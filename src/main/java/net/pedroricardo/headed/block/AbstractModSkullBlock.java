@@ -4,7 +4,6 @@ import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.block.entity.SkullBlockEntity;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.item.Wearable;
 import net.minecraft.util.math.BlockPos;
@@ -22,8 +21,13 @@ public abstract class AbstractModSkullBlock extends BlockWithEntity implements W
         this.type = type;
     }
 
+    @Override
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
+    }
+
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new SkullBlockEntity(pos, state);
+        return new ModSkullBlockEntity(pos, state);
     }
 
     @Nullable

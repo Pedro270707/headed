@@ -14,6 +14,8 @@ import java.util.stream.Stream;
 public class ModEntityModelLayers {
     private static final Set<EntityModelLayer> LAYERS = Sets.newHashSet();
     public static final EntityModelLayer VILLAGER_HEAD = registerMain("villager_head");
+    public static final EntityModelLayer EVOKER_HEAD = registerMain("evoker_head");
+    public static final EntityModelLayer VINDICATOR_HEAD = registerMain("vindicator_head");
 
     public ModEntityModelLayers() {
     }

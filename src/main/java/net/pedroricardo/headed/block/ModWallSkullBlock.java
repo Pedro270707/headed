@@ -19,6 +19,7 @@ import java.util.Map;
 public class ModWallSkullBlock extends AbstractModSkullBlock {
     public static final DirectionProperty FACING;
     private static final Map<Direction, VoxelShape> FACING_TO_SHAPE;
+    private static final Map<Direction, VoxelShape> FACING_TO_VILLAGER_SHAPE;
 
     public ModWallSkullBlock(ModSkullBlock.SkullType skullType, AbstractBlock.Settings settings) {
         super(skullType, settings);
@@ -30,7 +31,11 @@ public class ModWallSkullBlock extends AbstractModSkullBlock {
     }
 
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return (VoxelShape)FACING_TO_SHAPE.get(state.get(FACING));
+        if (this.getSkullType() == ModSkullBlock.Type.VILLAGER || this.getSkullType() == ModSkullBlock.Type.EVOKER || this.getSkullType() == ModSkullBlock.Type.VINDICATOR) {
+            return (VoxelShape)FACING_TO_VILLAGER_SHAPE.get(state.get(FACING));
+        } else {
+            return (VoxelShape)FACING_TO_SHAPE.get(state.get(FACING));
+        }
     }
 
     public BlockState getPlacementState(ItemPlacementContext ctx) {
@@ -70,5 +75,6 @@ public class ModWallSkullBlock extends AbstractModSkullBlock {
     static {
         FACING = HorizontalFacingBlock.FACING;
         FACING_TO_SHAPE = Maps.newEnumMap(ImmutableMap.of(Direction.NORTH, Block.createCuboidShape(4.0, 4.0, 8.0, 12.0, 12.0, 16.0), Direction.SOUTH, Block.createCuboidShape(4.0, 4.0, 0.0, 12.0, 12.0, 8.0), Direction.EAST, Block.createCuboidShape(0.0, 4.0, 4.0, 8.0, 12.0, 12.0), Direction.WEST, Block.createCuboidShape(8.0, 4.0, 4.0, 16.0, 12.0, 12.0)));
+        FACING_TO_VILLAGER_SHAPE = Maps.newEnumMap(ImmutableMap.of(Direction.NORTH, Block.createCuboidShape(4.0, 4.0, 8.0, 12.0, 14.0, 16.0), Direction.SOUTH, Block.createCuboidShape(4.0, 4.0, 0.0, 12.0, 14.0, 8.0), Direction.EAST, Block.createCuboidShape(0.0, 4.0, 4.0, 8.0, 14.0, 12.0), Direction.WEST, Block.createCuboidShape(8.0, 4.0, 4.0, 16.0, 14.0, 12.0)));
     }
 }

@@ -1,5 +1,9 @@
 {
   "item.headed.test_item": "Test Item",
   "block.headed.villager_head": "Villager Head",
-  "block.headed.villager_wall_head": "Villager Wall Head"
+  "block.headed.villager_wall_head": "Villager Wall Head",
+  "block.headed.evoker_head": "Evoker Head",
+  "block.headed.evoker_wall_head": "Evoker Wall Head",
+  "block.headed.vindicator_head": "Vindicator Head",
+  "block.headed.vindicator_wall_head": "Vindicator Wall Head"
 }
