@@ -12,7 +12,6 @@ import java.util.stream.Stream;
 
 @Environment(EnvType.CLIENT)
 public class ModEntityModelLayers {
-    private static final String MAIN = "main";
     private static final Set<EntityModelLayer> LAYERS = Sets.newHashSet();
     public static final EntityModelLayer VILLAGER_HEAD = registerMain("villager_head");
 
@@ -34,14 +33,6 @@ public class ModEntityModelLayers {
 
     private static EntityModelLayer create(String id, String layer) {
         return new EntityModelLayer(new Identifier(Headed.MOD_ID, id), layer);
-    }
-
-    private static EntityModelLayer createInnerArmor(String id) {
-        return register(id, "inner_armor");
-    }
-
-    private static EntityModelLayer createOuterArmor(String id) {
-        return register(id, "outer_armor");
     }
 
     public static Stream<EntityModelLayer> getLayers() {

@@ -15,6 +15,6 @@ public class HeadedClient implements ClientModInitializer {
     public void onInitializeClient() {
         BlockEntityRendererRegistry.register(ModBlockEntities.SKULL, ModSkullBlockEntityRenderer::new);
 
-        EntityModelLayerRegistry.registerModelLayer(VILLAGER_HEAD, VillagerHeadEntityModel::getModelData);
+        EntityModelLayerRegistry.registerModelLayer(VILLAGER_HEAD, VillagerHeadEntityModel::getTexturedModelData);
     }
 }

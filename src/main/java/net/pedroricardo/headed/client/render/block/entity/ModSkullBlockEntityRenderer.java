@@ -12,13 +12,13 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
-import net.minecraft.client.render.block.entity.SkullBlockEntityModel;
 import net.minecraft.client.render.entity.model.*;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.RotationPropertyHelper;
+import net.pedroricardo.headed.Headed;
 import net.pedroricardo.headed.block.AbstractModSkullBlock;
 import net.pedroricardo.headed.block.ModSkullBlock;
 import net.pedroricardo.headed.block.ModWallSkullBlock;
@@ -32,7 +32,7 @@ import java.util.Map;
 @Environment(EnvType.CLIENT)
 public class ModSkullBlockEntityRenderer implements BlockEntityRenderer<ModSkullBlockEntity> {
     private final Map<ModSkullBlock.SkullType, ModSkullBlockEntityModel> MODELS;
-    private static final Map<ModSkullBlock.SkullType, Identifier> TEXTURES = (Map) Util.make(Maps.newHashMap(), (map) -> {
+    private static final Map<ModSkullBlock.SkullType, Identifier> TEXTURES = (Map)Util.make(Maps.newHashMap(), (map) -> {
         map.put(ModSkullBlock.Type.VILLAGER, new Identifier("textures/entity/villager/villager.png"));
     });
 
@@ -46,6 +46,7 @@ public class ModSkullBlockEntityRenderer implements BlockEntityRenderer<ModSkull
         this.MODELS = getModels(ctx.getLayerRenderDispatcher());
     }
 
+    @Override
     public void render(ModSkullBlockEntity skullBlockEntity, float f, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, int j) {
         float g = skullBlockEntity.getPoweredTicks(f);
         BlockState blockState = skullBlockEntity.getCachedState();
@@ -57,6 +58,7 @@ public class ModSkullBlockEntityRenderer implements BlockEntityRenderer<ModSkull
         ModSkullBlockEntityModel skullBlockEntityModel = (ModSkullBlockEntityModel)this.MODELS.get(skullType);
         RenderLayer renderLayer = getRenderLayer(skullType, skullBlockEntity.getOwner());
         renderSkull(direction, h, g, matrixStack, vertexConsumerProvider, i, skullBlockEntityModel, renderLayer);
+        Headed.LOGGER.debug("Rendering skull");
     }
 
     public static void renderSkull(@Nullable Direction direction, float yaw, float animationProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, ModSkullBlockEntityModel model, RenderLayer renderLayer) {
