@@ -1,29 +1,32 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "headed",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Headed",
+  "description": "A mod that adds heads and skulls to more mobs in the game!",
   "authors": [
-    "Me!"
+    "Pedro270707"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://pedroricardo.net/",
+    "sources": "https://github.com/Pedro270707/headed"
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/headed/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "net.pedroricardo.headed.Headed"
+    ],
+    "client": [
+      "net.pedroricardo.headed.HeadedClient"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "headed.mixins.json"
   ],
 
   "depends": {
@@ -31,8 +34,5 @@
     "fabric-api": "*",
     "minecraft": "~1.19.3",
     "java": ">=17"
-  },
-  "suggests": {
-    "another-mod": "*"
   }
 }
