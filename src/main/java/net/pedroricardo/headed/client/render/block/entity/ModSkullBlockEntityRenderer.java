@@ -35,8 +35,9 @@ public class ModSkullBlockEntityRenderer implements BlockEntityRenderer<ModSkull
     private final Map<ModSkullBlock.SkullType, ModSkullBlockEntityModel> MODELS;
     private static final Map<ModSkullBlock.SkullType, Identifier> TEXTURES = (Map)Util.make(Maps.newHashMap(), (map) -> {
         map.put(Type.VILLAGER, new Identifier("textures/entity/villager/villager.png"));
-        map.put(Type.EVOKER, new Identifier("textures/entity/villager/villager.png"));
-        map.put(Type.VINDICATOR, new Identifier("textures/entity/villager/villager.png"));
+        map.put(Type.EVOKER, new Identifier("textures/entity/illager/evoker.png"));
+        map.put(Type.VINDICATOR, new Identifier("textures/entity/illager/vindicator.png"));
+        map.put(Type.PILLAGER, new Identifier("textures/entity/illager/pillager.png"));
     });
 
     public static Map<ModSkullBlock.SkullType, ModSkullBlockEntityModel> getModels(EntityModelLoader modelLoader) {
@@ -44,6 +45,7 @@ public class ModSkullBlockEntityRenderer implements BlockEntityRenderer<ModSkull
         builder.put(Type.VILLAGER, new VillagerHeadEntityModel(modelLoader.getModelPart(ModEntityModelLayers.VILLAGER_HEAD)));
         builder.put(Type.EVOKER, new VillagerHeadEntityModel(modelLoader.getModelPart(ModEntityModelLayers.EVOKER_HEAD)));
         builder.put(Type.VINDICATOR, new VillagerHeadEntityModel(modelLoader.getModelPart(ModEntityModelLayers.VINDICATOR_HEAD)));
+        builder.put(Type.PILLAGER, new VillagerHeadEntityModel(modelLoader.getModelPart(ModEntityModelLayers.PILLAGER_HEAD)));
         return builder.build();
     }
 

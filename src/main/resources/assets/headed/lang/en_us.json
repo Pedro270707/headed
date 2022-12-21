@@ -5,5 +5,7 @@
   "block.headed.evoker_head": "Evoker Head",
   "block.headed.evoker_wall_head": "Evoker Wall Head",
   "block.headed.vindicator_head": "Vindicator Head",
-  "block.headed.vindicator_wall_head": "Vindicator Wall Head"
+  "block.headed.vindicator_wall_head": "Vindicator Wall Head",
+  "block.headed.pillager_head": "Pillager Head",
+  "block.headed.pillager_wall_head": "Pillager Wall Head"
 }

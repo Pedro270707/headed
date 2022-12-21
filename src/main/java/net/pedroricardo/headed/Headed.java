@@ -19,7 +19,10 @@ public class Headed implements ModInitializer {
 		ModBlocks.registerModBlocks();
 		ModBlockEntities.registerBlockEntities();
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(content -> {
-			content.addAfter(Items.DRAGON_HEAD, ModItems.TEST_ITEM);
+			content.addAfter(Items.DRAGON_HEAD, ModItems.VILLAGER_HEAD);
+			content.addAfter(ModItems.VILLAGER_HEAD, ModItems.EVOKER_HEAD);
+			content.addAfter(ModItems.EVOKER_HEAD, ModItems.VINDICATOR_HEAD);
+			content.addAfter(ModItems.VINDICATOR_HEAD, ModItems.PILLAGER_HEAD);
 		});
 	}
 }

@@ -27,7 +27,7 @@ public class ModSkullBlock extends AbstractModSkullBlock {
     }
 
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        if (this.getSkullType() == Type.VILLAGER || this.getSkullType() == Type.EVOKER || this.getSkullType() == Type.VINDICATOR) {
+        if (this.getSkullType() == Type.VILLAGER || this.getSkullType() == Type.EVOKER || this.getSkullType() == Type.VINDICATOR || this.getSkullType() == Type.PILLAGER) {
             return VILLAGER_SHAPE;
         } else {
             return SHAPE;
@@ -67,7 +67,8 @@ public class ModSkullBlock extends AbstractModSkullBlock {
     public static enum Type implements SkullType {
         VILLAGER,
         EVOKER,
-        VINDICATOR;
+        VINDICATOR,
+        PILLAGER;
 
         private Type() {
         }

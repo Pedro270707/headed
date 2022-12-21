@@ -31,7 +31,7 @@ public class ModWallSkullBlock extends AbstractModSkullBlock {
     }
 
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        if (this.getSkullType() == ModSkullBlock.Type.VILLAGER || this.getSkullType() == ModSkullBlock.Type.EVOKER || this.getSkullType() == ModSkullBlock.Type.VINDICATOR) {
+        if (this.getSkullType() == ModSkullBlock.Type.VILLAGER || this.getSkullType() == ModSkullBlock.Type.EVOKER || this.getSkullType() == ModSkullBlock.Type.VINDICATOR || this.getSkullType() == ModSkullBlock.Type.PILLAGER) {
             return (VoxelShape)FACING_TO_VILLAGER_SHAPE.get(state.get(FACING));
         } else {
             return (VoxelShape)FACING_TO_SHAPE.get(state.get(FACING));

@@ -1,13 +1,9 @@
 package net.pedroricardo.headed.block;
 
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.*;
-import net.minecraft.item.VerticallyAttachableBlockItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Rarity;
-import net.minecraft.util.math.Direction;
 import net.pedroricardo.headed.Headed;
 
 public class ModBlocks {
@@ -17,6 +13,8 @@ public class ModBlocks {
     public static final Block EVOKER_WALL_HEAD;
     public static final Block VINDICATOR_HEAD;
     public static final Block VINDICATOR_WALL_HEAD;
+    public static final Block PILLAGER_HEAD;
+    public static final Block PILLAGER_WALL_HEAD;
 
     static {
         VILLAGER_HEAD = register("villager_head", new ModSkullBlock(ModSkullBlock.Type.VILLAGER, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
@@ -25,6 +23,8 @@ public class ModBlocks {
         EVOKER_WALL_HEAD = register("evoker_wall_head", new ModWallSkullBlock(ModSkullBlock.Type.EVOKER, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(EVOKER_HEAD)));
         VINDICATOR_HEAD = register("vindicator_head", new ModSkullBlock(ModSkullBlock.Type.VINDICATOR, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
         VINDICATOR_WALL_HEAD = register("vindicator_wall_head", new ModWallSkullBlock(ModSkullBlock.Type.VINDICATOR, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(VINDICATOR_HEAD)));
+        PILLAGER_HEAD = register("pillager_head", new ModSkullBlock(ModSkullBlock.Type.PILLAGER, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        PILLAGER_WALL_HEAD = register("pillager_wall_head", new ModWallSkullBlock(ModSkullBlock.Type.PILLAGER, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(PILLAGER_HEAD)));
     }
 
     private static Block register(String name, Block block) {
@@ -32,9 +32,6 @@ public class ModBlocks {
     }
 
     public static void registerModBlocks() {
-        Registry.register(Registries.ITEM, new Identifier(Headed.MOD_ID, "villager_head"), new VerticallyAttachableBlockItem(VILLAGER_HEAD, VILLAGER_WALL_HEAD, new FabricItemSettings().rarity(Rarity.UNCOMMON), Direction.DOWN));
-        Registry.register(Registries.ITEM, new Identifier(Headed.MOD_ID, "evoker_head"), new VerticallyAttachableBlockItem(EVOKER_HEAD, EVOKER_WALL_HEAD, new FabricItemSettings().rarity(Rarity.UNCOMMON), Direction.DOWN));
-        Registry.register(Registries.ITEM, new Identifier(Headed.MOD_ID, "vindicator_head"), new VerticallyAttachableBlockItem(VINDICATOR_HEAD, VINDICATOR_WALL_HEAD, new FabricItemSettings().rarity(Rarity.UNCOMMON), Direction.DOWN));
         Headed.LOGGER.debug("Registering Headed blocks");
     }
 }

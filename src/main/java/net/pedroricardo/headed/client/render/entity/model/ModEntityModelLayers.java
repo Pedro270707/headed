@@ -16,6 +16,7 @@ public class ModEntityModelLayers {
     public static final EntityModelLayer VILLAGER_HEAD = registerMain("villager_head");
     public static final EntityModelLayer EVOKER_HEAD = registerMain("evoker_head");
     public static final EntityModelLayer VINDICATOR_HEAD = registerMain("vindicator_head");
+    public static final EntityModelLayer PILLAGER_HEAD = registerMain("pillager_head");
 
     public ModEntityModelLayers() {
     }

@@ -13,6 +13,6 @@ public class ModBlockEntities {
     public static void registerBlockEntities() {
         SKULL = Registry.register(Registries.BLOCK_ENTITY_TYPE,
                 new Identifier(Headed.MOD_ID, "skull"),
-                FabricBlockEntityTypeBuilder.create(ModSkullBlockEntity::new, ModBlocks.VILLAGER_HEAD, ModBlocks.VILLAGER_WALL_HEAD, ModBlocks.EVOKER_HEAD, ModBlocks.EVOKER_WALL_HEAD, ModBlocks.VINDICATOR_HEAD, ModBlocks.VINDICATOR_WALL_HEAD).build(null));
+                FabricBlockEntityTypeBuilder.create(ModSkullBlockEntity::new, ModBlocks.VILLAGER_HEAD, ModBlocks.VILLAGER_WALL_HEAD, ModBlocks.EVOKER_HEAD, ModBlocks.EVOKER_WALL_HEAD, ModBlocks.VINDICATOR_HEAD, ModBlocks.VINDICATOR_WALL_HEAD, ModBlocks.PILLAGER_HEAD, ModBlocks.PILLAGER_WALL_HEAD).build(null));
     }
 }
