@@ -20,6 +20,9 @@ public class ModSkullBlock extends AbstractModSkullBlock {
     public static final IntProperty ROTATION;
     protected static final VoxelShape SHAPE;
     protected static final VoxelShape VILLAGER_SHAPE;
+    protected static final VoxelShape SHEEP_SHAPE;
+    protected static final VoxelShape ALLAY_SHAPE;
+    protected static final VoxelShape PIGLIN_SHAPE;
 
     public ModSkullBlock(ModSkullBlock.SkullType skullType, AbstractBlock.Settings settings) {
         super(skullType, settings);
@@ -27,8 +30,37 @@ public class ModSkullBlock extends AbstractModSkullBlock {
     }
 
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        if (this.getSkullType() == Type.VILLAGER || this.getSkullType() == Type.EVOKER || this.getSkullType() == Type.VINDICATOR || this.getSkullType() == Type.PILLAGER) {
+        if (this.getSkullType() == Type.VILLAGER
+                || this.getSkullType() == Type.EVOKER
+                || this.getSkullType() == Type.VINDICATOR
+                || this.getSkullType() == Type.PILLAGER
+                || this.getSkullType() == Type.ZOMBIE_VILLAGER
+                || this.getSkullType() == Type.ILLUSIONER) {
             return VILLAGER_SHAPE;
+        } else if (this.getSkullType() == Type.SHEEP
+                || this.getSkullType() == Type.WHITE_SHEEP
+                || this.getSkullType() == Type.ORANGE_SHEEP
+                || this.getSkullType() == Type.MAGENTA_SHEEP
+                || this.getSkullType() == Type.LIGHT_BLUE_SHEEP
+                || this.getSkullType() == Type.YELLOW_SHEEP
+                || this.getSkullType() == Type.LIME_SHEEP
+                || this.getSkullType() == Type.PINK_SHEEP
+                || this.getSkullType() == Type.GRAY_SHEEP
+                || this.getSkullType() == Type.LIGHT_GRAY_SHEEP
+                || this.getSkullType() == Type.CYAN_SHEEP
+                || this.getSkullType() == Type.PURPLE_SHEEP
+                || this.getSkullType() == Type.BLUE_SHEEP
+                || this.getSkullType() == Type.BROWN_SHEEP
+                || this.getSkullType() == Type.GREEN_SHEEP
+                || this.getSkullType() == Type.RED_SHEEP
+                || this.getSkullType() == Type.BLACK_SHEEP) {
+            return SHEEP_SHAPE;
+        } else if (this.getSkullType() == Type.ALLAY
+                || this.getSkullType() == Type.VEX) {
+            return ALLAY_SHAPE;
+        } else if (this.getSkullType() == Type.PIGLIN_BRUTE
+                || this.getSkullType() == Type.ZOMBIFIED_PIGLIN) {
+            return PIGLIN_SHAPE;
         } else {
             return SHAPE;
         }
@@ -59,6 +91,9 @@ public class ModSkullBlock extends AbstractModSkullBlock {
         ROTATION = Properties.ROTATION;
         SHAPE = Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 8.0, 12.0);
         VILLAGER_SHAPE = Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 10.0, 12.0);
+        SHEEP_SHAPE = Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 6.0, 12.0);
+        ALLAY_SHAPE = Block.createCuboidShape(5.5, 0.0, 5.5, 10.5, 5.0, 10.5);
+        PIGLIN_SHAPE = Block.createCuboidShape(3.0, 0.0, 3.0, 13.0, 8.0, 13.0);
     }
 
     public interface SkullType {
@@ -68,7 +103,30 @@ public class ModSkullBlock extends AbstractModSkullBlock {
         VILLAGER,
         EVOKER,
         VINDICATOR,
-        PILLAGER;
+        PILLAGER,
+        ZOMBIE_VILLAGER,
+        ILLUSIONER,
+        SHEEP,
+        WHITE_SHEEP,
+        ORANGE_SHEEP,
+        MAGENTA_SHEEP,
+        LIGHT_BLUE_SHEEP,
+        YELLOW_SHEEP,
+        LIME_SHEEP,
+        PINK_SHEEP,
+        GRAY_SHEEP,
+        LIGHT_GRAY_SHEEP,
+        CYAN_SHEEP,
+        PURPLE_SHEEP,
+        BLUE_SHEEP,
+        BROWN_SHEEP,
+        GREEN_SHEEP,
+        RED_SHEEP,
+        BLACK_SHEEP,
+        ALLAY,
+        VEX,
+        PIGLIN_BRUTE,
+        ZOMBIFIED_PIGLIN;
 
         private Type() {
         }

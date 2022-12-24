@@ -33,7 +33,7 @@ public abstract class AbstractModSkullBlock extends BlockWithEntity implements W
     @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
         if (world.isClient) {
-            boolean bl = state.isOf(ModBlocks.VILLAGER_HEAD) || state.isOf(ModBlocks.VILLAGER_WALL_HEAD) || state.isOf(ModBlocks.EVOKER_HEAD) || state.isOf(ModBlocks.EVOKER_WALL_HEAD) || state.isOf(ModBlocks.VINDICATOR_HEAD) || state.isOf(ModBlocks.VINDICATOR_WALL_HEAD) || state.isOf(ModBlocks.PILLAGER_HEAD) || state.isOf(ModBlocks.PILLAGER_WALL_HEAD);
+            boolean bl = state.isOf(ModBlocks.PIGLIN_BRUTE_HEAD) || state.isOf(ModBlocks.PIGLIN_BRUTE_WALL_HEAD) || state.isOf(ModBlocks.ZOMBIFIED_PIGLIN_HEAD) || state.isOf(ModBlocks.ZOMBIFIED_PIGLIN_WALL_HEAD);
             if (bl) {
                 return checkType(type, ModBlockEntities.SKULL, ModSkullBlockEntity::tick);
             }

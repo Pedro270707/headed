@@ -17,6 +17,14 @@ public class ModEntityModelLayers {
     public static final EntityModelLayer EVOKER_HEAD = registerMain("evoker_head");
     public static final EntityModelLayer VINDICATOR_HEAD = registerMain("vindicator_head");
     public static final EntityModelLayer PILLAGER_HEAD = registerMain("pillager_head");
+    public static final EntityModelLayer ZOMBIE_VILLAGER_HEAD = registerMain("zombie_villager_head");
+    public static final EntityModelLayer ILLUSIONER_HEAD = registerMain("illusioner_head");
+    public static final EntityModelLayer SHEEP_HEAD = registerMain("sheep_head");
+    public static final EntityModelLayer SHEEP_WOOL = register("sheep_head", "wool");
+    public static final EntityModelLayer ALLAY_HEAD = registerMain("allay_head");
+    public static final EntityModelLayer VEX_HEAD = registerMain("vex_head");
+    public static final EntityModelLayer PIGLIN_BRUTE_HEAD = registerMain("piglin_brute_head");
+    public static final EntityModelLayer ZOMBIFIED_PIGLIN_HEAD = registerMain("zombified_piglin_head");
 
     public ModEntityModelLayers() {
     }
