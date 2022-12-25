@@ -6,8 +6,8 @@ import net.minecraft.client.model.Model;
 import net.minecraft.client.render.RenderLayer;
 
 @Environment(EnvType.CLIENT)
-public abstract class ModSkullBlockEntityModel extends Model {
-    public ModSkullBlockEntityModel() {
+public abstract class HeadedSkullBlockEntityModel extends Model {
+    public HeadedSkullBlockEntityModel() {
         super(RenderLayer::getEntityTranslucent);
     }
 

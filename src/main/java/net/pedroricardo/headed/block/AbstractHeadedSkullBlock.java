@@ -9,14 +9,14 @@ import net.minecraft.item.Wearable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.pedroricardo.headed.block.entity.ModBlockEntities;
-import net.pedroricardo.headed.block.entity.ModSkullBlockEntity;
+import net.pedroricardo.headed.block.entity.HeadedBlockEntities;
+import net.pedroricardo.headed.block.entity.HeadedSkullBlockEntity;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class AbstractModSkullBlock extends BlockWithEntity implements Wearable {
-    private final ModSkullBlock.SkullType type;
+public abstract class AbstractHeadedSkullBlock extends BlockWithEntity implements Wearable {
+    private final HeadedSkullBlock.SkullType type;
 
-    public AbstractModSkullBlock(ModSkullBlock.SkullType type, AbstractBlock.Settings settings) {
+    public AbstractHeadedSkullBlock(HeadedSkullBlock.SkullType type, AbstractBlock.Settings settings) {
         super(settings);
         this.type = type;
     }
@@ -27,22 +27,22 @@ public abstract class AbstractModSkullBlock extends BlockWithEntity implements W
     }
 
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new ModSkullBlockEntity(pos, state);
+        return new HeadedSkullBlockEntity(pos, state);
     }
 
     @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
         if (world.isClient) {
-            boolean bl = state.isOf(ModBlocks.PIGLIN_BRUTE_HEAD) || state.isOf(ModBlocks.PIGLIN_BRUTE_WALL_HEAD) || state.isOf(ModBlocks.ZOMBIFIED_PIGLIN_HEAD) || state.isOf(ModBlocks.ZOMBIFIED_PIGLIN_WALL_HEAD);
+            boolean bl = state.isOf(HeadedBlocks.PIGLIN_BRUTE_HEAD) || state.isOf(HeadedBlocks.PIGLIN_BRUTE_WALL_HEAD) || state.isOf(HeadedBlocks.ZOMBIFIED_PIGLIN_HEAD) || state.isOf(HeadedBlocks.ZOMBIFIED_PIGLIN_WALL_HEAD);
             if (bl) {
-                return checkType(type, ModBlockEntities.SKULL, ModSkullBlockEntity::tick);
+                return checkType(type, HeadedBlockEntities.SKULL, HeadedSkullBlockEntity::tick);
             }
         }
 
         return null;
     }
 
-    public ModSkullBlock.SkullType getSkullType() {
+    public HeadedSkullBlock.SkullType getSkullType() {
         return this.type;
     }
 

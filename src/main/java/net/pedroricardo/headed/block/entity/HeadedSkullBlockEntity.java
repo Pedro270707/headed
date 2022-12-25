@@ -16,7 +16,7 @@ import java.util.UUID;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-public class ModSkullBlockEntity extends BlockEntity {
+public class HeadedSkullBlockEntity extends BlockEntity {
     public static final String SKULL_OWNER_KEY = "SkullOwner";
     public static final String NOTE_BLOCK_SOUND_KEY = "note_block_sound";
     @Nullable
@@ -32,14 +32,14 @@ public class ModSkullBlockEntity extends BlockEntity {
     private int poweredTicks;
     private boolean powered;
 
-    public ModSkullBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.SKULL, pos, state);
+    public HeadedSkullBlockEntity(BlockPos pos, BlockState state) {
+        super(HeadedBlockEntities.SKULL, pos, state);
     }
 
     public static void setServices(ApiServices apiServices, Executor executor) {
         userCache = apiServices.userCache();
         sessionService = apiServices.sessionService();
-        ModSkullBlockEntity.executor = executor;
+        HeadedSkullBlockEntity.executor = executor;
     }
 
     public static void clearServices() {
@@ -79,7 +79,7 @@ public class ModSkullBlockEntity extends BlockEntity {
 
     }
 
-    public static void tick(World world, BlockPos pos, BlockState state, ModSkullBlockEntity blockEntity) {
+    public static void tick(World world, BlockPos pos, BlockState state, HeadedSkullBlockEntity blockEntity) {
         if (world.isReceivingRedstonePower(pos)) {
             blockEntity.powered = true;
             ++blockEntity.poweredTicks;

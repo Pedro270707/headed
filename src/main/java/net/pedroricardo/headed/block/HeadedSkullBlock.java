@@ -14,7 +14,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 
-public class ModSkullBlock extends AbstractModSkullBlock {
+public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
     public static final int MAX_ROTATION_INDEX = RotationPropertyHelper.getMax();
     private static final int MAX_ROTATIONS;
     public static final IntProperty ROTATION;
@@ -23,8 +23,9 @@ public class ModSkullBlock extends AbstractModSkullBlock {
     protected static final VoxelShape SHEEP_SHAPE;
     protected static final VoxelShape ALLAY_SHAPE;
     protected static final VoxelShape PIGLIN_SHAPE;
+    protected static final VoxelShape AXOLOTL_SHAPE;
 
-    public ModSkullBlock(ModSkullBlock.SkullType skullType, AbstractBlock.Settings settings) {
+    public HeadedSkullBlock(HeadedSkullBlock.SkullType skullType, AbstractBlock.Settings settings) {
         super(skullType, settings);
         this.setDefaultState((BlockState)((BlockState)this.stateManager.getDefaultState()).with(ROTATION, 0));
     }
@@ -61,6 +62,12 @@ public class ModSkullBlock extends AbstractModSkullBlock {
         } else if (this.getSkullType() == Type.PIGLIN_BRUTE
                 || this.getSkullType() == Type.ZOMBIFIED_PIGLIN) {
             return PIGLIN_SHAPE;
+        } else if (this.getSkullType() == Type.LEUCISTIC_AXOLOTL
+                || this.getSkullType() == Type.BROWN_AXOLOTL
+                || this.getSkullType() == Type.CYAN_AXOLOTL
+                || this.getSkullType() == Type.GOLD_AXOLOTL
+                || this.getSkullType() == Type.BLUE_AXOLOTL) {
+            return AXOLOTL_SHAPE;
         } else {
             return SHAPE;
         }
@@ -94,6 +101,7 @@ public class ModSkullBlock extends AbstractModSkullBlock {
         SHEEP_SHAPE = Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 6.0, 12.0);
         ALLAY_SHAPE = Block.createCuboidShape(5.5, 0.0, 5.5, 10.5, 5.0, 10.5);
         PIGLIN_SHAPE = Block.createCuboidShape(3.0, 0.0, 3.0, 13.0, 8.0, 13.0);
+        AXOLOTL_SHAPE = Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 5.0, 12.0);
     }
 
     public interface SkullType {
@@ -126,7 +134,12 @@ public class ModSkullBlock extends AbstractModSkullBlock {
         ALLAY,
         VEX,
         PIGLIN_BRUTE,
-        ZOMBIFIED_PIGLIN;
+        ZOMBIFIED_PIGLIN,
+        LEUCISTIC_AXOLOTL,
+        BROWN_AXOLOTL,
+        CYAN_AXOLOTL,
+        GOLD_AXOLOTL,
+        BLUE_AXOLOTL;
 
         private Type() {
         }

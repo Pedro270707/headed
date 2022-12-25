@@ -5,10 +5,10 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.util.math.MatrixStack;
-import net.pedroricardo.headed.client.render.block.entity.ModSkullBlockEntityModel;
+import net.pedroricardo.headed.client.render.block.entity.HeadedSkullBlockEntityModel;
 
 @Environment(EnvType.CLIENT)
-public class VillagerHeadEntityModel extends ModSkullBlockEntityModel {
+public class VillagerHeadEntityModel extends HeadedSkullBlockEntityModel {
     private final ModelPart head;
     private final ModelPart nose;
     private final ModelPart hat;

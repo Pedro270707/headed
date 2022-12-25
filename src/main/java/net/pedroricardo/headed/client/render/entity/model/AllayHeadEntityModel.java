@@ -5,10 +5,10 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.util.math.MatrixStack;
-import net.pedroricardo.headed.client.render.block.entity.ModSkullBlockEntityModel;
+import net.pedroricardo.headed.client.render.block.entity.HeadedSkullBlockEntityModel;
 
 @Environment(EnvType.CLIENT)
-public class AllayHeadEntityModel extends ModSkullBlockEntityModel {
+public class AllayHeadEntityModel extends HeadedSkullBlockEntityModel {
     private final ModelPart head;
 
     public AllayHeadEntityModel(ModelPart root) {

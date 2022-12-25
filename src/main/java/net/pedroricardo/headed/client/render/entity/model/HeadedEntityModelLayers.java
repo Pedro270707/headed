@@ -11,7 +11,7 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 @Environment(EnvType.CLIENT)
-public class ModEntityModelLayers {
+public class HeadedEntityModelLayers {
     private static final Set<EntityModelLayer> LAYERS = Sets.newHashSet();
     public static final EntityModelLayer VILLAGER_HEAD = registerMain("villager_head");
     public static final EntityModelLayer EVOKER_HEAD = registerMain("evoker_head");
@@ -25,8 +25,9 @@ public class ModEntityModelLayers {
     public static final EntityModelLayer VEX_HEAD = registerMain("vex_head");
     public static final EntityModelLayer PIGLIN_BRUTE_HEAD = registerMain("piglin_brute_head");
     public static final EntityModelLayer ZOMBIFIED_PIGLIN_HEAD = registerMain("zombified_piglin_head");
+    public static final EntityModelLayer AXOLOTL_HEAD = registerMain("axolotl_head");
 
-    public ModEntityModelLayers() {
+    public HeadedEntityModelLayers() {
     }
 
     private static EntityModelLayer registerMain(String id) {

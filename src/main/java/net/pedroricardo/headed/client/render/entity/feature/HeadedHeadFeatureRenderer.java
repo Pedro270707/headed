@@ -3,56 +3,48 @@ package net.pedroricardo.headed.client.render.entity.feature;
 import com.mojang.authlib.GameProfile;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.AbstractSkullBlock;
-import net.minecraft.block.SkullBlock;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.block.entity.SkullBlockEntityModel;
-import net.minecraft.client.render.block.entity.SkullBlockEntityRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLoader;
 import net.minecraft.client.render.entity.model.ModelWithHead;
-import net.minecraft.client.render.item.HeldItemRenderer;
-import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.ZombieVillagerEntity;
 import net.minecraft.entity.passive.VillagerEntity;
-import net.minecraft.item.ArmorItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtHelper;
-import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.RotationAxis;
-import net.pedroricardo.headed.block.AbstractModSkullBlock;
-import net.pedroricardo.headed.block.ModSkullBlock;
-import net.pedroricardo.headed.client.render.block.entity.ModSkullBlockEntityModel;
-import net.pedroricardo.headed.client.render.block.entity.ModSkullBlockEntityRenderer;
+import net.pedroricardo.headed.block.AbstractHeadedSkullBlock;
+import net.pedroricardo.headed.block.HeadedSkullBlock;
+import net.pedroricardo.headed.client.render.block.entity.HeadedSkullBlockEntityModel;
+import net.pedroricardo.headed.client.render.block.entity.HeadedSkullBlockEntityRenderer;
 
 import java.util.Map;
 
 @Environment(EnvType.CLIENT)
-public class ModHeadFeatureRenderer<T extends LivingEntity, M extends EntityModel<T> & ModelWithHead> extends FeatureRenderer<T, M> {
+public class HeadedHeadFeatureRenderer<T extends LivingEntity, M extends EntityModel<T> & ModelWithHead> extends FeatureRenderer<T, M> {
     private final float scaleX;
     private final float scaleY;
     private final float scaleZ;
-    private final Map<ModSkullBlock.SkullType, ModSkullBlockEntityModel> headModels;
+    private final Map<HeadedSkullBlock.SkullType, HeadedSkullBlockEntityModel> headModels;
 
-    public ModHeadFeatureRenderer(FeatureRendererContext<T, M> context, EntityModelLoader loader) {
+    public HeadedHeadFeatureRenderer(FeatureRendererContext<T, M> context, EntityModelLoader loader) {
         this(context, loader, 1.0F, 1.0F, 1.0F);
     }
 
-    public ModHeadFeatureRenderer(FeatureRendererContext<T, M> context, EntityModelLoader loader, float scaleX, float scaleY, float scaleZ) {
+    public HeadedHeadFeatureRenderer(FeatureRendererContext<T, M> context, EntityModelLoader loader, float scaleX, float scaleY, float scaleZ) {
         super(context);
         this.scaleX = scaleX;
         this.scaleY = scaleY;
         this.scaleZ = scaleZ;
-        this.headModels = ModSkullBlockEntityRenderer.getModels(loader);
+        this.headModels = HeadedSkullBlockEntityRenderer.getModels(loader);
     }
 
     public void render(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, T livingEntity, float f, float g, float h, float j, float k, float l) {
@@ -72,7 +64,7 @@ public class ModHeadFeatureRenderer<T extends LivingEntity, M extends EntityMode
             }
 
             ((ModelWithHead)this.getContextModel()).getHead().rotate(matrixStack);
-            if (item instanceof BlockItem && ((BlockItem)item).getBlock() instanceof AbstractModSkullBlock) {
+            if (item instanceof BlockItem && ((BlockItem)item).getBlock() instanceof AbstractHeadedSkullBlock) {
                 m = 1.1875F;
                 matrixStack.scale(1.1875F, -1.1875F, -1.1875F);
                 if (bl) {
@@ -88,11 +80,11 @@ public class ModHeadFeatureRenderer<T extends LivingEntity, M extends EntityMode
                 }
 
                 matrixStack.translate(-0.5, 0.0, -0.5);
-                ModSkullBlock.SkullType skullType = ((AbstractModSkullBlock)((BlockItem)item).getBlock()).getSkullType();
-                ModSkullBlockEntityModel skullBlockEntityModel = (ModSkullBlockEntityModel)this.headModels.get(skullType);
-                RenderLayer renderLayer = ModSkullBlockEntityRenderer.getRenderLayer(skullType, gameProfile);
-                ModSkullBlockEntityRenderer.renderSkull(skullType, null, 180.0F, f, matrixStack, vertexConsumerProvider, i, skullBlockEntityModel, renderLayer, 1.0F, 1.0F, 1.0F);
-                ModSkullBlockEntityRenderer.testForSpecialSkull(skullType, null, 180.0F, f, matrixStack, vertexConsumerProvider, i);
+                HeadedSkullBlock.SkullType skullType = ((AbstractHeadedSkullBlock)((BlockItem)item).getBlock()).getSkullType();
+                HeadedSkullBlockEntityModel skullBlockEntityModel = (HeadedSkullBlockEntityModel)this.headModels.get(skullType);
+                RenderLayer renderLayer = HeadedSkullBlockEntityRenderer.getRenderLayer(skullType, gameProfile);
+                HeadedSkullBlockEntityRenderer.renderSkull(skullType, null, 180.0F, f, matrixStack, vertexConsumerProvider, i, skullBlockEntityModel, renderLayer, 1.0F, 1.0F, 1.0F);
+                HeadedSkullBlockEntityRenderer.testForSpecialSkull(skullType, null, 180.0F, f, matrixStack, vertexConsumerProvider, i);
             }
 
             matrixStack.pop();

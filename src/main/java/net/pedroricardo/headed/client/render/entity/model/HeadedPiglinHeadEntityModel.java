@@ -7,18 +7,17 @@ import net.minecraft.client.model.ModelData;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.block.entity.SkullBlockEntityModel;
 import net.minecraft.client.render.entity.model.PiglinEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
-import net.pedroricardo.headed.client.render.block.entity.ModSkullBlockEntityModel;
+import net.pedroricardo.headed.client.render.block.entity.HeadedSkullBlockEntityModel;
 
 @Environment(EnvType.CLIENT)
-public class ModPiglinHeadEntityModel extends ModSkullBlockEntityModel {
+public class HeadedPiglinHeadEntityModel extends HeadedSkullBlockEntityModel {
     private final ModelPart head;
     private final ModelPart leftEar;
     private final ModelPart rightEar;
 
-    public ModPiglinHeadEntityModel(ModelPart root) {
+    public HeadedPiglinHeadEntityModel(ModelPart root) {
         this.head = root.getChild("head");
         this.leftEar = this.head.getChild("left_ear");
         this.rightEar = this.head.getChild("right_ear");

@@ -6,22 +6,14 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
-import net.minecraft.client.render.entity.EntityRenderDispatcher;
-import net.minecraft.client.render.entity.feature.Deadmau5FeatureRenderer;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
-import net.minecraft.client.render.entity.model.EntityModelLoader;
-import net.minecraft.client.render.entity.model.PlayerEntityModel;
-import net.minecraft.client.render.item.HeldItemRenderer;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
-import net.pedroricardo.headed.block.entity.ModBlockEntities;
-import net.pedroricardo.headed.client.render.block.entity.ModSkullBlockEntityRenderer;
-import net.pedroricardo.headed.client.render.entity.feature.ModHeadFeatureRenderer;
+import net.pedroricardo.headed.block.entity.HeadedBlockEntities;
+import net.pedroricardo.headed.client.render.block.entity.HeadedSkullBlockEntityRenderer;
+import net.pedroricardo.headed.client.render.entity.feature.HeadedHeadFeatureRenderer;
 import net.pedroricardo.headed.client.render.entity.model.*;
 import net.pedroricardo.headed.init.ItemRendererRegistry;
-import net.pedroricardo.headed.item.ModItems;
+import net.pedroricardo.headed.item.HeadedItems;
 
 @Environment(EnvType.CLIENT)
 public class HeadedClient implements ClientModInitializer {
@@ -37,10 +29,11 @@ public class HeadedClient implements ClientModInitializer {
     private static final EntityModelLayer VEX_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "vex_head"), "main");
     private static final EntityModelLayer PIGLIN_BRUTE_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "piglin_brute_head"), "main");
     private static final EntityModelLayer ZOMBIFIED_PIGLIN_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "zombified_piglin_head"), "main");
+    private static final EntityModelLayer AXOLOTL_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "axolotl_head"), "main");
 
     @Override
     public void onInitializeClient() {
-        BlockEntityRendererRegistry.register(ModBlockEntities.SKULL, ModSkullBlockEntityRenderer::new);
+        BlockEntityRendererRegistry.register(HeadedBlockEntities.SKULL, HeadedSkullBlockEntityRenderer::new);
 
         EntityModelLayerRegistry.registerModelLayer(VILLAGER_HEAD, VillagerHeadEntityModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(EVOKER_HEAD, VillagerHeadEntityModel::getTexturedModelData);
@@ -52,37 +45,44 @@ public class HeadedClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(SHEEP_WOOL, SheepHeadWoolEntityModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(ALLAY_HEAD, AllayHeadEntityModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(VEX_HEAD, AllayHeadEntityModel::getTexturedModelData);
-        EntityModelLayerRegistry.registerModelLayer(PIGLIN_BRUTE_HEAD, ModPiglinHeadEntityModel::getTexturedModelData);
-        EntityModelLayerRegistry.registerModelLayer(ZOMBIFIED_PIGLIN_HEAD, ModPiglinHeadEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(PIGLIN_BRUTE_HEAD, HeadedPiglinHeadEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(ZOMBIFIED_PIGLIN_HEAD, HeadedPiglinHeadEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(AXOLOTL_HEAD, AxolotlHeadEntityModel::getTexturedModelData);
 
-        ItemRendererRegistry.register(ModItems.VILLAGER_HEAD);
-        ItemRendererRegistry.register(ModItems.EVOKER_HEAD);
-        ItemRendererRegistry.register(ModItems.VINDICATOR_HEAD);
-        ItemRendererRegistry.register(ModItems.PILLAGER_HEAD);
-        ItemRendererRegistry.register(ModItems.ZOMBIE_VILLAGER_HEAD);
-        ItemRendererRegistry.register(ModItems.ILLUSIONER_HEAD);
-        ItemRendererRegistry.register(ModItems.SHEEP_HEAD);
-        ItemRendererRegistry.register(ModItems.WHITE_SHEEP_HEAD);
-        ItemRendererRegistry.register(ModItems.ORANGE_SHEEP_HEAD);
-        ItemRendererRegistry.register(ModItems.MAGENTA_SHEEP_HEAD);
-        ItemRendererRegistry.register(ModItems.LIGHT_BLUE_SHEEP_HEAD);
-        ItemRendererRegistry.register(ModItems.YELLOW_SHEEP_HEAD);
-        ItemRendererRegistry.register(ModItems.LIME_SHEEP_HEAD);
-        ItemRendererRegistry.register(ModItems.PINK_SHEEP_HEAD);
-        ItemRendererRegistry.register(ModItems.GRAY_SHEEP_HEAD);
-        ItemRendererRegistry.register(ModItems.LIGHT_GRAY_SHEEP_HEAD);
-        ItemRendererRegistry.register(ModItems.CYAN_SHEEP_HEAD);
-        ItemRendererRegistry.register(ModItems.PURPLE_SHEEP_HEAD);
-        ItemRendererRegistry.register(ModItems.BLUE_SHEEP_HEAD);
-        ItemRendererRegistry.register(ModItems.BROWN_SHEEP_HEAD);
-        ItemRendererRegistry.register(ModItems.GREEN_SHEEP_HEAD);
-        ItemRendererRegistry.register(ModItems.RED_SHEEP_HEAD);
-        ItemRendererRegistry.register(ModItems.BLACK_SHEEP_HEAD);
-        ItemRendererRegistry.register(ModItems.ALLAY_HEAD);
-        ItemRendererRegistry.register(ModItems.VEX_HEAD);
-        ItemRendererRegistry.register(ModItems.PIGLIN_BRUTE_HEAD);
-        ItemRendererRegistry.register(ModItems.ZOMBIFIED_PIGLIN_HEAD);
+        ItemRendererRegistry.register(HeadedItems.VILLAGER_HEAD);
+        ItemRendererRegistry.register(HeadedItems.EVOKER_HEAD);
+        ItemRendererRegistry.register(HeadedItems.VINDICATOR_HEAD);
+        ItemRendererRegistry.register(HeadedItems.PILLAGER_HEAD);
+        ItemRendererRegistry.register(HeadedItems.ZOMBIE_VILLAGER_HEAD);
+        ItemRendererRegistry.register(HeadedItems.ILLUSIONER_HEAD);
+        ItemRendererRegistry.register(HeadedItems.SHEEP_HEAD);
+        ItemRendererRegistry.register(HeadedItems.WHITE_SHEEP_HEAD);
+        ItemRendererRegistry.register(HeadedItems.ORANGE_SHEEP_HEAD);
+        ItemRendererRegistry.register(HeadedItems.MAGENTA_SHEEP_HEAD);
+        ItemRendererRegistry.register(HeadedItems.LIGHT_BLUE_SHEEP_HEAD);
+        ItemRendererRegistry.register(HeadedItems.YELLOW_SHEEP_HEAD);
+        ItemRendererRegistry.register(HeadedItems.LIME_SHEEP_HEAD);
+        ItemRendererRegistry.register(HeadedItems.PINK_SHEEP_HEAD);
+        ItemRendererRegistry.register(HeadedItems.GRAY_SHEEP_HEAD);
+        ItemRendererRegistry.register(HeadedItems.LIGHT_GRAY_SHEEP_HEAD);
+        ItemRendererRegistry.register(HeadedItems.CYAN_SHEEP_HEAD);
+        ItemRendererRegistry.register(HeadedItems.PURPLE_SHEEP_HEAD);
+        ItemRendererRegistry.register(HeadedItems.BLUE_SHEEP_HEAD);
+        ItemRendererRegistry.register(HeadedItems.BROWN_SHEEP_HEAD);
+        ItemRendererRegistry.register(HeadedItems.GREEN_SHEEP_HEAD);
+        ItemRendererRegistry.register(HeadedItems.RED_SHEEP_HEAD);
+        ItemRendererRegistry.register(HeadedItems.BLACK_SHEEP_HEAD);
+        ItemRendererRegistry.register(HeadedItems.ALLAY_HEAD);
+        ItemRendererRegistry.register(HeadedItems.VEX_HEAD);
+        ItemRendererRegistry.register(HeadedItems.PIGLIN_BRUTE_HEAD);
+        ItemRendererRegistry.register(HeadedItems.ZOMBIFIED_PIGLIN_HEAD);
+        ItemRendererRegistry.register(HeadedItems.LEUCISTIC_AXOLOTL_HEAD);
+        ItemRendererRegistry.register(HeadedItems.BROWN_AXOLOTL_HEAD);
+        ItemRendererRegistry.register(HeadedItems.CYAN_AXOLOTL_HEAD);
+        ItemRendererRegistry.register(HeadedItems.GOLD_AXOLOTL_HEAD);
+        ItemRendererRegistry.register(HeadedItems.BLUE_AXOLOTL_HEAD);
 
-        LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, entityRenderer, registrationHelper, context) -> registrationHelper.register(new ModHeadFeatureRenderer(entityRenderer, context.getModelLoader())));
+
+        LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, entityRenderer, registrationHelper, context) -> registrationHelper.register(new HeadedHeadFeatureRenderer(entityRenderer, context.getModelLoader())));
     }
 }
