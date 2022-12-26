@@ -46,6 +46,9 @@ public class HeadedItems {
     public static final Item CYAN_AXOLOTL_HEAD = registerItem("cyan_axolotl_head", new VerticallyAttachableBlockItem(HeadedBlocks.CYAN_AXOLOTL_HEAD, HeadedBlocks.CYAN_AXOLOTL_WALL_HEAD, new FabricItemSettings().rarity(Rarity.UNCOMMON), Direction.DOWN));
     public static final Item GOLD_AXOLOTL_HEAD = registerItem("gold_axolotl_head", new VerticallyAttachableBlockItem(HeadedBlocks.GOLD_AXOLOTL_HEAD, HeadedBlocks.GOLD_AXOLOTL_WALL_HEAD, new FabricItemSettings().rarity(Rarity.UNCOMMON), Direction.DOWN));
     public static final Item BLUE_AXOLOTL_HEAD = registerItem("blue_axolotl_head", new VerticallyAttachableBlockItem(HeadedBlocks.BLUE_AXOLOTL_HEAD, HeadedBlocks.BLUE_AXOLOTL_WALL_HEAD, new FabricItemSettings().rarity(Rarity.UNCOMMON), Direction.DOWN));
+    public static final Item COW_HEAD = registerItem("cow_head", new VerticallyAttachableBlockItem(HeadedBlocks.COW_HEAD, HeadedBlocks.COW_WALL_HEAD, new FabricItemSettings().rarity(Rarity.UNCOMMON), Direction.DOWN));
+    public static final Item BROWN_MOOSHROOM_HEAD = registerItem("brown_mooshroom_head", new VerticallyAttachableBlockItem(HeadedBlocks.BROWN_MOOSHROOM_HEAD, HeadedBlocks.BROWN_MOOSHROOM_WALL_HEAD, new FabricItemSettings().rarity(Rarity.UNCOMMON), Direction.DOWN));
+    public static final Item RED_MOOSHROOM_HEAD = registerItem("red_mooshroom_head", new VerticallyAttachableBlockItem(HeadedBlocks.RED_MOOSHROOM_HEAD, HeadedBlocks.RED_MOOSHROOM_WALL_HEAD, new FabricItemSettings().rarity(Rarity.UNCOMMON), Direction.DOWN));
 
     protected static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, new Identifier(Headed.MOD_ID, name), item);

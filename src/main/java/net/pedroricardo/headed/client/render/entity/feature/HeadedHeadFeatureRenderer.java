@@ -63,7 +63,7 @@ public class HeadedHeadFeatureRenderer<T extends LivingEntity, M extends EntityM
                 matrixStack.translate(0.0F, 1.0F, 0.0F);
             }
 
-            ((ModelWithHead)this.getContextModel()).getHead().rotate(matrixStack);
+            (this.getContextModel()).getHead().rotate(matrixStack);
             if (item instanceof BlockItem && ((BlockItem)item).getBlock() instanceof AbstractHeadedSkullBlock) {
                 m = 1.1875F;
                 matrixStack.scale(1.1875F, -1.1875F, -1.1875F);

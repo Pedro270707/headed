@@ -71,6 +71,12 @@ public class HeadedBlocks {
     public static final Block GOLD_AXOLOTL_WALL_HEAD;
     public static final Block BLUE_AXOLOTL_HEAD;
     public static final Block BLUE_AXOLOTL_WALL_HEAD;
+    public static final Block COW_HEAD;
+    public static final Block COW_WALL_HEAD;
+    public static final Block BROWN_MOOSHROOM_HEAD;
+    public static final Block BROWN_MOOSHROOM_WALL_HEAD;
+    public static final Block RED_MOOSHROOM_HEAD;
+    public static final Block RED_MOOSHROOM_WALL_HEAD;
 
     static {
         VILLAGER_HEAD = register("villager_head", new HeadedSkullBlock(HeadedSkullBlock.Type.VILLAGER, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
@@ -137,6 +143,12 @@ public class HeadedBlocks {
         GOLD_AXOLOTL_WALL_HEAD = register("gold_axolotl_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.GOLD_AXOLOTL, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(GOLD_AXOLOTL_HEAD)));
         BLUE_AXOLOTL_HEAD = register("blue_axolotl_head", new HeadedSkullBlock(HeadedSkullBlock.Type.BLUE_AXOLOTL, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
         BLUE_AXOLOTL_WALL_HEAD = register("blue_axolotl_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.BLUE_AXOLOTL, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(BLUE_AXOLOTL_HEAD)));
+        COW_HEAD = register("cow_head", new HeadedSkullBlock(HeadedSkullBlock.Type.COW, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        COW_WALL_HEAD = register("cow_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.COW, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(COW_HEAD)));
+        BROWN_MOOSHROOM_HEAD = register("brown_mooshroom_head", new HeadedSkullBlock(HeadedSkullBlock.Type.BROWN_MOOSHROOM, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        BROWN_MOOSHROOM_WALL_HEAD = register("brown_mooshroom_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.BROWN_MOOSHROOM, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(BROWN_MOOSHROOM_HEAD)));
+        RED_MOOSHROOM_HEAD = register("red_mooshroom_head", new HeadedSkullBlock(HeadedSkullBlock.Type.RED_MOOSHROOM, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        RED_MOOSHROOM_WALL_HEAD = register("red_mooshroom_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.RED_MOOSHROOM, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(RED_MOOSHROOM_HEAD)));
     }
 
     private static Block register(String name, Block block) {

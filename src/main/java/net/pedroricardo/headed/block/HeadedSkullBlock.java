@@ -139,7 +139,10 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
         BROWN_AXOLOTL,
         CYAN_AXOLOTL,
         GOLD_AXOLOTL,
-        BLUE_AXOLOTL;
+        BLUE_AXOLOTL,
+        COW,
+        BROWN_MOOSHROOM,
+        RED_MOOSHROOM;
 
         private Type() {
         }

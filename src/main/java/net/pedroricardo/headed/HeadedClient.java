@@ -30,6 +30,7 @@ public class HeadedClient implements ClientModInitializer {
     private static final EntityModelLayer PIGLIN_BRUTE_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "piglin_brute_head"), "main");
     private static final EntityModelLayer ZOMBIFIED_PIGLIN_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "zombified_piglin_head"), "main");
     private static final EntityModelLayer AXOLOTL_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "axolotl_head"), "main");
+    private static final EntityModelLayer COW_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "cow_head"), "main");
 
     @Override
     public void onInitializeClient() {
@@ -48,6 +49,7 @@ public class HeadedClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(PIGLIN_BRUTE_HEAD, HeadedPiglinHeadEntityModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(ZOMBIFIED_PIGLIN_HEAD, HeadedPiglinHeadEntityModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(AXOLOTL_HEAD, AxolotlHeadEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(COW_HEAD, CowHeadEntityModel::getTexturedModelData);
 
         ItemRendererRegistry.register(HeadedItems.VILLAGER_HEAD);
         ItemRendererRegistry.register(HeadedItems.EVOKER_HEAD);
@@ -81,6 +83,9 @@ public class HeadedClient implements ClientModInitializer {
         ItemRendererRegistry.register(HeadedItems.CYAN_AXOLOTL_HEAD);
         ItemRendererRegistry.register(HeadedItems.GOLD_AXOLOTL_HEAD);
         ItemRendererRegistry.register(HeadedItems.BLUE_AXOLOTL_HEAD);
+        ItemRendererRegistry.register(HeadedItems.COW_HEAD);
+        ItemRendererRegistry.register(HeadedItems.BROWN_MOOSHROOM_HEAD);
+        ItemRendererRegistry.register(HeadedItems.RED_MOOSHROOM_HEAD);
 
 
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, entityRenderer, registrationHelper, context) -> registrationHelper.register(new HeadedHeadFeatureRenderer(entityRenderer, context.getModelLoader())));

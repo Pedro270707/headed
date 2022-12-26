@@ -31,11 +31,6 @@ public class HeadedSkullItemRenderer implements BuiltinItemRendererRegistry.Dyna
                     HeadedSkullBlockEntityRenderer.renderSkull(skullType, null, 180.0F, 0, matrices, vertexConsumers, light, skullModel, renderLayer, 1.0F, 1.0F, 1.0F);
                     HeadedSkullBlockEntityRenderer.testForSpecialSkull(skullType, null, 180.0F, 0, matrices, vertexConsumers, light);
                     matrices.pop();
-//                } else if (mode == ModelTransformation.Mode.HEAD) {
-//                    matrices.translate(-0.375F, 0.0625F, -0.375F);
-//                    matrices.scale(1.75F, 1.75F, 1.75F);
-//                    HeadedSkullBlockEntityRenderer.renderSkull(skullType, null, 0.0F, 0, matrices, vertexConsumers, light, skullModel, renderLayer, 1.0F, 1.0F, 1.0F);
-//                    HeadedSkullBlockEntityRenderer.testForSpecialSkull(skullType, null, 0.0F, 0, matrices, vertexConsumers, light);
                 } else {
                     HeadedSkullBlockEntityRenderer.renderSkull(skullType, null, 180.0F, 0, matrices, vertexConsumers, light, skullModel, renderLayer, 1.0F, 1.0F, 1.0F);
                     HeadedSkullBlockEntityRenderer.testForSpecialSkull(skullType, null, 180.0F, 0, matrices, vertexConsumers, light);

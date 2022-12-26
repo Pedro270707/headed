@@ -50,6 +50,9 @@ public class Headed implements ModInitializer {
 			content.addAfter(HeadedItems.BROWN_AXOLOTL_HEAD, HeadedItems.CYAN_AXOLOTL_HEAD);
 			content.addAfter(HeadedItems.CYAN_AXOLOTL_HEAD, HeadedItems.GOLD_AXOLOTL_HEAD);
 			content.addAfter(HeadedItems.GOLD_AXOLOTL_HEAD, HeadedItems.BLUE_AXOLOTL_HEAD);
+			content.addAfter(HeadedItems.BLUE_AXOLOTL_HEAD, HeadedItems.COW_HEAD);
+			content.addAfter(HeadedItems.COW_HEAD, HeadedItems.BROWN_MOOSHROOM_HEAD);
+			content.addAfter(HeadedItems.BROWN_MOOSHROOM_HEAD, HeadedItems.RED_MOOSHROOM_HEAD);
 		});
 	}
 }
