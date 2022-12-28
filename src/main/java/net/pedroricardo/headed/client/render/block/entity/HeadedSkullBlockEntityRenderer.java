@@ -70,7 +70,20 @@ public class HeadedSkullBlockEntityRenderer implements BlockEntityRenderer<Heade
         map.put(Type.COW, new Identifier("textures/entity/cow/cow.png"));
         map.put(Type.BROWN_MOOSHROOM, new Identifier("textures/entity/cow/brown_mooshroom.png"));
         map.put(Type.RED_MOOSHROOM, new Identifier("textures/entity/cow/red_mooshroom.png"));
-
+        map.put(Type.POLAR_BEAR, new Identifier("textures/entity/bear/polarbear.png"));
+        map.put(Type.OCELOT, new Identifier("textures/entity/cat/ocelot.png"));
+        map.put(Type.ALL_BLACK_CAT, new Identifier("textures/entity/cat/all_black.png"));
+        map.put(Type.BLACK_CAT, new Identifier("textures/entity/cat/black.png"));
+        map.put(Type.BRITISH_SHORTHAIR_CAT, new Identifier("textures/entity/cat/british_shorthair.png"));
+        map.put(Type.CALICO_CAT, new Identifier("textures/entity/cat/calico.png"));
+        map.put(Type.JELLIE_CAT, new Identifier("textures/entity/cat/jellie.png"));
+        map.put(Type.PERSIAN_CAT, new Identifier("textures/entity/cat/persian.png"));
+        map.put(Type.RAGDOLL_CAT, new Identifier("textures/entity/cat/ragdoll.png"));
+        map.put(Type.RED_CAT, new Identifier("textures/entity/cat/red.png"));
+        map.put(Type.SIAMESE_CAT, new Identifier("textures/entity/cat/siamese.png"));
+        map.put(Type.TABBY_CAT, new Identifier("textures/entity/cat/tabby.png"));
+        map.put(Type.WHITE_CAT, new Identifier("textures/entity/cat/white.png"));
+        map.put(Type.ENDERMAN, new Identifier("textures/entity/enderman/enderman.png"));
     });
 
     public static Map<HeadedSkullBlock.SkullType, HeadedSkullBlockEntityModel> getModels(EntityModelLoader modelLoader) {
@@ -110,6 +123,20 @@ public class HeadedSkullBlockEntityRenderer implements BlockEntityRenderer<Heade
         builder.put(Type.COW, new CowHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.COW_HEAD)));
         builder.put(Type.BROWN_MOOSHROOM, new CowHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.COW_HEAD)));
         builder.put(Type.RED_MOOSHROOM, new CowHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.COW_HEAD)));
+        builder.put(Type.POLAR_BEAR, new PolarBearHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.POLAR_BEAR_HEAD)));
+        builder.put(Type.OCELOT, new OcelotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.OCELOT_HEAD)));
+        builder.put(Type.ALL_BLACK_CAT, new OcelotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.OCELOT_HEAD)));
+        builder.put(Type.BLACK_CAT, new OcelotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.OCELOT_HEAD)));
+        builder.put(Type.BRITISH_SHORTHAIR_CAT, new OcelotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.OCELOT_HEAD)));
+        builder.put(Type.CALICO_CAT, new OcelotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.OCELOT_HEAD)));
+        builder.put(Type.JELLIE_CAT, new OcelotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.OCELOT_HEAD)));
+        builder.put(Type.PERSIAN_CAT, new OcelotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.OCELOT_HEAD)));
+        builder.put(Type.RAGDOLL_CAT, new OcelotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.OCELOT_HEAD)));
+        builder.put(Type.RED_CAT, new OcelotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.OCELOT_HEAD)));
+        builder.put(Type.SIAMESE_CAT, new OcelotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.OCELOT_HEAD)));
+        builder.put(Type.TABBY_CAT, new OcelotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.OCELOT_HEAD)));
+        builder.put(Type.WHITE_CAT, new OcelotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.OCELOT_HEAD)));
+        builder.put(Type.ENDERMAN, new EndermanHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.ENDERMAN_HEAD)));
         return builder.build();
     }
 
@@ -146,19 +173,35 @@ public class HeadedSkullBlockEntityRenderer implements BlockEntityRenderer<Heade
         map.put(Type.CYAN_AXOLOTL, new float[]{0.34375F, 0.34375F, 0.34375F});
         map.put(Type.GOLD_AXOLOTL, new float[]{0.34375F, 0.34375F, 0.34375F});
         map.put(Type.BLUE_AXOLOTL, new float[]{0.34375F, 0.34375F, 0.34375F});
-        map.put(Type.COW, new float[]{0.3125F, 0.25F, 0.25F});
-        map.put(Type.BROWN_MOOSHROOM, new float[]{0.3125F, 0.25F, 0.25F});
-        map.put(Type.RED_MOOSHROOM, new float[]{0.3125F, 0.25F, 0.25F});
+        map.put(Type.COW, new float[]{0.3125F, 0.25F, 0.3125F});
+        map.put(Type.BROWN_MOOSHROOM, new float[]{0.3125F, 0.25F, 0.3125F});
+        map.put(Type.RED_MOOSHROOM, new float[]{0.3125F, 0.25F, 0.3125F});
+        map.put(Type.POLAR_BEAR, new float[]{0.28125F, 0.28125F, 0.28125F});
+        map.put(Type.OCELOT, new float[]{0.34375F, 0.375F, 0.34375F});
+        map.put(Type.ALL_BLACK_CAT, new float[]{0.34375F, 0.375F, 0.34375F});
+        map.put(Type.BLACK_CAT, new float[]{0.34375F, 0.375F, 0.34375F});
+        map.put(Type.BRITISH_SHORTHAIR_CAT, new float[]{0.34375F, 0.375F, 0.34375F});
+        map.put(Type.CALICO_CAT, new float[]{0.34375F, 0.375F, 0.34375F});
+        map.put(Type.JELLIE_CAT, new float[]{0.34375F, 0.375F, 0.34375F});
+        map.put(Type.PERSIAN_CAT, new float[]{0.34375F, 0.375F, 0.34375F});
+        map.put(Type.RAGDOLL_CAT, new float[]{0.34375F, 0.375F, 0.34375F});
+        map.put(Type.RED_CAT, new float[]{0.34375F, 0.375F, 0.34375F});
+        map.put(Type.SIAMESE_CAT, new float[]{0.34375F, 0.375F, 0.34375F});
+        map.put(Type.TABBY_CAT, new float[]{0.34375F, 0.375F, 0.34375F});
+        map.put(Type.WHITE_CAT, new float[]{0.34375F, 0.375F, 0.34375F});
+        map.put(Type.ENDERMAN, new float[]{0.25F, 0.25F, 0.25F});
     });
 
     public static Map<String, HeadedSkullBlockEntityModel> getOtherModels(EntityModelLoader modelLoader) {
         ImmutableMap.Builder<String, HeadedSkullBlockEntityModel> builder = ImmutableMap.builder();
         builder.put("sheep_wool", new SheepHeadWoolEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_WOOL)));
+        builder.put("enderman_eyes", new EndermanHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.ENDERMAN_HEAD)));
         return builder.build();
     }
 
     private static final Map<String, Identifier> OTHER_TEXTURES = Util.make(Maps.newHashMap(), (map) -> {
         map.put("sheep_wool", new Identifier("textures/entity/sheep/sheep_fur.png"));
+        map.put("enderman_eyes", new Identifier("textures/entity/enderman/enderman_eyes.png"));
     });
 
     public HeadedSkullBlockEntityRenderer(BlockEntityRendererFactory.Context ctx) {
@@ -356,6 +399,11 @@ public class HeadedSkullBlockEntityRenderer implements BlockEntityRenderer<Heade
             HeadedSkullBlockEntityModel woolModel = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("sheep_wool");
 
             HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, woolModel, woolRenderLayer, s, t, u);
+        } else if (skullType == Type.ENDERMAN) {
+            RenderLayer endermanEyesRenderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("enderman_eyes");
+            HeadedSkullBlockEntityModel endermanEyesModel = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("enderman_eyes");
+
+            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, 15728640, endermanEyesModel, endermanEyesRenderLayer, 1.0F, 1.0F, 1.0F);
         }
     }
 }

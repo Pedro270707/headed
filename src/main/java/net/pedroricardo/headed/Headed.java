@@ -53,6 +53,20 @@ public class Headed implements ModInitializer {
 			content.addAfter(HeadedItems.BLUE_AXOLOTL_HEAD, HeadedItems.COW_HEAD);
 			content.addAfter(HeadedItems.COW_HEAD, HeadedItems.BROWN_MOOSHROOM_HEAD);
 			content.addAfter(HeadedItems.BROWN_MOOSHROOM_HEAD, HeadedItems.RED_MOOSHROOM_HEAD);
+			content.addAfter(HeadedItems.RED_MOOSHROOM_HEAD, HeadedItems.POLAR_BEAR_HEAD);
+			content.addAfter(HeadedItems.POLAR_BEAR_HEAD, HeadedItems.OCELOT_HEAD);
+			content.addAfter(HeadedItems.OCELOT_HEAD, HeadedItems.ALL_BLACK_CAT_HEAD);
+			content.addAfter(HeadedItems.ALL_BLACK_CAT_HEAD, HeadedItems.BLACK_CAT_HEAD);
+			content.addAfter(HeadedItems.BLACK_CAT_HEAD, HeadedItems.BRITISH_SHORTHAIR_CAT_HEAD);
+			content.addAfter(HeadedItems.BRITISH_SHORTHAIR_CAT_HEAD, HeadedItems.CALICO_CAT_HEAD);
+			content.addAfter(HeadedItems.CALICO_CAT_HEAD, HeadedItems.JELLIE_CAT_HEAD);
+			content.addAfter(HeadedItems.JELLIE_CAT_HEAD, HeadedItems.PERSIAN_CAT_HEAD);
+			content.addAfter(HeadedItems.PERSIAN_CAT_HEAD, HeadedItems.RAGDOLL_CAT_HEAD);
+			content.addAfter(HeadedItems.RAGDOLL_CAT_HEAD, HeadedItems.RED_CAT_HEAD);
+			content.addAfter(HeadedItems.RED_CAT_HEAD, HeadedItems.SIAMESE_CAT_HEAD);
+			content.addAfter(HeadedItems.SIAMESE_CAT_HEAD, HeadedItems.TABBY_CAT_HEAD);
+			content.addAfter(HeadedItems.TABBY_CAT_HEAD, HeadedItems.WHITE_CAT_HEAD);
+			content.addAfter(HeadedItems.WHITE_CAT_HEAD, HeadedItems.ENDERMAN_HEAD);
 		});
 	}
 }

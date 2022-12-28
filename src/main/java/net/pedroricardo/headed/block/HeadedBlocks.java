@@ -77,6 +77,35 @@ public class HeadedBlocks {
     public static final Block BROWN_MOOSHROOM_WALL_HEAD;
     public static final Block RED_MOOSHROOM_HEAD;
     public static final Block RED_MOOSHROOM_WALL_HEAD;
+    public static final Block POLAR_BEAR_HEAD;
+    public static final Block POLAR_BEAR_WALL_HEAD;
+    public static final Block OCELOT_HEAD;
+    public static final Block OCELOT_WALL_HEAD;
+    public static final Block ALL_BLACK_CAT_HEAD;
+    public static final Block ALL_BLACK_CAT_WALL_HEAD;
+    public static final Block BLACK_CAT_HEAD;
+    public static final Block BLACK_CAT_WALL_HEAD;
+    public static final Block BRITISH_SHORTHAIR_CAT_HEAD;
+    public static final Block BRITISH_SHORTHAIR_CAT_WALL_HEAD;
+    public static final Block CALICO_CAT_HEAD;
+    public static final Block CALICO_CAT_WALL_HEAD;
+    public static final Block JELLIE_CAT_HEAD;
+    public static final Block JELLIE_CAT_WALL_HEAD;
+    public static final Block PERSIAN_CAT_HEAD;
+    public static final Block PERSIAN_CAT_WALL_HEAD;
+    public static final Block RAGDOLL_CAT_HEAD;
+    public static final Block RAGDOLL_CAT_WALL_HEAD;
+    public static final Block RED_CAT_HEAD;
+    public static final Block RED_CAT_WALL_HEAD;
+    public static final Block SIAMESE_CAT_HEAD;
+    public static final Block SIAMESE_CAT_WALL_HEAD;
+    public static final Block TABBY_CAT_HEAD;
+    public static final Block TABBY_CAT_WALL_HEAD;
+    public static final Block WHITE_CAT_HEAD;
+    public static final Block WHITE_CAT_WALL_HEAD;
+    public static final Block ENDERMAN_HEAD;
+    public static final Block ENDERMAN_WALL_HEAD;
+
 
     static {
         VILLAGER_HEAD = register("villager_head", new HeadedSkullBlock(HeadedSkullBlock.Type.VILLAGER, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
@@ -149,6 +178,34 @@ public class HeadedBlocks {
         BROWN_MOOSHROOM_WALL_HEAD = register("brown_mooshroom_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.BROWN_MOOSHROOM, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(BROWN_MOOSHROOM_HEAD)));
         RED_MOOSHROOM_HEAD = register("red_mooshroom_head", new HeadedSkullBlock(HeadedSkullBlock.Type.RED_MOOSHROOM, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
         RED_MOOSHROOM_WALL_HEAD = register("red_mooshroom_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.RED_MOOSHROOM, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(RED_MOOSHROOM_HEAD)));
+        POLAR_BEAR_HEAD = register("polar_bear_head", new HeadedSkullBlock(HeadedSkullBlock.Type.POLAR_BEAR, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        POLAR_BEAR_WALL_HEAD = register("polar_bear_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.POLAR_BEAR, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(POLAR_BEAR_HEAD)));
+        OCELOT_HEAD = register("ocelot_head", new HeadedSkullBlock(HeadedSkullBlock.Type.OCELOT, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        OCELOT_WALL_HEAD = register("ocelot_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.OCELOT, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(OCELOT_HEAD)));
+        ALL_BLACK_CAT_HEAD = register("all_black_cat_head", new HeadedSkullBlock(HeadedSkullBlock.Type.ALL_BLACK_CAT, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        ALL_BLACK_CAT_WALL_HEAD = register("all_black_cat_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.ALL_BLACK_CAT, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(ALL_BLACK_CAT_HEAD)));
+        BLACK_CAT_HEAD = register("black_cat_head", new HeadedSkullBlock(HeadedSkullBlock.Type.BLACK_CAT, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        BLACK_CAT_WALL_HEAD = register("black_cat_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.BLACK_CAT, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(BLACK_CAT_HEAD)));
+        BRITISH_SHORTHAIR_CAT_HEAD = register("british_shorthair_cat_head", new HeadedSkullBlock(HeadedSkullBlock.Type.BRITISH_SHORTHAIR_CAT, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        BRITISH_SHORTHAIR_CAT_WALL_HEAD = register("british_shorthair_cat_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.BRITISH_SHORTHAIR_CAT, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(BRITISH_SHORTHAIR_CAT_HEAD)));
+        CALICO_CAT_HEAD = register("calico_cat_head", new HeadedSkullBlock(HeadedSkullBlock.Type.CALICO_CAT, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        CALICO_CAT_WALL_HEAD = register("calico_cat_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.CALICO_CAT, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(CALICO_CAT_HEAD)));
+        JELLIE_CAT_HEAD = register("jellie_cat_head", new HeadedSkullBlock(HeadedSkullBlock.Type.JELLIE_CAT, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        JELLIE_CAT_WALL_HEAD = register("jellie_cat_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.JELLIE_CAT, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(JELLIE_CAT_HEAD)));
+        PERSIAN_CAT_HEAD = register("persian_cat_head", new HeadedSkullBlock(HeadedSkullBlock.Type.PERSIAN_CAT, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        PERSIAN_CAT_WALL_HEAD = register("persian_cat_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.PERSIAN_CAT, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(PERSIAN_CAT_HEAD)));
+        RAGDOLL_CAT_HEAD = register("ragdoll_cat_head", new HeadedSkullBlock(HeadedSkullBlock.Type.RAGDOLL_CAT, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        RAGDOLL_CAT_WALL_HEAD = register("ragdoll_cat_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.RAGDOLL_CAT, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(RAGDOLL_CAT_HEAD)));
+        RED_CAT_HEAD = register("red_cat_head", new HeadedSkullBlock(HeadedSkullBlock.Type.RED_CAT, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        RED_CAT_WALL_HEAD = register("red_cat_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.RED_CAT, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(RED_CAT_HEAD)));
+        SIAMESE_CAT_HEAD = register("siamese_cat_head", new HeadedSkullBlock(HeadedSkullBlock.Type.SIAMESE_CAT, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        SIAMESE_CAT_WALL_HEAD = register("siamese_cat_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.SIAMESE_CAT, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(SIAMESE_CAT_HEAD)));
+        TABBY_CAT_HEAD = register("tabby_cat_head", new HeadedSkullBlock(HeadedSkullBlock.Type.TABBY_CAT, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        TABBY_CAT_WALL_HEAD = register("tabby_cat_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.TABBY_CAT, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(TABBY_CAT_HEAD)));
+        WHITE_CAT_HEAD = register("white_cat_head", new HeadedSkullBlock(HeadedSkullBlock.Type.WHITE_CAT, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        WHITE_CAT_WALL_HEAD = register("white_cat_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.WHITE_CAT, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(WHITE_CAT_HEAD)));
+        ENDERMAN_HEAD = register("enderman_head", new HeadedSkullBlock(HeadedSkullBlock.Type.ENDERMAN, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        ENDERMAN_WALL_HEAD = register("enderman_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.ENDERMAN, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(ENDERMAN_HEAD)));
     }
 
     private static Block register(String name, Block block) {

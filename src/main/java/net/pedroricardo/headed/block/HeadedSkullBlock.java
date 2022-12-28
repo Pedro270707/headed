@@ -24,6 +24,8 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
     protected static final VoxelShape ALLAY_SHAPE;
     protected static final VoxelShape PIGLIN_SHAPE;
     protected static final VoxelShape AXOLOTL_SHAPE;
+    protected static final VoxelShape POLAR_BEAR_SHAPE;
+    protected static final VoxelShape OCELOT_SHAPE;
 
     public HeadedSkullBlock(HeadedSkullBlock.SkullType skullType, AbstractBlock.Settings settings) {
         super(skullType, settings);
@@ -68,6 +70,21 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
                 || this.getSkullType() == Type.GOLD_AXOLOTL
                 || this.getSkullType() == Type.BLUE_AXOLOTL) {
             return AXOLOTL_SHAPE;
+        } else if (this.getSkullType() == Type.POLAR_BEAR) {
+            return POLAR_BEAR_SHAPE;
+        } else if (this.getSkullType() == Type.OCELOT
+                || this.getSkullType() == Type.ALL_BLACK_CAT
+                || this.getSkullType() == Type.BLACK_CAT
+                || this.getSkullType() == Type.BRITISH_SHORTHAIR_CAT
+                || this.getSkullType() == Type.CALICO_CAT
+                || this.getSkullType() == Type.JELLIE_CAT
+                || this.getSkullType() == Type.PERSIAN_CAT
+                || this.getSkullType() == Type.RAGDOLL_CAT
+                || this.getSkullType() == Type.RED_CAT
+                || this.getSkullType() == Type.SIAMESE_CAT
+                || this.getSkullType() == Type.TABBY_CAT
+                || this.getSkullType() == Type.WHITE_CAT) {
+            return OCELOT_SHAPE;
         } else {
             return SHAPE;
         }
@@ -102,6 +119,8 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
         ALLAY_SHAPE = Block.createCuboidShape(5.5, 0.0, 5.5, 10.5, 5.0, 10.5);
         PIGLIN_SHAPE = Block.createCuboidShape(3.0, 0.0, 3.0, 13.0, 8.0, 13.0);
         AXOLOTL_SHAPE = Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 5.0, 12.0);
+        POLAR_BEAR_SHAPE = Block.createCuboidShape(4.5, 0.0, 4.5, 11.5, 7.0, 11.5);
+        OCELOT_SHAPE = Block.createCuboidShape(5.5, 0.0, 5.5, 10.5, 4.0, 10.5);
     }
 
     public interface SkullType {
@@ -142,7 +161,21 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
         BLUE_AXOLOTL,
         COW,
         BROWN_MOOSHROOM,
-        RED_MOOSHROOM;
+        RED_MOOSHROOM,
+        POLAR_BEAR,
+        OCELOT,
+        ALL_BLACK_CAT,
+        BLACK_CAT,
+        BRITISH_SHORTHAIR_CAT,
+        CALICO_CAT,
+        JELLIE_CAT,
+        PERSIAN_CAT,
+        RAGDOLL_CAT,
+        RED_CAT,
+        SIAMESE_CAT,
+        TABBY_CAT,
+        WHITE_CAT,
+        ENDERMAN;
 
         private Type() {
         }

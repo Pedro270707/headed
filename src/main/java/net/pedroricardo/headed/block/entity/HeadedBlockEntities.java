@@ -47,6 +47,20 @@ public class HeadedBlockEntities {
                         HeadedBlocks.BLUE_AXOLOTL_HEAD, HeadedBlocks.BLUE_AXOLOTL_WALL_HEAD,
                         HeadedBlocks.COW_HEAD, HeadedBlocks.COW_WALL_HEAD,
                         HeadedBlocks.BROWN_MOOSHROOM_HEAD, HeadedBlocks.BROWN_MOOSHROOM_WALL_HEAD,
-                        HeadedBlocks.RED_MOOSHROOM_HEAD, HeadedBlocks.RED_MOOSHROOM_WALL_HEAD).build(null));
+                        HeadedBlocks.RED_MOOSHROOM_HEAD, HeadedBlocks.RED_MOOSHROOM_WALL_HEAD,
+                        HeadedBlocks.POLAR_BEAR_HEAD, HeadedBlocks.POLAR_BEAR_WALL_HEAD,
+                        HeadedBlocks.OCELOT_HEAD, HeadedBlocks.OCELOT_WALL_HEAD,
+                        HeadedBlocks.ALL_BLACK_CAT_HEAD, HeadedBlocks.ALL_BLACK_CAT_WALL_HEAD,
+                        HeadedBlocks.BLACK_CAT_HEAD, HeadedBlocks.BLACK_CAT_WALL_HEAD,
+                        HeadedBlocks.BRITISH_SHORTHAIR_CAT_HEAD, HeadedBlocks.BRITISH_SHORTHAIR_CAT_WALL_HEAD,
+                        HeadedBlocks.CALICO_CAT_HEAD, HeadedBlocks.CALICO_CAT_WALL_HEAD,
+                        HeadedBlocks.JELLIE_CAT_HEAD, HeadedBlocks.JELLIE_CAT_WALL_HEAD,
+                        HeadedBlocks.PERSIAN_CAT_HEAD, HeadedBlocks.PERSIAN_CAT_WALL_HEAD,
+                        HeadedBlocks.RAGDOLL_CAT_HEAD, HeadedBlocks.RAGDOLL_CAT_WALL_HEAD,
+                        HeadedBlocks.RED_CAT_HEAD, HeadedBlocks.RED_CAT_WALL_HEAD,
+                        HeadedBlocks.SIAMESE_CAT_HEAD, HeadedBlocks.SIAMESE_CAT_WALL_HEAD,
+                        HeadedBlocks.TABBY_CAT_HEAD, HeadedBlocks.TABBY_CAT_WALL_HEAD,
+                        HeadedBlocks.WHITE_CAT_HEAD, HeadedBlocks.WHITE_CAT_WALL_HEAD,
+                        HeadedBlocks.ENDERMAN_HEAD, HeadedBlocks.ENDERMAN_WALL_HEAD).build(null));
     }
 }

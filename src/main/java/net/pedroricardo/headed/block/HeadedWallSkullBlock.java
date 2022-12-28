@@ -24,6 +24,9 @@ public class HeadedWallSkullBlock extends AbstractHeadedSkullBlock {
     private static final Map<Direction, VoxelShape> FACING_TO_ALLAY_SHAPE;
     private static final Map<Direction, VoxelShape> FACING_TO_PIGLIN_SHAPE;
     private static final Map<Direction, VoxelShape> FACING_TO_AXOLOTL_SHAPE;
+    private static final Map<Direction, VoxelShape> FACING_TO_COW_SHAPE;
+    private static final Map<Direction, VoxelShape> FACING_TO_POLAR_BEAR_SHAPE;
+    private static final Map<Direction, VoxelShape> FACING_TO_OCELOT_SHAPE;
 
     public HeadedWallSkullBlock(HeadedSkullBlock.SkullType skullType, AbstractBlock.Settings settings) {
         super(skullType, settings);
@@ -72,6 +75,25 @@ public class HeadedWallSkullBlock extends AbstractHeadedSkullBlock {
                 || this.getSkullType() == HeadedSkullBlock.Type.GOLD_AXOLOTL
                 || this.getSkullType() == HeadedSkullBlock.Type.BLUE_AXOLOTL) {
             return FACING_TO_AXOLOTL_SHAPE.get(state.get(FACING));
+        } else if (this.getSkullType() == HeadedSkullBlock.Type.COW
+                || this.getSkullType() == HeadedSkullBlock.Type.BROWN_MOOSHROOM
+                || this.getSkullType() == HeadedSkullBlock.Type.RED_MOOSHROOM) {
+            return FACING_TO_COW_SHAPE.get(state.get(FACING));
+        } else if (this.getSkullType() == HeadedSkullBlock.Type.POLAR_BEAR) {
+            return FACING_TO_POLAR_BEAR_SHAPE.get(state.get(FACING));
+        } else if (this.getSkullType() == HeadedSkullBlock.Type.OCELOT
+                || this.getSkullType() == HeadedSkullBlock.Type.ALL_BLACK_CAT
+                || this.getSkullType() == HeadedSkullBlock.Type.BLACK_CAT
+                || this.getSkullType() == HeadedSkullBlock.Type.BRITISH_SHORTHAIR_CAT
+                || this.getSkullType() == HeadedSkullBlock.Type.CALICO_CAT
+                || this.getSkullType() == HeadedSkullBlock.Type.JELLIE_CAT
+                || this.getSkullType() == HeadedSkullBlock.Type.PERSIAN_CAT
+                || this.getSkullType() == HeadedSkullBlock.Type.RAGDOLL_CAT
+                || this.getSkullType() == HeadedSkullBlock.Type.RED_CAT
+                || this.getSkullType() == HeadedSkullBlock.Type.SIAMESE_CAT
+                || this.getSkullType() == HeadedSkullBlock.Type.TABBY_CAT
+                || this.getSkullType() == HeadedSkullBlock.Type.WHITE_CAT) {
+            return FACING_TO_OCELOT_SHAPE.get(state.get(FACING));
         } else {
             return FACING_TO_SHAPE.get(state.get(FACING));
         }
@@ -119,5 +141,8 @@ public class HeadedWallSkullBlock extends AbstractHeadedSkullBlock {
         FACING_TO_ALLAY_SHAPE = Maps.immutableEnumMap(Map.of(Direction.NORTH, Block.createCuboidShape(5.5, 5.5, 11.0, 10.5, 10.5, 16.0), Direction.SOUTH, Block.createCuboidShape(5.5, 5.5, 0.0, 10.5, 10.5, 5.0), Direction.EAST, Block.createCuboidShape(0.0, 5.5, 5.5, 5.0, 10.5, 10.5), Direction.WEST, Block.createCuboidShape(11.0, 5.5, 5.5, 16.0, 10.5, 10.5)));
         FACING_TO_PIGLIN_SHAPE = Maps.immutableEnumMap(Map.of(Direction.NORTH, Block.createCuboidShape(3.0, 4.0, 8.0, 13.0, 12.0, 16.0), Direction.SOUTH, Block.createCuboidShape(3.0, 4.0, 0.0, 13.0, 12.0, 8.0), Direction.EAST, Block.createCuboidShape(0.0, 4.0, 3.0, 8.0, 12.0, 13.0), Direction.WEST, Block.createCuboidShape(8.0, 4.0, 3.0, 16.0, 12.0, 13.0)));
         FACING_TO_AXOLOTL_SHAPE = Maps.immutableEnumMap(Map.of(Direction.NORTH, Block.createCuboidShape(4.0, 5.5, 11.0, 12.0, 10.5, 16.0), Direction.SOUTH, Block.createCuboidShape(4.0, 5.5, 0.0, 12.0, 10.5, 5.0), Direction.EAST, Block.createCuboidShape(0.0, 5.5, 4.0, 5.0, 10.5, 12.0), Direction.WEST, Block.createCuboidShape(11.0, 5.5, 4.0, 16.0, 10.5, 12.0)));
+        FACING_TO_COW_SHAPE = Maps.newEnumMap(ImmutableMap.of(Direction.NORTH, Block.createCuboidShape(4.0, 4.0, 10.0, 12.0, 12.0, 16.0), Direction.SOUTH, Block.createCuboidShape(4.0, 4.0, 0.0, 12.0, 12.0, 6.0), Direction.EAST, Block.createCuboidShape(0.0, 4.0, 4.0, 6.0, 12.0, 12.0), Direction.WEST, Block.createCuboidShape(10.0, 4.0, 4.0, 16.0, 12.0, 12.0)));
+        FACING_TO_POLAR_BEAR_SHAPE = Maps.newEnumMap(ImmutableMap.of(Direction.NORTH, Block.createCuboidShape(4.5, 4.5, 9.0, 11.5, 11.5, 16.0), Direction.SOUTH, Block.createCuboidShape(4.5, 4.5, 0.0, 11.5, 11.5, 7.0), Direction.EAST, Block.createCuboidShape(0.0, 4.5, 4.5, 7.0, 11.5, 11.5), Direction.WEST, Block.createCuboidShape(9.0, 4.5, 4.5, 16.0, 11.5, 11.5)));
+        FACING_TO_OCELOT_SHAPE = Maps.newEnumMap(ImmutableMap.of(Direction.NORTH, Block.createCuboidShape(5.5, 6, 11.0, 10.5, 10.0, 16.0), Direction.SOUTH, Block.createCuboidShape(5.5, 6.0, 0.0, 10.5, 10.0, 5.0), Direction.EAST, Block.createCuboidShape(0.0, 6.0, 5.5, 5.0, 10.0, 10.5), Direction.WEST, Block.createCuboidShape(11.0, 6.0, 5.5, 16.0, 10.0, 10.5)));
     }
 }
