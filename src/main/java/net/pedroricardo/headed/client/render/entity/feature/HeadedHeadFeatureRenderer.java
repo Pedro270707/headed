@@ -21,6 +21,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.util.math.RotationAxis;
+import net.pedroricardo.headed.Headed;
 import net.pedroricardo.headed.block.AbstractHeadedSkullBlock;
 import net.pedroricardo.headed.block.HeadedSkullBlock;
 import net.pedroricardo.headed.client.render.block.entity.HeadedSkullBlockEntityModel;
@@ -71,20 +72,25 @@ public class HeadedHeadFeatureRenderer<T extends LivingEntity, M extends EntityM
                     matrixStack.translate(0.0F, 0.0625F, 0.0F);
                 }
 
-                GameProfile gameProfile = null;
+                boolean hasLeftHorn = false;
+                boolean hasRightHorn = false;
                 if (itemStack.hasNbt()) {
                     NbtCompound nbtCompound = itemStack.getNbt();
-                    if (nbtCompound.contains("SkullOwner", 10)) {
-                        gameProfile = NbtHelper.toGameProfile(nbtCompound.getCompound("SkullOwner"));
+                    if (nbtCompound.contains("HasLeftHorn", 10)) {
+                        hasLeftHorn = nbtCompound.getBoolean("HasLeftHorn");
+                    }
+                    if (nbtCompound.contains("HasRightHorn", 10)) {
+                        hasRightHorn = nbtCompound.getBoolean("HasRightHorn");
                     }
                 }
 
                 matrixStack.translate(-0.5, 0.0, -0.5);
                 HeadedSkullBlock.SkullType skullType = ((AbstractHeadedSkullBlock)((BlockItem)item).getBlock()).getSkullType();
-                HeadedSkullBlockEntityModel skullBlockEntityModel = (HeadedSkullBlockEntityModel)this.headModels.get(skullType);
-                RenderLayer renderLayer = HeadedSkullBlockEntityRenderer.getRenderLayer(skullType, gameProfile);
+                HeadedSkullBlockEntityModel skullBlockEntityModel = this.headModels.get(skullType);
+                RenderLayer renderLayer = HeadedSkullBlockEntityRenderer.getRenderLayer(skullType);
                 HeadedSkullBlockEntityRenderer.renderSkull(skullType, null, 180.0F, f, matrixStack, vertexConsumerProvider, i, skullBlockEntityModel, renderLayer, 1.0F, 1.0F, 1.0F);
-                HeadedSkullBlockEntityRenderer.testForSpecialSkull(skullType, null, 180.0F, f, matrixStack, vertexConsumerProvider, i);
+                HeadedSkullBlockEntityRenderer.testForSpecialSkull(skullType, null, 180.0F, f, matrixStack, vertexConsumerProvider, i, hasLeftHorn, hasRightHorn);
+//                Headed.LOGGER.debug("HeadedHeadFeatureRenderer: " + hasLeftHorn + " " + hasRightHorn);
             }
 
             matrixStack.pop();

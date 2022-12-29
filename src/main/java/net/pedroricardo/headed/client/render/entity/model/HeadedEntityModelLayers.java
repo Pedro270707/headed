@@ -30,6 +30,9 @@ public class HeadedEntityModelLayers {
     public static final EntityModelLayer POLAR_BEAR_HEAD = registerMain("polar_bear_head");
     public static final EntityModelLayer OCELOT_HEAD = registerMain("ocelot_head");
     public static final EntityModelLayer ENDERMAN_HEAD = registerMain("enderman_head");
+    public static final EntityModelLayer FOX_HEAD = registerMain("fox_head");
+    public static final EntityModelLayer IRON_GOLEM_HEAD = registerMain("iron_golem_head");
+    public static final EntityModelLayer PANDA_HEAD = registerMain("panda_head");
 
     public HeadedEntityModelLayers() {
     }

@@ -67,6 +67,16 @@ public class Headed implements ModInitializer {
 			content.addAfter(HeadedItems.SIAMESE_CAT_HEAD, HeadedItems.TABBY_CAT_HEAD);
 			content.addAfter(HeadedItems.TABBY_CAT_HEAD, HeadedItems.WHITE_CAT_HEAD);
 			content.addAfter(HeadedItems.WHITE_CAT_HEAD, HeadedItems.ENDERMAN_HEAD);
+			content.addAfter(HeadedItems.ENDERMAN_HEAD, HeadedItems.FOX_HEAD);
+			content.addAfter(HeadedItems.FOX_HEAD, HeadedItems.SNOW_FOX_HEAD);
+			content.addAfter(HeadedItems.SNOW_FOX_HEAD, HeadedItems.IRON_GOLEM_HEAD);
+			content.addAfter(HeadedItems.IRON_GOLEM_HEAD, HeadedItems.AGGRESSIVE_PANDA_HEAD);
+			content.addAfter(HeadedItems.AGGRESSIVE_PANDA_HEAD, HeadedItems.BROWN_PANDA_HEAD);
+			content.addAfter(HeadedItems.BROWN_PANDA_HEAD, HeadedItems.LAZY_PANDA_HEAD);
+			content.addAfter(HeadedItems.LAZY_PANDA_HEAD, HeadedItems.PANDA_HEAD);
+			content.addAfter(HeadedItems.PANDA_HEAD, HeadedItems.PLAYFUL_PANDA_HEAD);
+			content.addAfter(HeadedItems.PLAYFUL_PANDA_HEAD, HeadedItems.WEAK_PANDA_HEAD);
+			content.addAfter(HeadedItems.WEAK_PANDA_HEAD, HeadedItems.WORRIED_PANDA_HEAD);
 		});
 	}
 }

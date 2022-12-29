@@ -34,6 +34,9 @@ public class HeadedClient implements ClientModInitializer {
     private static final EntityModelLayer POLAR_BEAR_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "polar_bear_head"), "main");
     private static final EntityModelLayer OCELOT_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "ocelot_head"), "main");
     private static final EntityModelLayer ENDERMAN_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "enderman_head"), "main");
+    private static final EntityModelLayer FOX_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "fox_head"), "main");
+    private static final EntityModelLayer IRON_GOLEM_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "iron_golem_head"), "main");
+    private static final EntityModelLayer PANDA_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "panda_head"), "main");
 
     @Override
     public void onInitializeClient() {
@@ -56,6 +59,9 @@ public class HeadedClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(POLAR_BEAR_HEAD, PolarBearHeadEntityModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(OCELOT_HEAD, OcelotHeadEntityModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(ENDERMAN_HEAD, EndermanHeadEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(FOX_HEAD, FoxHeadEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(IRON_GOLEM_HEAD, IronGolemHeadEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(PANDA_HEAD, PandaHeadEntityModel::getTexturedModelData);
 
         ItemRendererRegistry.register(HeadedItems.VILLAGER_HEAD);
         ItemRendererRegistry.register(HeadedItems.EVOKER_HEAD);
@@ -106,6 +112,16 @@ public class HeadedClient implements ClientModInitializer {
         ItemRendererRegistry.register(HeadedItems.TABBY_CAT_HEAD);
         ItemRendererRegistry.register(HeadedItems.WHITE_CAT_HEAD);
         ItemRendererRegistry.register(HeadedItems.ENDERMAN_HEAD);
+        ItemRendererRegistry.register(HeadedItems.FOX_HEAD);
+        ItemRendererRegistry.register(HeadedItems.SNOW_FOX_HEAD);
+        ItemRendererRegistry.register(HeadedItems.IRON_GOLEM_HEAD);
+        ItemRendererRegistry.register(HeadedItems.AGGRESSIVE_PANDA_HEAD);
+        ItemRendererRegistry.register(HeadedItems.BROWN_PANDA_HEAD);
+        ItemRendererRegistry.register(HeadedItems.LAZY_PANDA_HEAD);
+        ItemRendererRegistry.register(HeadedItems.PANDA_HEAD);
+        ItemRendererRegistry.register(HeadedItems.PLAYFUL_PANDA_HEAD);
+        ItemRendererRegistry.register(HeadedItems.WEAK_PANDA_HEAD);
+        ItemRendererRegistry.register(HeadedItems.WORRIED_PANDA_HEAD);
 
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, entityRenderer, registrationHelper, context) -> registrationHelper.register(new HeadedHeadFeatureRenderer(entityRenderer, context.getModelLoader())));
     }

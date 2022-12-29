@@ -105,6 +105,26 @@ public class HeadedBlocks {
     public static final Block WHITE_CAT_WALL_HEAD;
     public static final Block ENDERMAN_HEAD;
     public static final Block ENDERMAN_WALL_HEAD;
+    public static final Block FOX_HEAD;
+    public static final Block FOX_WALL_HEAD;
+    public static final Block SNOW_FOX_HEAD;
+    public static final Block SNOW_FOX_WALL_HEAD;
+    public static final Block IRON_GOLEM_HEAD;
+    public static final Block IRON_GOLEM_WALL_HEAD;
+    public static final Block AGGRESSIVE_PANDA_HEAD;
+    public static final Block AGGRESSIVE_PANDA_WALL_HEAD;
+    public static final Block BROWN_PANDA_HEAD;
+    public static final Block BROWN_PANDA_WALL_HEAD;
+    public static final Block LAZY_PANDA_HEAD;
+    public static final Block LAZY_PANDA_WALL_HEAD;
+    public static final Block PANDA_HEAD;
+    public static final Block PANDA_WALL_HEAD;
+    public static final Block PLAYFUL_PANDA_HEAD;
+    public static final Block PLAYFUL_PANDA_WALL_HEAD;
+    public static final Block WEAK_PANDA_HEAD;
+    public static final Block WEAK_PANDA_WALL_HEAD;
+    public static final Block WORRIED_PANDA_HEAD;
+    public static final Block WORRIED_PANDA_WALL_HEAD;
 
 
     static {
@@ -206,6 +226,26 @@ public class HeadedBlocks {
         WHITE_CAT_WALL_HEAD = register("white_cat_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.WHITE_CAT, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(WHITE_CAT_HEAD)));
         ENDERMAN_HEAD = register("enderman_head", new HeadedSkullBlock(HeadedSkullBlock.Type.ENDERMAN, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
         ENDERMAN_WALL_HEAD = register("enderman_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.ENDERMAN, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(ENDERMAN_HEAD)));
+        FOX_HEAD = register("fox_head", new HeadedSkullBlock(HeadedSkullBlock.Type.FOX, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        FOX_WALL_HEAD = register("fox_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.FOX, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(FOX_HEAD)));
+        SNOW_FOX_HEAD = register("snow_fox_head", new HeadedSkullBlock(HeadedSkullBlock.Type.SNOW_FOX, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        SNOW_FOX_WALL_HEAD = register("snow_fox_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.SNOW_FOX, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(SNOW_FOX_HEAD)));
+        IRON_GOLEM_HEAD = register("iron_golem_head", new HeadedSkullBlock(HeadedSkullBlock.Type.IRON_GOLEM, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        IRON_GOLEM_WALL_HEAD = register("iron_golem_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.IRON_GOLEM, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(IRON_GOLEM_HEAD)));
+        AGGRESSIVE_PANDA_HEAD = register("aggressive_panda_head", new HeadedSkullBlock(HeadedSkullBlock.Type.AGGRESSIVE_PANDA, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        AGGRESSIVE_PANDA_WALL_HEAD = register("aggressive_panda_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.AGGRESSIVE_PANDA, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(AGGRESSIVE_PANDA_HEAD)));
+        BROWN_PANDA_HEAD = register("brown_panda_head", new HeadedSkullBlock(HeadedSkullBlock.Type.BROWN_PANDA, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        BROWN_PANDA_WALL_HEAD = register("brown_panda_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.BROWN_PANDA, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(BROWN_PANDA_HEAD)));
+        LAZY_PANDA_HEAD = register("lazy_panda_head", new HeadedSkullBlock(HeadedSkullBlock.Type.LAZY_PANDA, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        LAZY_PANDA_WALL_HEAD = register("lazy_panda_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.LAZY_PANDA, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(LAZY_PANDA_HEAD)));
+        PANDA_HEAD = register("panda_head", new HeadedSkullBlock(HeadedSkullBlock.Type.PANDA, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        PANDA_WALL_HEAD = register("panda_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.PANDA, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(PANDA_HEAD)));
+        PLAYFUL_PANDA_HEAD = register("playful_panda_head", new HeadedSkullBlock(HeadedSkullBlock.Type.PLAYFUL_PANDA, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        PLAYFUL_PANDA_WALL_HEAD = register("playful_panda_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.PLAYFUL_PANDA, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(PLAYFUL_PANDA_HEAD)));
+        WEAK_PANDA_HEAD = register("weak_panda_head", new HeadedSkullBlock(HeadedSkullBlock.Type.WEAK_PANDA, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        WEAK_PANDA_WALL_HEAD = register("weak_panda_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.WEAK_PANDA, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(WEAK_PANDA_HEAD)));
+        WORRIED_PANDA_HEAD = register("worried_panda_head", new HeadedSkullBlock(HeadedSkullBlock.Type.WORRIED_PANDA, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        WORRIED_PANDA_WALL_HEAD = register("worried_panda_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.WORRIED_PANDA, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(WORRIED_PANDA_HEAD)));
     }
 
     private static Block register(String name, Block block) {

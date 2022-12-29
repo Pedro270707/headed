@@ -61,6 +61,16 @@ public class HeadedBlockEntities {
                         HeadedBlocks.SIAMESE_CAT_HEAD, HeadedBlocks.SIAMESE_CAT_WALL_HEAD,
                         HeadedBlocks.TABBY_CAT_HEAD, HeadedBlocks.TABBY_CAT_WALL_HEAD,
                         HeadedBlocks.WHITE_CAT_HEAD, HeadedBlocks.WHITE_CAT_WALL_HEAD,
-                        HeadedBlocks.ENDERMAN_HEAD, HeadedBlocks.ENDERMAN_WALL_HEAD).build(null));
+                        HeadedBlocks.ENDERMAN_HEAD, HeadedBlocks.ENDERMAN_WALL_HEAD,
+                        HeadedBlocks.FOX_HEAD, HeadedBlocks.FOX_WALL_HEAD,
+                        HeadedBlocks.SNOW_FOX_HEAD, HeadedBlocks.SNOW_FOX_WALL_HEAD,
+                        HeadedBlocks.IRON_GOLEM_HEAD, HeadedBlocks.IRON_GOLEM_WALL_HEAD,
+                        HeadedBlocks.AGGRESSIVE_PANDA_HEAD, HeadedBlocks.AGGRESSIVE_PANDA_WALL_HEAD,
+                        HeadedBlocks.BROWN_PANDA_HEAD, HeadedBlocks.BROWN_PANDA_WALL_HEAD,
+                        HeadedBlocks.LAZY_PANDA_HEAD, HeadedBlocks.LAZY_PANDA_WALL_HEAD,
+                        HeadedBlocks.PANDA_HEAD, HeadedBlocks.PANDA_WALL_HEAD,
+                        HeadedBlocks.PLAYFUL_PANDA_HEAD, HeadedBlocks.PLAYFUL_PANDA_WALL_HEAD,
+                        HeadedBlocks.WEAK_PANDA_HEAD, HeadedBlocks.WEAK_PANDA_WALL_HEAD,
+                        HeadedBlocks.WORRIED_PANDA_HEAD, HeadedBlocks.WORRIED_PANDA_WALL_HEAD).build(null));
     }
 }

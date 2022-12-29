@@ -26,10 +26,13 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
     protected static final VoxelShape AXOLOTL_SHAPE;
     protected static final VoxelShape POLAR_BEAR_SHAPE;
     protected static final VoxelShape OCELOT_SHAPE;
+    protected static final VoxelShape FOX_SHAPE;
+    protected static final VoxelShape IRON_GOLEM_SHAPE;
+    protected static final VoxelShape PANDA_SHAPE;
 
     public HeadedSkullBlock(HeadedSkullBlock.SkullType skullType, AbstractBlock.Settings settings) {
         super(skullType, settings);
-        this.setDefaultState((BlockState)((BlockState)this.stateManager.getDefaultState()).with(ROTATION, 0));
+        this.setDefaultState((this.stateManager.getDefaultState()).with(ROTATION, 0));
     }
 
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
@@ -85,6 +88,19 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
                 || this.getSkullType() == Type.TABBY_CAT
                 || this.getSkullType() == Type.WHITE_CAT) {
             return OCELOT_SHAPE;
+        } else if (this.getSkullType() == Type.FOX
+                || this.getSkullType() == Type.SNOW_FOX) {
+            return FOX_SHAPE;
+        } else if (this.getSkullType() == Type.IRON_GOLEM) {
+            return IRON_GOLEM_SHAPE;
+        } else if (this.getSkullType() == Type.AGGRESSIVE_PANDA
+                || this.getSkullType() == Type.BROWN_PANDA
+                || this.getSkullType() == Type.LAZY_PANDA
+                || this.getSkullType() == Type.PANDA
+                || this.getSkullType() == Type.PLAYFUL_PANDA
+                || this.getSkullType() == Type.WEAK_PANDA
+                || this.getSkullType() == Type.WORRIED_PANDA) {
+            return PANDA_SHAPE;
         } else {
             return SHAPE;
         }
@@ -95,15 +111,15 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
     }
 
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return (BlockState)this.getDefaultState().with(ROTATION, RotationPropertyHelper.fromYaw(ctx.getPlayerYaw() + 180.0F));
+        return this.getDefaultState().with(ROTATION, RotationPropertyHelper.fromYaw(ctx.getPlayerYaw() + 180.0F));
     }
 
     public BlockState rotate(BlockState state, BlockRotation rotation) {
-        return (BlockState)state.with(ROTATION, rotation.rotate((Integer)state.get(ROTATION), MAX_ROTATIONS));
+        return state.with(ROTATION, rotation.rotate(state.get(ROTATION), MAX_ROTATIONS));
     }
 
     public BlockState mirror(BlockState state, BlockMirror mirror) {
-        return (BlockState)state.with(ROTATION, mirror.mirror((Integer)state.get(ROTATION), MAX_ROTATIONS));
+        return state.with(ROTATION, mirror.mirror(state.get(ROTATION), MAX_ROTATIONS));
     }
 
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
@@ -121,12 +137,15 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
         AXOLOTL_SHAPE = Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 5.0, 12.0);
         POLAR_BEAR_SHAPE = Block.createCuboidShape(4.5, 0.0, 4.5, 11.5, 7.0, 11.5);
         OCELOT_SHAPE = Block.createCuboidShape(5.5, 0.0, 5.5, 10.5, 4.0, 10.5);
+        FOX_SHAPE = Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 6.0, 12.0);
+        IRON_GOLEM_SHAPE = Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 10.0, 12.0);
+        PANDA_SHAPE = Block.createCuboidShape(1.5, 0.0, 1.5, 14.5, 10.0, 14.5);
     }
 
     public interface SkullType {
     }
 
-    public static enum Type implements SkullType {
+    public enum Type implements SkullType {
         VILLAGER,
         EVOKER,
         VINDICATOR,
@@ -175,7 +194,17 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
         SIAMESE_CAT,
         TABBY_CAT,
         WHITE_CAT,
-        ENDERMAN;
+        ENDERMAN,
+        FOX,
+        SNOW_FOX,
+        IRON_GOLEM,
+        AGGRESSIVE_PANDA,
+        BROWN_PANDA,
+        LAZY_PANDA,
+        PANDA,
+        PLAYFUL_PANDA,
+        WEAK_PANDA,
+        WORRIED_PANDA;
 
         private Type() {
         }

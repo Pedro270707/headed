@@ -1,34 +1,18 @@
 package net.pedroricardo.headed.block.entity;
 
-import com.mojang.authlib.GameProfile;
-import com.mojang.authlib.minecraft.MinecraftSessionService;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtHelper;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
-import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.UUID;
-import java.util.concurrent.Executor;
-import java.util.function.Consumer;
 
 public class HeadedSkullBlockEntity extends BlockEntity {
-    public static final String SKULL_OWNER_KEY = "SkullOwner";
-    public static final String NOTE_BLOCK_SOUND_KEY = "note_block_sound";
-    @Nullable
-    private static UserCache userCache;
-    @Nullable
-    private static MinecraftSessionService sessionService;
-    @Nullable
-    private static Executor executor;
-    @Nullable
-    private GameProfile owner;
-    @Nullable
-    private Identifier noteBlockSound;
+    public static final String HAS_LEFT_HORN = "HasLeftHorn";
+    public static final String HAS_RIGHT_HORN = "HasRightHorn";
+
+    private boolean hasLeftHorn;
+    private boolean hasRightHorn;
     private int poweredTicks;
     private boolean powered;
 
@@ -36,47 +20,18 @@ public class HeadedSkullBlockEntity extends BlockEntity {
         super(HeadedBlockEntities.SKULL, pos, state);
     }
 
-    public static void setServices(ApiServices apiServices, Executor executor) {
-        userCache = apiServices.userCache();
-        sessionService = apiServices.sessionService();
-        HeadedSkullBlockEntity.executor = executor;
-    }
-
-    public static void clearServices() {
-        userCache = null;
-        sessionService = null;
-        executor = null;
-    }
-
     protected void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
-        if (this.owner != null) {
-            NbtCompound nbtCompound = new NbtCompound();
-            NbtHelper.writeGameProfile(nbtCompound, this.owner);
-            nbt.put("SkullOwner", nbtCompound);
-        }
 
-        if (this.noteBlockSound != null) {
-            nbt.putString("note_block_sound", this.noteBlockSound.toString());
-        }
-
+        nbt.putBoolean("HasLeftHorn", this.hasLeftHorn);
+        nbt.putBoolean("HasRightHorn", this.hasRightHorn);
     }
 
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
-        if (nbt.contains("SkullOwner", 10)) {
-            this.setOwner(NbtHelper.toGameProfile(nbt.getCompound("SkullOwner")));
-        } else if (nbt.contains("ExtraType", 8)) {
-            String string = nbt.getString("ExtraType");
-            if (!StringHelper.isEmpty(string)) {
-                this.setOwner(new GameProfile((UUID)null, string));
-            }
-        }
 
-        if (nbt.contains("note_block_sound", 8)) {
-            this.noteBlockSound = Identifier.tryParse(nbt.getString("note_block_sound"));
-        }
-
+        this.hasLeftHorn = nbt.getBoolean("HasLeftHorn");
+        this.hasRightHorn = nbt.getBoolean("HasRightHorn");
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, HeadedSkullBlockEntity blockEntity) {
@@ -93,14 +48,12 @@ public class HeadedSkullBlockEntity extends BlockEntity {
         return this.powered ? (float)this.poweredTicks + tickDelta : (float)this.poweredTicks;
     }
 
-    @Nullable
-    public GameProfile getOwner() {
-        return this.owner;
+    public boolean getLeftHorn() {
+        return this.hasLeftHorn;
     }
 
-    @Nullable
-    public Identifier getNoteBlockSound() {
-        return this.noteBlockSound;
+    public boolean getRightHorn() {
+        return this.hasRightHorn;
     }
 
     public BlockEntityUpdateS2CPacket toUpdatePacket() {
@@ -109,24 +62,5 @@ public class HeadedSkullBlockEntity extends BlockEntity {
 
     public NbtCompound toInitialChunkDataNbt() {
         return this.createNbt();
-    }
-
-    public void setOwner(@Nullable GameProfile owner) {
-        synchronized(this) {
-            this.owner = owner;
-        }
-
-        this.loadOwnerProperties();
-    }
-
-    private void loadOwnerProperties() {
-        loadProperties(this.owner, (owner) -> {
-            this.owner = owner;
-            this.markDirty();
-        });
-    }
-
-    public static void loadProperties(@Nullable GameProfile owner, Consumer<GameProfile> callback) {
-        callback.accept(owner);
     }
 }
