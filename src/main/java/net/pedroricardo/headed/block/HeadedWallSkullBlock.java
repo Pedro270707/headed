@@ -46,6 +46,7 @@ public class HeadedWallSkullBlock extends AbstractHeadedSkullBlock {
                 || this.getSkullType() == HeadedSkullBlock.Type.VINDICATOR
                 || this.getSkullType() == HeadedSkullBlock.Type.PILLAGER
                 || this.getSkullType() == HeadedSkullBlock.Type.ZOMBIE_VILLAGER
+                || this.getSkullType() == HeadedSkullBlock.Type.WANDERING_TRADER
                 || this.getSkullType() == HeadedSkullBlock.Type.ILLUSIONER) {
             return FACING_TO_VILLAGER_SHAPE.get(state.get(FACING));
         } else if (this.getSkullType() == HeadedSkullBlock.Type.SHEEP

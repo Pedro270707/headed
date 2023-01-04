@@ -17,6 +17,8 @@ public class HeadedBlocks {
     public static final Block PILLAGER_WALL_HEAD;
     public static final Block ZOMBIE_VILLAGER_HEAD;
     public static final Block ZOMBIE_VILLAGER_WALL_HEAD;
+    public static final Block WANDERING_TRADER_HEAD;
+    public static final Block WANDERING_TRADER_WALL_HEAD;
     public static final Block ILLUSIONER_HEAD;
     public static final Block ILLUSIONER_WALL_HEAD;
     public static final Block SHEEP_HEAD;
@@ -125,6 +127,8 @@ public class HeadedBlocks {
     public static final Block WEAK_PANDA_WALL_HEAD;
     public static final Block WORRIED_PANDA_HEAD;
     public static final Block WORRIED_PANDA_WALL_HEAD;
+    public static final Block DROWNED_HEAD;
+    public static final Block DROWNED_WALL_HEAD;
 
 
     static {
@@ -138,6 +142,8 @@ public class HeadedBlocks {
         PILLAGER_WALL_HEAD = register("pillager_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.PILLAGER, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(PILLAGER_HEAD)));
         ZOMBIE_VILLAGER_HEAD = register("zombie_villager_head", new HeadedSkullBlock(HeadedSkullBlock.Type.ZOMBIE_VILLAGER, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
         ZOMBIE_VILLAGER_WALL_HEAD = register("zombie_villager_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.ZOMBIE_VILLAGER, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(ZOMBIE_VILLAGER_HEAD)));
+        WANDERING_TRADER_HEAD = register("wandering_trader_head", new HeadedSkullBlock(HeadedSkullBlock.Type.WANDERING_TRADER, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        WANDERING_TRADER_WALL_HEAD = register("wandering_trader_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.WANDERING_TRADER, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(WANDERING_TRADER_HEAD)));
         SHEEP_HEAD = register("sheep_head", new HeadedSkullBlock(HeadedSkullBlock.Type.SHEEP, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
         SHEEP_WALL_HEAD = register("sheep_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.SHEEP, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(SHEEP_HEAD)));
         WHITE_SHEEP_HEAD = register("white_sheep_head", new HeadedSkullBlock(HeadedSkullBlock.Type.WHITE_SHEEP, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
@@ -246,6 +252,8 @@ public class HeadedBlocks {
         WEAK_PANDA_WALL_HEAD = register("weak_panda_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.WEAK_PANDA, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(WEAK_PANDA_HEAD)));
         WORRIED_PANDA_HEAD = register("worried_panda_head", new HeadedSkullBlock(HeadedSkullBlock.Type.WORRIED_PANDA, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
         WORRIED_PANDA_WALL_HEAD = register("worried_panda_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.WORRIED_PANDA, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(WORRIED_PANDA_HEAD)));
+        DROWNED_HEAD = register("drowned_head", new HeadedSkullBlock(HeadedSkullBlock.Type.DROWNED, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        DROWNED_WALL_HEAD = register("drowned_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.DROWNED, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(DROWNED_HEAD)));
     }
 
     private static Block register(String name, Block block) {

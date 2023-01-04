@@ -6,8 +6,12 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
+import net.fabricmc.fabric.api.event.Event;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
+import net.minecraft.client.model.Dilation;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.event.listener.EntityGameEventHandler;
 import net.pedroricardo.headed.block.entity.HeadedBlockEntities;
 import net.pedroricardo.headed.client.render.block.entity.HeadedSkullBlockEntityRenderer;
 import net.pedroricardo.headed.client.render.entity.feature.HeadedHeadFeatureRenderer;
@@ -22,6 +26,7 @@ public class HeadedClient implements ClientModInitializer {
     private static final EntityModelLayer VINDICATOR_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "vindicator_head"), "main");
     private static final EntityModelLayer PILLAGER_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "pillager_head"), "main");
     private static final EntityModelLayer ZOMBIE_VILLAGER_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "zombie_villager_head"), "main");
+    private static final EntityModelLayer WANDERING_TRADER_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "wandering_trader_head"), "main");
     private static final EntityModelLayer ILLUSIONER_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "illusioner_head"), "main");
     private static final EntityModelLayer SHEEP_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "sheep_head"), "main");
     private static final EntityModelLayer SHEEP_WOOL = new EntityModelLayer(new Identifier(Headed.MOD_ID, "sheep_head"), "wool");
@@ -37,6 +42,8 @@ public class HeadedClient implements ClientModInitializer {
     private static final EntityModelLayer FOX_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "fox_head"), "main");
     private static final EntityModelLayer IRON_GOLEM_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "iron_golem_head"), "main");
     private static final EntityModelLayer PANDA_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "panda_head"), "main");
+    private static final EntityModelLayer DROWNED_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "drowned_head"), "main");
+    private static final EntityModelLayer DROWNED_OUTER_LAYER = new EntityModelLayer(new Identifier(Headed.MOD_ID, "drowned_head"), "outer");
 
     @Override
     public void onInitializeClient() {
@@ -47,6 +54,7 @@ public class HeadedClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(VINDICATOR_HEAD, VillagerHeadEntityModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(PILLAGER_HEAD, VillagerHeadEntityModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(ZOMBIE_VILLAGER_HEAD, VillagerHeadEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(WANDERING_TRADER_HEAD, VillagerHeadEntityModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(ILLUSIONER_HEAD, VillagerHeadEntityModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(SHEEP_HEAD, SheepHeadEntityModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(SHEEP_WOOL, SheepHeadWoolEntityModel::getTexturedModelData);
@@ -62,12 +70,15 @@ public class HeadedClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(FOX_HEAD, FoxHeadEntityModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(IRON_GOLEM_HEAD, IronGolemHeadEntityModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(PANDA_HEAD, PandaHeadEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(DROWNED_HEAD, () -> GenericSkullEntityModel.getTexturedModelData(new Dilation(0.0F)));
+        EntityModelLayerRegistry.registerModelLayer(DROWNED_OUTER_LAYER, () -> GenericSkullEntityModel.getTexturedModelData(new Dilation(0.25F)));
 
         ItemRendererRegistry.register(HeadedItems.VILLAGER_HEAD);
         ItemRendererRegistry.register(HeadedItems.EVOKER_HEAD);
         ItemRendererRegistry.register(HeadedItems.VINDICATOR_HEAD);
         ItemRendererRegistry.register(HeadedItems.PILLAGER_HEAD);
         ItemRendererRegistry.register(HeadedItems.ZOMBIE_VILLAGER_HEAD);
+        ItemRendererRegistry.register(HeadedItems.WANDERING_TRADER_HEAD);
         ItemRendererRegistry.register(HeadedItems.ILLUSIONER_HEAD);
         ItemRendererRegistry.register(HeadedItems.SHEEP_HEAD);
         ItemRendererRegistry.register(HeadedItems.WHITE_SHEEP_HEAD);
@@ -122,7 +133,9 @@ public class HeadedClient implements ClientModInitializer {
         ItemRendererRegistry.register(HeadedItems.PLAYFUL_PANDA_HEAD);
         ItemRendererRegistry.register(HeadedItems.WEAK_PANDA_HEAD);
         ItemRendererRegistry.register(HeadedItems.WORRIED_PANDA_HEAD);
+        ItemRendererRegistry.register(HeadedItems.DROWNED_HEAD);
 
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, entityRenderer, registrationHelper, context) -> registrationHelper.register(new HeadedHeadFeatureRenderer(entityRenderer, context.getModelLoader())));
+
     }
 }

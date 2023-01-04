@@ -18,6 +18,7 @@ public class HeadedBlockEntities {
                         HeadedBlocks.VINDICATOR_HEAD, HeadedBlocks.VINDICATOR_WALL_HEAD,
                         HeadedBlocks.PILLAGER_HEAD, HeadedBlocks.PILLAGER_WALL_HEAD,
                         HeadedBlocks.ZOMBIE_VILLAGER_HEAD, HeadedBlocks.ZOMBIE_VILLAGER_WALL_HEAD,
+                        HeadedBlocks.WANDERING_TRADER_HEAD, HeadedBlocks.WANDERING_TRADER_WALL_HEAD,
                         HeadedBlocks.ILLUSIONER_HEAD, HeadedBlocks.ILLUSIONER_WALL_HEAD,
                         HeadedBlocks.SHEEP_HEAD, HeadedBlocks.SHEEP_WALL_HEAD,
                         HeadedBlocks.WHITE_SHEEP_HEAD, HeadedBlocks.WHITE_SHEEP_WALL_HEAD,
@@ -71,6 +72,7 @@ public class HeadedBlockEntities {
                         HeadedBlocks.PANDA_HEAD, HeadedBlocks.PANDA_WALL_HEAD,
                         HeadedBlocks.PLAYFUL_PANDA_HEAD, HeadedBlocks.PLAYFUL_PANDA_WALL_HEAD,
                         HeadedBlocks.WEAK_PANDA_HEAD, HeadedBlocks.WEAK_PANDA_WALL_HEAD,
-                        HeadedBlocks.WORRIED_PANDA_HEAD, HeadedBlocks.WORRIED_PANDA_WALL_HEAD).build(null));
+                        HeadedBlocks.WORRIED_PANDA_HEAD, HeadedBlocks.WORRIED_PANDA_WALL_HEAD,
+                        HeadedBlocks.DROWNED_HEAD, HeadedBlocks.DROWNED_WALL_HEAD).build(null));
     }
 }

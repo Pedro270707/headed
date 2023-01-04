@@ -18,6 +18,7 @@ public class HeadedEntityModelLayers {
     public static final EntityModelLayer VINDICATOR_HEAD = registerMain("vindicator_head");
     public static final EntityModelLayer PILLAGER_HEAD = registerMain("pillager_head");
     public static final EntityModelLayer ZOMBIE_VILLAGER_HEAD = registerMain("zombie_villager_head");
+    public static final EntityModelLayer WANDERING_TRADER_HEAD = registerMain("wandering_trader_head");
     public static final EntityModelLayer ILLUSIONER_HEAD = registerMain("illusioner_head");
     public static final EntityModelLayer SHEEP_HEAD = registerMain("sheep_head");
     public static final EntityModelLayer SHEEP_WOOL = register("sheep_head", "wool");
@@ -33,6 +34,8 @@ public class HeadedEntityModelLayers {
     public static final EntityModelLayer FOX_HEAD = registerMain("fox_head");
     public static final EntityModelLayer IRON_GOLEM_HEAD = registerMain("iron_golem_head");
     public static final EntityModelLayer PANDA_HEAD = registerMain("panda_head");
+    public static final EntityModelLayer DROWNED_HEAD = registerMain("drowned_head");
+    public static final EntityModelLayer DROWNED_OUTER_LAYER = register("drowned_head", "outer");
 
     public HeadedEntityModelLayers() {
     }

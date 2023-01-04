@@ -6,9 +6,10 @@ import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.block.entity.SkullBlockEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
+import net.pedroricardo.headed.client.render.block.entity.HeadedSkullBlockEntityModel;
 
 @Environment(EnvType.CLIENT)
-public class GenericSkullEntityModel extends SkullBlockEntityModel {
+public class GenericSkullEntityModel extends HeadedSkullBlockEntityModel {
     private final ModelPart root;
     protected final ModelPart head;
 
@@ -17,23 +18,11 @@ public class GenericSkullEntityModel extends SkullBlockEntityModel {
         this.head = root.getChild("head");
     }
 
-    public static ModelData getModelData() {
+    public static TexturedModelData getTexturedModelData(Dilation dilation) {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
-        modelPartData.addChild("head", ModelPartBuilder.create().uv(0, 0).cuboid(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F), ModelTransform.NONE);
-        return modelData;
-    }
-
-    public static TexturedModelData getTexturedModelData() {
-        ModelData modelData = getModelData();
-        ModelPartData modelPartData = modelData.getRoot();
-        modelPartData.getChild("head").addChild("hat", ModelPartBuilder.create().uv(32, 0).cuboid(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new Dilation(0.25F)), ModelTransform.NONE);
+        modelPartData.addChild("head", ModelPartBuilder.create().uv(0, 0).cuboid(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, dilation), ModelTransform.NONE);
         return TexturedModelData.of(modelData, 64, 64);
-    }
-
-    public static TexturedModelData getSkullTexturedModelData() {
-        ModelData modelData = getModelData();
-        return TexturedModelData.of(modelData, 64, 32);
     }
 
     public void setHeadRotation(float animationProgress, float yaw, float pitch) {

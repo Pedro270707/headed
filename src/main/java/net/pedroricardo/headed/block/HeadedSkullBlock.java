@@ -41,6 +41,7 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
                 || this.getSkullType() == Type.VINDICATOR
                 || this.getSkullType() == Type.PILLAGER
                 || this.getSkullType() == Type.ZOMBIE_VILLAGER
+                || this.getSkullType() == Type.WANDERING_TRADER
                 || this.getSkullType() == Type.ILLUSIONER) {
             return VILLAGER_SHAPE;
         } else if (this.getSkullType() == Type.SHEEP
@@ -151,6 +152,7 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
         VINDICATOR,
         PILLAGER,
         ZOMBIE_VILLAGER,
+        WANDERING_TRADER,
         ILLUSIONER,
         SHEEP,
         WHITE_SHEEP,
@@ -204,7 +206,8 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
         PANDA,
         PLAYFUL_PANDA,
         WEAK_PANDA,
-        WORRIED_PANDA;
+        WORRIED_PANDA,
+        DROWNED;
 
         private Type() {
         }

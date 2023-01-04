@@ -1,5 +1,6 @@
 package net.pedroricardo.headed;
 
+import jdk.jfr.EventFactory;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.ItemGroups;
@@ -26,7 +27,8 @@ public class Headed implements ModInitializer {
 			content.addAfter(HeadedItems.EVOKER_HEAD, HeadedItems.VINDICATOR_HEAD);
 			content.addAfter(HeadedItems.VINDICATOR_HEAD, HeadedItems.PILLAGER_HEAD);
 			content.addAfter(HeadedItems.PILLAGER_HEAD, HeadedItems.ZOMBIE_VILLAGER_HEAD);
-			content.addAfter(HeadedItems.ZOMBIE_VILLAGER_HEAD, HeadedItems.SHEEP_HEAD);
+			content.addAfter(HeadedItems.ZOMBIE_VILLAGER_HEAD, HeadedItems.WANDERING_TRADER_HEAD);
+			content.addAfter(HeadedItems.WANDERING_TRADER_HEAD, HeadedItems.SHEEP_HEAD);
 			content.addAfter(HeadedItems.SHEEP_HEAD, HeadedItems.WHITE_SHEEP_HEAD);
 			content.addAfter(HeadedItems.WHITE_SHEEP_HEAD, HeadedItems.LIGHT_GRAY_SHEEP_HEAD);
 			content.addAfter(HeadedItems.LIGHT_GRAY_SHEEP_HEAD, HeadedItems.GRAY_SHEEP_HEAD);
@@ -77,6 +79,7 @@ public class Headed implements ModInitializer {
 			content.addAfter(HeadedItems.PANDA_HEAD, HeadedItems.PLAYFUL_PANDA_HEAD);
 			content.addAfter(HeadedItems.PLAYFUL_PANDA_HEAD, HeadedItems.WEAK_PANDA_HEAD);
 			content.addAfter(HeadedItems.WEAK_PANDA_HEAD, HeadedItems.WORRIED_PANDA_HEAD);
+			content.addAfter(HeadedItems.WORRIED_PANDA_HEAD, HeadedItems.DROWNED_HEAD);
 		});
 	}
 }
