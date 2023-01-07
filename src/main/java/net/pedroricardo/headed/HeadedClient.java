@@ -43,7 +43,19 @@ public class HeadedClient implements ClientModInitializer {
     private static final EntityModelLayer IRON_GOLEM_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "iron_golem_head"), "main");
     private static final EntityModelLayer PANDA_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "panda_head"), "main");
     private static final EntityModelLayer DROWNED_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "drowned_head"), "main");
-    private static final EntityModelLayer DROWNED_OUTER_LAYER = new EntityModelLayer(new Identifier(Headed.MOD_ID, "drowned_head"), "outer");
+    private static final EntityModelLayer DROWNED_HEAD_OUTER_LAYER = new EntityModelLayer(new Identifier(Headed.MOD_ID, "drowned_head"), "outer");
+    private static final EntityModelLayer PARROT_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "parrot_head"), "main");
+    private static final EntityModelLayer STRAY_SKULL = new EntityModelLayer(new Identifier(Headed.MOD_ID, "stray_skull"), "main");
+    private static final EntityModelLayer STRAY_SKULL_OUTER_LAYER = new EntityModelLayer(new Identifier(Headed.MOD_ID, "stray_skull"), "outer");
+    private static final EntityModelLayer SHULKER_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "shulker_head"), "main");
+    private static final EntityModelLayer HUSK_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "husk_head"), "main");
+    private static final EntityModelLayer PIG_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "pig_head"), "main");
+    private static final EntityModelLayer SPIDER_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "spider_head"), "main");
+    private static final EntityModelLayer SPIDER_EYES = new EntityModelLayer(new Identifier(Headed.MOD_ID, "spider_head"), "eyes");
+    private static final EntityModelLayer BLAZE_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "blaze_head"), "main");
+    private static final EntityModelLayer RABBIT_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "rabbit_head"), "main");
+    private static final EntityModelLayer TURTLE_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "turtle_head"), "main");
+    private static final EntityModelLayer WITHER_SKULL = new EntityModelLayer(new Identifier(Headed.MOD_ID, "wither_skull"), "main");
 
     @Override
     public void onInitializeClient() {
@@ -70,8 +82,20 @@ public class HeadedClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(FOX_HEAD, FoxHeadEntityModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(IRON_GOLEM_HEAD, IronGolemHeadEntityModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(PANDA_HEAD, PandaHeadEntityModel::getTexturedModelData);
-        EntityModelLayerRegistry.registerModelLayer(DROWNED_HEAD, () -> GenericSkullEntityModel.getTexturedModelData(new Dilation(0.0F)));
-        EntityModelLayerRegistry.registerModelLayer(DROWNED_OUTER_LAYER, () -> GenericSkullEntityModel.getTexturedModelData(new Dilation(0.25F)));
+        EntityModelLayerRegistry.registerModelLayer(DROWNED_HEAD, () -> GenericSkullEntityModel.getTexturedModelData(new Dilation(0.0F), 64, 64));
+        EntityModelLayerRegistry.registerModelLayer(DROWNED_HEAD_OUTER_LAYER, () -> GenericSkullEntityModel.getTexturedModelData(new Dilation(0.25F), 64, 64));
+        EntityModelLayerRegistry.registerModelLayer(PARROT_HEAD, ParrotHeadEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(STRAY_SKULL, () -> StraySkullEntityModel.getTexturedModelData(new Dilation(0.0F)));
+        EntityModelLayerRegistry.registerModelLayer(STRAY_SKULL_OUTER_LAYER, () -> StraySkullEntityModel.getTexturedModelData(new Dilation(0.25F)));
+        EntityModelLayerRegistry.registerModelLayer(SHULKER_HEAD, ShulkerHeadEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(HUSK_HEAD, () -> GenericSkullEntityModel.getTexturedModelData(new Dilation(0.0F), 64, 64));
+        EntityModelLayerRegistry.registerModelLayer(PIG_HEAD, PigHeadEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(SPIDER_HEAD, () -> SpiderHeadEntityModel.getTexturedModelData(new Dilation(0.0F)));
+        EntityModelLayerRegistry.registerModelLayer(SPIDER_EYES, () -> SpiderHeadEntityModel.getTexturedModelData(new Dilation(0.0F)));
+        EntityModelLayerRegistry.registerModelLayer(BLAZE_HEAD, () -> GenericSkullEntityModel.getTexturedModelData(new Dilation(0.0F), 64, 32));
+        EntityModelLayerRegistry.registerModelLayer(RABBIT_HEAD, RabbitHeadEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(TURTLE_HEAD, TurtleHeadEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(WITHER_SKULL, () -> GenericSkullEntityModel.getTexturedModelData(new Dilation(0.0F), 64, 64));
 
         ItemRendererRegistry.register(HeadedItems.VILLAGER_HEAD);
         ItemRendererRegistry.register(HeadedItems.EVOKER_HEAD);
@@ -134,6 +158,28 @@ public class HeadedClient implements ClientModInitializer {
         ItemRendererRegistry.register(HeadedItems.WEAK_PANDA_HEAD);
         ItemRendererRegistry.register(HeadedItems.WORRIED_PANDA_HEAD);
         ItemRendererRegistry.register(HeadedItems.DROWNED_HEAD);
+        ItemRendererRegistry.register(HeadedItems.RED_PARROT_HEAD);
+        ItemRendererRegistry.register(HeadedItems.GREEN_PARROT_HEAD);
+        ItemRendererRegistry.register(HeadedItems.BLUE_PARROT_HEAD);
+        ItemRendererRegistry.register(HeadedItems.CYAN_PARROT_HEAD);
+        ItemRendererRegistry.register(HeadedItems.GRAY_PARROT_HEAD);
+        ItemRendererRegistry.register(HeadedItems.STRAY_SKULL);
+        ItemRendererRegistry.register(HeadedItems.SHULKER_HEAD);
+        ItemRendererRegistry.register(HeadedItems.HUSK_HEAD);
+        ItemRendererRegistry.register(HeadedItems.PIG_HEAD);
+        ItemRendererRegistry.register(HeadedItems.SPIDER_HEAD);
+        ItemRendererRegistry.register(HeadedItems.CAVE_SPIDER_HEAD);
+        ItemRendererRegistry.register(HeadedItems.BLAZE_HEAD);
+        ItemRendererRegistry.register(HeadedItems.BLACK_RABBIT_HEAD);
+        ItemRendererRegistry.register(HeadedItems.BROWN_RABBIT_HEAD);
+        ItemRendererRegistry.register(HeadedItems.EVIL_RABBIT_HEAD);
+        ItemRendererRegistry.register(HeadedItems.GOLD_RABBIT_HEAD);
+        ItemRendererRegistry.register(HeadedItems.SALT_RABBIT_HEAD);
+        ItemRendererRegistry.register(HeadedItems.TOAST_RABBIT_HEAD);
+        ItemRendererRegistry.register(HeadedItems.WHITE_RABBIT_HEAD);
+        ItemRendererRegistry.register(HeadedItems.WHITE_SPLOTCHED_RABBIT_HEAD);
+        ItemRendererRegistry.register(HeadedItems.TURTLE_HEAD);
+        ItemRendererRegistry.register(HeadedItems.WITHER_SKULL);
 
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, entityRenderer, registrationHelper, context) -> registrationHelper.register(new HeadedHeadFeatureRenderer(entityRenderer, context.getModelLoader())));
 

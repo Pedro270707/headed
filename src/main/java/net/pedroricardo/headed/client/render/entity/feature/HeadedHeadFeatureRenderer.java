@@ -1,6 +1,5 @@
 package net.pedroricardo.headed.client.render.entity.feature;
 
-import com.mojang.authlib.GameProfile;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.RenderLayer;
@@ -19,9 +18,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtHelper;
 import net.minecraft.util.math.RotationAxis;
-import net.pedroricardo.headed.Headed;
 import net.pedroricardo.headed.block.AbstractHeadedSkullBlock;
 import net.pedroricardo.headed.block.HeadedSkullBlock;
 import net.pedroricardo.headed.client.render.block.entity.HeadedSkullBlockEntityModel;
@@ -89,8 +86,7 @@ public class HeadedHeadFeatureRenderer<T extends LivingEntity, M extends EntityM
                 HeadedSkullBlockEntityModel skullBlockEntityModel = this.headModels.get(skullType);
                 RenderLayer renderLayer = HeadedSkullBlockEntityRenderer.getRenderLayer(skullType);
                 HeadedSkullBlockEntityRenderer.renderSkull(skullType, null, 180.0F, f, matrixStack, vertexConsumerProvider, i, skullBlockEntityModel, renderLayer, 1.0F, 1.0F, 1.0F);
-                HeadedSkullBlockEntityRenderer.testForSpecialSkull(skullType, null, 180.0F, f, matrixStack, vertexConsumerProvider, i, hasLeftHorn, hasRightHorn);
-//                Headed.LOGGER.debug("HeadedHeadFeatureRenderer: " + hasLeftHorn + " " + hasRightHorn);
+                HeadedSkullBlockEntityRenderer.testForSkullFeature(skullType, null, 180.0F, f, matrixStack, vertexConsumerProvider, i, hasLeftHorn, hasRightHorn);
             }
 
             matrixStack.pop();

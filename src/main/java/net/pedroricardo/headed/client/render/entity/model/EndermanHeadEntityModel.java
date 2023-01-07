@@ -21,7 +21,7 @@ public class EndermanHeadEntityModel extends HeadedSkullBlockEntityModel {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
         ModelPartData modelPartData2 = modelPartData.addChild("head", ModelPartBuilder.create().uv(0, 0).cuboid("head", -4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F), ModelTransform.NONE);
-        modelPartData2.addChild("head_layer", ModelPartBuilder.create().uv(0, 16).cuboid("head_layer", -4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F), ModelTransform.NONE);
+        modelPartData2.addChild("head_layer", ModelPartBuilder.create().uv(0, 16).cuboid("head_layer", -4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new Dilation(-0.5F)), ModelTransform.NONE);
         return TexturedModelData.of(modelData, 64, 32);
     }
 

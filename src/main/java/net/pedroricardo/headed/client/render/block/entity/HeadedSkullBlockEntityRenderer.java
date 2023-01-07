@@ -95,6 +95,28 @@ public class HeadedSkullBlockEntityRenderer implements BlockEntityRenderer<Heade
         map.put(Type.WEAK_PANDA, new Identifier("textures/entity/panda/weak_panda.png"));
         map.put(Type.WORRIED_PANDA, new Identifier("textures/entity/panda/worried_panda.png"));
         map.put(Type.DROWNED, new Identifier("textures/entity/zombie/drowned.png"));
+        map.put(Type.RED_PARROT, new Identifier("textures/entity/parrot/parrot_red_blue.png"));
+        map.put(Type.GREEN_PARROT, new Identifier("textures/entity/parrot/parrot_green.png"));
+        map.put(Type.BLUE_PARROT, new Identifier("textures/entity/parrot/parrot_blue.png"));
+        map.put(Type.CYAN_PARROT, new Identifier("textures/entity/parrot/parrot_yellow_blue.png"));
+        map.put(Type.GRAY_PARROT, new Identifier("textures/entity/parrot/parrot_grey.png"));
+        map.put(Type.STRAY, new Identifier("textures/entity/skeleton/stray.png"));
+        map.put(Type.SHULKER, new Identifier("textures/entity/shulker/shulker.png"));
+        map.put(Type.HUSK, new Identifier("textures/entity/zombie/husk.png"));
+        map.put(Type.PIG, new Identifier("textures/entity/pig/pig.png"));
+        map.put(Type.SPIDER, new Identifier("textures/entity/spider/spider.png"));
+        map.put(Type.CAVE_SPIDER, new Identifier("textures/entity/spider/cave_spider.png"));
+        map.put(Type.BLAZE, new Identifier("textures/entity/blaze.png"));
+        map.put(Type.BLACK_RABBIT, new Identifier("textures/entity/rabbit/black.png"));
+        map.put(Type.BROWN_RABBIT, new Identifier("textures/entity/rabbit/brown.png"));
+        map.put(Type.EVIL_RABBIT, new Identifier("textures/entity/rabbit/caerbannog.png"));
+        map.put(Type.GOLD_RABBIT, new Identifier("textures/entity/rabbit/gold.png"));
+        map.put(Type.SALT_RABBIT, new Identifier("textures/entity/rabbit/salt.png"));
+        map.put(Type.TOAST_RABBIT, new Identifier("textures/entity/rabbit/toast.png"));
+        map.put(Type.WHITE_RABBIT, new Identifier("textures/entity/rabbit/white.png"));
+        map.put(Type.WHITE_SPLOTCHED_RABBIT, new Identifier("textures/entity/rabbit/white_splotched.png"));
+        map.put(Type.TURTLE, new Identifier("textures/entity/turtle/big_sea_turtle.png"));
+        map.put(Type.WITHER, new Identifier("textures/entity/wither/wither.png"));
     });
 
     public static Map<HeadedSkullBlock.SkullType, HeadedSkullBlockEntityModel> getModels(EntityModelLoader modelLoader) {
@@ -160,10 +182,40 @@ public class HeadedSkullBlockEntityRenderer implements BlockEntityRenderer<Heade
         builder.put(Type.WEAK_PANDA, new PandaHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PANDA_HEAD)));
         builder.put(Type.WORRIED_PANDA, new PandaHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PANDA_HEAD)));
         builder.put(Type.DROWNED, new GenericSkullEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.DROWNED_HEAD)));
+        builder.put(Type.RED_PARROT, new GenericSkullEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PARROT_HEAD)));
+        builder.put(Type.GREEN_PARROT, new ParrotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PARROT_HEAD)));
+        builder.put(Type.BLUE_PARROT, new ParrotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PARROT_HEAD)));
+        builder.put(Type.CYAN_PARROT, new ParrotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PARROT_HEAD)));
+        builder.put(Type.GRAY_PARROT, new ParrotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PARROT_HEAD)));
+        builder.put(Type.STRAY, new StraySkullEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.STRAY_SKULL)));
+        builder.put(Type.SHULKER, new StraySkullEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHULKER_HEAD)));
+        builder.put(Type.HUSK, new GenericSkullEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.HUSK_HEAD)));
+        builder.put(Type.PIG, new PigHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PIG_HEAD)));
+        builder.put(Type.SPIDER, new SpiderHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SPIDER_HEAD)));
+        builder.put(Type.CAVE_SPIDER, new SpiderHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SPIDER_HEAD)));
+        builder.put(Type.BLAZE, new GenericSkullEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.BLAZE_HEAD)));
+        builder.put(Type.BLACK_RABBIT, new RabbitHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.RABBIT_HEAD)));
+        builder.put(Type.BROWN_RABBIT, new RabbitHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.RABBIT_HEAD)));
+        builder.put(Type.EVIL_RABBIT, new RabbitHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.RABBIT_HEAD)));
+        builder.put(Type.GOLD_RABBIT, new RabbitHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.RABBIT_HEAD)));
+        builder.put(Type.SALT_RABBIT, new RabbitHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.RABBIT_HEAD)));
+        builder.put(Type.TOAST_RABBIT, new RabbitHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.RABBIT_HEAD)));
+        builder.put(Type.WHITE_RABBIT, new RabbitHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.RABBIT_HEAD)));
+        builder.put(Type.WHITE_SPLOTCHED_RABBIT, new RabbitHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.RABBIT_HEAD)));
+        builder.put(Type.TURTLE, new TurtleHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.TURTLE_HEAD)));
+        builder.put(Type.WITHER, new GenericSkullEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.WITHER_SKULL)));
         return builder.build();
     }
 
+
     private static final Map<HeadedSkullBlock.SkullType, float[]> HEAD_DIRECTION_DISLOCATION = Util.make(Maps.newHashMap(), (map) -> {
+        /*
+         * To get these values, we use the following
+         * function: (16 - length)/32
+         * length would be the length of the dimension (e.g.:
+         * a normal skull is 8x8x8, so doing this with each
+         * dimension gives us 0.25F, 0.25F, 0.25F).
+         */
         map.put(Type.VILLAGER, new float[]{0.25F, 0.25F, 0.25F});
         map.put(Type.EVOKER, new float[]{0.25F, 0.25F, 0.25F});
         map.put(Type.VINDICATOR, new float[]{0.25F, 0.25F, 0.25F});
@@ -225,20 +277,46 @@ public class HeadedSkullBlockEntityRenderer implements BlockEntityRenderer<Heade
         map.put(Type.WEAK_PANDA, new float[]{0.21875F, 0.1875F, 0.21875F});
         map.put(Type.WORRIED_PANDA, new float[]{0.21875F, 0.1875F, 0.21875F});
         map.put(Type.DROWNED, new float[]{0.25F, 0.25F, 0.25F});
+        map.put(Type.RED_PARROT, new float[]{0.4375F, 0.375F, 0.4375F});
+        map.put(Type.GREEN_PARROT, new float[]{0.4375F, 0.375F, 0.4375F});
+        map.put(Type.BLUE_PARROT, new float[]{0.4375F, 0.375F, 0.4375F});
+        map.put(Type.CYAN_PARROT, new float[]{0.4375F, 0.375F, 0.4375F});
+        map.put(Type.GRAY_PARROT, new float[]{0.4375F, 0.375F, 0.4375F});
+        map.put(Type.STRAY, new float[]{0.25F, 0.25F, 0.25F});
+        map.put(Type.SHULKER, new float[]{0.3125F, 0.3125F, 0.3125F});
+        map.put(Type.HUSK, new float[]{0.25F, 0.25F, 0.25F});
+        map.put(Type.PIG, new float[]{0.25F, 0.25F, 0.25F});
+        map.put(Type.SPIDER, new float[]{0.25F, 0.25F, 0.25F});
+        map.put(Type.CAVE_SPIDER, new float[]{0.328125F, 0.328125F, 0.328125F});
+        map.put(Type.BLAZE, new float[]{0.25F, 0.25F, 0.25F});
+        map.put(Type.BLACK_RABBIT, new float[]{0.34375F, 0.375F, 0.34375F});
+        map.put(Type.BROWN_RABBIT, new float[]{0.34375F, 0.375F, 0.34375F});
+        map.put(Type.EVIL_RABBIT, new float[]{0.34375F, 0.375F, 0.34375F});
+        map.put(Type.GOLD_RABBIT, new float[]{0.34375F, 0.375F, 0.34375F});
+        map.put(Type.SALT_RABBIT, new float[]{0.34375F, 0.375F, 0.34375F});
+        map.put(Type.TOAST_RABBIT, new float[]{0.34375F, 0.375F, 0.34375F});
+        map.put(Type.WHITE_RABBIT, new float[]{0.34375F, 0.375F, 0.34375F});
+        map.put(Type.WHITE_SPLOTCHED_RABBIT, new float[]{0.34375F, 0.375F, 0.34375F});
+        map.put(Type.TURTLE, new float[]{0.3125F, 0.34375F, 0.3125F});
+        map.put(Type.WITHER, new float[]{0.25F, 0.25F, 0.25F});
     });
 
     public static Map<String, HeadedSkullBlockEntityModel> getOtherModels(EntityModelLoader modelLoader) {
         ImmutableMap.Builder<String, HeadedSkullBlockEntityModel> builder = ImmutableMap.builder();
         builder.put("sheep_wool", new SheepHeadWoolEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_WOOL)));
         builder.put("enderman_eyes", new EndermanHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.ENDERMAN_HEAD)));
-        builder.put("drowned_outer_layer", new GenericSkullEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.DROWNED_OUTER_LAYER)));
+        builder.put("drowned_head_outer_layer", new GenericSkullEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.DROWNED_HEAD_OUTER_LAYER)));
+        builder.put("stray_skull_outer_layer", new StraySkullEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.STRAY_SKULL_OUTER_LAYER)));
+        builder.put("spider_eyes", new SpiderHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SPIDER_EYES)));
         return builder.build();
     }
 
     private static final Map<String, Identifier> OTHER_TEXTURES = Util.make(Maps.newHashMap(), (map) -> {
         map.put("sheep_wool", new Identifier("textures/entity/sheep/sheep_fur.png"));
         map.put("enderman_eyes", new Identifier("textures/entity/enderman/enderman_eyes.png"));
-        map.put("drowned_outer_layer", new Identifier("textures/entity/zombie/drowned_outer_layer.png"));
+        map.put("drowned_head_outer_layer", new Identifier("textures/entity/zombie/drowned_outer_layer.png"));
+        map.put("stray_skull_outer_layer", new Identifier("textures/entity/skeleton/stray_overlay.png"));
+        map.put("spider_eyes", new Identifier("textures/entity/spider_eyes.png"));
     });
 
     public HeadedSkullBlockEntityRenderer(BlockEntityRendererFactory.Context ctx) {
@@ -251,6 +329,9 @@ public class HeadedSkullBlockEntityRenderer implements BlockEntityRenderer<Heade
 
     public static RenderLayer getRenderLayer(HeadedSkullBlock.SkullType type) {
         Identifier identifier = TEXTURES.get(type);
+        if (type == Type.ENDERMAN || type == Type.SPIDER || type == Type.CAVE_SPIDER) {
+            return RenderLayer.getEntityCutout(identifier);
+        }
         return RenderLayer.getEntityCutoutNoCullZOffset(identifier);
     }
     public static RenderLayer getOtherRenderLayer(String type) {
@@ -270,6 +351,9 @@ public class HeadedSkullBlockEntityRenderer implements BlockEntityRenderer<Heade
         }
 
         matrices.scale(-1.0F, -1.0F, 1.0F);
+        if (skullType == Type.CAVE_SPIDER) {
+            matrices.scale(0.7F, 0.7F, 0.7F);
+        }
         VertexConsumer vertexConsumer = vertexConsumers.getBuffer(renderLayer);
         model.setHeadRotation(animationProgress, yaw, 0.0F);
         model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, r, g, b, 1.0F);
@@ -292,10 +376,10 @@ public class HeadedSkullBlockEntityRenderer implements BlockEntityRenderer<Heade
         } else {
             renderSkull(skullType, direction, h, g, matrices, vertexConsumers, light, skullBlockEntityModel, renderLayer, 1.0F, 1.0F, 1.0F);
         }
-        testForSpecialSkull(skullType, direction, h, g, matrices, vertexConsumers, light, blockEntity.getLeftHorn(), blockEntity.getRightHorn());
+        testForSkullFeature(skullType, direction, h, g, matrices, vertexConsumers, light, blockEntity.getLeftHorn(), blockEntity.getRightHorn());
     }
 
-    public static void testForSpecialSkull(HeadedSkullBlock.SkullType skullType, @Nullable Direction direction, float yaw, float deltaTime, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, boolean hasLeftHorn, boolean hasRightHorn) {
+    public static void testForSkullFeature(HeadedSkullBlock.SkullType skullType, @Nullable Direction direction, float yaw, float deltaTime, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, boolean hasLeftHorn, boolean hasRightHorn) {
         if (skullType == Type.WHITE_SHEEP) {
             float[] hs = SheepEntity.getRgbColor(DyeColor.WHITE);
             float s = hs[0];
@@ -441,15 +525,30 @@ public class HeadedSkullBlockEntityRenderer implements BlockEntityRenderer<Heade
 
             HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, woolModel, woolRenderLayer, s, t, u);
         } else if (skullType == Type.ENDERMAN) {
-            RenderLayer endermanEyesRenderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("enderman_eyes");
+            RenderLayer endermanEyesRenderLayer = RenderLayer.getEyes(new Identifier("textures/entity/enderman/enderman_eyes.png"));
             HeadedSkullBlockEntityModel endermanEyesModel = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("enderman_eyes");
 
             HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, 15728640, endermanEyesModel, endermanEyesRenderLayer, 1.0F, 1.0F, 1.0F);
         } else if (skullType == Type.DROWNED) {
-            RenderLayer drownedOuterLayerRenderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("drowned_outer_layer");
-            HeadedSkullBlockEntityModel drownedOuterLayerModel = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("drowned_outer_layer");
+            RenderLayer drownedOuterLayerRenderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("drowned_head_outer_layer");
+            HeadedSkullBlockEntityModel drownedOuterLayerModel = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("drowned_head_outer_layer");
 
             HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, drownedOuterLayerModel, drownedOuterLayerRenderLayer, 1.0F, 1.0F, 1.0F);
+        } else if (skullType == Type.STRAY) {
+            RenderLayer strayOuterLayerRenderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("stray_skull_outer_layer");
+            HeadedSkullBlockEntityModel strayOuterLayerModel = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("stray_skull_outer_layer");
+
+            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, strayOuterLayerModel, strayOuterLayerRenderLayer, 1.0F, 1.0F, 1.0F);
+        } else if (skullType == Type.SPIDER) {
+            RenderLayer spiderEyesRenderLayer = RenderLayer.getEyes(new Identifier("textures/entity/spider_eyes.png"));
+            HeadedSkullBlockEntityModel spiderEyesModel = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("spider_eyes");
+
+            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, 15728640, spiderEyesModel, spiderEyesRenderLayer, 1.0F, 1.0F, 1.0F);
+        } else if (skullType == Type.CAVE_SPIDER) {
+            RenderLayer spiderEyesRenderLayer = RenderLayer.getEyes(new Identifier("textures/entity/spider_eyes.png"));
+            HeadedSkullBlockEntityModel spiderEyesModel = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("spider_eyes");
+
+            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, 15728640, spiderEyesModel, spiderEyesRenderLayer, 1.0F, 1.0F, 1.0F);
         }
 //        else if (skullType == Type.ALL_BLACK_CAT) {
 //            if (hasLeftHorn) {

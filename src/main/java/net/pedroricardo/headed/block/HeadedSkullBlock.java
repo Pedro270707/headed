@@ -29,6 +29,11 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
     protected static final VoxelShape FOX_SHAPE;
     protected static final VoxelShape IRON_GOLEM_SHAPE;
     protected static final VoxelShape PANDA_SHAPE;
+    protected static final VoxelShape PARROT_SHAPE;
+    protected static final VoxelShape SHULKER_SHAPE;
+    protected static final VoxelShape CAVE_SPIDER_SHAPE;
+    protected static final VoxelShape RABBIT_SHAPE;
+    protected static final VoxelShape TURTLE_SHAPE;
 
     public HeadedSkullBlock(HeadedSkullBlock.SkullType skullType, AbstractBlock.Settings settings) {
         super(skullType, settings);
@@ -102,6 +107,27 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
                 || this.getSkullType() == Type.WEAK_PANDA
                 || this.getSkullType() == Type.WORRIED_PANDA) {
             return PANDA_SHAPE;
+        } else if (this.getSkullType() == Type.RED_PARROT
+                || this.getSkullType() == Type.GREEN_PARROT
+                || this.getSkullType() == Type.BLUE_PARROT
+                || this.getSkullType() == Type.CYAN_PARROT
+                || this.getSkullType() == Type.GRAY_PARROT) {
+            return PARROT_SHAPE;
+        } else if (this.getSkullType() == Type.SHULKER) {
+            return SHULKER_SHAPE;
+        } else if (this.getSkullType() == Type.CAVE_SPIDER) {
+            return CAVE_SPIDER_SHAPE;
+        } else if (this.getSkullType() == Type.BLACK_RABBIT
+                || this.getSkullType() == Type.BROWN_RABBIT
+                || this.getSkullType() == Type.EVIL_RABBIT
+                || this.getSkullType() == Type.GOLD_RABBIT
+                || this.getSkullType() == Type.SALT_RABBIT
+                || this.getSkullType() == Type.TOAST_RABBIT
+                || this.getSkullType() == Type.WHITE_RABBIT
+                || this.getSkullType() == Type.WHITE_SPLOTCHED_RABBIT) {
+            return RABBIT_SHAPE;
+        } else if (this.getSkullType() == Type.TURTLE) {
+            return TURTLE_SHAPE;
         } else {
             return SHAPE;
         }
@@ -141,6 +167,11 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
         FOX_SHAPE = Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 6.0, 12.0);
         IRON_GOLEM_SHAPE = Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 10.0, 12.0);
         PANDA_SHAPE = Block.createCuboidShape(1.5, 0.0, 1.5, 14.5, 10.0, 14.5);
+        PARROT_SHAPE = Block.createCuboidShape(5.0, 0.0, 5.0, 11.0, 4.0, 11.0);
+        SHULKER_SHAPE = Block.createCuboidShape(5.0, 0.0, 5.0, 11.0, 6.0, 11.0);
+        CAVE_SPIDER_SHAPE = Block.createCuboidShape(5.25, 0.0, 5.25, 10.75, 5.5, 10.75);
+        RABBIT_SHAPE = Block.createCuboidShape(5.5, 0.0, 5.5, 10.5, 4.0, 10.5);
+        TURTLE_SHAPE = Block.createCuboidShape(5.0, 0.0, 5.0, 11.0, 5.0, 11.0);
     }
 
     public interface SkullType {
@@ -207,7 +238,29 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
         PLAYFUL_PANDA,
         WEAK_PANDA,
         WORRIED_PANDA,
-        DROWNED;
+        DROWNED,
+        RED_PARROT,
+        GREEN_PARROT,
+        BLUE_PARROT,
+        CYAN_PARROT,
+        GRAY_PARROT,
+        STRAY,
+        SHULKER,
+        HUSK,
+        PIG,
+        SPIDER,
+        CAVE_SPIDER,
+        BLAZE,
+        BLACK_RABBIT,
+        BROWN_RABBIT,
+        EVIL_RABBIT,
+        GOLD_RABBIT,
+        SALT_RABBIT,
+        TOAST_RABBIT,
+        WHITE_RABBIT,
+        WHITE_SPLOTCHED_RABBIT,
+        TURTLE,
+        WITHER;
 
         private Type() {
         }

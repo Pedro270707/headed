@@ -1,5 +1,6 @@
 package net.pedroricardo.headed.loottable;
 
+import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.mob.*;
 import net.minecraft.entity.passive.*;
 import net.minecraft.item.Item;
@@ -155,6 +156,54 @@ public class HeadedLootTable {
         }
         if (entity instanceof DrownedEntity) {
             return HeadedItems.DROWNED_HEAD;
+        }
+        if (entity instanceof ParrotEntity) {
+            return switch (((ParrotEntity) entity).getVariant()) {
+                case RED_BLUE -> HeadedItems.RED_PARROT_HEAD;
+                case BLUE -> HeadedItems.BLUE_PARROT_HEAD;
+                case GREEN -> HeadedItems.GREEN_PARROT_HEAD;
+                case YELLOW_BLUE -> HeadedItems.CYAN_PARROT_HEAD;
+                case GRAY -> HeadedItems.GRAY_PARROT_HEAD;
+            };
+        }
+        if (entity instanceof StrayEntity) {
+            return HeadedItems.STRAY_SKULL;
+        }
+        if (entity instanceof ShulkerEntity) {
+            return HeadedItems.SHULKER_HEAD;
+        }
+        if (entity instanceof HuskEntity) {
+            return HeadedItems.HUSK_HEAD;
+        }
+        if (entity instanceof PigEntity) {
+            return HeadedItems.PIG_HEAD;
+        }
+        if (entity instanceof SpiderEntity) {
+            return entity instanceof CaveSpiderEntity ? HeadedItems.CAVE_SPIDER_HEAD : HeadedItems.SPIDER_HEAD;
+        }
+        if (entity instanceof BlazeEntity) {
+            return HeadedItems.BLAZE_HEAD;
+        }
+        if (entity instanceof RabbitEntity) {
+            if (entity.hasCustomName() && "Toast".equals(entity.getName().getString())) {
+                return HeadedItems.TOAST_RABBIT_HEAD;
+            }
+            return switch (((RabbitEntity) entity).getVariant()) {
+
+                case BROWN -> HeadedItems.BROWN_RABBIT_HEAD;
+                case WHITE -> HeadedItems.WHITE_RABBIT_HEAD;
+                case BLACK -> HeadedItems.BLACK_RABBIT_HEAD;
+                case WHITE_SPLOTCHED -> HeadedItems.WHITE_SPLOTCHED_RABBIT_HEAD;
+                case GOLD -> HeadedItems.GOLD_RABBIT_HEAD;
+                case SALT -> HeadedItems.SALT_RABBIT_HEAD;
+                case EVIL -> HeadedItems.EVIL_RABBIT_HEAD;
+            };
+        }
+        if (entity instanceof TurtleEntity) {
+            return HeadedItems.TURTLE_HEAD;
+        }
+        if (entity instanceof WitherEntity) {
+            return HeadedItems.WITHER_SKULL;
         }
         return Items.AIR;
     }

@@ -18,11 +18,11 @@ public class GenericSkullEntityModel extends HeadedSkullBlockEntityModel {
         this.head = root.getChild("head");
     }
 
-    public static TexturedModelData getTexturedModelData(Dilation dilation) {
+    public static TexturedModelData getTexturedModelData(Dilation dilation, int textureWidth, int textureHeight) {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
         modelPartData.addChild("head", ModelPartBuilder.create().uv(0, 0).cuboid(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, dilation), ModelTransform.NONE);
-        return TexturedModelData.of(modelData, 64, 64);
+        return TexturedModelData.of(modelData, textureWidth, textureHeight);
     }
 
     public void setHeadRotation(float animationProgress, float yaw, float pitch) {

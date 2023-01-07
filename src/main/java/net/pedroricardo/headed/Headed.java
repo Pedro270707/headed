@@ -3,6 +3,7 @@ package net.pedroricardo.headed;
 import jdk.jfr.EventFactory;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.Items;
 import net.pedroricardo.headed.block.HeadedBlocks;
@@ -21,6 +22,9 @@ public class Headed implements ModInitializer {
 		HeadedBlockEntities.registerBlockEntities();
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(content -> {
 			content.addBefore(Items.DRAGON_HEAD, HeadedItems.PIGLIN_BRUTE_HEAD);
+			content.addAfter(Items.ZOMBIE_HEAD, HeadedItems.HUSK_HEAD);
+			content.addAfter(HeadedItems.HUSK_HEAD, HeadedItems.DROWNED_HEAD);
+			content.addAfter(Items.SKELETON_SKULL, HeadedItems.STRAY_SKULL);
 			content.addAfter(HeadedItems.PIGLIN_BRUTE_HEAD, HeadedItems.ZOMBIFIED_PIGLIN_HEAD);
 			content.addAfter(Items.DRAGON_HEAD, HeadedItems.VILLAGER_HEAD);
 			content.addAfter(HeadedItems.VILLAGER_HEAD, HeadedItems.EVOKER_HEAD);
@@ -79,7 +83,24 @@ public class Headed implements ModInitializer {
 			content.addAfter(HeadedItems.PANDA_HEAD, HeadedItems.PLAYFUL_PANDA_HEAD);
 			content.addAfter(HeadedItems.PLAYFUL_PANDA_HEAD, HeadedItems.WEAK_PANDA_HEAD);
 			content.addAfter(HeadedItems.WEAK_PANDA_HEAD, HeadedItems.WORRIED_PANDA_HEAD);
-			content.addAfter(HeadedItems.WORRIED_PANDA_HEAD, HeadedItems.DROWNED_HEAD);
+			content.addAfter(HeadedItems.WORRIED_PANDA_HEAD, HeadedItems.RED_PARROT_HEAD);
+			content.addAfter(HeadedItems.RED_PARROT_HEAD, HeadedItems.GREEN_PARROT_HEAD);
+			content.addAfter(HeadedItems.GREEN_PARROT_HEAD, HeadedItems.BLUE_PARROT_HEAD);
+			content.addAfter(HeadedItems.BLUE_PARROT_HEAD, HeadedItems.CYAN_PARROT_HEAD);
+			content.addAfter(HeadedItems.CYAN_PARROT_HEAD, HeadedItems.GRAY_PARROT_HEAD);
+			content.addAfter(HeadedItems.GRAY_PARROT_HEAD, HeadedItems.SHULKER_HEAD);
+			content.addAfter(HeadedItems.SHULKER_HEAD, HeadedItems.PIG_HEAD);
+			content.addAfter(HeadedItems.PIG_HEAD, HeadedItems.SPIDER_HEAD);
+			content.addAfter(HeadedItems.SPIDER_HEAD, HeadedItems.CAVE_SPIDER_HEAD);
+			content.addAfter(HeadedItems.CAVE_SPIDER_HEAD, HeadedItems.BLAZE_HEAD);
+			content.addAfter(HeadedItems.BLAZE_HEAD, HeadedItems.BLACK_RABBIT_HEAD);
+			content.addAfter(HeadedItems.BLACK_RABBIT_HEAD, HeadedItems.BROWN_RABBIT_HEAD);
+			content.addAfter(HeadedItems.BROWN_RABBIT_HEAD, HeadedItems.GOLD_RABBIT_HEAD);
+			content.addAfter(HeadedItems.GOLD_RABBIT_HEAD, HeadedItems.SALT_RABBIT_HEAD);
+			content.addAfter(HeadedItems.SALT_RABBIT_HEAD, HeadedItems.WHITE_RABBIT_HEAD);
+			content.addAfter(HeadedItems.WHITE_RABBIT_HEAD, HeadedItems.WHITE_SPLOTCHED_RABBIT_HEAD);
+			content.addAfter(HeadedItems.WHITE_SPLOTCHED_RABBIT_HEAD, HeadedItems.TURTLE_HEAD);
+			content.addAfter(HeadedItems.TURTLE_HEAD, HeadedItems.WITHER_SKULL);
 		});
 	}
 }

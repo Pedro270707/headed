@@ -35,7 +35,19 @@ public class HeadedEntityModelLayers {
     public static final EntityModelLayer IRON_GOLEM_HEAD = registerMain("iron_golem_head");
     public static final EntityModelLayer PANDA_HEAD = registerMain("panda_head");
     public static final EntityModelLayer DROWNED_HEAD = registerMain("drowned_head");
-    public static final EntityModelLayer DROWNED_OUTER_LAYER = register("drowned_head", "outer");
+    public static final EntityModelLayer DROWNED_HEAD_OUTER_LAYER = register("drowned_head", "outer");
+    public static final EntityModelLayer PARROT_HEAD = registerMain("parrot_head");
+    public static final EntityModelLayer STRAY_SKULL = registerMain("stray_skull");
+    public static final EntityModelLayer STRAY_SKULL_OUTER_LAYER = register("stray_skull", "outer");
+    public static final EntityModelLayer SHULKER_HEAD = registerMain("shulker_head");
+    public static final EntityModelLayer HUSK_HEAD = registerMain("husk_head");
+    public static final EntityModelLayer PIG_HEAD = registerMain("pig_head");
+    public static final EntityModelLayer SPIDER_HEAD = registerMain("spider_head");
+    public static final EntityModelLayer SPIDER_EYES = register("spider_head", "eyes");
+    public static final EntityModelLayer BLAZE_HEAD = registerMain("blaze_head");
+    public static final EntityModelLayer RABBIT_HEAD = registerMain("rabbit_head");
+    public static final EntityModelLayer TURTLE_HEAD = registerMain("turtle_head");
+    public static final EntityModelLayer WITHER_SKULL = registerMain("wither_skull");
 
     public HeadedEntityModelLayers() {
     }
