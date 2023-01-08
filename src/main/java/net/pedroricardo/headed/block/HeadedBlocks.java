@@ -173,6 +173,18 @@ public class HeadedBlocks {
     public static final Block TURTLE_WALL_HEAD;
     public static final Block WITHER_SKULL;
     public static final Block WITHER_WALL_SKULL;
+    public static final Block WOLF_HEAD;
+    public static final Block WOLF_WALL_HEAD;
+    public static final Block BAT_HEAD;
+    public static final Block BAT_WALL_HEAD;
+    public static final Block WITCH_HEAD;
+    public static final Block WITCH_WALL_HEAD;
+    public static final Block CHICKEN_HEAD;
+    public static final Block CHICKEN_WALL_HEAD;
+    public static final Block PHANTOM_HEAD;
+    public static final Block PHANTOM_WALL_HEAD;
+    public static final Block SNOW_GOLEM_HEAD;
+    public static final Block SNOW_GOLEM_WALL_HEAD;
 
 
     static {
@@ -342,6 +354,18 @@ public class HeadedBlocks {
         TURTLE_WALL_HEAD = register("turtle_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.TURTLE, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(TURTLE_HEAD)));
         WITHER_SKULL = register("wither_skull", new HeadedSkullBlock(HeadedSkullBlock.Type.WITHER, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
         WITHER_WALL_SKULL = register("wither_wall_skull", new HeadedWallSkullBlock(HeadedSkullBlock.Type.WITHER, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(WITHER_SKULL)));
+        WOLF_HEAD = register("wolf_head", new HeadedSkullBlock(HeadedSkullBlock.Type.WOLF, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        WOLF_WALL_HEAD = register("wolf_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.WOLF, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(WOLF_HEAD)));
+        BAT_HEAD = register("bat_head", new HeadedSkullBlock(HeadedSkullBlock.Type.BAT, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        BAT_WALL_HEAD = register("bat_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.BAT, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(BAT_HEAD)));
+        WITCH_HEAD = register("witch_head", new HeadedSkullBlock(HeadedSkullBlock.Type.WITCH, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        WITCH_WALL_HEAD = register("witch_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.WITCH, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(WITCH_HEAD)));
+        CHICKEN_HEAD = register("chicken_head", new HeadedSkullBlock(HeadedSkullBlock.Type.CHICKEN, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        CHICKEN_WALL_HEAD = register("chicken_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.CHICKEN, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(CHICKEN_HEAD)));
+        PHANTOM_HEAD = register("phantom_head", new HeadedSkullBlock(HeadedSkullBlock.Type.PHANTOM, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        PHANTOM_WALL_HEAD = register("phantom_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.PHANTOM, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(PHANTOM_HEAD)));
+        SNOW_GOLEM_HEAD = register("snow_golem_head", new HeadedSkullBlock(HeadedSkullBlock.Type.SNOW_GOLEM, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        SNOW_GOLEM_WALL_HEAD = register("snow_golem_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.SNOW_GOLEM, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(SNOW_GOLEM_HEAD)));
     }
 
     private static Block register(String name, Block block) {

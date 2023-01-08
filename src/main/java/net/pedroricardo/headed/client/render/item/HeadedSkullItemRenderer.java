@@ -42,12 +42,12 @@ public class HeadedSkullItemRenderer implements BuiltinItemRendererRegistry.Dyna
 
                 if (mode == ModelTransformation.Mode.GUI) {
                     HeadedSkullBlockEntityRenderer.renderSkull(skullType, null, 180.0F, 0, matrices, vertexConsumers, light, skullModel, renderLayer, 1.0F, 1.0F, 1.0F);
-                    HeadedSkullBlockEntityRenderer.testForSkullFeature(skullType, null, 180.0F, 0, matrices, vertexConsumers, light, hasLeftHorn, hasRightHorn);
+                    HeadedSkullBlockEntityRenderer.testForSkullFeature(skullType, null, 180.0F, 0, matrices, vertexConsumers, light);
 //                    Headed.LOGGER.debug("HeadedSkullItemRenderer GUI: " + hasLeftHorn + " " + hasRightHorn);
                     matrices.pop();
                 } else if (mode != ModelTransformation.Mode.HEAD) {
                     HeadedSkullBlockEntityRenderer.renderSkull(skullType, null, 180.0F, 0, matrices, vertexConsumers, light, skullModel, renderLayer, 1.0F, 1.0F, 1.0F);
-                    HeadedSkullBlockEntityRenderer.testForSkullFeature(skullType, null, 180.0F, 0, matrices, vertexConsumers, light, hasLeftHorn, hasRightHorn);
+                    HeadedSkullBlockEntityRenderer.testForSkullFeature(skullType, null, 180.0F, 0, matrices, vertexConsumers, light);
 //                    Headed.LOGGER.debug("HeadedSkullItemRenderer HEAD: " + hasLeftHorn + " " + hasRightHorn);
                 }
             }

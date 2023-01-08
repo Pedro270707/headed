@@ -6,12 +6,9 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
-import net.fabricmc.fabric.api.event.Event;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.minecraft.client.model.Dilation;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.util.Identifier;
-import net.minecraft.world.event.listener.EntityGameEventHandler;
 import net.pedroricardo.headed.block.entity.HeadedBlockEntities;
 import net.pedroricardo.headed.client.render.block.entity.HeadedSkullBlockEntityRenderer;
 import net.pedroricardo.headed.client.render.entity.feature.HeadedHeadFeatureRenderer;
@@ -56,6 +53,13 @@ public class HeadedClient implements ClientModInitializer {
     private static final EntityModelLayer RABBIT_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "rabbit_head"), "main");
     private static final EntityModelLayer TURTLE_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "turtle_head"), "main");
     private static final EntityModelLayer WITHER_SKULL = new EntityModelLayer(new Identifier(Headed.MOD_ID, "wither_skull"), "main");
+    private static final EntityModelLayer WOLF_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "wolf_head"), "main");
+    private static final EntityModelLayer BAT_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "bat_head"), "main");
+    private static final EntityModelLayer WITCH_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "witch_head"), "main");
+    private static final EntityModelLayer CHICKEN_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "chicken_head"), "main");
+    private static final EntityModelLayer PHANTOM_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "phantom_head"), "main");
+    private static final EntityModelLayer PHANTOM_EYES = new EntityModelLayer(new Identifier(Headed.MOD_ID, "phantom_head"), "eyes");
+    private static final EntityModelLayer SNOW_GOLEM_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "snow_golem_head"), "main");
 
     @Override
     public void onInitializeClient() {
@@ -96,6 +100,13 @@ public class HeadedClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(RABBIT_HEAD, RabbitHeadEntityModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(TURTLE_HEAD, TurtleHeadEntityModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(WITHER_SKULL, () -> GenericSkullEntityModel.getTexturedModelData(new Dilation(0.0F), 64, 64));
+        EntityModelLayerRegistry.registerModelLayer(WOLF_HEAD, WolfHeadEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(BAT_HEAD, BatHeadEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(WITCH_HEAD, WitchHeadEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(CHICKEN_HEAD, ChickenHeadEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(PHANTOM_HEAD, PhantomHeadEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(PHANTOM_EYES, PhantomHeadEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(SNOW_GOLEM_HEAD, SnowGolemHeadEntityModel::getTexturedModelData);
 
         ItemRendererRegistry.register(HeadedItems.VILLAGER_HEAD);
         ItemRendererRegistry.register(HeadedItems.EVOKER_HEAD);
@@ -180,6 +191,12 @@ public class HeadedClient implements ClientModInitializer {
         ItemRendererRegistry.register(HeadedItems.WHITE_SPLOTCHED_RABBIT_HEAD);
         ItemRendererRegistry.register(HeadedItems.TURTLE_HEAD);
         ItemRendererRegistry.register(HeadedItems.WITHER_SKULL);
+        ItemRendererRegistry.register(HeadedItems.WOLF_HEAD);
+        ItemRendererRegistry.register(HeadedItems.BAT_HEAD);
+        ItemRendererRegistry.register(HeadedItems.WITCH_HEAD);
+        ItemRendererRegistry.register(HeadedItems.CHICKEN_HEAD);
+        ItemRendererRegistry.register(HeadedItems.PHANTOM_HEAD);
+        ItemRendererRegistry.register(HeadedItems.SNOW_GOLEM_HEAD);
 
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, entityRenderer, registrationHelper, context) -> registrationHelper.register(new HeadedHeadFeatureRenderer(entityRenderer, context.getModelLoader())));
 

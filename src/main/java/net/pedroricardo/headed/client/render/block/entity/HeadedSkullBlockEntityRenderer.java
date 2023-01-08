@@ -5,20 +5,25 @@ import com.google.common.collect.Maps;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.block.BlockRenderManager;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.render.entity.model.*;
+import net.minecraft.client.render.model.BakedModel;
+import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.RotationPropertyHelper;
 import net.pedroricardo.headed.block.AbstractHeadedSkullBlock;
 import net.pedroricardo.headed.block.HeadedSkullBlock;
@@ -27,12 +32,16 @@ import net.pedroricardo.headed.block.HeadedWallSkullBlock;
 import net.pedroricardo.headed.block.entity.HeadedSkullBlockEntity;
 import net.pedroricardo.headed.client.render.entity.model.*;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Matrix4f;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 import java.util.Map;
 
 @Environment(EnvType.CLIENT)
 public class HeadedSkullBlockEntityRenderer implements BlockEntityRenderer<HeadedSkullBlockEntity> {
     private final Map<HeadedSkullBlock.SkullType, HeadedSkullBlockEntityModel> MODELS;
+    public static BlockRenderManager BLOCK_RENDER_MANAGER;
     private static final Map<HeadedSkullBlock.SkullType, Identifier> TEXTURES = Util.make(Maps.newHashMap(), (map) -> {
         map.put(Type.VILLAGER, new Identifier("textures/entity/villager/villager.png"));
         map.put(Type.EVOKER, new Identifier("textures/entity/illager/evoker.png"));
@@ -117,6 +126,12 @@ public class HeadedSkullBlockEntityRenderer implements BlockEntityRenderer<Heade
         map.put(Type.WHITE_SPLOTCHED_RABBIT, new Identifier("textures/entity/rabbit/white_splotched.png"));
         map.put(Type.TURTLE, new Identifier("textures/entity/turtle/big_sea_turtle.png"));
         map.put(Type.WITHER, new Identifier("textures/entity/wither/wither.png"));
+        map.put(Type.WOLF, new Identifier("textures/entity/wolf/wolf.png"));
+        map.put(Type.BAT, new Identifier("textures/entity/bat.png"));
+        map.put(Type.WITCH, new Identifier("textures/entity/witch.png"));
+        map.put(Type.CHICKEN, new Identifier("textures/entity/chicken.png"));
+        map.put(Type.PHANTOM, new Identifier("textures/entity/phantom.png"));
+        map.put(Type.SNOW_GOLEM, new Identifier("textures/entity/snow_golem.png"));
     });
 
     public static Map<HeadedSkullBlock.SkullType, HeadedSkullBlockEntityModel> getModels(EntityModelLoader modelLoader) {
@@ -204,6 +219,12 @@ public class HeadedSkullBlockEntityRenderer implements BlockEntityRenderer<Heade
         builder.put(Type.WHITE_SPLOTCHED_RABBIT, new RabbitHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.RABBIT_HEAD)));
         builder.put(Type.TURTLE, new TurtleHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.TURTLE_HEAD)));
         builder.put(Type.WITHER, new GenericSkullEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.WITHER_SKULL)));
+        builder.put(Type.WOLF, new WolfHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.WOLF_HEAD)));
+        builder.put(Type.BAT, new BatHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.BAT_HEAD)));
+        builder.put(Type.WITCH, new WitchHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.WITCH_HEAD)));
+        builder.put(Type.CHICKEN, new ChickenHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.CHICKEN_HEAD)));
+        builder.put(Type.PHANTOM, new PhantomHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PHANTOM_HEAD)));
+        builder.put(Type.SNOW_GOLEM, new SnowGolemHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SNOW_GOLEM_HEAD)));
         return builder.build();
     }
 
@@ -214,7 +235,9 @@ public class HeadedSkullBlockEntityRenderer implements BlockEntityRenderer<Heade
          * function: (16 - length)/32
          * length would be the length of the dimension (e.g.:
          * a normal skull is 8x8x8, so doing this with each
-         * dimension gives us 0.25F, 0.25F, 0.25F).
+         * dimension (not considering the X dimension, because
+         * the first and last ones have to use the Z dimension)
+         * gives us Z=0.25F, Y=0.25F, Z=0.25F).
          */
         map.put(Type.VILLAGER, new float[]{0.25F, 0.25F, 0.25F});
         map.put(Type.EVOKER, new float[]{0.25F, 0.25F, 0.25F});
@@ -287,7 +310,7 @@ public class HeadedSkullBlockEntityRenderer implements BlockEntityRenderer<Heade
         map.put(Type.HUSK, new float[]{0.25F, 0.25F, 0.25F});
         map.put(Type.PIG, new float[]{0.25F, 0.25F, 0.25F});
         map.put(Type.SPIDER, new float[]{0.25F, 0.25F, 0.25F});
-        map.put(Type.CAVE_SPIDER, new float[]{0.328125F, 0.328125F, 0.328125F});
+        map.put(Type.CAVE_SPIDER, new float[]{0.325F, 0.325F, 0.325F});
         map.put(Type.BLAZE, new float[]{0.25F, 0.25F, 0.25F});
         map.put(Type.BLACK_RABBIT, new float[]{0.34375F, 0.375F, 0.34375F});
         map.put(Type.BROWN_RABBIT, new float[]{0.34375F, 0.375F, 0.34375F});
@@ -299,6 +322,12 @@ public class HeadedSkullBlockEntityRenderer implements BlockEntityRenderer<Heade
         map.put(Type.WHITE_SPLOTCHED_RABBIT, new float[]{0.34375F, 0.375F, 0.34375F});
         map.put(Type.TURTLE, new float[]{0.3125F, 0.34375F, 0.3125F});
         map.put(Type.WITHER, new float[]{0.25F, 0.25F, 0.25F});
+        map.put(Type.WOLF, new float[]{0.375F, 0.3125F, 0.375F});
+        map.put(Type.BAT, new float[]{0.434375F, 0.434375F, 0.434375F});
+        map.put(Type.WITCH, new float[]{0.25F, 0.25F, 0.25F});
+        map.put(Type.CHICKEN, new float[]{0.40625F, 0.3125F, 0.40625F});
+        map.put(Type.PHANTOM, new float[]{0.34375F, 0.40625F, 0.34375F});
+        map.put(Type.SNOW_GOLEM, new float[]{0.28125F, 0.28125F, 0.28125F});
     });
 
     public static Map<String, HeadedSkullBlockEntityModel> getOtherModels(EntityModelLoader modelLoader) {
@@ -308,6 +337,7 @@ public class HeadedSkullBlockEntityRenderer implements BlockEntityRenderer<Heade
         builder.put("drowned_head_outer_layer", new GenericSkullEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.DROWNED_HEAD_OUTER_LAYER)));
         builder.put("stray_skull_outer_layer", new StraySkullEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.STRAY_SKULL_OUTER_LAYER)));
         builder.put("spider_eyes", new SpiderHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SPIDER_EYES)));
+        builder.put("phantom_eyes", new PhantomHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PHANTOM_EYES)));
         return builder.build();
     }
 
@@ -317,10 +347,12 @@ public class HeadedSkullBlockEntityRenderer implements BlockEntityRenderer<Heade
         map.put("drowned_head_outer_layer", new Identifier("textures/entity/zombie/drowned_outer_layer.png"));
         map.put("stray_skull_outer_layer", new Identifier("textures/entity/skeleton/stray_overlay.png"));
         map.put("spider_eyes", new Identifier("textures/entity/spider_eyes.png"));
+        map.put("phantom_eyes", new Identifier("textures/entity/phantom_eyes.png"));
     });
 
     public HeadedSkullBlockEntityRenderer(BlockEntityRendererFactory.Context ctx) {
         this.MODELS = getModels(ctx.getLayerRenderDispatcher());
+        BLOCK_RENDER_MANAGER = ctx.getRenderManager();
     }
 
     public boolean rendersOutsideBoundingBox(HeadedSkullBlockEntity skullBlockEntity) {
@@ -329,7 +361,7 @@ public class HeadedSkullBlockEntityRenderer implements BlockEntityRenderer<Heade
 
     public static RenderLayer getRenderLayer(HeadedSkullBlock.SkullType type) {
         Identifier identifier = TEXTURES.get(type);
-        if (type == Type.ENDERMAN || type == Type.SPIDER || type == Type.CAVE_SPIDER) {
+        if (type == Type.ENDERMAN || type == Type.SPIDER || type == Type.CAVE_SPIDER || type == Type.PHANTOM) {
             return RenderLayer.getEntityCutout(identifier);
         }
         return RenderLayer.getEntityCutoutNoCullZOffset(identifier);
@@ -337,6 +369,10 @@ public class HeadedSkullBlockEntityRenderer implements BlockEntityRenderer<Heade
     public static RenderLayer getOtherRenderLayer(String type) {
         Identifier identifier = OTHER_TEXTURES.get(type);
         return RenderLayer.getEntityCutoutNoCullZOffset(identifier);
+    }
+
+    public BlockRenderManager getBlockRenderManager() {
+        return this.BLOCK_RENDER_MANAGER;
     }
 
     public static void renderSkull(HeadedSkullBlock.SkullType skullType, @Nullable Direction direction, float yaw, float animationProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, HeadedSkullBlockEntityModel model, RenderLayer renderLayer, float r, float g, float b) {
@@ -376,180 +412,205 @@ public class HeadedSkullBlockEntityRenderer implements BlockEntityRenderer<Heade
         } else {
             renderSkull(skullType, direction, h, g, matrices, vertexConsumers, light, skullBlockEntityModel, renderLayer, 1.0F, 1.0F, 1.0F);
         }
-        testForSkullFeature(skullType, direction, h, g, matrices, vertexConsumers, light, blockEntity.getLeftHorn(), blockEntity.getRightHorn());
+        testForSkullFeature(skullType, direction, h, g, matrices, vertexConsumers, light);
     }
 
-    public static void testForSkullFeature(HeadedSkullBlock.SkullType skullType, @Nullable Direction direction, float yaw, float deltaTime, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, boolean hasLeftHorn, boolean hasRightHorn) {
+    public static void testForSkullFeature(HeadedSkullBlock.SkullType skullType, @Nullable Direction direction, float yaw, float deltaTime, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
         if (skullType == Type.WHITE_SHEEP) {
             float[] hs = SheepEntity.getRgbColor(DyeColor.WHITE);
             float s = hs[0];
             float t = hs[1];
             float u = hs[2];
-            RenderLayer woolRenderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("sheep_wool");
-            HeadedSkullBlockEntityModel woolModel = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("sheep_wool");
+            RenderLayer renderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("sheep_wool");
+            HeadedSkullBlockEntityModel model = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("sheep_wool");
 
-            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, woolModel, woolRenderLayer, s, t, u);
+            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, model, renderLayer, s, t, u);
         } else if (skullType == Type.ORANGE_SHEEP) {
             float[] hs = SheepEntity.getRgbColor(DyeColor.ORANGE);
             float s = hs[0];
             float t = hs[1];
             float u = hs[2];
-            RenderLayer woolRenderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("sheep_wool");
-            HeadedSkullBlockEntityModel woolModel = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("sheep_wool");
+            RenderLayer renderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("sheep_wool");
+            HeadedSkullBlockEntityModel model = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("sheep_wool");
 
-            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, woolModel, woolRenderLayer, s, t, u);
+            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, model, renderLayer, s, t, u);
         } else if (skullType == Type.MAGENTA_SHEEP) {
             float[] hs = SheepEntity.getRgbColor(DyeColor.MAGENTA);
             float s = hs[0];
             float t = hs[1];
             float u = hs[2];
-            RenderLayer woolRenderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("sheep_wool");
-            HeadedSkullBlockEntityModel woolModel = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("sheep_wool");
+            RenderLayer renderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("sheep_wool");
+            HeadedSkullBlockEntityModel model = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("sheep_wool");
 
-            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, woolModel, woolRenderLayer, s, t, u);
+            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, model, renderLayer, s, t, u);
         } else if (skullType == Type.LIGHT_BLUE_SHEEP) {
             float[] hs = SheepEntity.getRgbColor(DyeColor.LIGHT_BLUE);
             float s = hs[0];
             float t = hs[1];
             float u = hs[2];
-            RenderLayer woolRenderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("sheep_wool");
-            HeadedSkullBlockEntityModel woolModel = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("sheep_wool");
+            RenderLayer renderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("sheep_wool");
+            HeadedSkullBlockEntityModel model = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("sheep_wool");
 
-            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, woolModel, woolRenderLayer, s, t, u);
+            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, model, renderLayer, s, t, u);
         } else if (skullType == Type.YELLOW_SHEEP) {
             float[] hs = SheepEntity.getRgbColor(DyeColor.YELLOW);
             float s = hs[0];
             float t = hs[1];
             float u = hs[2];
-            RenderLayer woolRenderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("sheep_wool");
-            HeadedSkullBlockEntityModel woolModel = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("sheep_wool");
+            RenderLayer renderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("sheep_wool");
+            HeadedSkullBlockEntityModel model = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("sheep_wool");
 
-            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, woolModel, woolRenderLayer, s, t, u);
+            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, model, renderLayer, s, t, u);
         } else if (skullType == Type.LIME_SHEEP) {
             float[] hs = SheepEntity.getRgbColor(DyeColor.LIME);
             float s = hs[0];
             float t = hs[1];
             float u = hs[2];
-            RenderLayer woolRenderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("sheep_wool");
-            HeadedSkullBlockEntityModel woolModel = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("sheep_wool");
+            RenderLayer renderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("sheep_wool");
+            HeadedSkullBlockEntityModel model = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("sheep_wool");
 
-            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, woolModel, woolRenderLayer, s, t, u);
+            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, model, renderLayer, s, t, u);
         } else if (skullType == Type.PINK_SHEEP) {
             float[] hs = SheepEntity.getRgbColor(DyeColor.PINK);
             float s = hs[0];
             float t = hs[1];
             float u = hs[2];
-            RenderLayer woolRenderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("sheep_wool");
-            HeadedSkullBlockEntityModel woolModel = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("sheep_wool");
+            RenderLayer renderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("sheep_wool");
+            HeadedSkullBlockEntityModel model = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("sheep_wool");
 
-            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, woolModel, woolRenderLayer, s, t, u);
+            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, model, renderLayer, s, t, u);
         } else if (skullType == Type.GRAY_SHEEP) {
             float[] hs = SheepEntity.getRgbColor(DyeColor.GRAY);
             float s = hs[0];
             float t = hs[1];
             float u = hs[2];
-            RenderLayer woolRenderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("sheep_wool");
-            HeadedSkullBlockEntityModel woolModel = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("sheep_wool");
+            RenderLayer renderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("sheep_wool");
+            HeadedSkullBlockEntityModel model = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("sheep_wool");
 
-            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, woolModel, woolRenderLayer, s, t, u);
+            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, model, renderLayer, s, t, u);
         } else if (skullType == Type.LIGHT_GRAY_SHEEP) {
             float[] hs = SheepEntity.getRgbColor(DyeColor.LIGHT_GRAY);
             float s = hs[0];
             float t = hs[1];
             float u = hs[2];
-            RenderLayer woolRenderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("sheep_wool");
-            HeadedSkullBlockEntityModel woolModel = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("sheep_wool");
+            RenderLayer renderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("sheep_wool");
+            HeadedSkullBlockEntityModel model = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("sheep_wool");
 
-            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, woolModel, woolRenderLayer, s, t, u);
+            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, model, renderLayer, s, t, u);
         } else if (skullType == Type.CYAN_SHEEP) {
             float[] hs = SheepEntity.getRgbColor(DyeColor.CYAN);
             float s = hs[0];
             float t = hs[1];
             float u = hs[2];
-            RenderLayer woolRenderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("sheep_wool");
-            HeadedSkullBlockEntityModel woolModel = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("sheep_wool");
+            RenderLayer renderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("sheep_wool");
+            HeadedSkullBlockEntityModel model = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("sheep_wool");
 
-            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, woolModel, woolRenderLayer, s, t, u);
+            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, model, renderLayer, s, t, u);
         } else if (skullType == Type.PURPLE_SHEEP) {
             float[] hs = SheepEntity.getRgbColor(DyeColor.PURPLE);
             float s = hs[0];
             float t = hs[1];
             float u = hs[2];
-            RenderLayer woolRenderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("sheep_wool");
-            HeadedSkullBlockEntityModel woolModel = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("sheep_wool");
+            RenderLayer renderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("sheep_wool");
+            HeadedSkullBlockEntityModel model = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("sheep_wool");
 
-            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, woolModel, woolRenderLayer, s, t, u);
+            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, model, renderLayer, s, t, u);
         } else if (skullType == Type.BLUE_SHEEP) {
             float[] hs = SheepEntity.getRgbColor(DyeColor.BLUE);
             float s = hs[0];
             float t = hs[1];
             float u = hs[2];
-            RenderLayer woolRenderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("sheep_wool");
-            HeadedSkullBlockEntityModel woolModel = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("sheep_wool");
+            RenderLayer renderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("sheep_wool");
+            HeadedSkullBlockEntityModel model = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("sheep_wool");
 
-            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, woolModel, woolRenderLayer, s, t, u);
+            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, model, renderLayer, s, t, u);
         } else if (skullType == Type.BROWN_SHEEP) {
             float[] hs = SheepEntity.getRgbColor(DyeColor.BROWN);
             float s = hs[0];
             float t = hs[1];
             float u = hs[2];
-            RenderLayer woolRenderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("sheep_wool");
-            HeadedSkullBlockEntityModel woolModel = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("sheep_wool");
+            RenderLayer renderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("sheep_wool");
+            HeadedSkullBlockEntityModel model = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("sheep_wool");
 
-            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, woolModel, woolRenderLayer, s, t, u);
+            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, model, renderLayer, s, t, u);
         } else if (skullType == Type.GREEN_SHEEP) {
             float[] hs = SheepEntity.getRgbColor(DyeColor.GREEN);
             float s = hs[0];
             float t = hs[1];
             float u = hs[2];
-            RenderLayer woolRenderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("sheep_wool");
-            HeadedSkullBlockEntityModel woolModel = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("sheep_wool");
+            RenderLayer renderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("sheep_wool");
+            HeadedSkullBlockEntityModel model = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("sheep_wool");
 
-            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, woolModel, woolRenderLayer, s, t, u);
+            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, model, renderLayer, s, t, u);
         } else if (skullType == Type.RED_SHEEP) {
             float[] hs = SheepEntity.getRgbColor(DyeColor.RED);
             float s = hs[0];
             float t = hs[1];
             float u = hs[2];
-            RenderLayer woolRenderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("sheep_wool");
-            HeadedSkullBlockEntityModel woolModel = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("sheep_wool");
+            RenderLayer renderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("sheep_wool");
+            HeadedSkullBlockEntityModel model = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("sheep_wool");
 
-            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, woolModel, woolRenderLayer, s, t, u);
+            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, model, renderLayer, s, t, u);
         } else if (skullType == Type.BLACK_SHEEP) {
             float[] hs = SheepEntity.getRgbColor(DyeColor.BLACK);
             float s = hs[0];
             float t = hs[1];
             float u = hs[2];
-            RenderLayer woolRenderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("sheep_wool");
-            HeadedSkullBlockEntityModel woolModel = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("sheep_wool");
+            RenderLayer renderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("sheep_wool");
+            HeadedSkullBlockEntityModel model = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("sheep_wool");
 
-            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, woolModel, woolRenderLayer, s, t, u);
+            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, model, renderLayer, s, t, u);
         } else if (skullType == Type.ENDERMAN) {
-            RenderLayer endermanEyesRenderLayer = RenderLayer.getEyes(new Identifier("textures/entity/enderman/enderman_eyes.png"));
-            HeadedSkullBlockEntityModel endermanEyesModel = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("enderman_eyes");
+            RenderLayer renderLayer = RenderLayer.getEyes(OTHER_TEXTURES.get("enderman_eyes"));
+            HeadedSkullBlockEntityModel model = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("enderman_eyes");
 
-            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, 15728640, endermanEyesModel, endermanEyesRenderLayer, 1.0F, 1.0F, 1.0F);
+            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, 15728640, model, renderLayer, 1.0F, 1.0F, 1.0F);
         } else if (skullType == Type.DROWNED) {
-            RenderLayer drownedOuterLayerRenderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("drowned_head_outer_layer");
-            HeadedSkullBlockEntityModel drownedOuterLayerModel = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("drowned_head_outer_layer");
+            RenderLayer renderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("drowned_head_outer_layer");
+            HeadedSkullBlockEntityModel model = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("drowned_head_outer_layer");
 
-            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, drownedOuterLayerModel, drownedOuterLayerRenderLayer, 1.0F, 1.0F, 1.0F);
+            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, model, renderLayer, 1.0F, 1.0F, 1.0F);
         } else if (skullType == Type.STRAY) {
-            RenderLayer strayOuterLayerRenderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("stray_skull_outer_layer");
-            HeadedSkullBlockEntityModel strayOuterLayerModel = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("stray_skull_outer_layer");
+            RenderLayer renderLayer = HeadedSkullBlockEntityRenderer.getOtherRenderLayer("stray_skull_outer_layer");
+            HeadedSkullBlockEntityModel model = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("stray_skull_outer_layer");
 
-            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, strayOuterLayerModel, strayOuterLayerRenderLayer, 1.0F, 1.0F, 1.0F);
+            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, model, renderLayer, 1.0F, 1.0F, 1.0F);
         } else if (skullType == Type.SPIDER) {
-            RenderLayer spiderEyesRenderLayer = RenderLayer.getEyes(new Identifier("textures/entity/spider_eyes.png"));
-            HeadedSkullBlockEntityModel spiderEyesModel = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("spider_eyes");
+            RenderLayer renderLayer = RenderLayer.getEyes(OTHER_TEXTURES.get("spider_eyes"));
+            HeadedSkullBlockEntityModel model = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("spider_eyes");
 
-            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, 15728640, spiderEyesModel, spiderEyesRenderLayer, 1.0F, 1.0F, 1.0F);
+            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, 15728640, model, renderLayer, 1.0F, 1.0F, 1.0F);
         } else if (skullType == Type.CAVE_SPIDER) {
-            RenderLayer spiderEyesRenderLayer = RenderLayer.getEyes(new Identifier("textures/entity/spider_eyes.png"));
-            HeadedSkullBlockEntityModel spiderEyesModel = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("spider_eyes");
+            RenderLayer renderLayer = RenderLayer.getEyes(OTHER_TEXTURES.get("spider_eyes"));
+            HeadedSkullBlockEntityModel model = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("spider_eyes");
 
-            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, 15728640, spiderEyesModel, spiderEyesRenderLayer, 1.0F, 1.0F, 1.0F);
+            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, 15728640, model, renderLayer, 1.0F, 1.0F, 1.0F);
+        } else if (skullType == Type.PHANTOM) {
+            RenderLayer renderLayer = RenderLayer.getEyes(OTHER_TEXTURES.get("phantom_eyes"));
+            HeadedSkullBlockEntityModel model = HeadedSkullBlockEntityRenderer.getOtherModels(MinecraftClient.getInstance().getEntityModelLoader()).get("phantom_eyes");
+
+            HeadedSkullBlockEntityRenderer.renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, 15728640, model, renderLayer, 1.0F, 1.0F, 1.0F);
         }
+        /*
+        else if (skullType == Type.RED_MOOSHROOM || skullType == Type.BROWN_MOOSHROOM) {
+            BlockState blockState = skullType == Type.RED_MOOSHROOM ? Blocks.RED_MUSHROOM.getDefaultState() : Blocks.BROWN_MUSHROOM.getDefaultState();
+            BakedModel bakedModel = BLOCK_RENDER_MANAGER.getModel(blockState);
+            matrices.pop();
+            matrices.push();
+            if (direction == null) {
+                matrices.multiplyPositionMatrix(new Matrix4f().rotateY(yaw * 3.1415927F / 180.0F));
+//                matrices.translate(-1.0F, 0.0F, -1.0F);
+            } else {
+                float dislocationX = HEAD_DIRECTION_DISLOCATION.get(skullType)[0];
+                float dislocationY = HEAD_DIRECTION_DISLOCATION.get(skullType)[1];
+                float dislocationZ = HEAD_DIRECTION_DISLOCATION.get(skullType)[2];
+                matrices.translate(- (float)direction.getOffsetX() * dislocationX, dislocationY, - (float)direction.getOffsetZ() * dislocationZ);
+            }
+//            matrices.translate(0.0F, 0.4375F, 0.0F);
+            BLOCK_RENDER_MANAGER.renderBlockAsEntity(blockState, matrices, vertexConsumers, light, OverlayTexture.DEFAULT_UV);
+            matrices.pop();
+        }
+        */
 //        else if (skullType == Type.ALL_BLACK_CAT) {
 //            if (hasLeftHorn) {
 //                renderSkull(skullType, direction, yaw, deltaTime, matrices, vertexConsumers, light, HeadedSkullBlockEntityRenderer.getModels(MinecraftClient.getInstance().getEntityModelLoader()).get(Type.SNOW_FOX), getRenderLayer(Type.SNOW_FOX), 1.0F, 1.0F, 1.0F);

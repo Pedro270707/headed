@@ -48,6 +48,13 @@ public class HeadedEntityModelLayers {
     public static final EntityModelLayer RABBIT_HEAD = registerMain("rabbit_head");
     public static final EntityModelLayer TURTLE_HEAD = registerMain("turtle_head");
     public static final EntityModelLayer WITHER_SKULL = registerMain("wither_skull");
+    public static final EntityModelLayer WOLF_HEAD = registerMain("wolf_head");
+    public static final EntityModelLayer BAT_HEAD = registerMain("bat_head");
+    public static final EntityModelLayer WITCH_HEAD = registerMain("witch_head");
+    public static final EntityModelLayer CHICKEN_HEAD = registerMain("chicken_head");
+    public static final EntityModelLayer PHANTOM_HEAD = registerMain("phantom_head");
+    public static final EntityModelLayer PHANTOM_EYES = register("phantom_head", "eyes");
+    public static final EntityModelLayer SNOW_GOLEM_HEAD = registerMain("snow_golem_head");
 
     public HeadedEntityModelLayers() {
     }

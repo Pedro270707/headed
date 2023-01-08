@@ -4,11 +4,13 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.block.BlockRenderManager;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLoader;
 import net.minecraft.client.render.entity.model.ModelWithHead;
+import net.minecraft.client.render.item.BuiltinModelItemRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -86,7 +88,7 @@ public class HeadedHeadFeatureRenderer<T extends LivingEntity, M extends EntityM
                 HeadedSkullBlockEntityModel skullBlockEntityModel = this.headModels.get(skullType);
                 RenderLayer renderLayer = HeadedSkullBlockEntityRenderer.getRenderLayer(skullType);
                 HeadedSkullBlockEntityRenderer.renderSkull(skullType, null, 180.0F, f, matrixStack, vertexConsumerProvider, i, skullBlockEntityModel, renderLayer, 1.0F, 1.0F, 1.0F);
-                HeadedSkullBlockEntityRenderer.testForSkullFeature(skullType, null, 180.0F, f, matrixStack, vertexConsumerProvider, i, hasLeftHorn, hasRightHorn);
+                HeadedSkullBlockEntityRenderer.testForSkullFeature(skullType, null, 180.0F, f, matrixStack, vertexConsumerProvider, i);
             }
 
             matrixStack.pop();

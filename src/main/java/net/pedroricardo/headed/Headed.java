@@ -1,9 +1,7 @@
 package net.pedroricardo.headed;
 
-import jdk.jfr.EventFactory;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.Items;
 import net.pedroricardo.headed.block.HeadedBlocks;
@@ -101,6 +99,12 @@ public class Headed implements ModInitializer {
 			content.addAfter(HeadedItems.WHITE_RABBIT_HEAD, HeadedItems.WHITE_SPLOTCHED_RABBIT_HEAD);
 			content.addAfter(HeadedItems.WHITE_SPLOTCHED_RABBIT_HEAD, HeadedItems.TURTLE_HEAD);
 			content.addAfter(HeadedItems.TURTLE_HEAD, HeadedItems.WITHER_SKULL);
+			content.addAfter(HeadedItems.WITHER_SKULL, HeadedItems.WOLF_HEAD);
+			content.addAfter(HeadedItems.WOLF_HEAD, HeadedItems.BAT_HEAD);
+			content.addAfter(HeadedItems.BAT_HEAD, HeadedItems.WITCH_HEAD);
+			content.addAfter(HeadedItems.WITCH_HEAD, HeadedItems.CHICKEN_HEAD);
+			content.addAfter(HeadedItems.CHICKEN_HEAD, HeadedItems.PHANTOM_HEAD);
+			content.addAfter(HeadedItems.PHANTOM_HEAD, HeadedItems.SNOW_GOLEM_HEAD);
 		});
 	}
 }

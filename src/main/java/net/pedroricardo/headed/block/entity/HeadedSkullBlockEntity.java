@@ -10,9 +10,11 @@ import net.minecraft.world.World;
 public class HeadedSkullBlockEntity extends BlockEntity {
     public static final String HAS_LEFT_HORN = "HasLeftHorn";
     public static final String HAS_RIGHT_HORN = "HasRightHorn";
+    public static final String IS_TAMED = "Tamed";
 
     private boolean hasLeftHorn;
     private boolean hasRightHorn;
+    private boolean isTamed;
     private int poweredTicks;
     private boolean powered;
 
@@ -25,6 +27,7 @@ public class HeadedSkullBlockEntity extends BlockEntity {
 
         nbt.putBoolean("HasLeftHorn", this.hasLeftHorn);
         nbt.putBoolean("HasRightHorn", this.hasRightHorn);
+        nbt.putBoolean("Tamed", this.isTamed);
     }
 
     public void readNbt(NbtCompound nbt) {
@@ -32,6 +35,7 @@ public class HeadedSkullBlockEntity extends BlockEntity {
 
         this.hasLeftHorn = nbt.getBoolean("HasLeftHorn");
         this.hasRightHorn = nbt.getBoolean("HasRightHorn");
+        this.isTamed = nbt.getBoolean("Tamed");
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, HeadedSkullBlockEntity blockEntity) {
@@ -54,6 +58,10 @@ public class HeadedSkullBlockEntity extends BlockEntity {
 
     public boolean getRightHorn() {
         return this.hasRightHorn;
+    }
+
+    public boolean isTamed() {
+        return this.isTamed;
     }
 
     public BlockEntityUpdateS2CPacket toUpdatePacket() {

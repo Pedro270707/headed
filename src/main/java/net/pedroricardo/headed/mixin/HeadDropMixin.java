@@ -18,7 +18,7 @@ public class HeadDropMixin {
         if (entity != ((MobEntity)(Object)this) && entity instanceof CreeperEntity creeperEntity) {
             if (creeperEntity.shouldDropHead()) {
                 creeperEntity.onHeadDropped();
-                ((MobEntity)(Object)this).dropItem(HeadedLootTable.getHead((MobEntity)(Object)this));
+                ((MobEntity)(Object)this).dropStack(HeadedLootTable.getHead((MobEntity)(Object)this));
             }
         }
     }

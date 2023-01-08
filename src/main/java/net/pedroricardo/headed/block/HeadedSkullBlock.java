@@ -34,6 +34,11 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
     protected static final VoxelShape CAVE_SPIDER_SHAPE;
     protected static final VoxelShape RABBIT_SHAPE;
     protected static final VoxelShape TURTLE_SHAPE;
+    protected static final VoxelShape WOLF_SHAPE;
+    protected static final VoxelShape BAT_SHAPE;
+    protected static final VoxelShape CHICKEN_SHAPE;
+    protected static final VoxelShape PHANTOM_SHAPE;
+    protected static final VoxelShape SNOW_GOLEM_SHAPE;
 
     public HeadedSkullBlock(HeadedSkullBlock.SkullType skullType, AbstractBlock.Settings settings) {
         super(skullType, settings);
@@ -47,7 +52,8 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
                 || this.getSkullType() == Type.PILLAGER
                 || this.getSkullType() == Type.ZOMBIE_VILLAGER
                 || this.getSkullType() == Type.WANDERING_TRADER
-                || this.getSkullType() == Type.ILLUSIONER) {
+                || this.getSkullType() == Type.ILLUSIONER
+                || this.getSkullType() == Type.WITCH) {
             return VILLAGER_SHAPE;
         } else if (this.getSkullType() == Type.SHEEP
                 || this.getSkullType() == Type.WHITE_SHEEP
@@ -128,6 +134,16 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
             return RABBIT_SHAPE;
         } else if (this.getSkullType() == Type.TURTLE) {
             return TURTLE_SHAPE;
+        } else if (this.getSkullType() == Type.WOLF) {
+            return WOLF_SHAPE;
+        } else if (this.getSkullType() == Type.BAT) {
+            return BAT_SHAPE;
+        } else if (this.getSkullType() == Type.CHICKEN) {
+            return CHICKEN_SHAPE;
+        } else if (this.getSkullType() == Type.PHANTOM) {
+            return PHANTOM_SHAPE;
+        } else if (this.getSkullType() == Type.SNOW_GOLEM) {
+            return SNOW_GOLEM_SHAPE;
         } else {
             return SHAPE;
         }
@@ -169,9 +185,14 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
         PANDA_SHAPE = Block.createCuboidShape(1.5, 0.0, 1.5, 14.5, 10.0, 14.5);
         PARROT_SHAPE = Block.createCuboidShape(5.0, 0.0, 5.0, 11.0, 4.0, 11.0);
         SHULKER_SHAPE = Block.createCuboidShape(5.0, 0.0, 5.0, 11.0, 6.0, 11.0);
-        CAVE_SPIDER_SHAPE = Block.createCuboidShape(5.25, 0.0, 5.25, 10.75, 5.5, 10.75);
+        CAVE_SPIDER_SHAPE = Block.createCuboidShape(5.2, 0.0, 5.2, 10.8, 5.6, 10.8);
         RABBIT_SHAPE = Block.createCuboidShape(5.5, 0.0, 5.5, 10.5, 4.0, 10.5);
         TURTLE_SHAPE = Block.createCuboidShape(5.0, 0.0, 5.0, 11.0, 5.0, 11.0);
+        WOLF_SHAPE = Block.createCuboidShape(5.0, 0.0, 5.0, 11.0, 6.0, 11.0);
+        BAT_SHAPE = Block.createCuboidShape(6.95, 0.0, 6.95, 9.05, 2.1, 9.05);
+        CHICKEN_SHAPE = Block.createCuboidShape(6.0, 0.0, 6.0, 10.0, 6.0, 10.0);
+        PHANTOM_SHAPE = Block.createCuboidShape(4.5, 0.0, 4.5, 11.5, 3.0, 11.5);
+        SNOW_GOLEM_SHAPE = Block.createCuboidShape(4.5, 0.0, 4.5, 11.5, 7.0, 11.5);
     }
 
     public interface SkullType {
@@ -260,7 +281,13 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
         WHITE_RABBIT,
         WHITE_SPLOTCHED_RABBIT,
         TURTLE,
-        WITHER;
+        WITHER,
+        WOLF,
+        BAT,
+        WITCH,
+        CHICKEN,
+        PHANTOM,
+        SNOW_GOLEM;
 
         private Type() {
         }

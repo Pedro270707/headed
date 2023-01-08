@@ -19,13 +19,17 @@ public class VillagerHeadEntityModel extends HeadedSkullBlockEntityModel {
         this.hat = this.head.getChild("hat");
     }
 
-    public static TexturedModelData getTexturedModelData() {
+    public static ModelData getModelData() {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
         ModelPartData modelPartData2 = modelPartData.addChild("head", ModelPartBuilder.create().uv(0, 0).cuboid("head",-4.0F, -10.0F, -4.0F, 8.0F, 10.0F, 8.0F), ModelTransform.NONE);
         modelPartData2.addChild("nose", ModelPartBuilder.create().uv(24, 0).cuboid("nose", -1.0F, -1.0F, -6.0F, 2.0F, 4.0F, 2.0F), ModelTransform.pivot(0.0F, -2.0F, 0.0F));
         modelPartData2.addChild("hat", ModelPartBuilder.create().uv(32, 0).cuboid("hat",-4.0F, -10.0F, -4.0F, 8.0F, 10.0F, 8.0F, new Dilation(0.51F)), ModelTransform.NONE);
-        return TexturedModelData.of(modelData, 64, 64);
+        return modelData;
+    }
+
+    public static TexturedModelData getTexturedModelData() {
+        return TexturedModelData.of(getModelData(), 64, 64);
     }
 
     public void setHeadRotation(float animationProgress, float yaw, float pitch) {

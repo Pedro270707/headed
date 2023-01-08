@@ -100,6 +100,7 @@
   "block.headed.tabby_cat_wall_head": "Tabby Cat Wall Head",
   "block.headed.white_cat_head": "White Cat Head",
   "block.headed.white_cat_wall_head": "White Cat Wall Head",
+  "block.headed.cat_head.named": "%s's Head",
   "block.headed.enderman_head": "Enderman Head",
   "block.headed.enderman_wall_head": "Enderman Wall Head",
   "block.headed.fox_head": "Fox Head",
@@ -165,5 +166,18 @@
   "block.headed.turtle_head": "Turtle Head",
   "block.headed.turtle_wall_head": "Turtle Wall Head",
   "block.headed.wither_skull": "Wither Skull",
-  "block.headed.wither_wall_skull": "Wither Wall Skull"
+  "block.headed.wither_wall_skull": "Wither Wall Skull",
+  "block.headed.wolf_head": "Wolf Head",
+  "block.headed.wolf_wall_head": "Wolf Wall Head",
+  "block.headed.wolf_head.named": "%s's Head",
+  "block.headed.bat_head": "Bat Head",
+  "block.headed.bat_wall_head": "Bat Wall Head",
+  "block.headed.witch_head": "Witch Head",
+  "block.headed.witch_wall_head": "Witch Wall Head",
+  "block.headed.chicken_head": "Chicken Head",
+  "block.headed.chicken_wall_head": "Chicken Wall Head",
+  "block.headed.phantom_head": "Phantom Head",
+  "block.headed.phantom_wall_head": "Phantom Wall Head",
+  "block.headed.snow_golem_head": "Snow Golem Head",
+  "block.headed.snow_golem_wall_head": "Snow Golem Wall Head"
 }

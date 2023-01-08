@@ -97,6 +97,12 @@ public class HeadedItems {
     public static final Item WHITE_SPLOTCHED_RABBIT_HEAD = registerItem("white_splotched_rabbit_head", new VerticallyAttachableBlockItem(HeadedBlocks.WHITE_SPLOTCHED_RABBIT_HEAD, HeadedBlocks.WHITE_SPLOTCHED_RABBIT_WALL_HEAD, new FabricItemSettings().rarity(Rarity.UNCOMMON), Direction.DOWN));
     public static final Item TURTLE_HEAD = registerItem("turtle_head", new VerticallyAttachableBlockItem(HeadedBlocks.TURTLE_HEAD, HeadedBlocks.TURTLE_WALL_HEAD, new FabricItemSettings().rarity(Rarity.UNCOMMON), Direction.DOWN));
     public static final Item WITHER_SKULL = registerItem("wither_skull", new VerticallyAttachableBlockItem(HeadedBlocks.WITHER_SKULL, HeadedBlocks.WITHER_WALL_SKULL, new FabricItemSettings().rarity(Rarity.RARE).equipmentSlot(stack -> EquipmentSlot.HEAD), Direction.DOWN));
+    public static final Item WOLF_HEAD = registerItem("wolf_head", new VerticallyAttachableBlockItem(HeadedBlocks.WOLF_HEAD, HeadedBlocks.WOLF_WALL_HEAD, new FabricItemSettings().rarity(Rarity.UNCOMMON), Direction.DOWN));
+    public static final Item BAT_HEAD = registerItem("bat_head", new VerticallyAttachableBlockItem(HeadedBlocks.BAT_HEAD, HeadedBlocks.BAT_WALL_HEAD, new FabricItemSettings().rarity(Rarity.UNCOMMON), Direction.DOWN));
+    public static final Item WITCH_HEAD = registerItem("witch_head", new VerticallyAttachableBlockItem(HeadedBlocks.WITCH_HEAD, HeadedBlocks.WITCH_WALL_HEAD, new FabricItemSettings().rarity(Rarity.UNCOMMON).equipmentSlot(stack -> EquipmentSlot.HEAD), Direction.DOWN));
+    public static final Item CHICKEN_HEAD = registerItem("chicken_head", new VerticallyAttachableBlockItem(HeadedBlocks.CHICKEN_HEAD, HeadedBlocks.CHICKEN_WALL_HEAD, new FabricItemSettings().rarity(Rarity.UNCOMMON), Direction.DOWN));
+    public static final Item PHANTOM_HEAD = registerItem("phantom_head", new VerticallyAttachableBlockItem(HeadedBlocks.PHANTOM_HEAD, HeadedBlocks.PHANTOM_WALL_HEAD, new FabricItemSettings().rarity(Rarity.UNCOMMON), Direction.DOWN));
+    public static final Item SNOW_GOLEM_HEAD = registerItem("snow_golem_head", new VerticallyAttachableBlockItem(HeadedBlocks.SNOW_GOLEM_HEAD, HeadedBlocks.SNOW_GOLEM_WALL_HEAD, new FabricItemSettings().rarity(Rarity.UNCOMMON), Direction.DOWN));
 
     protected static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, new Identifier(Headed.MOD_ID, name), item);

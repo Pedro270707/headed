@@ -95,6 +95,12 @@ public class HeadedBlockEntities {
                         HeadedBlocks.WHITE_RABBIT_HEAD, HeadedBlocks.WHITE_RABBIT_WALL_HEAD,
                         HeadedBlocks.WHITE_SPLOTCHED_RABBIT_HEAD, HeadedBlocks.WHITE_SPLOTCHED_RABBIT_WALL_HEAD,
                         HeadedBlocks.TURTLE_HEAD, HeadedBlocks.TURTLE_WALL_HEAD,
-                        HeadedBlocks.WITHER_SKULL, HeadedBlocks.WITHER_WALL_SKULL).build(null));
+                        HeadedBlocks.WITHER_SKULL, HeadedBlocks.WITHER_WALL_SKULL,
+                        HeadedBlocks.WOLF_HEAD, HeadedBlocks.WOLF_WALL_HEAD,
+                        HeadedBlocks.BAT_HEAD, HeadedBlocks.BAT_WALL_HEAD,
+                        HeadedBlocks.WITCH_HEAD, HeadedBlocks.WITCH_WALL_HEAD,
+                        HeadedBlocks.CHICKEN_HEAD, HeadedBlocks.CHICKEN_WALL_HEAD,
+                        HeadedBlocks.PHANTOM_HEAD, HeadedBlocks.PHANTOM_WALL_HEAD,
+                        HeadedBlocks.SNOW_GOLEM_HEAD, HeadedBlocks.SNOW_GOLEM_WALL_HEAD).build(null));
     }
 }
