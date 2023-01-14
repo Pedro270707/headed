@@ -3,6 +3,7 @@ package net.pedroricardo.headed;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.ItemGroups;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.pedroricardo.headed.block.HeadedBlocks;
 import net.pedroricardo.headed.block.entity.HeadedBlockEntities;

@@ -91,7 +91,6 @@ public class HeadedBlockEntities {
                         HeadedBlocks.EVIL_RABBIT_HEAD, HeadedBlocks.EVIL_RABBIT_WALL_HEAD,
                         HeadedBlocks.GOLD_RABBIT_HEAD, HeadedBlocks.GOLD_RABBIT_WALL_HEAD,
                         HeadedBlocks.SALT_RABBIT_HEAD, HeadedBlocks.SALT_RABBIT_WALL_HEAD,
-                        HeadedBlocks.TOAST_RABBIT_HEAD, HeadedBlocks.TOAST_RABBIT_WALL_HEAD,
                         HeadedBlocks.WHITE_RABBIT_HEAD, HeadedBlocks.WHITE_RABBIT_WALL_HEAD,
                         HeadedBlocks.WHITE_SPLOTCHED_RABBIT_HEAD, HeadedBlocks.WHITE_SPLOTCHED_RABBIT_WALL_HEAD,
                         HeadedBlocks.TURTLE_HEAD, HeadedBlocks.TURTLE_WALL_HEAD,

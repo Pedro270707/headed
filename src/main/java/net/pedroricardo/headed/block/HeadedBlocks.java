@@ -7,6 +7,7 @@ import net.minecraft.util.Identifier;
 import net.pedroricardo.headed.Headed;
 
 public class HeadedBlocks {
+    
     public static final Block VILLAGER_HEAD;
     public static final Block VILLAGER_WALL_HEAD;
     public static final Block EVOKER_HEAD;
@@ -163,8 +164,6 @@ public class HeadedBlocks {
     public static final Block GOLD_RABBIT_WALL_HEAD;
     public static final Block SALT_RABBIT_HEAD;
     public static final Block SALT_RABBIT_WALL_HEAD;
-    public static final Block TOAST_RABBIT_HEAD;
-    public static final Block TOAST_RABBIT_WALL_HEAD;
     public static final Block WHITE_RABBIT_HEAD;
     public static final Block WHITE_RABBIT_WALL_HEAD;
     public static final Block WHITE_SPLOTCHED_RABBIT_HEAD;
@@ -344,8 +343,6 @@ public class HeadedBlocks {
         GOLD_RABBIT_WALL_HEAD = register("gold_rabbit_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.GOLD_RABBIT, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(GOLD_RABBIT_HEAD)));
         SALT_RABBIT_HEAD = register("salt_rabbit_head", new HeadedSkullBlock(HeadedSkullBlock.Type.SALT_RABBIT, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
         SALT_RABBIT_WALL_HEAD = register("salt_rabbit_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.SALT_RABBIT, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(SALT_RABBIT_HEAD)));
-        TOAST_RABBIT_HEAD = register("toast_rabbit_head", new HeadedSkullBlock(HeadedSkullBlock.Type.TOAST_RABBIT, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
-        TOAST_RABBIT_WALL_HEAD = register("toast_rabbit_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.TOAST_RABBIT, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(TOAST_RABBIT_HEAD)));
         WHITE_RABBIT_HEAD = register("white_rabbit_head", new HeadedSkullBlock(HeadedSkullBlock.Type.WHITE_RABBIT, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
         WHITE_RABBIT_WALL_HEAD = register("white_rabbit_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.WHITE_RABBIT, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(WHITE_RABBIT_HEAD)));
         WHITE_SPLOTCHED_RABBIT_HEAD = register("white_splotched_rabbit_head", new HeadedSkullBlock(HeadedSkullBlock.Type.WHITE_SPLOTCHED_RABBIT, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));

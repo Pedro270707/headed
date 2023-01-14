@@ -51,95 +51,35 @@ public class HeadedWallSkullBlock extends AbstractHeadedSkullBlock {
     }
 
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        if (this.getSkullType() == HeadedSkullBlock.Type.VILLAGER
-                || this.getSkullType() == HeadedSkullBlock.Type.EVOKER
-                || this.getSkullType() == HeadedSkullBlock.Type.VINDICATOR
-                || this.getSkullType() == HeadedSkullBlock.Type.PILLAGER
-                || this.getSkullType() == HeadedSkullBlock.Type.ZOMBIE_VILLAGER
-                || this.getSkullType() == HeadedSkullBlock.Type.WANDERING_TRADER
-                || this.getSkullType() == HeadedSkullBlock.Type.ILLUSIONER
-                || this.getSkullType() == HeadedSkullBlock.Type.WITCH) {
+        if (HeadedSkullBlock.VILLAGER_TYPES.contains(this.getSkullType())) {
             return FACING_TO_VILLAGER_SHAPE.get(state.get(FACING));
-        } else if (this.getSkullType() == HeadedSkullBlock.Type.SHEEP
-                || this.getSkullType() == HeadedSkullBlock.Type.WHITE_SHEEP
-                || this.getSkullType() == HeadedSkullBlock.Type.ORANGE_SHEEP
-                || this.getSkullType() == HeadedSkullBlock.Type.MAGENTA_SHEEP
-                || this.getSkullType() == HeadedSkullBlock.Type.LIGHT_BLUE_SHEEP
-                || this.getSkullType() == HeadedSkullBlock.Type.YELLOW_SHEEP
-                || this.getSkullType() == HeadedSkullBlock.Type.LIME_SHEEP
-                || this.getSkullType() == HeadedSkullBlock.Type.PINK_SHEEP
-                || this.getSkullType() == HeadedSkullBlock.Type.GRAY_SHEEP
-                || this.getSkullType() == HeadedSkullBlock.Type.LIGHT_GRAY_SHEEP
-                || this.getSkullType() == HeadedSkullBlock.Type.CYAN_SHEEP
-                || this.getSkullType() == HeadedSkullBlock.Type.PURPLE_SHEEP
-                || this.getSkullType() == HeadedSkullBlock.Type.BLUE_SHEEP
-                || this.getSkullType() == HeadedSkullBlock.Type.BROWN_SHEEP
-                || this.getSkullType() == HeadedSkullBlock.Type.GREEN_SHEEP
-                || this.getSkullType() == HeadedSkullBlock.Type.RED_SHEEP
-                || this.getSkullType() == HeadedSkullBlock.Type.BLACK_SHEEP) {
+        } else if (HeadedSkullBlock.SHEEP_TYPES.contains(this.getSkullType())) {
             return FACING_TO_SHEEP_SHAPE.get(state.get(FACING));
-        } else if (this.getSkullType() == HeadedSkullBlock.Type.ALLAY
-                || this.getSkullType() == HeadedSkullBlock.Type.VEX) {
+        } else if (HeadedSkullBlock.ALLAY_TYPES.contains(this.getSkullType())) {
             return FACING_TO_ALLAY_SHAPE.get(state.get(FACING));
-        } else if (this.getSkullType() == HeadedSkullBlock.Type.PIGLIN_BRUTE
-                || this.getSkullType() == HeadedSkullBlock.Type.ZOMBIFIED_PIGLIN) {
+        } else if (HeadedSkullBlock.PIGLIN_TYPES.contains(this.getSkullType())) {
             return FACING_TO_PIGLIN_SHAPE.get(state.get(FACING));
-        } else if (this.getSkullType() == HeadedSkullBlock.Type.LEUCISTIC_AXOLOTL
-                || this.getSkullType() == HeadedSkullBlock.Type.BROWN_AXOLOTL
-                || this.getSkullType() == HeadedSkullBlock.Type.CYAN_AXOLOTL
-                || this.getSkullType() == HeadedSkullBlock.Type.GOLD_AXOLOTL
-                || this.getSkullType() == HeadedSkullBlock.Type.BLUE_AXOLOTL) {
+        } else if (HeadedSkullBlock.AXOLOTL_TYPES.contains(this.getSkullType())) {
             return FACING_TO_AXOLOTL_SHAPE.get(state.get(FACING));
-        } else if (this.getSkullType() == HeadedSkullBlock.Type.COW
-                || this.getSkullType() == HeadedSkullBlock.Type.BROWN_MOOSHROOM
-                || this.getSkullType() == HeadedSkullBlock.Type.RED_MOOSHROOM) {
+        } else if (HeadedSkullBlock.COW_TYPES.contains(this.getSkullType())) {
             return FACING_TO_COW_SHAPE.get(state.get(FACING));
         } else if (this.getSkullType() == HeadedSkullBlock.Type.POLAR_BEAR) {
             return FACING_TO_POLAR_BEAR_SHAPE.get(state.get(FACING));
-        } else if (this.getSkullType() == HeadedSkullBlock.Type.OCELOT
-                || this.getSkullType() == HeadedSkullBlock.Type.ALL_BLACK_CAT
-                || this.getSkullType() == HeadedSkullBlock.Type.BLACK_CAT
-                || this.getSkullType() == HeadedSkullBlock.Type.BRITISH_SHORTHAIR_CAT
-                || this.getSkullType() == HeadedSkullBlock.Type.CALICO_CAT
-                || this.getSkullType() == HeadedSkullBlock.Type.JELLIE_CAT
-                || this.getSkullType() == HeadedSkullBlock.Type.PERSIAN_CAT
-                || this.getSkullType() == HeadedSkullBlock.Type.RAGDOLL_CAT
-                || this.getSkullType() == HeadedSkullBlock.Type.RED_CAT
-                || this.getSkullType() == HeadedSkullBlock.Type.SIAMESE_CAT
-                || this.getSkullType() == HeadedSkullBlock.Type.TABBY_CAT
-                || this.getSkullType() == HeadedSkullBlock.Type.WHITE_CAT) {
+        } else if (HeadedSkullBlock.OCELOT_TYPES.contains(this.getSkullType())) {
             return FACING_TO_OCELOT_SHAPE.get(state.get(FACING));
-        } else if (this.getSkullType() == HeadedSkullBlock.Type.FOX
-                || this.getSkullType() == HeadedSkullBlock.Type.SNOW_FOX) {
+        } else if (HeadedSkullBlock.FOX_TYPES.contains(this.getSkullType())) {
             return FACING_TO_FOX_SHAPE.get(state.get(FACING));
         } else if (this.getSkullType() == HeadedSkullBlock.Type.IRON_GOLEM) {
             return FACING_TO_IRON_GOLEM_SHAPE.get(state.get(FACING));
-        } else if (this.getSkullType() == HeadedSkullBlock.Type.AGGRESSIVE_PANDA
-                || this.getSkullType() == HeadedSkullBlock.Type.BROWN_PANDA
-                || this.getSkullType() == HeadedSkullBlock.Type.LAZY_PANDA
-                || this.getSkullType() == HeadedSkullBlock.Type.PANDA
-                || this.getSkullType() == HeadedSkullBlock.Type.PLAYFUL_PANDA
-                || this.getSkullType() == HeadedSkullBlock.Type.WEAK_PANDA
-                || this.getSkullType() == HeadedSkullBlock.Type.WORRIED_PANDA) {
+        } else if (HeadedSkullBlock.PANDA_TYPES.contains(this.getSkullType())) {
             return FACING_TO_PANDA_SHAPE.get(state.get(FACING));
-        } else if (this.getSkullType() == HeadedSkullBlock.Type.RED_PARROT
-                || this.getSkullType() == HeadedSkullBlock.Type.GREEN_PARROT
-                || this.getSkullType() == HeadedSkullBlock.Type.BLUE_PARROT
-                || this.getSkullType() == HeadedSkullBlock.Type.CYAN_PARROT
-                || this.getSkullType() == HeadedSkullBlock.Type.GRAY_PARROT) {
+        } else if (HeadedSkullBlock.PARROT_TYPES.contains(this.getSkullType())) {
             return FACING_TO_PARROT_SHAPE.get(state.get(FACING));
         } else if (this.getSkullType() == HeadedSkullBlock.Type.SHULKER) {
             return FACING_TO_SHULKER_SHAPE.get(state.get(FACING));
         } else if (this.getSkullType() == HeadedSkullBlock.Type.CAVE_SPIDER) {
             return FACING_TO_CAVE_SPIDER_SHAPE.get(state.get(FACING));
-        } else if (this.getSkullType() == HeadedSkullBlock.Type.BLACK_RABBIT
-                || this.getSkullType() == HeadedSkullBlock.Type.BROWN_RABBIT
-                || this.getSkullType() == HeadedSkullBlock.Type.EVIL_RABBIT
-                || this.getSkullType() == HeadedSkullBlock.Type.GOLD_RABBIT
-                || this.getSkullType() == HeadedSkullBlock.Type.SALT_RABBIT
-                || this.getSkullType() == HeadedSkullBlock.Type.TOAST_RABBIT
-                || this.getSkullType() == HeadedSkullBlock.Type.WHITE_RABBIT
-                || this.getSkullType() == HeadedSkullBlock.Type.WHITE_SPLOTCHED_RABBIT) {
+        } else if (HeadedSkullBlock.RABBIT_TYPES.contains(this.getSkullType())) {
             return FACING_TO_RABBIT_SHAPE.get(state.get(FACING));
         } else if (this.getSkullType() == HeadedSkullBlock.Type.TURTLE) {
             return FACING_TO_TURTLE_SHAPE.get(state.get(FACING));
@@ -211,7 +151,7 @@ public class HeadedWallSkullBlock extends AbstractHeadedSkullBlock {
         FACING_TO_CAVE_SPIDER_SHAPE = Maps.newEnumMap(ImmutableMap.of(Direction.NORTH, Block.createCuboidShape(5.2, 5.2, 10.4, 10.8, 10.8, 16.0), Direction.SOUTH, Block.createCuboidShape(5.2, 5.2, 0.0, 10.8, 10.8, 5.6), Direction.EAST, Block.createCuboidShape(0.0, 5.2, 5.2, 5.6, 10.8, 10.8), Direction.WEST, Block.createCuboidShape(10.4, 5.2, 5.2, 16.0, 10.8, 10.8)));
         FACING_TO_RABBIT_SHAPE = Maps.immutableEnumMap(Map.of(Direction.NORTH, Block.createCuboidShape(5.5, 6.0, 11.0, 10.5, 10.0, 16.0), Direction.SOUTH, Block.createCuboidShape(5.5, 6.0, 0.0, 10.5, 10.0, 5.0), Direction.EAST, Block.createCuboidShape(0.0, 6.0, 5.5, 5.0, 10.0, 10.5), Direction.WEST, Block.createCuboidShape(11.0, 6.0, 5.5, 16.0, 10.0, 10.5)));
         FACING_TO_TURTLE_SHAPE = Maps.immutableEnumMap(Map.of(Direction.NORTH, Block.createCuboidShape(5.0, 5.5, 10.0, 11.0, 10.5, 16.0), Direction.SOUTH, Block.createCuboidShape(5.0, 5.5, 0.0, 11.0, 10.5, 6.0), Direction.EAST, Block.createCuboidShape(0.0, 5.5, 5.0, 6.0, 10.5, 11.0), Direction.WEST, Block.createCuboidShape(10.0, 5.5, 5.0, 16.0, 10.5, 11.0)));
-        FACING_TO_WOLF_SHAPE = Maps.immutableEnumMap(Map.of(Direction.NORTH, Block.createCuboidShape(5.0, 5.0, 12.0, 11.5, 11.0, 16.0), Direction.SOUTH, Block.createCuboidShape(5.0, 5.0, 0.0, 11.0, 11.0, 4.0), Direction.EAST, Block.createCuboidShape(0.0, 5.0, 5.0, 4.0, 11.0, 11.0), Direction.WEST, Block.createCuboidShape(12.0, 5.0, 5.0, 16.0, 11.0, 11.0)));
+        FACING_TO_WOLF_SHAPE = Maps.immutableEnumMap(Map.of(Direction.NORTH, Block.createCuboidShape(5.0, 5.0, 12.0, 11.0, 11.0, 16.0), Direction.SOUTH, Block.createCuboidShape(5.0, 5.0, 0.0, 11.0, 11.0, 4.0), Direction.EAST, Block.createCuboidShape(0.0, 5.0, 5.0, 4.0, 11.0, 11.0), Direction.WEST, Block.createCuboidShape(12.0, 5.0, 5.0, 16.0, 11.0, 11.0)));
         FACING_TO_BAT_SHAPE = Maps.newEnumMap(ImmutableMap.of(Direction.NORTH, Block.createCuboidShape(6.95, 6.95, 13.9, 9.05, 9.05, 16.0), Direction.SOUTH, Block.createCuboidShape(6.95, 6.95, 0.0, 9.05, 9.05, 2.1), Direction.EAST, Block.createCuboidShape(0.0, 6.95, 6.95, 2.1, 9.05, 9.05), Direction.WEST, Block.createCuboidShape(13.9, 6.95, 6.95, 16.0, 9.05, 9.05)));
         FACING_TO_CHICKEN_SHAPE = Maps.newEnumMap(ImmutableMap.of(Direction.NORTH, Block.createCuboidShape(6.0, 5.0, 13.0, 10.0, 11.0, 16.0), Direction.SOUTH, Block.createCuboidShape(6.0, 5.0, 0.0, 10.0, 11.0, 3.0), Direction.EAST, Block.createCuboidShape(0.0, 5.0, 6.0, 3.0, 11.0, 10.0), Direction.WEST, Block.createCuboidShape(13.0, 5.0, 6.0, 16.0, 11.0, 10.0)));
         FACING_TO_PHANTOM_SHAPE = Maps.newEnumMap(ImmutableMap.of(Direction.NORTH, Block.createCuboidShape(4.5, 6.5, 11.0, 11.5, 9.5, 16.0), Direction.SOUTH, Block.createCuboidShape(4.5, 6.5, 0.0, 11.5, 9.5, 5.0), Direction.EAST, Block.createCuboidShape(0.0, 6.5, 4.5, 5.0, 9.5, 11.5), Direction.WEST, Block.createCuboidShape(11.0, 6.5, 4.5, 16.0, 9.5, 11.5)));

@@ -6,6 +6,24 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:copy_nbt",
+              "ops": [
+                {
+                  "op": "replace",
+                  "source": "Tamed",
+                  "target": "BlockEntityTag.Tamed"
+                },
+                {
+                  "op": "replace",
+                  "source": "CustomName",
+                  "target": "display.Name"
+                }
+              ],
+              "source": "block_entity"
+            }
+          ],
           "name": "headed:calico_cat_head"
         }
       ],

@@ -14,6 +14,8 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 
+import java.util.*;
+
 public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
     public static final int MAX_ROTATION_INDEX = RotationPropertyHelper.getMax();
     private static final int MAX_ROTATIONS;
@@ -45,92 +47,47 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
         this.setDefaultState((this.stateManager.getDefaultState()).with(ROTATION, 0));
     }
 
+    public static final Set<Type> VILLAGER_TYPES = EnumSet.of(Type.VILLAGER, Type.EVOKER, Type.VINDICATOR, Type.PILLAGER, Type.ZOMBIE_VILLAGER, Type.WANDERING_TRADER, Type.ILLUSIONER, Type.WITCH);
+    public static final Set<Type> SHEEP_TYPES = EnumSet.of(Type.SHEEP, Type.WHITE_SHEEP, Type.ORANGE_SHEEP, Type.MAGENTA_SHEEP, Type.LIGHT_BLUE_SHEEP, Type.YELLOW_SHEEP, Type.LIME_SHEEP, Type.PINK_SHEEP, Type.GRAY_SHEEP, Type.LIGHT_GRAY_SHEEP, Type.CYAN_SHEEP, Type.PURPLE_SHEEP, Type.BLUE_SHEEP, Type.BROWN_SHEEP, Type.GREEN_SHEEP, Type.RED_SHEEP, Type.BLACK_SHEEP);
+    public static final Set<Type> ALLAY_TYPES = EnumSet.of(Type.ALLAY, Type.VEX);
+    public static final Set<Type> PIGLIN_TYPES = EnumSet.of(Type.PIGLIN_BRUTE, Type.ZOMBIFIED_PIGLIN);
+    public static final Set<Type> AXOLOTL_TYPES = EnumSet.of(Type.LEUCISTIC_AXOLOTL, Type.BROWN_AXOLOTL, Type.CYAN_AXOLOTL, Type.GOLD_AXOLOTL, Type.BLUE_AXOLOTL);
+    public static final Set<Type> OCELOT_TYPES = EnumSet.of(Type.OCELOT, Type.ALL_BLACK_CAT, Type.BLACK_CAT, Type.BRITISH_SHORTHAIR_CAT, Type.CALICO_CAT, Type.JELLIE_CAT, Type.PERSIAN_CAT, Type.RAGDOLL_CAT, Type.RED_CAT, Type.SIAMESE_CAT, Type.TABBY_CAT, Type.WHITE_CAT);
+    public static final Set<Type> PANDA_TYPES = EnumSet.of(Type.AGGRESSIVE_PANDA, Type.BROWN_PANDA, Type.LAZY_PANDA, Type.PANDA, Type.PLAYFUL_PANDA, Type.WEAK_PANDA, Type.WORRIED_PANDA);
+    public static final Set<Type> PARROT_TYPES = EnumSet.of(Type.RED_PARROT, Type.GREEN_PARROT, Type.BLUE_PARROT, Type.CYAN_PARROT, Type.GRAY_PARROT);
+    public static final Set<Type> RABBIT_TYPES = EnumSet.of(Type.BLACK_RABBIT, Type.BROWN_RABBIT, Type.EVIL_RABBIT, Type.GOLD_RABBIT, Type.SALT_RABBIT, Type.WHITE_RABBIT, Type.WHITE_SPLOTCHED_RABBIT);
+    public static final Set<Type> COW_TYPES = EnumSet.of(Type.COW, Type.RED_MOOSHROOM, Type.BROWN_MOOSHROOM);
+    public static final Set<Type> FOX_TYPES = EnumSet.of(Type.FOX, Type.SNOW_FOX);
+
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        if (this.getSkullType() == Type.VILLAGER
-                || this.getSkullType() == Type.EVOKER
-                || this.getSkullType() == Type.VINDICATOR
-                || this.getSkullType() == Type.PILLAGER
-                || this.getSkullType() == Type.ZOMBIE_VILLAGER
-                || this.getSkullType() == Type.WANDERING_TRADER
-                || this.getSkullType() == Type.ILLUSIONER
-                || this.getSkullType() == Type.WITCH) {
+        if (VILLAGER_TYPES.contains(this.getSkullType())) {
             return VILLAGER_SHAPE;
-        } else if (this.getSkullType() == Type.SHEEP
-                || this.getSkullType() == Type.WHITE_SHEEP
-                || this.getSkullType() == Type.ORANGE_SHEEP
-                || this.getSkullType() == Type.MAGENTA_SHEEP
-                || this.getSkullType() == Type.LIGHT_BLUE_SHEEP
-                || this.getSkullType() == Type.YELLOW_SHEEP
-                || this.getSkullType() == Type.LIME_SHEEP
-                || this.getSkullType() == Type.PINK_SHEEP
-                || this.getSkullType() == Type.GRAY_SHEEP
-                || this.getSkullType() == Type.LIGHT_GRAY_SHEEP
-                || this.getSkullType() == Type.CYAN_SHEEP
-                || this.getSkullType() == Type.PURPLE_SHEEP
-                || this.getSkullType() == Type.BLUE_SHEEP
-                || this.getSkullType() == Type.BROWN_SHEEP
-                || this.getSkullType() == Type.GREEN_SHEEP
-                || this.getSkullType() == Type.RED_SHEEP
-                || this.getSkullType() == Type.BLACK_SHEEP) {
+        } else if (SHEEP_TYPES.contains(this.getSkullType())) {
             return SHEEP_SHAPE;
-        } else if (this.getSkullType() == Type.ALLAY
-                || this.getSkullType() == Type.VEX) {
+        } else if (ALLAY_TYPES.contains(this.getSkullType())) {
             return ALLAY_SHAPE;
-        } else if (this.getSkullType() == Type.PIGLIN_BRUTE
-                || this.getSkullType() == Type.ZOMBIFIED_PIGLIN) {
+        } else if (PIGLIN_TYPES.contains(this.getSkullType())) {
             return PIGLIN_SHAPE;
-        } else if (this.getSkullType() == Type.LEUCISTIC_AXOLOTL
-                || this.getSkullType() == Type.BROWN_AXOLOTL
-                || this.getSkullType() == Type.CYAN_AXOLOTL
-                || this.getSkullType() == Type.GOLD_AXOLOTL
-                || this.getSkullType() == Type.BLUE_AXOLOTL) {
+        } else if (AXOLOTL_TYPES.contains(this.getSkullType())) {
             return AXOLOTL_SHAPE;
         } else if (this.getSkullType() == Type.POLAR_BEAR) {
             return POLAR_BEAR_SHAPE;
-        } else if (this.getSkullType() == Type.OCELOT
-                || this.getSkullType() == Type.ALL_BLACK_CAT
-                || this.getSkullType() == Type.BLACK_CAT
-                || this.getSkullType() == Type.BRITISH_SHORTHAIR_CAT
-                || this.getSkullType() == Type.CALICO_CAT
-                || this.getSkullType() == Type.JELLIE_CAT
-                || this.getSkullType() == Type.PERSIAN_CAT
-                || this.getSkullType() == Type.RAGDOLL_CAT
-                || this.getSkullType() == Type.RED_CAT
-                || this.getSkullType() == Type.SIAMESE_CAT
-                || this.getSkullType() == Type.TABBY_CAT
-                || this.getSkullType() == Type.WHITE_CAT) {
+        } else if (OCELOT_TYPES.contains(this.getSkullType())) {
             return OCELOT_SHAPE;
         } else if (this.getSkullType() == Type.FOX
                 || this.getSkullType() == Type.SNOW_FOX) {
             return FOX_SHAPE;
         } else if (this.getSkullType() == Type.IRON_GOLEM) {
             return IRON_GOLEM_SHAPE;
-        } else if (this.getSkullType() == Type.AGGRESSIVE_PANDA
-                || this.getSkullType() == Type.BROWN_PANDA
-                || this.getSkullType() == Type.LAZY_PANDA
-                || this.getSkullType() == Type.PANDA
-                || this.getSkullType() == Type.PLAYFUL_PANDA
-                || this.getSkullType() == Type.WEAK_PANDA
-                || this.getSkullType() == Type.WORRIED_PANDA) {
+        } else if (PANDA_TYPES.contains(this.getSkullType())) {
             return PANDA_SHAPE;
-        } else if (this.getSkullType() == Type.RED_PARROT
-                || this.getSkullType() == Type.GREEN_PARROT
-                || this.getSkullType() == Type.BLUE_PARROT
-                || this.getSkullType() == Type.CYAN_PARROT
-                || this.getSkullType() == Type.GRAY_PARROT) {
+        } else if (PARROT_TYPES.contains(this.getSkullType())) {
             return PARROT_SHAPE;
         } else if (this.getSkullType() == Type.SHULKER) {
             return SHULKER_SHAPE;
         } else if (this.getSkullType() == Type.CAVE_SPIDER) {
             return CAVE_SPIDER_SHAPE;
-        } else if (this.getSkullType() == Type.BLACK_RABBIT
-                || this.getSkullType() == Type.BROWN_RABBIT
-                || this.getSkullType() == Type.EVIL_RABBIT
-                || this.getSkullType() == Type.GOLD_RABBIT
-                || this.getSkullType() == Type.SALT_RABBIT
-                || this.getSkullType() == Type.TOAST_RABBIT
-                || this.getSkullType() == Type.WHITE_RABBIT
-                || this.getSkullType() == Type.WHITE_SPLOTCHED_RABBIT) {
+        } else if (RABBIT_TYPES.contains(this.getSkullType())) {
             return RABBIT_SHAPE;
         } else if (this.getSkullType() == Type.TURTLE) {
             return TURTLE_SHAPE;
@@ -277,7 +234,6 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
         EVIL_RABBIT,
         GOLD_RABBIT,
         SALT_RABBIT,
-        TOAST_RABBIT,
         WHITE_RABBIT,
         WHITE_SPLOTCHED_RABBIT,
         TURTLE,

@@ -38,7 +38,7 @@ public class HeadedLootTable {
             if (((SheepEntity) entity).isSheared()) {
                 return new ItemStack(HeadedItems.SHEEP_HEAD);
             }
-            return switch (((SheepEntity) entity).getColor()) {
+            ItemStack itemStack = switch (((SheepEntity) entity).getColor()) {
                 case WHITE -> new ItemStack(HeadedItems.WHITE_SHEEP_HEAD);
                 case ORANGE -> new ItemStack(HeadedItems.ORANGE_SHEEP_HEAD);
                 case MAGENTA -> new ItemStack(HeadedItems.MAGENTA_SHEEP_HEAD);
@@ -56,6 +56,8 @@ public class HeadedLootTable {
                 case RED -> new ItemStack(HeadedItems.RED_SHEEP_HEAD);
                 case BLACK -> new ItemStack(HeadedItems.BLACK_SHEEP_HEAD);
             };
+            if (entity.getName().getString().equals("jeb_")) itemStack.setCustomName(Text.literal(entity.getName().getString()));
+            return itemStack;
         }
         if (entity instanceof AllayEntity) {
             return new ItemStack(HeadedItems.ALLAY_HEAD);
@@ -117,8 +119,9 @@ public class HeadedLootTable {
             } else {
                 itemStack = new ItemStack(Items.AIR);
             }
-            if (((CatEntity) entity).isTamed() && entity.hasCustomName()) {
-                itemStack.setCustomName(Text.translatable("block.headed.cat_head.named", entity.getName()));
+            if (((CatEntity) entity).isTamed()) {
+                if (entity.hasCustomName()) itemStack.setCustomName(Text.translatable("block.headed.cat_head.named", entity.getName()));
+                itemStack.getOrCreateSubNbt("BlockEntityTag").putBoolean("Tamed", true);
             }
             return itemStack;
         }
@@ -183,10 +186,7 @@ public class HeadedLootTable {
             return new ItemStack(HeadedItems.BLAZE_HEAD);
         }
         if (entity instanceof RabbitEntity) {
-            if (entity.hasCustomName() && "Toast".equals(entity.getName().getString())) {
-                return new ItemStack(HeadedItems.TOAST_RABBIT_HEAD);
-            }
-            return switch (((RabbitEntity) entity).getVariant()) {
+            ItemStack itemStack = switch (((RabbitEntity) entity).getVariant()) {
 
                 case BROWN -> new ItemStack(HeadedItems.BROWN_RABBIT_HEAD);
                 case WHITE -> new ItemStack(HeadedItems.WHITE_RABBIT_HEAD);
@@ -196,6 +196,8 @@ public class HeadedLootTable {
                 case SALT -> new ItemStack(HeadedItems.SALT_RABBIT_HEAD);
                 case EVIL -> new ItemStack(HeadedItems.EVIL_RABBIT_HEAD);
             };
+            if (entity.getName().getString().equals("Toast")) itemStack.setCustomName(Text.literal(entity.getName().getString()));
+            return itemStack;
         }
         if (entity instanceof TurtleEntity) {
             return new ItemStack(HeadedItems.TURTLE_HEAD);
@@ -207,6 +209,7 @@ public class HeadedLootTable {
             if (((WolfEntity) entity).isTamed()) {
                 ItemStack itemStack = new ItemStack(HeadedItems.WOLF_HEAD);
                 if (entity.hasCustomName()) itemStack.setCustomName(Text.translatable("block.headed.wolf_head.named", entity.getName()));
+                itemStack.getOrCreateSubNbt("BlockEntityTag").putBoolean("Tamed", true);
                 return itemStack;
             }
             return new ItemStack(HeadedItems.WOLF_HEAD);

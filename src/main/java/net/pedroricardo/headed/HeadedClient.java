@@ -186,7 +186,6 @@ public class HeadedClient implements ClientModInitializer {
         ItemRendererRegistry.register(HeadedItems.EVIL_RABBIT_HEAD);
         ItemRendererRegistry.register(HeadedItems.GOLD_RABBIT_HEAD);
         ItemRendererRegistry.register(HeadedItems.SALT_RABBIT_HEAD);
-        ItemRendererRegistry.register(HeadedItems.TOAST_RABBIT_HEAD);
         ItemRendererRegistry.register(HeadedItems.WHITE_RABBIT_HEAD);
         ItemRendererRegistry.register(HeadedItems.WHITE_SPLOTCHED_RABBIT_HEAD);
         ItemRendererRegistry.register(HeadedItems.TURTLE_HEAD);

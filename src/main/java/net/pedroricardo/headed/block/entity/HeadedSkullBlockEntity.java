@@ -4,17 +4,17 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 public class HeadedSkullBlockEntity extends BlockEntity {
-    public static final String HAS_LEFT_HORN = "HasLeftHorn";
-    public static final String HAS_RIGHT_HORN = "HasRightHorn";
-    public static final String IS_TAMED = "Tamed";
+    public static final String IS_TAMED_KEY = "Tamed";
 
-    private boolean hasLeftHorn;
-    private boolean hasRightHorn;
     private boolean isTamed;
+    @Nullable
+    private Text customName;
     private int poweredTicks;
     private boolean powered;
 
@@ -25,17 +25,19 @@ public class HeadedSkullBlockEntity extends BlockEntity {
     protected void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
 
-        nbt.putBoolean("HasLeftHorn", this.hasLeftHorn);
-        nbt.putBoolean("HasRightHorn", this.hasRightHorn);
         nbt.putBoolean("Tamed", this.isTamed);
+        if (this.customName != null) {
+            nbt.putString("CustomName", Text.Serializer.toJson(this.customName));
+        }
     }
 
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
 
-        this.hasLeftHorn = nbt.getBoolean("HasLeftHorn");
-        this.hasRightHorn = nbt.getBoolean("HasRightHorn");
         this.isTamed = nbt.getBoolean("Tamed");
+        if (nbt.contains("CustomName", 8)) {
+            this.customName = Text.Serializer.fromJson(nbt.getString("CustomName"));
+        }
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, HeadedSkullBlockEntity blockEntity) {
@@ -52,16 +54,17 @@ public class HeadedSkullBlockEntity extends BlockEntity {
         return this.powered ? (float)this.poweredTicks + tickDelta : (float)this.poweredTicks;
     }
 
-    public boolean getLeftHorn() {
-        return this.hasLeftHorn;
-    }
-
-    public boolean getRightHorn() {
-        return this.hasRightHorn;
-    }
-
     public boolean isTamed() {
         return this.isTamed;
+    }
+
+    public void setCustomName(@Nullable Text customName) {
+        this.customName = customName;
+    }
+
+    @Nullable
+    public Text getCustomName() {
+        return this.customName;
     }
 
     public BlockEntityUpdateS2CPacket toUpdatePacket() {
