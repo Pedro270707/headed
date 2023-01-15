@@ -2,18 +2,14 @@ package net.pedroricardo.headed.client.render.block.entity.feature;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.OverlayTexture;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.RotationAxis;
+import net.minecraft.util.math.Vec3f;
 import net.pedroricardo.headed.block.HeadedSkullBlock;
 import net.pedroricardo.headed.block.entity.HeadedSkullBlockEntity;
-import net.pedroricardo.headed.client.render.block.entity.HeadedSkullBlockEntityModel;
-import net.pedroricardo.headed.client.render.block.entity.HeadedSkullBlockEntityRenderer;
 import net.pedroricardo.headed.client.render.block.entity.HeadedSkullRenderManager;
 import org.jetbrains.annotations.Nullable;
 
@@ -24,7 +20,7 @@ public class HeadedMooshroomHeadMushroomFeatureRenderer implements HeadedSkullFe
         if (direction == null) {
             matrices.translate(0.5F, 0.0F, 0.5F);
             matrices.translate(Math.sqrt(0.5)*-Math.cos((yaw+45) * 0.0174532F), 0.0F, Math.sqrt(0.5)*-Math.sin((yaw+45) * 0.0174532F));
-            matrices.multiply(RotationAxis.NEGATIVE_Y.rotationDegrees(yaw));
+            matrices.multiply(Vec3f.NEGATIVE_Y.getDegreesQuaternion(yaw));
         } else {
             float dislocationX = HeadedSkullRenderManager.getHeadDirectionDislocation(skullType)[0];
             float dislocationY = HeadedSkullRenderManager.getHeadDirectionDislocation(skullType)[1];

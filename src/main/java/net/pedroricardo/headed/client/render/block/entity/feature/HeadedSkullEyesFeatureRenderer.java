@@ -1,18 +1,14 @@
 package net.pedroricardo.headed.client.render.block.entity.feature;
 
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import net.pedroricardo.headed.block.HeadedSkullBlock;
 import net.pedroricardo.headed.block.entity.HeadedSkullBlockEntity;
 import net.pedroricardo.headed.client.render.block.entity.HeadedSkullBlockEntityModel;
 import net.pedroricardo.headed.client.render.block.entity.HeadedSkullRenderManager;
-import net.pedroricardo.headed.client.render.entity.model.EndermanHeadEntityModel;
-import net.pedroricardo.headed.client.render.entity.model.HeadedEntityModelLayers;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class HeadedSkullEyesFeatureRenderer implements HeadedSkullFeatureRenderer {

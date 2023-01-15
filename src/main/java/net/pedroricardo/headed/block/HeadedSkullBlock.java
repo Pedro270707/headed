@@ -9,7 +9,7 @@ import net.minecraft.state.property.Property;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RotationPropertyHelper;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
@@ -17,7 +17,7 @@ import net.minecraft.world.BlockView;
 import java.util.*;
 
 public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
-    public static final int MAX_ROTATION_INDEX = RotationPropertyHelper.getMax();
+    public static final int MAX_ROTATION_INDEX = 15;
     private static final int MAX_ROTATIONS;
     public static final IntProperty ROTATION;
     protected static final VoxelShape SHAPE;
@@ -111,7 +111,7 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
     }
 
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return this.getDefaultState().with(ROTATION, RotationPropertyHelper.fromYaw(ctx.getPlayerYaw() + 180.0F));
+        return this.getDefaultState().with(ROTATION, MathHelper.floor((double)(ctx.getPlayerYaw() * 16.0F / 360.0F) + 0.5) & 15);
     }
 
     public BlockState rotate(BlockState state, BlockRotation rotation) {

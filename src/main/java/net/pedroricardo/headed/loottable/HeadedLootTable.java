@@ -5,7 +5,6 @@ import net.minecraft.entity.mob.*;
 import net.minecraft.entity.passive.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.registry.Registries;
 import net.minecraft.text.Text;
 import net.pedroricardo.headed.item.HeadedItems;
 
@@ -82,7 +81,7 @@ public class HeadedLootTable {
         }
         if (entity instanceof CowEntity) {
             if (entity instanceof MooshroomEntity) {
-                return ((MooshroomEntity) entity).getVariant() == MooshroomEntity.Type.RED ? new ItemStack(HeadedItems.RED_MOOSHROOM_HEAD) : new ItemStack(HeadedItems.BROWN_MOOSHROOM_HEAD);
+                return ((MooshroomEntity) entity).getMooshroomType() == MooshroomEntity.Type.RED ? new ItemStack(HeadedItems.RED_MOOSHROOM_HEAD) : new ItemStack(HeadedItems.BROWN_MOOSHROOM_HEAD);
             }
             return new ItemStack(HeadedItems.COW_HEAD);
         }
@@ -94,27 +93,27 @@ public class HeadedLootTable {
         }
         if (entity instanceof CatEntity) {
             ItemStack itemStack;
-            if (((CatEntity) entity).getVariant() == Registries.CAT_VARIANT.get(ALL_BLACK)) {
+            if (((CatEntity) entity).getVariant() == ALL_BLACK) {
                 itemStack = new ItemStack(HeadedItems.ALL_BLACK_CAT_HEAD);
-            } else if (((CatEntity) entity).getVariant() == Registries.CAT_VARIANT.get(BLACK)) {
+            } else if (((CatEntity) entity).getVariant() == BLACK) {
                 itemStack = new ItemStack(HeadedItems.BLACK_CAT_HEAD);
-            } else if (((CatEntity) entity).getVariant() == Registries.CAT_VARIANT.get(BRITISH_SHORTHAIR)) {
+            } else if (((CatEntity) entity).getVariant() == BRITISH_SHORTHAIR) {
                 itemStack = new ItemStack(HeadedItems.BRITISH_SHORTHAIR_CAT_HEAD);
-            } else if (((CatEntity) entity).getVariant() == Registries.CAT_VARIANT.get(CALICO)) {
+            } else if (((CatEntity) entity).getVariant() == CALICO) {
                 itemStack = new ItemStack(HeadedItems.CALICO_CAT_HEAD);
-            } else if (((CatEntity) entity).getVariant() == Registries.CAT_VARIANT.get(JELLIE)) {
+            } else if (((CatEntity) entity).getVariant() == JELLIE) {
                 itemStack = new ItemStack(HeadedItems.JELLIE_CAT_HEAD);
-            } else if (((CatEntity) entity).getVariant() == Registries.CAT_VARIANT.get(PERSIAN)) {
+            } else if (((CatEntity) entity).getVariant() == PERSIAN) {
                 itemStack = new ItemStack(HeadedItems.PERSIAN_CAT_HEAD);
-            } else if (((CatEntity) entity).getVariant() == Registries.CAT_VARIANT.get(RAGDOLL)) {
+            } else if (((CatEntity) entity).getVariant() == RAGDOLL) {
                 itemStack = new ItemStack(HeadedItems.RAGDOLL_CAT_HEAD);
-            } else if (((CatEntity) entity).getVariant() == Registries.CAT_VARIANT.get(RED)) {
+            } else if (((CatEntity) entity).getVariant() == RED) {
                 itemStack = new ItemStack(HeadedItems.RED_CAT_HEAD);
-            } else if (((CatEntity) entity).getVariant() == Registries.CAT_VARIANT.get(SIAMESE)) {
+            } else if (((CatEntity) entity).getVariant() == SIAMESE) {
                 itemStack = new ItemStack(HeadedItems.SIAMESE_CAT_HEAD);
-            } else if (((CatEntity) entity).getVariant() == Registries.CAT_VARIANT.get(TABBY)) {
+            } else if (((CatEntity) entity).getVariant() == TABBY) {
                 itemStack = new ItemStack(HeadedItems.TABBY_CAT_HEAD);
-            } else if (((CatEntity) entity).getVariant() == Registries.CAT_VARIANT.get(WHITE)) {
+            } else if (((CatEntity) entity).getVariant() == WHITE) {
                 itemStack = new ItemStack(HeadedItems.WHITE_CAT_HEAD);
             } else {
                 itemStack = new ItemStack(Items.AIR);
@@ -129,7 +128,7 @@ public class HeadedLootTable {
             return new ItemStack(HeadedItems.ENDERMAN_HEAD);
         }
         if (entity instanceof FoxEntity) {
-            return ((FoxEntity) entity).getVariant() == FoxEntity.Type.RED ? new ItemStack(HeadedItems.FOX_HEAD) : new ItemStack(HeadedItems.SNOW_FOX_HEAD);
+            return ((FoxEntity) entity).getFoxType() == FoxEntity.Type.RED ? new ItemStack(HeadedItems.FOX_HEAD) : new ItemStack(HeadedItems.SNOW_FOX_HEAD);
         }
         if (entity instanceof IronGolemEntity) {
             return new ItemStack(HeadedItems.IRON_GOLEM_HEAD);
@@ -160,11 +159,12 @@ public class HeadedLootTable {
         }
         if (entity instanceof ParrotEntity) {
             return switch (((ParrotEntity) entity).getVariant()) {
-                case RED_BLUE -> new ItemStack(HeadedItems.RED_PARROT_HEAD);
-                case BLUE -> new ItemStack(HeadedItems.BLUE_PARROT_HEAD);
-                case GREEN -> new ItemStack(HeadedItems.GREEN_PARROT_HEAD);
-                case YELLOW_BLUE -> new ItemStack(HeadedItems.CYAN_PARROT_HEAD);
-                case GRAY -> new ItemStack(HeadedItems.GRAY_PARROT_HEAD);
+                case 0 -> new ItemStack(HeadedItems.RED_PARROT_HEAD);
+                case 1 -> new ItemStack(HeadedItems.BLUE_PARROT_HEAD);
+                case 2 -> new ItemStack(HeadedItems.GREEN_PARROT_HEAD);
+                case 3 -> new ItemStack(HeadedItems.CYAN_PARROT_HEAD);
+                case 4 -> new ItemStack(HeadedItems.GRAY_PARROT_HEAD);
+                default -> new ItemStack(HeadedItems.RED_PARROT_HEAD);
             };
         }
         if (entity instanceof StrayEntity) {
@@ -186,15 +186,17 @@ public class HeadedLootTable {
             return new ItemStack(HeadedItems.BLAZE_HEAD);
         }
         if (entity instanceof RabbitEntity) {
-            ItemStack itemStack = switch (((RabbitEntity) entity).getVariant()) {
+            ItemStack itemStack = switch (((RabbitEntity) entity).getRabbitType()) {
 
-                case BROWN -> new ItemStack(HeadedItems.BROWN_RABBIT_HEAD);
-                case WHITE -> new ItemStack(HeadedItems.WHITE_RABBIT_HEAD);
-                case BLACK -> new ItemStack(HeadedItems.BLACK_RABBIT_HEAD);
-                case WHITE_SPLOTCHED -> new ItemStack(HeadedItems.WHITE_SPLOTCHED_RABBIT_HEAD);
-                case GOLD -> new ItemStack(HeadedItems.GOLD_RABBIT_HEAD);
-                case SALT -> new ItemStack(HeadedItems.SALT_RABBIT_HEAD);
-                case EVIL -> new ItemStack(HeadedItems.EVIL_RABBIT_HEAD);
+                case 0 -> new ItemStack(HeadedItems.BROWN_RABBIT_HEAD);
+                case 1 -> new ItemStack(HeadedItems.WHITE_RABBIT_HEAD);
+                case 2 -> new ItemStack(HeadedItems.BLACK_RABBIT_HEAD);
+                case 3 -> new ItemStack(HeadedItems.WHITE_SPLOTCHED_RABBIT_HEAD);
+                case 4 -> new ItemStack(HeadedItems.GOLD_RABBIT_HEAD);
+                case 5 -> new ItemStack(HeadedItems.SALT_RABBIT_HEAD);
+                case 6 -> new ItemStack(HeadedItems.EVIL_RABBIT_HEAD);
+                default ->
+                        new ItemStack(HeadedItems.BROWN_RABBIT_HEAD);
             };
             if (entity.getName().getString().equals("Toast")) itemStack.setCustomName(Text.literal(entity.getName().getString()));
             return itemStack;

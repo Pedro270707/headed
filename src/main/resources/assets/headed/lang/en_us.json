@@ -177,5 +177,6 @@
   "block.headed.phantom_head": "Phantom Head",
   "block.headed.phantom_wall_head": "Phantom Wall Head",
   "block.headed.snow_golem_head": "Snow Golem Head",
-  "block.headed.snow_golem_wall_head": "Snow Golem Wall Head"
+  "block.headed.snow_golem_wall_head": "Snow Golem Wall Head",
+  "itemGroup.headed.headed_group": "Headed"
 }

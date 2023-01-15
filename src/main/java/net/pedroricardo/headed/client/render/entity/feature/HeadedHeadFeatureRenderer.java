@@ -17,7 +17,7 @@ import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.RotationAxis;
+import net.minecraft.util.math.Vec3f;
 import net.pedroricardo.headed.block.AbstractHeadedSkullBlock;
 import net.pedroricardo.headed.block.HeadedSkullBlock;
 import net.pedroricardo.headed.client.render.block.entity.HeadedSkullBlockEntityModel;
@@ -82,7 +82,7 @@ public class HeadedHeadFeatureRenderer<T extends LivingEntity, M extends EntityM
     public static void translate(MatrixStack matrices, boolean villager) {
         float f = 0.625F;
         matrices.translate(0.0F, -0.25F, 0.0F);
-        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180.0F));
+        matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(180.0F));
         matrices.scale(0.625F, -0.625F, -0.625F);
         if (villager) {
             matrices.translate(0.0F, 0.1875F, 0.0F);

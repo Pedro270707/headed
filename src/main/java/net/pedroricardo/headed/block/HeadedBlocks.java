@@ -1,9 +1,8 @@
 package net.pedroricardo.headed.block;
 
 import net.minecraft.block.*;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 import net.pedroricardo.headed.Headed;
 
 public class HeadedBlocks {
@@ -366,7 +365,7 @@ public class HeadedBlocks {
     }
 
     private static Block register(String name, Block block) {
-        return Registry.register(Registries.BLOCK, new Identifier(Headed.MOD_ID, name), block);
+        return Registry.register(Registry.BLOCK, new Identifier(Headed.MOD_ID, name), block);
     }
 
     public static void registerModBlocks() {

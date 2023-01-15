@@ -2,16 +2,15 @@ package net.pedroricardo.headed.block.entity;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 import net.pedroricardo.headed.Headed;
 import net.pedroricardo.headed.block.HeadedBlocks;
 
 public class HeadedBlockEntities {
     public static BlockEntityType<HeadedSkullBlockEntity> SKULL;
     public static void registerBlockEntities() {
-        SKULL = Registry.register(Registries.BLOCK_ENTITY_TYPE,
+        SKULL = Registry.register(Registry.BLOCK_ENTITY_TYPE,
                 new Identifier(Headed.MOD_ID, "skull"),
                 FabricBlockEntityTypeBuilder.create(HeadedSkullBlockEntity::new, HeadedBlocks.VILLAGER_HEAD, HeadedBlocks.VILLAGER_WALL_HEAD,
                         HeadedBlocks.EVOKER_HEAD, HeadedBlocks.EVOKER_WALL_HEAD,
