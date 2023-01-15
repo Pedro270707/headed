@@ -17,13 +17,11 @@ import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.RotationAxis;
 import net.pedroricardo.headed.block.AbstractHeadedSkullBlock;
 import net.pedroricardo.headed.block.HeadedSkullBlock;
-import net.pedroricardo.headed.block.entity.HeadedSkullBlockEntity;
 import net.pedroricardo.headed.client.render.block.entity.HeadedSkullBlockEntityModel;
-import net.pedroricardo.headed.client.render.block.entity.HeadedSkullBlockEntityRenderer;
+import net.pedroricardo.headed.client.render.block.entity.HeadedSkullRenderManager;
 
 import java.util.Map;
 
@@ -43,7 +41,7 @@ public class HeadedHeadFeatureRenderer<T extends LivingEntity, M extends EntityM
         this.scaleX = scaleX;
         this.scaleY = scaleY;
         this.scaleZ = scaleZ;
-        this.headModels = HeadedSkullBlockEntityRenderer.getModels(loader);
+        this.headModels = HeadedSkullRenderManager.getModels(loader);
     }
 
     public void render(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, T livingEntity, float f, float g, float h, float j, float k, float l) {
@@ -73,16 +71,8 @@ public class HeadedHeadFeatureRenderer<T extends LivingEntity, M extends EntityM
                 matrixStack.translate(-0.5, 0.0, -0.5);
                 HeadedSkullBlock.SkullType skullType = ((AbstractHeadedSkullBlock)((BlockItem)item).getBlock()).getSkullType();
                 HeadedSkullBlockEntityModel skullBlockEntityModel = this.headModels.get(skullType);
-                RenderLayer renderLayer = HeadedSkullBlockEntityRenderer.getRenderLayer(skullType);
-                if (itemStack.hasNbt()) {
-                    if (itemStack.getOrCreateSubNbt("BlockEntityTag").getBoolean(HeadedSkullBlockEntity.IS_TAMED_KEY) && skullType == HeadedSkullBlock.Type.WOLF) {
-                        renderLayer = RenderLayer.getEntityCutoutNoCullZOffset(new Identifier("textures/entity/wolf/wolf_tame.png"));
-                    } else if (itemStack.getName().getString().equals("Toast") && HeadedSkullBlock.RABBIT_TYPES.contains(skullType)) {
-                        renderLayer = RenderLayer.getEntityCutoutNoCullZOffset(new Identifier("textures/entity/rabbit/toast.png"));
-                    }
-                }
-                HeadedSkullBlockEntityRenderer.renderSkull(skullType, null, 180.0F, f, matrixStack, vertexConsumerProvider, i, skullBlockEntityModel, renderLayer, 1.0F, 1.0F, 1.0F);
-                HeadedSkullBlockEntityRenderer.testForSkullFeature(skullType, null, 180.0F, f, matrixStack, vertexConsumerProvider, i, itemStack.getName());
+                RenderLayer renderLayer = HeadedSkullRenderManager.getInstance().getRenderLayer(null, itemStack, skullType);
+                HeadedSkullRenderManager.renderSkullWithFeature(skullType, null, 180.0F, f, matrixStack, vertexConsumerProvider, i, skullBlockEntityModel, renderLayer, 1.0F, 1.0F, 1.0F, null, itemStack);
             }
 
             matrixStack.pop();
@@ -97,6 +87,5 @@ public class HeadedHeadFeatureRenderer<T extends LivingEntity, M extends EntityM
         if (villager) {
             matrices.translate(0.0F, 0.1875F, 0.0F);
         }
-
     }
 }
