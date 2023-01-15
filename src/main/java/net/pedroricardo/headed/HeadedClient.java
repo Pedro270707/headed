@@ -29,6 +29,7 @@ public class HeadedClient implements ClientModInitializer {
     private static final EntityModelLayer SHEEP_WOOL = new EntityModelLayer(new Identifier(Headed.MOD_ID, "sheep_head"), "wool");
     private static final EntityModelLayer ALLAY_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "allay_head"), "main");
     private static final EntityModelLayer VEX_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "vex_head"), "main");
+    private static final EntityModelLayer PIGLIN_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "piglin_head"), "main");
     private static final EntityModelLayer PIGLIN_BRUTE_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "piglin_brute_head"), "main");
     private static final EntityModelLayer ZOMBIFIED_PIGLIN_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "zombified_piglin_head"), "main");
     private static final EntityModelLayer AXOLOTL_HEAD = new EntityModelLayer(new Identifier(Headed.MOD_ID, "axolotl_head"), "main");
@@ -75,7 +76,8 @@ public class HeadedClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(SHEEP_HEAD, SheepHeadEntityModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(SHEEP_WOOL, SheepHeadWoolEntityModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(ALLAY_HEAD, AllayHeadEntityModel::getTexturedModelData);
-        EntityModelLayerRegistry.registerModelLayer(VEX_HEAD, AllayHeadEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(VEX_HEAD, () -> GenericSkullEntityModel.getTexturedModelData(new Dilation(0.0F), 64, 64));
+        EntityModelLayerRegistry.registerModelLayer(PIGLIN_HEAD, HeadedPiglinHeadEntityModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(PIGLIN_BRUTE_HEAD, HeadedPiglinHeadEntityModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(ZOMBIFIED_PIGLIN_HEAD, HeadedPiglinHeadEntityModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(AXOLOTL_HEAD, AxolotlHeadEntityModel::getTexturedModelData);
@@ -134,6 +136,7 @@ public class HeadedClient implements ClientModInitializer {
         ItemRendererRegistry.register(HeadedItems.BLACK_SHEEP_HEAD);
         ItemRendererRegistry.register(HeadedItems.ALLAY_HEAD);
         ItemRendererRegistry.register(HeadedItems.VEX_HEAD);
+        ItemRendererRegistry.register(HeadedItems.PIGLIN_HEAD);
         ItemRendererRegistry.register(HeadedItems.PIGLIN_BRUTE_HEAD);
         ItemRendererRegistry.register(HeadedItems.ZOMBIFIED_PIGLIN_HEAD);
         ItemRendererRegistry.register(HeadedItems.LEUCISTIC_AXOLOTL_HEAD);

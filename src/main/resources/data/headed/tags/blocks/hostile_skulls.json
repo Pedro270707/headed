@@ -4,6 +4,7 @@
     "minecraft:wither_skeleton_skull",
     "minecraft:zombie_head",
     "minecraft:creeper_head",
+    "minecraft:dragon_head",
     "#headed:headed_hostile_skulls"
   ]
 }

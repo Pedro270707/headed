@@ -24,6 +24,7 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
     protected static final VoxelShape VILLAGER_SHAPE;
     protected static final VoxelShape SHEEP_SHAPE;
     protected static final VoxelShape ALLAY_SHAPE;
+    protected static final VoxelShape VEX_SHAPE;
     protected static final VoxelShape PIGLIN_SHAPE;
     protected static final VoxelShape AXOLOTL_SHAPE;
     protected static final VoxelShape POLAR_BEAR_SHAPE;
@@ -49,8 +50,7 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
 
     public static final Set<Type> VILLAGER_TYPES = EnumSet.of(Type.VILLAGER, Type.EVOKER, Type.VINDICATOR, Type.PILLAGER, Type.ZOMBIE_VILLAGER, Type.WANDERING_TRADER, Type.ILLUSIONER, Type.WITCH);
     public static final Set<Type> SHEEP_TYPES = EnumSet.of(Type.SHEEP, Type.WHITE_SHEEP, Type.ORANGE_SHEEP, Type.MAGENTA_SHEEP, Type.LIGHT_BLUE_SHEEP, Type.YELLOW_SHEEP, Type.LIME_SHEEP, Type.PINK_SHEEP, Type.GRAY_SHEEP, Type.LIGHT_GRAY_SHEEP, Type.CYAN_SHEEP, Type.PURPLE_SHEEP, Type.BLUE_SHEEP, Type.BROWN_SHEEP, Type.GREEN_SHEEP, Type.RED_SHEEP, Type.BLACK_SHEEP);
-    public static final Set<Type> ALLAY_TYPES = EnumSet.of(Type.ALLAY, Type.VEX);
-    public static final Set<Type> PIGLIN_TYPES = EnumSet.of(Type.PIGLIN_BRUTE, Type.ZOMBIFIED_PIGLIN);
+    public static final Set<Type> PIGLIN_TYPES = EnumSet.of(Type.PIGLIN, Type.PIGLIN_BRUTE, Type.ZOMBIFIED_PIGLIN);
     public static final Set<Type> AXOLOTL_TYPES = EnumSet.of(Type.LEUCISTIC_AXOLOTL, Type.BROWN_AXOLOTL, Type.CYAN_AXOLOTL, Type.GOLD_AXOLOTL, Type.BLUE_AXOLOTL);
     public static final Set<Type> OCELOT_TYPES = EnumSet.of(Type.OCELOT, Type.ALL_BLACK_CAT, Type.BLACK_CAT, Type.BRITISH_SHORTHAIR_CAT, Type.CALICO_CAT, Type.JELLIE_CAT, Type.PERSIAN_CAT, Type.RAGDOLL_CAT, Type.RED_CAT, Type.SIAMESE_CAT, Type.TABBY_CAT, Type.WHITE_CAT);
     public static final Set<Type> PANDA_TYPES = EnumSet.of(Type.AGGRESSIVE_PANDA, Type.BROWN_PANDA, Type.LAZY_PANDA, Type.PANDA, Type.PLAYFUL_PANDA, Type.WEAK_PANDA, Type.WORRIED_PANDA);
@@ -64,8 +64,10 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
             return VILLAGER_SHAPE;
         } else if (SHEEP_TYPES.contains(this.getSkullType())) {
             return SHEEP_SHAPE;
-        } else if (ALLAY_TYPES.contains(this.getSkullType())) {
+        } else if (this.getSkullType() == Type.ALLAY) {
             return ALLAY_SHAPE;
+        } else if (this.getSkullType() == Type.VEX) {
+            return VEX_SHAPE;
         } else if (PIGLIN_TYPES.contains(this.getSkullType())) {
             return PIGLIN_SHAPE;
         } else if (AXOLOTL_TYPES.contains(this.getSkullType())) {
@@ -133,6 +135,7 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
         VILLAGER_SHAPE = Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 10.0, 12.0);
         SHEEP_SHAPE = Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 6.0, 12.0);
         ALLAY_SHAPE = Block.createCuboidShape(5.5, 0.0, 5.5, 10.5, 5.0, 10.5);
+        VEX_SHAPE = Block.createCuboidShape(6.4, 0.0, 6.4, 9.6, 3.2, 9.6);
         PIGLIN_SHAPE = Block.createCuboidShape(3.0, 0.0, 3.0, 13.0, 8.0, 13.0);
         AXOLOTL_SHAPE = Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 5.0, 12.0);
         POLAR_BEAR_SHAPE = Block.createCuboidShape(4.5, 0.0, 4.5, 11.5, 7.0, 11.5);
@@ -182,6 +185,7 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
         BLACK_SHEEP,
         ALLAY,
         VEX,
+        PIGLIN,
         PIGLIN_BRUTE,
         ZOMBIFIED_PIGLIN,
         LEUCISTIC_AXOLOTL,

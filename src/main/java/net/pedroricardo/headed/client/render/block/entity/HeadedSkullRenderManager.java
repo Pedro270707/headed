@@ -69,7 +69,8 @@ public class HeadedSkullRenderManager {
         builder.put(HeadedSkullBlock.Type.RED_SHEEP, new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
         builder.put(HeadedSkullBlock.Type.BLACK_SHEEP, new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
         builder.put(HeadedSkullBlock.Type.ALLAY, new AllayHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.ALLAY_HEAD)));
-        builder.put(HeadedSkullBlock.Type.VEX, new AllayHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.VEX_HEAD)));
+        builder.put(HeadedSkullBlock.Type.VEX, new GenericSkullEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.VEX_HEAD)));
+        builder.put(HeadedSkullBlock.Type.PIGLIN, new HeadedPiglinHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PIGLIN_HEAD)));
         builder.put(HeadedSkullBlock.Type.PIGLIN_BRUTE, new HeadedPiglinHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PIGLIN_BRUTE_HEAD)));
         builder.put(HeadedSkullBlock.Type.ZOMBIFIED_PIGLIN, new HeadedPiglinHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.ZOMBIFIED_PIGLIN_HEAD)));
         builder.put(HeadedSkullBlock.Type.LEUCISTIC_AXOLOTL, new AxolotlHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.AXOLOTL_HEAD)));
@@ -162,6 +163,7 @@ public class HeadedSkullRenderManager {
         map.put(HeadedSkullBlock.Type.BLACK_SHEEP, new Identifier("textures/entity/sheep/sheep.png"));
         map.put(HeadedSkullBlock.Type.ALLAY, new Identifier("textures/entity/allay/allay.png"));
         map.put(HeadedSkullBlock.Type.VEX, new Identifier("textures/entity/illager/vex.png"));
+        map.put(HeadedSkullBlock.Type.PIGLIN, new Identifier("textures/entity/piglin/piglin.png"));
         map.put(HeadedSkullBlock.Type.PIGLIN_BRUTE, new Identifier("textures/entity/piglin/piglin_brute.png"));
         map.put(HeadedSkullBlock.Type.ZOMBIFIED_PIGLIN, new Identifier("textures/entity/piglin/zombified_piglin.png"));
         map.put(HeadedSkullBlock.Type.LEUCISTIC_AXOLOTL, new Identifier("textures/entity/axolotl/axolotl_lucy.png"));
@@ -261,7 +263,8 @@ public class HeadedSkullRenderManager {
         map.put(HeadedSkullBlock.Type.RED_SHEEP, new float[]{0.25F, 0.3125F, 0.25F});
         map.put(HeadedSkullBlock.Type.BLACK_SHEEP, new float[]{0.25F, 0.3125F, 0.25F});
         map.put(HeadedSkullBlock.Type.ALLAY, new float[]{0.34375F, 0.34375F, 0.34375F});
-        map.put(HeadedSkullBlock.Type.VEX, new float[]{0.34375F, 0.34375F, 0.34375F});
+        map.put(HeadedSkullBlock.Type.VEX, new float[]{0.4F, 0.4F, 0.4F});
+        map.put(HeadedSkullBlock.Type.PIGLIN, new float[]{0.25F, 0.25F, 0.25F});
         map.put(HeadedSkullBlock.Type.PIGLIN_BRUTE, new float[]{0.25F, 0.25F, 0.25F});
         map.put(HeadedSkullBlock.Type.ZOMBIFIED_PIGLIN, new float[]{0.25F, 0.25F, 0.25F});
         map.put(HeadedSkullBlock.Type.LEUCISTIC_AXOLOTL, new float[]{0.34375F, 0.34375F, 0.34375F});
@@ -381,6 +384,8 @@ public class HeadedSkullRenderManager {
         matrices.scale(-1.0F, -1.0F, 1.0F);
         if (skullType == HeadedSkullBlock.Type.CAVE_SPIDER) {
             matrices.scale(0.7F, 0.7F, 0.7F);
+        } else if (skullType == HeadedSkullBlock.Type.VEX) {
+            matrices.scale(0.4F, 0.4F, 0.4F);
         }
         VertexConsumer vertexConsumer = vertexConsumers.getBuffer(renderLayer);
         model.setHeadRotation(animationProgress, yaw, 0.0F);

@@ -39,7 +39,7 @@ public abstract class AbstractHeadedSkullBlock extends BlockWithEntity implement
     @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
         if (world.isClient) {
-            boolean bl = state.isOf(HeadedBlocks.PIGLIN_BRUTE_HEAD) || state.isOf(HeadedBlocks.PIGLIN_BRUTE_WALL_HEAD) || state.isOf(HeadedBlocks.ZOMBIFIED_PIGLIN_HEAD) || state.isOf(HeadedBlocks.ZOMBIFIED_PIGLIN_WALL_HEAD) || state.isOf(HeadedBlocks.FOX_HEAD) || state.isOf(HeadedBlocks.SNOW_FOX_HEAD);
+            boolean bl = state.isOf(HeadedBlocks.PIGLIN_HEAD) || state.isOf(HeadedBlocks.PIGLIN_WALL_HEAD) || state.isOf(HeadedBlocks.PIGLIN_BRUTE_HEAD) || state.isOf(HeadedBlocks.PIGLIN_BRUTE_WALL_HEAD) || state.isOf(HeadedBlocks.ZOMBIFIED_PIGLIN_HEAD) || state.isOf(HeadedBlocks.ZOMBIFIED_PIGLIN_WALL_HEAD) || state.isOf(HeadedBlocks.FOX_HEAD) || state.isOf(HeadedBlocks.SNOW_FOX_HEAD);
             if (bl) {
                 return checkType(type, HeadedBlockEntities.SKULL, HeadedSkullBlockEntity::tick);
             }

@@ -22,6 +22,7 @@ public class HeadedWallSkullBlock extends AbstractHeadedSkullBlock {
     private static final Map<Direction, VoxelShape> FACING_TO_VILLAGER_SHAPE;
     private static final Map<Direction, VoxelShape> FACING_TO_SHEEP_SHAPE;
     private static final Map<Direction, VoxelShape> FACING_TO_ALLAY_SHAPE;
+    private static final Map<Direction, VoxelShape> FACING_TO_VEX_SHAPE;
     private static final Map<Direction, VoxelShape> FACING_TO_PIGLIN_SHAPE;
     private static final Map<Direction, VoxelShape> FACING_TO_AXOLOTL_SHAPE;
     private static final Map<Direction, VoxelShape> FACING_TO_COW_SHAPE;
@@ -55,8 +56,10 @@ public class HeadedWallSkullBlock extends AbstractHeadedSkullBlock {
             return FACING_TO_VILLAGER_SHAPE.get(state.get(FACING));
         } else if (HeadedSkullBlock.SHEEP_TYPES.contains(this.getSkullType())) {
             return FACING_TO_SHEEP_SHAPE.get(state.get(FACING));
-        } else if (HeadedSkullBlock.ALLAY_TYPES.contains(this.getSkullType())) {
+        } else if (this.getSkullType() == HeadedSkullBlock.Type.ALLAY) {
             return FACING_TO_ALLAY_SHAPE.get(state.get(FACING));
+        } else if (this.getSkullType() == HeadedSkullBlock.Type.VEX) {
+            return FACING_TO_VEX_SHAPE.get(state.get(FACING));
         } else if (HeadedSkullBlock.PIGLIN_TYPES.contains(this.getSkullType())) {
             return FACING_TO_PIGLIN_SHAPE.get(state.get(FACING));
         } else if (HeadedSkullBlock.AXOLOTL_TYPES.contains(this.getSkullType())) {
@@ -138,6 +141,7 @@ public class HeadedWallSkullBlock extends AbstractHeadedSkullBlock {
         FACING_TO_VILLAGER_SHAPE = Maps.immutableEnumMap(Map.of(Direction.NORTH, Block.createCuboidShape(4.0, 4.0, 8.0, 12.0, 14.0, 16.0), Direction.SOUTH, Block.createCuboidShape(4.0, 4.0, 0.0, 12.0, 14.0, 8.0), Direction.EAST, Block.createCuboidShape(0.0, 4.0, 4.0, 8.0, 14.0, 12.0), Direction.WEST, Block.createCuboidShape(8.0, 4.0, 4.0, 16.0, 14.0, 12.0)));
         FACING_TO_SHEEP_SHAPE = Maps.immutableEnumMap(Map.of(Direction.NORTH, Block.createCuboidShape(5.0, 5.0, 8.0, 11.0, 11.0, 16.0), Direction.SOUTH, Block.createCuboidShape(5.0, 5.0, 0.0, 11.0, 11.0, 8.0), Direction.EAST, Block.createCuboidShape(0.0, 5.0, 5.0, 8.0, 11.0, 11.0), Direction.WEST, Block.createCuboidShape(8.0, 5.0, 5.0, 16.0, 11.0, 11.0)));
         FACING_TO_ALLAY_SHAPE = Maps.immutableEnumMap(Map.of(Direction.NORTH, Block.createCuboidShape(5.5, 5.5, 11.0, 10.5, 10.5, 16.0), Direction.SOUTH, Block.createCuboidShape(5.5, 5.5, 0.0, 10.5, 10.5, 5.0), Direction.EAST, Block.createCuboidShape(0.0, 5.5, 5.5, 5.0, 10.5, 10.5), Direction.WEST, Block.createCuboidShape(11.0, 5.5, 5.5, 16.0, 10.5, 10.5)));
+        FACING_TO_VEX_SHAPE = Maps.immutableEnumMap(Map.of(Direction.NORTH, Block.createCuboidShape(6.4, 6.4, 12.8, 9.6, 9.6, 16.0), Direction.SOUTH, Block.createCuboidShape(6.4, 6.4, 0.0, 9.6, 9.6, 3.2), Direction.EAST, Block.createCuboidShape(0.0, 6.4, 6.4, 3.2, 9.6, 9.6), Direction.WEST, Block.createCuboidShape(12.8, 6.4, 6.4, 16.0, 9.6, 9.6)));
         FACING_TO_PIGLIN_SHAPE = Maps.immutableEnumMap(Map.of(Direction.NORTH, Block.createCuboidShape(3.0, 4.0, 8.0, 13.0, 12.0, 16.0), Direction.SOUTH, Block.createCuboidShape(3.0, 4.0, 0.0, 13.0, 12.0, 8.0), Direction.EAST, Block.createCuboidShape(0.0, 4.0, 3.0, 8.0, 12.0, 13.0), Direction.WEST, Block.createCuboidShape(8.0, 4.0, 3.0, 16.0, 12.0, 13.0)));
         FACING_TO_AXOLOTL_SHAPE = Maps.immutableEnumMap(Map.of(Direction.NORTH, Block.createCuboidShape(4.0, 5.5, 11.0, 12.0, 10.5, 16.0), Direction.SOUTH, Block.createCuboidShape(4.0, 5.5, 0.0, 12.0, 10.5, 5.0), Direction.EAST, Block.createCuboidShape(0.0, 5.5, 4.0, 5.0, 10.5, 12.0), Direction.WEST, Block.createCuboidShape(11.0, 5.5, 4.0, 16.0, 10.5, 12.0)));
         FACING_TO_COW_SHAPE = Maps.newEnumMap(ImmutableMap.of(Direction.NORTH, Block.createCuboidShape(4.0, 4.0, 10.0, 12.0, 12.0, 16.0), Direction.SOUTH, Block.createCuboidShape(4.0, 4.0, 0.0, 12.0, 12.0, 6.0), Direction.EAST, Block.createCuboidShape(0.0, 4.0, 4.0, 6.0, 12.0, 12.0), Direction.WEST, Block.createCuboidShape(10.0, 4.0, 4.0, 16.0, 12.0, 12.0)));

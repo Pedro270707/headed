@@ -64,6 +64,9 @@ public class HeadedLootTable {
         if (entity instanceof VexEntity) {
             return new ItemStack(HeadedItems.VEX_HEAD);
         }
+        if (entity instanceof PiglinEntity) {
+            return new ItemStack(HeadedItems.PIGLIN_HEAD);
+        }
         if (entity instanceof PiglinBruteEntity) {
             return new ItemStack(HeadedItems.PIGLIN_BRUTE_HEAD);
         }

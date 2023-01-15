@@ -24,6 +24,7 @@ public class HeadedEntityModelLayers {
     public static final EntityModelLayer SHEEP_WOOL = register("sheep_head", "wool");
     public static final EntityModelLayer ALLAY_HEAD = registerMain("allay_head");
     public static final EntityModelLayer VEX_HEAD = registerMain("vex_head");
+    public static final EntityModelLayer PIGLIN_HEAD = registerMain("piglin_head");
     public static final EntityModelLayer PIGLIN_BRUTE_HEAD = registerMain("piglin_brute_head");
     public static final EntityModelLayer ZOMBIFIED_PIGLIN_HEAD = registerMain("zombified_piglin_head");
     public static final EntityModelLayer AXOLOTL_HEAD = registerMain("axolotl_head");
