@@ -6,6 +6,19 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:copy_nbt",
+              "ops": [
+                {
+                  "op": "replace",
+                  "source": "CustomName",
+                  "target": "display.Name"
+                }
+              ],
+              "source": "block_entity"
+            }
+          ],
           "name": "headed:white_sheep_head"
         }
       ],

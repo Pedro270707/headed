@@ -1,0 +1,24 @@
+{
+  "values": [
+    "headed:evoker_wall_head",
+    "headed:vindicator_wall_head",
+    "headed:pillager_wall_head",
+    "headed:zombie_villager_wall_head",
+    "headed:illusioner_wall_head",
+    "headed:vex_wall_head",
+    "headed:piglin_brute_wall_head",
+    "headed:zombified_piglin_wall_head",
+    "headed:enderman_wall_head",
+    "headed:drowned_wall_head",
+    "headed:stray_wall_head",
+    "headed:shulker_wall_head",
+    "headed:husk_wall_head",
+    "headed:spider_wall_head",
+    "headed:cave_spider_wall_head",
+    "headed:blaze_wall_head",
+    "headed:the_killer_bunny_wall_head",
+    "headed:wither_wall_skull",
+    "headed:witch_wall_head",
+    "headed:phantom_wall_head"
+  ]
+}

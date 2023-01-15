@@ -1,0 +1,9 @@
+{
+  "values": [
+    "minecraft:skeleton_wall_skull",
+    "minecraft:wither_skeleton_wall_skull",
+    "minecraft:zombie_wall_head",
+    "minecraft:creeper_wall_head",
+    "#headed:headed_hostile_wall_skulls"
+  ]
+}
