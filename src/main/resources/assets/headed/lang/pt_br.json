@@ -1,5 +1,4 @@
 {
-  "item.headed.test_item": "Test Item",
   "block.headed.villager_head": "Cabeça de aldeão",
   "block.headed.villager_wall_head": "Cabeça de aldeão de parede",
   "block.headed.evoker_head": "Cabeça de invocador",
@@ -133,8 +132,8 @@
   "block.headed.cyan_parrot_wall_head": "Cabeça de papagaio ciano de parede",
   "block.headed.gray_parrot_head": "Cabeça de papagaio cinza",
   "block.headed.gray_parrot_wall_head": "Cabeça de papagaio cinza de parede",
-  "block.headed.stray_skull": "Cabeça de esqueleto-errante",
-  "block.headed.stray_wall_skull": "Cabeça de esqueleto-errante",
+  "block.headed.stray_skull": "Crânio de esqueleto-errante",
+  "block.headed.stray_wall_skull": "Crânio de esqueleto-errante",
   "block.headed.shulker_head": "Cabeça de shulker",
   "block.headed.shulker_wall_head": "Cabeça de shulker de parede",
   "block.headed.husk_head": "Cabeça de zumbi-múmia",
