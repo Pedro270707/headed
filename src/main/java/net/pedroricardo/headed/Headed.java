@@ -1,5 +1,6 @@
 package net.pedroricardo.headed;
 
+import com.kyanite.paragon.api.ConfigManager;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.item.ItemGroup;
@@ -21,5 +22,7 @@ public class Headed implements ModInitializer {
 		HeadedItems.registerModItems();
 		HeadedBlocks.registerModBlocks();
 		HeadedBlockEntities.registerBlockEntities();
+
+		ConfigManager.register(MOD_ID, new HeadedConfig());
 	}
 }
