@@ -34,7 +34,7 @@ public class HeadedLootTable {
         if (entity instanceof IllusionerEntity && HeadedConfig.ILLUSIONER_HEAD_DROP.get()) {
             return new ItemStack(HeadedItems.ILLUSIONER_HEAD);
         }
-        if (entity instanceof SheepEntity &&  (HeadedConfig.SHEEP_HEAD_DROP.get() || HeadedConfig.COLORED_SHEEP_HEAD_DROP.get())) {
+        if (entity instanceof SheepEntity && (HeadedConfig.SHEEP_HEAD_DROP.get() || HeadedConfig.COLORED_SHEEP_HEAD_DROP.get())) {
             if ((((SheepEntity) entity).isSheared() || HeadedConfig.ALL_SHEEP_DROP_SHEARED_HEAD.get()) && HeadedConfig.SHEEP_HEAD_DROP.get()) {
                 return new ItemStack(HeadedItems.SHEEP_HEAD);
             } else if (HeadedConfig.COLORED_SHEEP_HEAD_DROP.get()) {
