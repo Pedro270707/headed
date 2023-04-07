@@ -326,26 +326,6 @@ public class HeadedSkullRenderManager {
         map.put(HeadedSkullBlock.Type.SNOW_GOLEM, new float[]{0.28125F, 0.28125F, 0.28125F});
     });
 
-    public boolean isTamed(HeadedSkullBlockEntity blockEntity, ItemStack itemStack) {
-        if (blockEntity != null) {
-            return blockEntity.isTamed();
-        } else if (itemStack.hasNbt()) {
-            return itemStack.getOrCreateSubNbt("BlockEntityTag").getBoolean(HeadedSkullBlockEntity.IS_TAMED_KEY);
-        }
-        return false;
-    }
-
-    public boolean isToast(HeadedSkullBlockEntity blockEntity, ItemStack itemStack) {
-        if (blockEntity != null) {
-            if (blockEntity.getCustomName() != null) {
-                return blockEntity.getCustomName().getString().equals("Toast");
-            }
-        } else if (itemStack.hasNbt()) {
-            return itemStack.getName().getString().equals("Toast");
-        }
-        return false;
-    }
-
     private RenderLayer getRenderLayer(HeadedSkullBlock.SkullType type) {
         Identifier identifier = TEXTURES.get(type);
         if (type == HeadedSkullBlock.Type.ENDERMAN || type == HeadedSkullBlock.Type.SPIDER || type == HeadedSkullBlock.Type.CAVE_SPIDER || type == HeadedSkullBlock.Type.PHANTOM) {
@@ -355,9 +335,9 @@ public class HeadedSkullRenderManager {
     }
 
     public RenderLayer getRenderLayer(HeadedSkullBlockEntity blockEntity, ItemStack itemStack, HeadedSkullBlock.SkullType skullType) {
-        if (HeadedSkullRenderManager.getInstance().isTamed(blockEntity, itemStack) && skullType == HeadedSkullBlock.Type.WOLF) {
+        if (HeadedSkullBlock.isTamed(blockEntity, itemStack) && skullType == HeadedSkullBlock.Type.WOLF) {
             return RenderLayer.getEntityCutoutNoCullZOffset(new Identifier("textures/entity/wolf/wolf_tame.png"));
-        } else if (HeadedSkullRenderManager.getInstance().isToast(blockEntity, itemStack) && HeadedSkullBlock.RABBIT_TYPES.contains(skullType)) {
+        } else if (HeadedSkullBlock.isToast(blockEntity, itemStack) && HeadedSkullBlock.RABBIT_TYPES.contains(skullType)) {
             return RenderLayer.getEntityCutoutNoCullZOffset(new Identifier("textures/entity/rabbit/toast.png"));
         }
         return getRenderLayer(skullType);
