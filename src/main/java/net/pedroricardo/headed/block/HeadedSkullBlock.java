@@ -1,7 +1,9 @@
 package net.pedroricardo.headed.block;
 
 import net.minecraft.block.*;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
@@ -13,6 +15,7 @@ import net.minecraft.util.math.RotationPropertyHelper;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
+import net.pedroricardo.headed.block.entity.HeadedSkullBlockEntity;
 
 import java.util.*;
 
@@ -42,9 +45,12 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
     protected static final VoxelShape PHANTOM_SHAPE;
     protected static final VoxelShape SNOW_GOLEM_SHAPE;
 
-    public HeadedSkullBlock(HeadedSkullBlock.SkullType skullType, AbstractBlock.Settings settings) {
-        super(skullType, settings);
+    private final boolean wearable;
+
+    public HeadedSkullBlock(HeadedSkullBlock.SkullType skullType, AbstractBlock.Settings settings, boolean wearable) {
+        super(skullType, settings, wearable);
         this.setDefaultState((this.stateManager.getDefaultState()).with(ROTATION, 0));
+        this.wearable = wearable;
     }
 
     public static final Set<Type> VILLAGER_TYPES = EnumSet.of(Type.VILLAGER, Type.EVOKER, Type.VINDICATOR, Type.PILLAGER, Type.ZOMBIE_VILLAGER, Type.WANDERING_TRADER, Type.ILLUSIONER, Type.WITCH);
@@ -111,7 +117,7 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
     }
 
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return this.getDefaultState().with(ROTATION, RotationPropertyHelper.fromYaw(ctx.getPlayerYaw() + 180.0F));
+        return this.getDefaultState().with(ROTATION, RotationPropertyHelper.fromYaw(ctx.getPlayerYaw()));
     }
 
     public BlockState rotate(BlockState state, BlockRotation rotation) {
@@ -150,6 +156,26 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
         CHICKEN_SHAPE = Block.createCuboidShape(6.0, 0.0, 6.0, 10.0, 6.0, 10.0);
         PHANTOM_SHAPE = Block.createCuboidShape(4.5, 0.0, 4.5, 11.5, 3.0, 11.5);
         SNOW_GOLEM_SHAPE = Block.createCuboidShape(4.5, 0.0, 4.5, 11.5, 7.0, 11.5);
+    }
+
+    public static boolean isTamed(HeadedSkullBlockEntity blockEntity, ItemStack itemStack) {
+        if (blockEntity != null) {
+            return blockEntity.isTamed();
+        } else if (itemStack.hasNbt()) {
+            return itemStack.getOrCreateSubNbt("BlockEntityTag").getBoolean(HeadedSkullBlockEntity.IS_TAMED_KEY);
+        }
+        return false;
+    }
+
+    public static boolean isToast(HeadedSkullBlockEntity blockEntity, ItemStack itemStack) {
+        if (blockEntity != null) {
+            if (blockEntity.getCustomName() != null) {
+                return blockEntity.getCustomName().getString().equals("Toast");
+            }
+        } else if (itemStack.hasNbt()) {
+            return itemStack.getName().getString().equals("Toast");
+        }
+        return false;
     }
 
     public interface SkullType {

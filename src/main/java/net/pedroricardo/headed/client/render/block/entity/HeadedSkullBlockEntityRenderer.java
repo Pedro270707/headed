@@ -32,14 +32,14 @@ public class HeadedSkullBlockEntityRenderer implements BlockEntityRenderer<Heade
     public void render(HeadedSkullBlockEntity blockEntity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
         float g = blockEntity.getPoweredTicks(tickDelta);
         BlockState blockState = blockEntity.getCachedState();
-        boolean bl = blockState.getBlock() instanceof HeadedWallSkullBlock;
-        Direction direction = bl ? blockState.get(HeadedWallSkullBlock.FACING) : null;
-        int k = bl ? RotationPropertyHelper.fromDirection(direction) : blockState.get(HeadedSkullBlock.ROTATION);
-        float h = RotationPropertyHelper.toDegrees(k);
+        boolean isWall = blockState.getBlock() instanceof HeadedWallSkullBlock;
+        Direction direction = isWall ? blockState.get(HeadedWallSkullBlock.FACING) : null;
+        int k = isWall ? RotationPropertyHelper.fromDirection(direction) : blockState.get(HeadedSkullBlock.ROTATION);
+        float h = isWall ? RotationPropertyHelper.toDegrees(k) + 180.0F : RotationPropertyHelper.toDegrees(k);
         HeadedSkullBlock.SkullType skullType = ((AbstractHeadedSkullBlock)blockState.getBlock()).getSkullType();
         HeadedSkullBlockEntityModel skullBlockEntityModel = HeadedSkullRenderManager.getModels(MinecraftClient.getInstance().getEntityModelLoader()).get(skullType);
         RenderLayer renderLayer = HeadedSkullRenderManager.getInstance().getRenderLayer(blockEntity, null, skullType);
-        if (skullType == Type.FOX && !bl || skullType == Type.SNOW_FOX && !bl) {
+        if ((skullType == Type.FOX || skullType == Type.SNOW_FOX) && !isWall) {
             HeadedSkullRenderManager.renderSkullWithFeature(skullType, null, h - g * 5.0F, g, matrices, vertexConsumers, light, skullBlockEntityModel, renderLayer, 1.0F, 1.0F, 1.0F, blockEntity, null);
         } else {
             HeadedSkullRenderManager.renderSkullWithFeature(skullType, direction, h, g, matrices, vertexConsumers, light, skullBlockEntityModel, renderLayer, 1.0F, 1.0F, 1.0F, blockEntity, null);

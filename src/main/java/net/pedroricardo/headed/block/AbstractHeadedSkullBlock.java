@@ -7,10 +7,11 @@ import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.pathing.NavigationType;
+import net.minecraft.item.Equipment;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Wearable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
@@ -20,12 +21,14 @@ import net.pedroricardo.headed.block.entity.HeadedSkullBlockEntity;
 import net.pedroricardo.headed.item.HeadedItems;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class AbstractHeadedSkullBlock extends BlockWithEntity implements Wearable {
+public abstract class AbstractHeadedSkullBlock extends BlockWithEntity implements Equipment {
     private final HeadedSkullBlock.SkullType type;
+    private final boolean wearable;
 
-    public AbstractHeadedSkullBlock(HeadedSkullBlock.SkullType type, AbstractBlock.Settings settings) {
+    public AbstractHeadedSkullBlock(HeadedSkullBlock.SkullType type, AbstractBlock.Settings settings, boolean wearable) {
         super(settings);
         this.type = type;
+        this.wearable = wearable;
     }
 
     @Override
@@ -64,5 +67,14 @@ public abstract class AbstractHeadedSkullBlock extends BlockWithEntity implement
 
     public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
         return false;
+    }
+
+    @Override
+    public EquipmentSlot getSlotType() {
+        if (this.wearable) {
+            return EquipmentSlot.HEAD;
+        } else {
+            return null;
+        }
     }
 }
