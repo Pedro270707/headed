@@ -62,7 +62,7 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
     public static final Set<Type> PANDA_TYPES = EnumSet.of(Type.AGGRESSIVE_PANDA, Type.BROWN_PANDA, Type.LAZY_PANDA, Type.PANDA, Type.PLAYFUL_PANDA, Type.WEAK_PANDA, Type.WORRIED_PANDA);
     public static final Set<Type> PARROT_TYPES = EnumSet.of(Type.RED_PARROT, Type.GREEN_PARROT, Type.BLUE_PARROT, Type.CYAN_PARROT, Type.GRAY_PARROT);
     public static final Set<Type> RABBIT_TYPES = EnumSet.of(Type.BLACK_RABBIT, Type.BROWN_RABBIT, Type.EVIL_RABBIT, Type.GOLD_RABBIT, Type.SALT_RABBIT, Type.WHITE_RABBIT, Type.WHITE_SPLOTCHED_RABBIT);
-    public static final Set<Type> COW_TYPES = EnumSet.of(Type.COW, Type.RED_MOOSHROOM, Type.BROWN_MOOSHROOM);
+    public static final Set<Type> COW_TYPES = EnumSet.of(Type.COW, Type.RED_MOOSHROOM, Type.BROWN_MOOSHROOM, Type.MOON_COW);
     public static final Set<Type> FOX_TYPES = EnumSet.of(Type.FOX, Type.SNOW_FOX);
 
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
@@ -269,7 +269,8 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
         WITCH,
         CHICKEN,
         PHANTOM,
-        SNOW_GOLEM;
+        SNOW_GOLEM,
+        MOON_COW;
 
         private Type() {
         }

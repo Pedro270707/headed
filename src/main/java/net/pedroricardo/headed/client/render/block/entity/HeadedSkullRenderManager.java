@@ -132,6 +132,7 @@ public class HeadedSkullRenderManager {
         builder.put(HeadedSkullBlock.Type.CHICKEN, new ChickenHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.CHICKEN_HEAD)));
         builder.put(HeadedSkullBlock.Type.PHANTOM, new PhantomHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PHANTOM_HEAD)));
         builder.put(HeadedSkullBlock.Type.SNOW_GOLEM, new SnowGolemHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SNOW_GOLEM_HEAD)));
+        builder.put(HeadedSkullBlock.Type.MOON_COW, new SnowGolemHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.COW_HEAD)));
         return builder.build();
     }
 
@@ -224,6 +225,7 @@ public class HeadedSkullRenderManager {
         map.put(HeadedSkullBlock.Type.CHICKEN, new Identifier("textures/entity/chicken.png"));
         map.put(HeadedSkullBlock.Type.PHANTOM, new Identifier("textures/entity/phantom.png"));
         map.put(HeadedSkullBlock.Type.SNOW_GOLEM, new Identifier("textures/entity/snow_golem.png"));
+        map.put(HeadedSkullBlock.Type.MOON_COW, new Identifier("textures/entity/cow/moon_cow.png"));
     });
 
     private static final Map<HeadedSkullBlock.SkullType, float[]> HEAD_DIRECTION_DISLOCATION = Util.make(Maps.newHashMap(), (map) -> {
@@ -324,6 +326,7 @@ public class HeadedSkullRenderManager {
         map.put(HeadedSkullBlock.Type.CHICKEN, new float[]{0.40625F, 0.3125F, 0.40625F});
         map.put(HeadedSkullBlock.Type.PHANTOM, new float[]{0.34375F, 0.40625F, 0.34375F});
         map.put(HeadedSkullBlock.Type.SNOW_GOLEM, new float[]{0.28125F, 0.28125F, 0.28125F});
+        map.put(HeadedSkullBlock.Type.MOON_COW, new float[]{0.3125F, 0.25F, 0.3125F});
     });
 
 

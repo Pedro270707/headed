@@ -1,5 +1,6 @@
 package net.pedroricardo.headed.loottable;
 
+import net.minecraft.class_8405;
 import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.mob.*;
 import net.minecraft.entity.passive.*;
@@ -102,6 +103,8 @@ public class HeadedLootTable {
                 } else {
                     return ((MooshroomEntity) entity).getVariant() == MooshroomEntity.Type.RED ? new ItemStack(HeadedItems.RED_MOOSHROOM_HEAD) : new ItemStack(HeadedItems.BROWN_MOOSHROOM_HEAD);
                 }
+            } else if (entity instanceof class_8405) { // the moon cow from the new april fools update
+                return new ItemStack(HeadedItems.MOON_COW_HEAD);
             }
             if (HeadedConfig.COW_HEAD_DROP.get()) {
                 return new ItemStack(HeadedItems.COW_HEAD);
@@ -165,9 +168,7 @@ public class HeadedLootTable {
             return new ItemStack(HeadedItems.IRON_GOLEM_HEAD);
         }
         if (entity instanceof PandaEntity && HeadedConfig.PANDA_HEAD_DROP.get()) {
-            if (HeadedConfig.ALL_PANDAS_DROP_NORMAL_PANDA_HEAD.get()) {
-                return new ItemStack(HeadedItems.PANDA_HEAD);
-            } else {
+            if (!HeadedConfig.ALL_PANDAS_DROP_NORMAL_PANDA_HEAD.get()) {
                 if (entity.isAttacking()) {
                     return new ItemStack(HeadedItems.AGGRESSIVE_PANDA_HEAD);
                 }
@@ -186,8 +187,8 @@ public class HeadedLootTable {
                 if (((PandaEntity) entity).isWorried()) {
                     return new ItemStack(HeadedItems.WORRIED_PANDA_HEAD);
                 }
-                return new ItemStack(HeadedItems.PANDA_HEAD);
             }
+            return new ItemStack(HeadedItems.PANDA_HEAD);
         }
         if (entity instanceof DrownedEntity && HeadedConfig.DROWNED_HEAD_DROP.get()) {
             return new ItemStack(HeadedItems.DROWNED_HEAD);

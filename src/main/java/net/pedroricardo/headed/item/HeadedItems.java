@@ -102,6 +102,7 @@ public class HeadedItems {
     public static final Item CHICKEN_HEAD = registerItem("chicken_head", new VerticallyAttachableBlockItem(HeadedBlocks.CHICKEN_HEAD, HeadedBlocks.CHICKEN_WALL_HEAD, new FabricItemSettings().rarity(Rarity.UNCOMMON), Direction.DOWN));
     public static final Item PHANTOM_HEAD = registerItem("phantom_head", new VerticallyAttachableBlockItem(HeadedBlocks.PHANTOM_HEAD, HeadedBlocks.PHANTOM_WALL_HEAD, new FabricItemSettings().rarity(Rarity.UNCOMMON), Direction.DOWN));
     public static final Item SNOW_GOLEM_HEAD = registerItem("snow_golem_head", new VerticallyAttachableBlockItem(HeadedBlocks.SNOW_GOLEM_HEAD, HeadedBlocks.SNOW_GOLEM_WALL_HEAD, new FabricItemSettings().rarity(Rarity.UNCOMMON), Direction.DOWN));
+    public static final Item MOON_COW_HEAD = registerItem("moon_cow_head", new VerticallyAttachableBlockItem(HeadedBlocks.MOON_COW_HEAD, HeadedBlocks.MOON_COW_WALL_HEAD, new FabricItemSettings().rarity(Rarity.UNCOMMON), Direction.DOWN));
 
     protected static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, new Identifier(Headed.MOD_ID, name), item);

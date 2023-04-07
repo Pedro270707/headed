@@ -184,6 +184,8 @@ public class HeadedBlocks {
     public static final Block PHANTOM_WALL_HEAD;
     public static final Block SNOW_GOLEM_HEAD;
     public static final Block SNOW_GOLEM_WALL_HEAD;
+    public static final Block MOON_COW_HEAD;
+    public static final Block MOON_COW_WALL_HEAD;
 
 
     static {
@@ -363,6 +365,8 @@ public class HeadedBlocks {
         PHANTOM_WALL_HEAD = register("phantom_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.PHANTOM, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(PHANTOM_HEAD)));
         SNOW_GOLEM_HEAD = register("snow_golem_head", new HeadedSkullBlock(HeadedSkullBlock.Type.SNOW_GOLEM, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F), false));
         SNOW_GOLEM_WALL_HEAD = register("snow_golem_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.SNOW_GOLEM, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(SNOW_GOLEM_HEAD)));
+        MOON_COW_HEAD = register("moon_cow_head", new HeadedSkullBlock(HeadedSkullBlock.Type.MOON_COW, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F), false));
+        MOON_COW_WALL_HEAD = register("moon_cow_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.MOON_COW, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(MOON_COW_HEAD)));
     }
 
     private static Block register(String name, Block block) {

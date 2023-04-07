@@ -100,6 +100,7 @@ public class HeadedBlockEntities {
                         HeadedBlocks.WITCH_HEAD, HeadedBlocks.WITCH_WALL_HEAD,
                         HeadedBlocks.CHICKEN_HEAD, HeadedBlocks.CHICKEN_WALL_HEAD,
                         HeadedBlocks.PHANTOM_HEAD, HeadedBlocks.PHANTOM_WALL_HEAD,
-                        HeadedBlocks.SNOW_GOLEM_HEAD, HeadedBlocks.SNOW_GOLEM_WALL_HEAD).build(null));
+                        HeadedBlocks.SNOW_GOLEM_HEAD, HeadedBlocks.SNOW_GOLEM_WALL_HEAD,
+                        HeadedBlocks.MOON_COW_HEAD, HeadedBlocks.MOON_COW_WALL_HEAD).build(null));
     }
 }
