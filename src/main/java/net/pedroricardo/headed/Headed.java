@@ -8,6 +8,8 @@ import net.minecraft.item.Items;
 import net.pedroricardo.headed.block.HeadedBlocks;
 import net.pedroricardo.headed.block.entity.HeadedBlockEntities;
 import net.pedroricardo.headed.item.HeadedItems;
+import net.pedroricardo.headed.loottable.HeadedLootConditionTypes;
+import net.pedroricardo.headed.loottable.HeadedLootTable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +20,9 @@ public class Headed implements ModInitializer {
 	public void onInitialize() {
 		HeadedItems.registerModItems();
 		HeadedBlocks.registerModBlocks();
-		HeadedBlockEntities.registerBlockEntities();
+		HeadedBlockEntities.registerModBlockEntities();
+		HeadedLootConditionTypes.registerModLootConditions();
+		HeadedLootTable.registerModLootTables();
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(content -> {
 			content.addBefore(Items.DRAGON_HEAD, HeadedItems.PIGLIN_BRUTE_HEAD);
 			content.addAfter(Items.ZOMBIE_HEAD, HeadedItems.HUSK_HEAD);

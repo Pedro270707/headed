@@ -10,7 +10,7 @@ import net.pedroricardo.headed.block.HeadedBlocks;
 
 public class HeadedBlockEntities {
     public static BlockEntityType<HeadedSkullBlockEntity> SKULL;
-    public static void registerBlockEntities() {
+    public static void registerModBlockEntities() {
         SKULL = Registry.register(Registries.BLOCK_ENTITY_TYPE,
                 new Identifier(Headed.MOD_ID, "skull"),
                 FabricBlockEntityTypeBuilder.create(HeadedSkullBlockEntity::new, HeadedBlocks.VILLAGER_HEAD, HeadedBlocks.VILLAGER_WALL_HEAD,

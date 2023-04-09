@@ -12,6 +12,9 @@ import net.minecraft.util.math.Direction;
 import net.pedroricardo.headed.Headed;
 import net.pedroricardo.headed.block.HeadedBlocks;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class HeadedItems {
 
     public static final Item VILLAGER_HEAD = registerItem("villager_head", new VerticallyAttachableBlockItem(HeadedBlocks.VILLAGER_HEAD, HeadedBlocks.VILLAGER_WALL_HEAD, new FabricItemSettings().rarity(Rarity.UNCOMMON).equipmentSlot(stack -> EquipmentSlot.HEAD), Direction.DOWN));
@@ -103,7 +106,18 @@ public class HeadedItems {
     public static final Item PHANTOM_HEAD = registerItem("phantom_head", new VerticallyAttachableBlockItem(HeadedBlocks.PHANTOM_HEAD, HeadedBlocks.PHANTOM_WALL_HEAD, new FabricItemSettings().rarity(Rarity.UNCOMMON), Direction.DOWN));
     public static final Item SNOW_GOLEM_HEAD = registerItem("snow_golem_head", new VerticallyAttachableBlockItem(HeadedBlocks.SNOW_GOLEM_HEAD, HeadedBlocks.SNOW_GOLEM_WALL_HEAD, new FabricItemSettings().rarity(Rarity.UNCOMMON), Direction.DOWN));
 
-    protected static Item registerItem(String name, Item item) {
+    public static final List<HeadVariant> AXOLOTL_HEADS = Arrays.asList(
+            new HeadVariant(0, HeadedItems.LEUCISTIC_AXOLOTL_HEAD),
+            new HeadVariant(1, HeadedItems.BROWN_AXOLOTL_HEAD),
+            new HeadVariant(2, HeadedItems.GOLD_AXOLOTL_HEAD),
+            new HeadVariant(3, HeadedItems.CYAN_AXOLOTL_HEAD),
+            new HeadVariant(4, HeadedItems.BLUE_AXOLOTL_HEAD)
+    );
+
+    public record HeadVariant(int variant, Item headItem) {
+    }
+    
+    private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, new Identifier(Headed.MOD_ID, name), item);
     }
 
