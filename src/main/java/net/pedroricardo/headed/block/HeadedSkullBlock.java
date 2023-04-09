@@ -1,7 +1,6 @@
 package net.pedroricardo.headed.block;
 
 import net.minecraft.block.*;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
@@ -45,12 +44,9 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
     protected static final VoxelShape PHANTOM_SHAPE;
     protected static final VoxelShape SNOW_GOLEM_SHAPE;
 
-    private final boolean wearable;
-
-    public HeadedSkullBlock(HeadedSkullBlock.SkullType skullType, AbstractBlock.Settings settings, boolean wearable) {
-        super(skullType, settings, wearable);
+    public HeadedSkullBlock(HeadedSkullBlock.SkullType skullType, AbstractBlock.Settings settings) {
+        super(skullType, settings);
         this.setDefaultState((this.stateManager.getDefaultState()).with(ROTATION, 0));
-        this.wearable = wearable;
     }
 
     public static final Set<Type> VILLAGER_TYPES = EnumSet.of(Type.VILLAGER, Type.EVOKER, Type.VINDICATOR, Type.PILLAGER, Type.ZOMBIE_VILLAGER, Type.WANDERING_TRADER, Type.ILLUSIONER, Type.WITCH);

@@ -19,8 +19,7 @@ public class WitherSkullImmunityMixin {
     private void canHaveStatusEffect(StatusEffectInstance effect, CallbackInfoReturnable<Boolean> ci) {
         if (effect.getEffectType() == StatusEffects.WITHER && HeadedConfig.WITHER_SKULL_GRANTS_WITHER_IMMUNITY.get()) {
             LivingEntity entity = (LivingEntity) (Object) this;
-            if(entity instanceof PlayerEntity) {
-                PlayerEntity player = (PlayerEntity) entity;
+            if (entity instanceof PlayerEntity player) {
                 ItemStack headStack = player.getEquippedStack(EquipmentSlot.HEAD);
                 if (headStack.getItem() == HeadedItems.WITHER_SKULL) {
                     ci.setReturnValue(false);

@@ -42,7 +42,7 @@ public class HeadedWallSkullBlock extends AbstractHeadedSkullBlock {
     private static final Map<Direction, VoxelShape> FACING_TO_SNOW_GOLEM_SHAPE;
 
     public HeadedWallSkullBlock(HeadedSkullBlock.SkullType skullType, AbstractBlock.Settings settings) {
-        super(skullType, settings, false);
+        super(skullType, settings);
         this.setDefaultState((this.stateManager.getDefaultState()).with(FACING, Direction.NORTH));
     }
 
