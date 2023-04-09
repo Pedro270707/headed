@@ -1,293 +1,725 @@
 package net.pedroricardo.headed.loottable;
 
-import net.minecraft.entity.boss.WitherEntity;
-import net.minecraft.entity.mob.*;
+import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.*;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.text.Text;
-import net.pedroricardo.headed.HeadedConfig;
+import net.minecraft.loot.LootPool;
+import net.minecraft.loot.LootTables;
+import net.minecraft.loot.condition.EntityPropertiesLootCondition;
+import net.minecraft.loot.context.LootContext;
+import net.minecraft.loot.entry.ItemEntry;
+import net.minecraft.loot.function.CopyNameLootFunction;
+import net.minecraft.loot.function.CopyNbtLootFunction;
+import net.minecraft.loot.function.FillPlayerHeadLootFunction;
+import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.predicate.NbtPredicate;
+import net.minecraft.predicate.entity.EntityPredicate;
+import net.minecraft.util.Identifier;
+import net.pedroricardo.headed.Headed;
 import net.pedroricardo.headed.item.HeadedItems;
 
-import static net.minecraft.entity.passive.CatVariant.*;
-
 public class HeadedLootTable {
-    public static ItemStack getHead(MobEntity entity) {
-        if (entity instanceof VillagerEntity && HeadedConfig.VILLAGER_HEAD_DROP.get()) {
-            return new ItemStack(HeadedItems.VILLAGER_HEAD);
-        }
-        if (entity instanceof EvokerEntity && HeadedConfig.EVOKER_HEAD_DROP.get()) {
-            return new ItemStack(HeadedItems.EVOKER_HEAD);
-        }
-        if (entity instanceof VindicatorEntity && HeadedConfig.VINDICATOR_HEAD_DROP.get()) {
-            return new ItemStack(HeadedItems.VINDICATOR_HEAD);
-        }
-        if (entity instanceof PillagerEntity && HeadedConfig.PILLAGER_HEAD_DROP.get()) {
-            return new ItemStack(HeadedItems.PILLAGER_HEAD);
-        }
-        if (entity instanceof ZombieVillagerEntity && HeadedConfig.ZOMBIE_VILLAGER_HEAD_DROP.get()) {
-            return new ItemStack(HeadedItems.ZOMBIE_VILLAGER_HEAD);
-        }
-        if (entity instanceof WanderingTraderEntity && HeadedConfig.WANDERING_TRADER_HEAD_DROP.get()) {
-            return new ItemStack(HeadedItems.WANDERING_TRADER_HEAD);
-        }
-        if (entity instanceof IllusionerEntity && HeadedConfig.ILLUSIONER_HEAD_DROP.get()) {
-            return new ItemStack(HeadedItems.ILLUSIONER_HEAD);
-        }
-        if (entity instanceof SheepEntity && (HeadedConfig.SHEEP_HEAD_DROP.get() || HeadedConfig.COLORED_SHEEP_HEAD_DROP.get())) {
-            if ((((SheepEntity) entity).isSheared() || HeadedConfig.ALL_SHEEP_DROP_SHEARED_HEAD.get()) && HeadedConfig.SHEEP_HEAD_DROP.get()) {
-                return new ItemStack(HeadedItems.SHEEP_HEAD);
-            } else if (HeadedConfig.COLORED_SHEEP_HEAD_DROP.get()) {
-                ItemStack itemStack;
-                if (HeadedConfig.ALL_COLORED_SHEEP_DROP_WHITE_SHEEP_HEAD.get()) {
-                    itemStack = new ItemStack(HeadedItems.WHITE_SHEEP_HEAD);
-                } else {
-                    itemStack = switch (((SheepEntity) entity).getColor()) {
-                        case WHITE -> new ItemStack(HeadedItems.WHITE_SHEEP_HEAD);
-                        case ORANGE -> new ItemStack(HeadedItems.ORANGE_SHEEP_HEAD);
-                        case MAGENTA -> new ItemStack(HeadedItems.MAGENTA_SHEEP_HEAD);
-                        case LIGHT_BLUE -> new ItemStack(HeadedItems.LIGHT_BLUE_SHEEP_HEAD);
-                        case YELLOW -> new ItemStack(HeadedItems.YELLOW_SHEEP_HEAD);
-                        case LIME -> new ItemStack(HeadedItems.LIME_SHEEP_HEAD);
-                        case PINK -> new ItemStack(HeadedItems.PINK_SHEEP_HEAD);
-                        case GRAY -> new ItemStack(HeadedItems.GRAY_SHEEP_HEAD);
-                        case LIGHT_GRAY -> new ItemStack(HeadedItems.LIGHT_GRAY_SHEEP_HEAD);
-                        case CYAN -> new ItemStack(HeadedItems.CYAN_SHEEP_HEAD);
-                        case PURPLE -> new ItemStack(HeadedItems.PURPLE_SHEEP_HEAD);
-                        case BLUE -> new ItemStack(HeadedItems.BLUE_SHEEP_HEAD);
-                        case BROWN -> new ItemStack(HeadedItems.BROWN_SHEEP_HEAD);
-                        case GREEN -> new ItemStack(HeadedItems.GREEN_SHEEP_HEAD);
-                        case RED -> new ItemStack(HeadedItems.RED_SHEEP_HEAD);
-                        case BLACK -> new ItemStack(HeadedItems.BLACK_SHEEP_HEAD);
-                    };
-                }
-                if (entity.getName().getString().equals("jeb_") && HeadedConfig.JEB_SHEEP_DROP_JEB_HEAD.get())
-                    itemStack.setCustomName(Text.literal(entity.getName().getString()));
-                return itemStack;
+    // This class adds the heads to the loot table
+    // Every pool uses the
+    // KilledByChargedCreeperLootCondition loot table
+    // condition. Check it out!
+    static {
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.VILLAGER.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().conditionally(KilledByChargedCreeperLootCondition.builder())
+                        .with(ItemEntry.builder(HeadedItems.VILLAGER_HEAD).build()).build()).build();
             }
-        }
-        if (entity instanceof AllayEntity && HeadedConfig.ALLAY_HEAD_DROP.get()) {
-            return new ItemStack(HeadedItems.ALLAY_HEAD);
-        }
-        if (entity instanceof VexEntity && HeadedConfig.VEX_HEAD_DROP.get()) {
-            return new ItemStack(HeadedItems.VEX_HEAD);
-        }
-        if (entity instanceof PiglinEntity && HeadedConfig.PIGLIN_HEAD_DROP.get()) {
-            return new ItemStack(HeadedItems.PIGLIN_HEAD);
-        }
-        if (entity instanceof PiglinBruteEntity && HeadedConfig.PIGLIN_BRUTE_HEAD_DROP.get()) {
-            return new ItemStack(HeadedItems.PIGLIN_BRUTE_HEAD);
-        }
-        if (entity instanceof ZombifiedPiglinEntity && HeadedConfig.ZOMBIFIED_PIGLIN_HEAD_DROP.get()) {
-            return new ItemStack(HeadedItems.ZOMBIFIED_PIGLIN_HEAD);
-        }
-        if (entity instanceof AxolotlEntity && HeadedConfig.AXOLOTL_HEAD_DROP.get()) {
-            if (HeadedConfig.ALL_AXOLOTLS_DROP_LEUCISTIC_AXOLOTL_HEAD.get()) {
-                return new ItemStack(HeadedItems.LEUCISTIC_AXOLOTL_HEAD);
-            } else {
-                return switch (((AxolotlEntity) entity).getVariant()) {
-                    case BLUE -> new ItemStack(HeadedItems.BLUE_AXOLOTL_HEAD);
-                    case CYAN -> new ItemStack(HeadedItems.CYAN_AXOLOTL_HEAD);
-                    case GOLD -> new ItemStack(HeadedItems.GOLD_AXOLOTL_HEAD);
-                    case LUCY -> new ItemStack(HeadedItems.LEUCISTIC_AXOLOTL_HEAD);
-                    case WILD -> new ItemStack(HeadedItems.BROWN_AXOLOTL_HEAD);
-                };
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.EVOKER.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().conditionally(KilledByChargedCreeperLootCondition.builder())
+                        .with(ItemEntry.builder(HeadedItems.EVOKER_HEAD).build()).build()).build();
             }
-        }
-        if (entity instanceof CowEntity) {
-            if (entity instanceof MooshroomEntity && HeadedConfig.MOOSHROOM_HEAD_DROP.get()) {
-                if (HeadedConfig.BROWN_MOOSHROOMS_DROP_RED_MOOSHROOM_HEAD.get()) {
-                    return new ItemStack(HeadedItems.RED_MOOSHROOM_HEAD);
-                } else {
-                    return ((MooshroomEntity) entity).getMooshroomType() == MooshroomEntity.Type.RED ? new ItemStack(HeadedItems.RED_MOOSHROOM_HEAD) : new ItemStack(HeadedItems.BROWN_MOOSHROOM_HEAD);
-                }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.VINDICATOR.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().conditionally(KilledByChargedCreeperLootCondition.builder())
+                        .with(ItemEntry.builder(HeadedItems.VINDICATOR_HEAD).build()).build()).build();
             }
-            if (HeadedConfig.COW_HEAD_DROP.get()) {
-                return new ItemStack(HeadedItems.COW_HEAD);
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.PILLAGER.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().conditionally(KilledByChargedCreeperLootCondition.builder())
+                        .with(ItemEntry.builder(HeadedItems.PILLAGER_HEAD).build()).build()).build();
             }
-        }
-        if (entity instanceof PolarBearEntity && HeadedConfig.POLAR_BEAR_HEAD_DROP.get()) {
-            return new ItemStack(HeadedItems.POLAR_BEAR_HEAD);
-        }
-        if (entity instanceof OcelotEntity && HeadedConfig.OCELOT_HEAD_DROP.get()) {
-            return new ItemStack(HeadedItems.OCELOT_HEAD);
-        }
-        if (entity instanceof CatEntity && HeadedConfig.CAT_HEAD_DROP.get()) {
-            ItemStack itemStack;
-            if (HeadedConfig.ALL_CATS_DROP_WHITE_CAT_HEAD.get()) {
-                itemStack = new ItemStack(HeadedItems.WHITE_CAT_HEAD);
-            } else {
-                if (((CatEntity) entity).getVariant() == ALL_BLACK) {
-                    itemStack = new ItemStack(HeadedItems.ALL_BLACK_CAT_HEAD);
-                } else if (((CatEntity) entity).getVariant() == BLACK) {
-                    itemStack = new ItemStack(HeadedItems.BLACK_CAT_HEAD);
-                } else if (((CatEntity) entity).getVariant() == BRITISH_SHORTHAIR) {
-                    itemStack = new ItemStack(HeadedItems.BRITISH_SHORTHAIR_CAT_HEAD);
-                } else if (((CatEntity) entity).getVariant() == CALICO) {
-                    itemStack = new ItemStack(HeadedItems.CALICO_CAT_HEAD);
-                } else if (((CatEntity) entity).getVariant() == JELLIE) {
-                    itemStack = new ItemStack(HeadedItems.JELLIE_CAT_HEAD);
-                } else if (((CatEntity) entity).getVariant() == PERSIAN) {
-                    itemStack = new ItemStack(HeadedItems.PERSIAN_CAT_HEAD);
-                } else if (((CatEntity) entity).getVariant() == RAGDOLL) {
-                    itemStack = new ItemStack(HeadedItems.RAGDOLL_CAT_HEAD);
-                } else if (((CatEntity) entity).getVariant() == RED) {
-                    itemStack = new ItemStack(HeadedItems.RED_CAT_HEAD);
-                } else if (((CatEntity) entity).getVariant() == SIAMESE) {
-                    itemStack = new ItemStack(HeadedItems.SIAMESE_CAT_HEAD);
-                } else if (((CatEntity) entity).getVariant() == TABBY) {
-                    itemStack = new ItemStack(HeadedItems.TABBY_CAT_HEAD);
-                } else {
-                    itemStack = new ItemStack(HeadedItems.WHITE_CAT_HEAD);
-                }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.ZOMBIE_VILLAGER.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().conditionally(KilledByChargedCreeperLootCondition.builder())
+                        .with(ItemEntry.builder(HeadedItems.ZOMBIE_VILLAGER_HEAD).build()).build()).build();
             }
-            if (((CatEntity) entity).isTamed()) {
-                if (HeadedConfig.TAMED_CATS_DROP_NAMED_HEAD.get()) {
-                    if (entity.hasCustomName())
-                        itemStack.setCustomName(Text.translatable("block.headed.cat_head.named", entity.getName()));
-                }
-                itemStack.getOrCreateSubNbt("BlockEntityTag").putBoolean("Tamed", true);
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.WANDERING_TRADER.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().conditionally(KilledByChargedCreeperLootCondition.builder())
+                        .with(ItemEntry.builder(HeadedItems.WANDERING_TRADER_HEAD).build()).build()).build();
             }
-            return itemStack;
-        }
-        if (entity instanceof EndermanEntity && HeadedConfig.ENDERMAN_HEAD_DROP.get()) {
-            return new ItemStack(HeadedItems.ENDERMAN_HEAD);
-        }
-        if (entity instanceof FoxEntity && HeadedConfig.FOX_HEAD_DROP.get()) {
-            if (HeadedConfig.SNOW_FOXES_DROP_NORMAL_FOX_HEAD.get()) {
-                return new ItemStack(HeadedItems.FOX_HEAD);
-            } else {
-                return ((FoxEntity) entity).getFoxType() == FoxEntity.Type.RED ? new ItemStack(HeadedItems.FOX_HEAD) : new ItemStack(HeadedItems.SNOW_FOX_HEAD);
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.ILLUSIONER.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().conditionally(KilledByChargedCreeperLootCondition.builder())
+                        .with(ItemEntry.builder(HeadedItems.ILLUSIONER_HEAD).build()).build()).build();
             }
-        }
-        if (entity instanceof IronGolemEntity && HeadedConfig.IRON_GOLEM_HEAD_DROP.get()) {
-            return new ItemStack(HeadedItems.IRON_GOLEM_HEAD);
-        }
-        if (entity instanceof PandaEntity && HeadedConfig.PANDA_HEAD_DROP.get()) {
-            if (HeadedConfig.ALL_PANDAS_DROP_NORMAL_PANDA_HEAD.get()) {
-                return new ItemStack(HeadedItems.PANDA_HEAD);
-            } else {
-                if (entity.isAttacking()) {
-                    return new ItemStack(HeadedItems.AGGRESSIVE_PANDA_HEAD);
-                }
-                if (((PandaEntity) entity).isBrown()) {
-                    return new ItemStack(HeadedItems.BROWN_PANDA_HEAD);
-                }
-                if (((PandaEntity) entity).isLazy()) {
-                    return new ItemStack(HeadedItems.LAZY_PANDA_HEAD);
-                }
-                if (((PandaEntity) entity).isPlayful()) {
-                    return new ItemStack(HeadedItems.PLAYFUL_PANDA_HEAD);
-                }
-                if (((PandaEntity) entity).isWeak()) {
-                    return new ItemStack(HeadedItems.WEAK_PANDA_HEAD);
-                }
-                if (((PandaEntity) entity).isWorried()) {
-                    return new ItemStack(HeadedItems.WORRIED_PANDA_HEAD);
-                }
-                return new ItemStack(HeadedItems.PANDA_HEAD);
+        });
+        NbtCompound shearedNbtCompound = new NbtCompound();
+        shearedNbtCompound.putBoolean("Sheared", true);
+        NbtPredicate shearedNbtPredicate = new NbtPredicate(shearedNbtCompound);
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.SHEEP.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(shearedNbtPredicate)))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder())
+                        .with(ItemEntry.builder(HeadedItems.SHEEP_HEAD).build()).build()).build();
             }
-        }
-        if (entity instanceof DrownedEntity && HeadedConfig.DROWNED_HEAD_DROP.get()) {
-            return new ItemStack(HeadedItems.DROWNED_HEAD);
-        }
-        if (entity instanceof ParrotEntity && HeadedConfig.PARROT_HEAD_DROP.get()) {
-            if (HeadedConfig.ALL_PARROTS_DROP_RED_PARROT_HEAD.get()) {
-                return new ItemStack(HeadedItems.RED_PARROT_HEAD);
-            } else {
-                return switch (((ParrotEntity) entity).getVariant()) {
-                    case 0 -> new ItemStack(HeadedItems.RED_PARROT_HEAD);
-                    case 1 -> new ItemStack(HeadedItems.BLUE_PARROT_HEAD);
-                    case 2 -> new ItemStack(HeadedItems.GREEN_PARROT_HEAD);
-                    case 3 -> new ItemStack(HeadedItems.CYAN_PARROT_HEAD);
-                    case 4 -> new ItemStack(HeadedItems.GRAY_PARROT_HEAD);
-                    default -> new ItemStack(HeadedItems.RED_PARROT_HEAD);
-                };
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && LootTables.WHITE_SHEEP_ENTITY.equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.WHITE_SHEEP_HEAD)
+                        .apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.THIS))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder())));
             }
-        }
-        if (entity instanceof StrayEntity && HeadedConfig.STRAY_SKULL_DROP.get()) {
-            return new ItemStack(HeadedItems.STRAY_SKULL);
-        }
-        if (entity instanceof ShulkerEntity && HeadedConfig.SHULKER_HEAD_DROP.get()) {
-            return new ItemStack(HeadedItems.SHULKER_HEAD);
-        }
-        if (entity instanceof HuskEntity && HeadedConfig.HUSK_HEAD_DROP.get()) {
-            return new ItemStack(HeadedItems.HUSK_HEAD);
-        }
-        if (entity instanceof PigEntity && HeadedConfig.PIG_HEAD_DROP.get()) {
-            return new ItemStack(HeadedItems.PIG_HEAD);
-        }
-        if (entity instanceof SpiderEntity && HeadedConfig.SPIDER_HEAD_DROP.get()) {
-            if (HeadedConfig.CAVE_SPIDERS_DROP_NORMAL_SPIDER_HEAD.get()) {
-                return new ItemStack(HeadedItems.SPIDER_HEAD);
-            } else {
-                return entity instanceof CaveSpiderEntity ? new ItemStack(HeadedItems.CAVE_SPIDER_HEAD) : new ItemStack(HeadedItems.SPIDER_HEAD);
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && LootTables.ORANGE_SHEEP_ENTITY.equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.ORANGE_SHEEP_HEAD)
+                        .apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.THIS))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder())));
             }
-        }
-        if (entity instanceof BlazeEntity && HeadedConfig.BLAZE_HEAD_DROP.get()) {
-            return new ItemStack(HeadedItems.BLAZE_HEAD);
-        }
-        if (entity instanceof RabbitEntity && HeadedConfig.RABBIT_HEAD_DROP.get()) {
-            ItemStack itemStack;
-            if (HeadedConfig.ALL_RABBITS_DROP_BROWN_RABBIT_HEAD.get()) {
-                itemStack = new ItemStack(HeadedItems.BROWN_RABBIT_HEAD);
-            } else {
-                itemStack = switch (((RabbitEntity) entity).getRabbitType()) {
-                    case 0 -> new ItemStack(HeadedItems.BROWN_RABBIT_HEAD);
-                    case 1 -> new ItemStack(HeadedItems.WHITE_RABBIT_HEAD);
-                    case 2 -> new ItemStack(HeadedItems.BLACK_RABBIT_HEAD);
-                    case 3 -> new ItemStack(HeadedItems.WHITE_SPLOTCHED_RABBIT_HEAD);
-                    case 4 -> new ItemStack(HeadedItems.GOLD_RABBIT_HEAD);
-                    case 5 -> new ItemStack(HeadedItems.SALT_RABBIT_HEAD);
-                    case 6 -> new ItemStack(HeadedItems.EVIL_RABBIT_HEAD);
-                    default -> new ItemStack(HeadedItems.BROWN_RABBIT_HEAD);
-                };
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && LootTables.MAGENTA_SHEEP_ENTITY.equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.MAGENTA_SHEEP_HEAD)
+                        .apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.THIS))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder())));
             }
-            if (entity.getName().getString().equals("Toast") && HeadedConfig.TOAST_RABBITS_DROP_NAMED_HEAD.get()) itemStack.setCustomName(Text.literal(entity.getName().getString()));
-            return itemStack;
-        }
-        if (entity instanceof TurtleEntity && HeadedConfig.TURTLE_HEAD_DROP.get()) {
-            return new ItemStack(HeadedItems.TURTLE_HEAD);
-        }
-        if (entity instanceof WitherEntity && HeadedConfig.WITHER_SKULL_DROP.get()) {
-            return new ItemStack(HeadedItems.WITHER_SKULL);
-        }
-        if (entity instanceof WolfEntity && HeadedConfig.WOLF_HEAD_DROP.get()) {
-            if (((WolfEntity) entity).isTamed() && HeadedConfig.TAMED_WOLVES_DROP_TAMED_HEAD.get()) {
-                ItemStack itemStack = new ItemStack(HeadedItems.WOLF_HEAD);
-                if (entity.hasCustomName()) itemStack.setCustomName(Text.translatable("block.headed.wolf_head.named", entity.getName()));
-                itemStack.getOrCreateSubNbt("BlockEntityTag").putBoolean("Tamed", true);
-                return itemStack;
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && LootTables.LIGHT_BLUE_SHEEP_ENTITY.equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.LIGHT_BLUE_SHEEP_HEAD)
+                        .apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.THIS))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder())));
             }
-            return new ItemStack(HeadedItems.WOLF_HEAD);
-        }
-        if (entity instanceof BatEntity && HeadedConfig.BAT_HEAD_DROP.get()) {
-            return new ItemStack(HeadedItems.BAT_HEAD);
-        }
-        if (entity instanceof WitchEntity && HeadedConfig.WITCH_HEAD_DROP.get()) {
-            return new ItemStack(HeadedItems.WITCH_HEAD);
-        }
-        if (entity instanceof ChickenEntity && HeadedConfig.CHICKEN_HEAD_DROP.get()) {
-            return new ItemStack(HeadedItems.CHICKEN_HEAD);
-        }
-        if (entity instanceof PhantomEntity && HeadedConfig.PHANTOM_HEAD_DROP.get()) {
-            return new ItemStack(HeadedItems.PHANTOM_HEAD);
-        }
-        if (entity instanceof SnowGolemEntity) {
-            if (((SnowGolemEntity) entity).hasPumpkin() && !HeadedConfig.SNOW_GOLEMS_WITH_PUMPKIN_DROP_SNOW_GOLEM_HEAD.get()) {
-                return new ItemStack(Items.CARVED_PUMPKIN);
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && LootTables.YELLOW_SHEEP_ENTITY.equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.YELLOW_SHEEP_HEAD)
+                        .apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.THIS))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder())));
             }
-            return new ItemStack(HeadedItems.SNOW_GOLEM_HEAD);
-        }
-        if (entity instanceof CreeperEntity && HeadedConfig.CREEPER_HEAD_DROP.get()) {
-            return new ItemStack(Items.CREEPER_HEAD);
-        }
-        if (entity instanceof SkeletonEntity && HeadedConfig.SKELETON_SKULL_DROP.get()) {
-            return new ItemStack(Items.SKELETON_SKULL);
-        }
-        if (entity instanceof ZombieEntity && HeadedConfig.ZOMBIE_HEAD_DROP.get()) {
-            return new ItemStack(Items.ZOMBIE_HEAD);
-        }
-        return ItemStack.EMPTY;
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && LootTables.LIME_SHEEP_ENTITY.equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.LIME_SHEEP_HEAD)
+                        .apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.THIS))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder())));
+            }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && LootTables.PINK_SHEEP_ENTITY.equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.PINK_SHEEP_HEAD)
+                        .apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.THIS))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder())));
+            }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && LootTables.GRAY_SHEEP_ENTITY.equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.GRAY_SHEEP_HEAD)
+                        .apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.THIS))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder())));
+            }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && LootTables.LIGHT_GRAY_SHEEP_ENTITY.equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.LIGHT_GRAY_SHEEP_HEAD)
+                        .apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.THIS))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder())));
+            }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && LootTables.CYAN_SHEEP_ENTITY.equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.CYAN_SHEEP_HEAD)
+                        .apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.THIS))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder())));
+            }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && LootTables.PURPLE_SHEEP_ENTITY.equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.PURPLE_SHEEP_HEAD)
+                        .apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.THIS))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder())));
+            }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && LootTables.BLUE_SHEEP_ENTITY.equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.BLUE_SHEEP_HEAD)
+                        .apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.THIS))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder())));
+            }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && LootTables.BROWN_SHEEP_ENTITY.equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.BROWN_SHEEP_HEAD)
+                        .apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.THIS))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder())));
+            }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && LootTables.GREEN_SHEEP_ENTITY.equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.GREEN_SHEEP_HEAD)
+                        .apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.THIS))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder())));
+            }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && LootTables.RED_SHEEP_ENTITY.equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.RED_SHEEP_HEAD)
+                        .apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.THIS))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder())));
+            }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && LootTables.BLACK_SHEEP_ENTITY.equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.BLACK_SHEEP_HEAD)
+                        .apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.THIS))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder())));
+            }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.ALLAY.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.ALLAY_HEAD))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder()));
+            }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.VEX.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.VEX_HEAD))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder()));
+            }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.PIGLIN.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.PIGLIN_HEAD))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder()));
+            }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.PIGLIN_BRUTE.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.PIGLIN_BRUTE_HEAD))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder()));
+            }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.ZOMBIFIED_PIGLIN.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.ZOMBIFIED_PIGLIN_HEAD))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder()));
+            }
+        });
+        NbtCompound lucyAxolotlNbtCompound = new NbtCompound();
+        NbtCompound brownAxolotlNbtCompound = new NbtCompound();
+        NbtCompound goldAxolotlNbtCompound = new NbtCompound();
+        NbtCompound cyanAxolotlNbtCompound = new NbtCompound();
+        NbtCompound blueAxolotlNbtCompound = new NbtCompound();
+        lucyAxolotlNbtCompound.putInt("Variant", AxolotlEntity.Variant.LUCY.getId());
+        brownAxolotlNbtCompound.putInt("Variant", AxolotlEntity.Variant.WILD.getId());
+        goldAxolotlNbtCompound.putInt("Variant", AxolotlEntity.Variant.GOLD.getId());
+        cyanAxolotlNbtCompound.putInt("Variant", AxolotlEntity.Variant.CYAN.getId());
+        blueAxolotlNbtCompound.putInt("Variant", AxolotlEntity.Variant.BLUE.getId());
+        NbtPredicate lucyAxolotlNbtPredicate = new NbtPredicate(lucyAxolotlNbtCompound);
+        NbtPredicate brownAxolotlNbtPredicate = new NbtPredicate(brownAxolotlNbtCompound);
+        NbtPredicate goldAxolotlNbtPredicate = new NbtPredicate(goldAxolotlNbtCompound);
+        NbtPredicate cyanAxolotlNbtPredicate = new NbtPredicate(cyanAxolotlNbtCompound);
+        NbtPredicate blueAxolotlNbtPredicate = new NbtPredicate(blueAxolotlNbtCompound);
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.AXOLOTL.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.LEUCISTIC_AXOLOTL_HEAD))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(lucyAxolotlNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                        .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.BROWN_AXOLOTL_HEAD))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(brownAxolotlNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                        .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.GOLD_AXOLOTL_HEAD))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(goldAxolotlNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                        .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.CYAN_AXOLOTL_HEAD))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(cyanAxolotlNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                        .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.BLUE_AXOLOTL_HEAD))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(blueAxolotlNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()));
+            }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.COW.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.COW_HEAD))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder()));
+            }
+        });
+        NbtCompound redMooshroomNbtCompound = new NbtCompound();
+        NbtCompound brownMooshroomNbtCompound = new NbtCompound();
+        redMooshroomNbtCompound.putString("Type", "red");
+        brownMooshroomNbtCompound.putString("Type", "brown");
+        NbtPredicate redMooshroomNbtPredicate = new NbtPredicate(redMooshroomNbtCompound);
+        NbtPredicate brownMooshroomNbtPredicate = new NbtPredicate(brownMooshroomNbtCompound);
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.MOOSHROOM.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                        .with(ItemEntry.builder(HeadedItems.RED_MOOSHROOM_HEAD))
+                            .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(redMooshroomNbtPredicate)))
+                            .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                    .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                        .with(ItemEntry.builder(HeadedItems.BROWN_MOOSHROOM_HEAD))
+                            .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(brownMooshroomNbtPredicate)))
+                            .conditionally(KilledByChargedCreeperLootCondition.builder()));
+            }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.POLAR_BEAR.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.POLAR_BEAR_HEAD))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder()));
+            }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.OCELOT.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.OCELOT_HEAD))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder()));
+            }
+        });
+        NbtCompound allBlackCatNbtCompound = new NbtCompound();
+        NbtCompound blackCatNbtCompound = new NbtCompound();
+        NbtCompound britishShorthairCatNbtCompound = new NbtCompound();
+        NbtCompound calicoCatNbtCompound = new NbtCompound();
+        NbtCompound jellieCatNbtCompound = new NbtCompound();
+        NbtCompound persianCatNbtCompound = new NbtCompound();
+        NbtCompound ragdollCatNbtCompound = new NbtCompound();
+        NbtCompound redCatNbtCompound = new NbtCompound();
+        NbtCompound siameseCatNbtCompound = new NbtCompound();
+        NbtCompound tabbyCatNbtCompound = new NbtCompound();
+        NbtCompound whiteCatNbtCompound = new NbtCompound();
+        allBlackCatNbtCompound.putString("variant", new Identifier("all_black").toString());
+        blackCatNbtCompound.putString("variant", new Identifier("black").toString());
+        britishShorthairCatNbtCompound.putString("variant", new Identifier("british_shorthair").toString());
+        calicoCatNbtCompound.putString("variant", new Identifier("calico").toString());
+        jellieCatNbtCompound.putString("variant", new Identifier("jellie").toString());
+        persianCatNbtCompound.putString("variant", new Identifier("persian").toString());
+        ragdollCatNbtCompound.putString("variant", new Identifier("ragdoll").toString());
+        redCatNbtCompound.putString("variant", new Identifier("red").toString());
+        siameseCatNbtCompound.putString("variant", new Identifier("siamese").toString());
+        tabbyCatNbtCompound.putString("variant", new Identifier("tabby").toString());
+        whiteCatNbtCompound.putString("variant", new Identifier("white").toString());
+        NbtPredicate allBlackCatNbtPredicate = new NbtPredicate(allBlackCatNbtCompound);
+        NbtPredicate blackCatNbtPredicate = new NbtPredicate(blackCatNbtCompound);
+        NbtPredicate britishShorthairCatNbtPredicate = new NbtPredicate(britishShorthairCatNbtCompound);
+        NbtPredicate calicoCatNbtPredicate = new NbtPredicate(calicoCatNbtCompound);
+        NbtPredicate jellieCatNbtPredicate = new NbtPredicate(jellieCatNbtCompound);
+        NbtPredicate persianCatNbtPredicate = new NbtPredicate(persianCatNbtCompound);
+        NbtPredicate ragdollCatNbtPredicate = new NbtPredicate(ragdollCatNbtCompound);
+        NbtPredicate redCatNbtPredicate = new NbtPredicate(redCatNbtCompound);
+        NbtPredicate siameseCatNbtPredicate = new NbtPredicate(siameseCatNbtCompound);
+        NbtPredicate tabbyCatNbtPredicate = new NbtPredicate(tabbyCatNbtCompound);
+        NbtPredicate whiteCatNbtPredicate = new NbtPredicate(whiteCatNbtCompound);
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.CAT.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.ALL_BLACK_CAT_HEAD))
+                                .apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.THIS))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(allBlackCatNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                        .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.BLACK_CAT_HEAD))
+                                .apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.THIS))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(blackCatNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                        .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.BRITISH_SHORTHAIR_CAT_HEAD))
+                                .apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.THIS))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(britishShorthairCatNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                        .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.CALICO_CAT_HEAD))
+                                .apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.THIS))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(calicoCatNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                        .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.JELLIE_CAT_HEAD))
+                                .apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.THIS))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(jellieCatNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                        .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.PERSIAN_CAT_HEAD))
+                                .apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.THIS))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(persianCatNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                        .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.RAGDOLL_CAT_HEAD))
+                                .apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.THIS))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(ragdollCatNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                        .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.RED_CAT_HEAD))
+                                .apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.THIS))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(redCatNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                        .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.SIAMESE_CAT_HEAD))
+                                .apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.THIS))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(siameseCatNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                        .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.TABBY_CAT_HEAD))
+                                .apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.THIS))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(tabbyCatNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                        .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.WHITE_CAT_HEAD))
+                                .apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.THIS))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(whiteCatNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()));
+            }
+        });
+        // Endermen teleport away when blown up.
+        // Set up just in case.
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.ENDERMAN.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.ENDERMAN_HEAD))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder()));
+            }
+        });
+        NbtCompound redFoxNbtCompound = new NbtCompound();
+        NbtCompound snowFoxNbtCompound = new NbtCompound();
+        redFoxNbtCompound.putString("Type", "red");
+        snowFoxNbtCompound.putString("Type", "snow");
+        NbtPredicate redFoxNbtPredicate = new NbtPredicate(redFoxNbtCompound);
+        NbtPredicate snowFoxNbtPredicate = new NbtPredicate(snowFoxNbtCompound);
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.FOX.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.FOX_HEAD))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(redFoxNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                        .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.SNOW_FOX_HEAD))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(snowFoxNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()));
+            }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.IRON_GOLEM.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.IRON_GOLEM_HEAD))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder()));
+            }
+        });
+        NbtCompound normalPandaNbtCompound = new NbtCompound();
+        NbtCompound aggressivePandaNbtCompound = new NbtCompound();
+        NbtCompound lazyPandaNbtCompound = new NbtCompound();
+        NbtCompound worriedPandaNbtCompound = new NbtCompound();
+        NbtCompound playfulPandaNbtCompound = new NbtCompound();
+        NbtCompound weakPandaNbtCompound = new NbtCompound();
+        NbtCompound brownPandaNbtCompound = new NbtCompound();
+        NbtCompound weakPandaMainNbtCompound = new NbtCompound();
+        NbtCompound brownPandaMainNbtCompound = new NbtCompound();
+        NbtCompound weakPandaHiddenNbtCompound = new NbtCompound();
+        NbtCompound brownPandaHiddenNbtCompound = new NbtCompound();
+        normalPandaNbtCompound.putString("MainGene", "normal");
+        aggressivePandaNbtCompound.putString("MainGene", "aggressive");
+        lazyPandaNbtCompound.putString("MainGene", "lazy");
+        worriedPandaNbtCompound.putString("MainGene", "worried");
+        playfulPandaNbtCompound.putString("MainGene", "playful");
+        weakPandaNbtCompound.putString("MainGene", "weak");
+        weakPandaNbtCompound.putString("HiddenGene", "weak");
+        brownPandaNbtCompound.putString("MainGene", "brown");
+        brownPandaNbtCompound.putString("HiddenGene", "brown");
+        weakPandaMainNbtCompound.putString("MainGene", "weak");
+        weakPandaHiddenNbtCompound.putString("HiddenGene", "weak");
+        brownPandaMainNbtCompound.putString("MainGene", "brown");
+        brownPandaHiddenNbtCompound.putString("HiddenGene", "brown");
+        NbtPredicate normalPandaNbtPredicate = new NbtPredicate(normalPandaNbtCompound);
+        NbtPredicate aggressivePandaNbtPredicate = new NbtPredicate(aggressivePandaNbtCompound);
+        NbtPredicate lazyPandaNbtPredicate = new NbtPredicate(lazyPandaNbtCompound);
+        NbtPredicate worriedPandaNbtPredicate = new NbtPredicate(worriedPandaNbtCompound);
+        NbtPredicate playfulPandaNbtPredicate = new NbtPredicate(playfulPandaNbtCompound);
+        NbtPredicate weakPandaNbtPredicate = new NbtPredicate(weakPandaNbtCompound);
+        NbtPredicate brownPandaNbtPredicate = new NbtPredicate(brownPandaNbtCompound);
+        NbtPredicate weakPandaMainNbtPredicate = new NbtPredicate(weakPandaMainNbtCompound);
+        NbtPredicate brownPandaMainNbtPredicate = new NbtPredicate(brownPandaMainNbtCompound);
+        NbtPredicate weakPandaHiddenNbtPredicate = new NbtPredicate(weakPandaHiddenNbtCompound);
+        NbtPredicate brownPandaHiddenNbtPredicate = new NbtPredicate(brownPandaHiddenNbtCompound);
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.PANDA.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.PANDA_HEAD))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(normalPandaNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                        .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.AGGRESSIVE_PANDA_HEAD))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(aggressivePandaNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                        .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.LAZY_PANDA_HEAD))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(lazyPandaNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                        .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.WORRIED_PANDA_HEAD))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(worriedPandaNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                        .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.PLAYFUL_PANDA_HEAD))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(playfulPandaNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                        .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.WEAK_PANDA_HEAD))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(weakPandaNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                        .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.PANDA_HEAD))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(weakPandaMainNbtPredicate)))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(weakPandaNbtPredicate)).invert())
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                        .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.PANDA_HEAD))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(weakPandaHiddenNbtPredicate)))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(weakPandaNbtPredicate)).invert())
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                        .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.BROWN_PANDA_HEAD))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(brownPandaNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                        .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.PANDA_HEAD))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(brownPandaMainNbtPredicate)))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(brownPandaNbtPredicate)).invert())
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                        .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.PANDA_HEAD))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(brownPandaHiddenNbtPredicate)))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(brownPandaNbtPredicate)).invert())
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()));
+            }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.DROWNED.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.DROWNED_HEAD))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder()));
+            }
+        });
+        NbtCompound redParrotNbtCompound = new NbtCompound();
+        NbtCompound blueParrotNbtCompound = new NbtCompound();
+        NbtCompound greenParrotNbtCompound = new NbtCompound();
+        NbtCompound cyanParrotNbtCompound = new NbtCompound();
+        NbtCompound grayParrotNbtCompound = new NbtCompound();
+        redParrotNbtCompound.putInt("Variant", 0);
+        blueParrotNbtCompound.putInt("Variant", 1);
+        greenParrotNbtCompound.putInt("Variant", 2);
+        cyanParrotNbtCompound.putInt("Variant", 3);
+        grayParrotNbtCompound.putInt("Variant", 4);
+        NbtPredicate redParrotNbtPredicate = new NbtPredicate(redParrotNbtCompound);
+        NbtPredicate blueParrotNbtPredicate = new NbtPredicate(blueParrotNbtCompound);
+        NbtPredicate greenParrotNbtPredicate = new NbtPredicate(greenParrotNbtCompound);
+        NbtPredicate cyanParrotNbtPredicate = new NbtPredicate(cyanParrotNbtCompound);
+        NbtPredicate grayParrotNbtPredicate = new NbtPredicate(grayParrotNbtCompound);
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.PARROT.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.RED_PARROT_HEAD))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(redParrotNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                        .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.BLUE_PARROT_HEAD))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(blueParrotNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                        .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.GREEN_PARROT_HEAD))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(greenParrotNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                        .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.CYAN_PARROT_HEAD))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(cyanParrotNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                        .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.GRAY_PARROT_HEAD))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(grayParrotNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()));
+            }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.STRAY.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.STRAY_SKULL))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder()));
+            }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.SHULKER.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.SHULKER_HEAD))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder()));
+            }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.HUSK.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.HUSK_HEAD))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder()));
+            }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.PIG.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.PIG_HEAD))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder()));
+            }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.SPIDER.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.SPIDER_HEAD))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder()));
+            }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.CAVE_SPIDER.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.CAVE_SPIDER_HEAD))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder()));
+            }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.BLAZE.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.BLAZE_HEAD))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder()));
+            }
+        });
+        NbtCompound brownRabbitNbtCompound = new NbtCompound();
+        NbtCompound whiteRabbitNbtCompound = new NbtCompound();
+        NbtCompound blackRabbitNbtCompound = new NbtCompound();
+        NbtCompound whiteSplotchedRabbitNbtCompound = new NbtCompound();
+        NbtCompound goldRabbitNbtCompound = new NbtCompound();
+        NbtCompound saltRabbitNbtCompound = new NbtCompound();
+        NbtCompound evilRabbitNbtCompound = new NbtCompound();
+        brownRabbitNbtCompound.putInt("RabbitType", 0);
+        whiteRabbitNbtCompound.putInt("RabbitType", 1);
+        blackRabbitNbtCompound.putInt("RabbitType", 2);
+        whiteSplotchedRabbitNbtCompound.putInt("RabbitType", 3);
+        goldRabbitNbtCompound.putInt("RabbitType", 4);
+        saltRabbitNbtCompound.putInt("RabbitType", 5);
+        evilRabbitNbtCompound.putInt("RabbitType", 99);
+        NbtPredicate brownRabbitNbtPredicate = new NbtPredicate(brownRabbitNbtCompound);
+        NbtPredicate whiteRabbitNbtPredicate = new NbtPredicate(whiteRabbitNbtCompound);
+        NbtPredicate blackRabbitNbtPredicate = new NbtPredicate(blackRabbitNbtCompound);
+        NbtPredicate whiteSplotchedRabbitNbtPredicate = new NbtPredicate(whiteSplotchedRabbitNbtCompound);
+        NbtPredicate goldRabbitNbtPredicate = new NbtPredicate(goldRabbitNbtCompound);
+        NbtPredicate saltRabbitNbtPredicate = new NbtPredicate(saltRabbitNbtCompound);
+        NbtPredicate evilRabbitNbtPredicate = new NbtPredicate(evilRabbitNbtCompound);
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.RABBIT.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.BROWN_RABBIT_HEAD))
+                                .apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.THIS))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(brownRabbitNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                        .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.WHITE_RABBIT_HEAD))
+                                .apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.THIS))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(whiteRabbitNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                        .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.BLACK_RABBIT_HEAD))
+                                .apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.THIS))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(blackRabbitNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                        .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.WHITE_SPLOTCHED_RABBIT_HEAD))
+                                .apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.THIS))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(whiteSplotchedRabbitNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                        .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.GOLD_RABBIT_HEAD))
+                                .apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.THIS))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(goldRabbitNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                        .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.SALT_RABBIT_HEAD))
+                                .apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.THIS))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(saltRabbitNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                        .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F))
+                                .with(ItemEntry.builder(HeadedItems.EVIL_RABBIT_HEAD))
+                                .apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.THIS))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(evilRabbitNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()));
+            }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.TURTLE.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.TURTLE_HEAD))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder()));
+            }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.WITHER.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.WITHER_SKULL))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder()));
+            }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.WOLF.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.WOLF_HEAD))
+                        .apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.THIS))
+                        .apply(CopyNbtLootFunction.builder(LootContext.EntityTarget.THIS).withOperation("Tamed", "BlockEntityTag.Tamed"))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder()));
+            }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.BAT.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.BAT_HEAD))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder()));
+            }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.WITCH.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.WITCH_HEAD))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder()));
+            }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.CHICKEN.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.CHICKEN_HEAD))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder()));
+            }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.PHANTOM.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.PHANTOM_HEAD))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder()));
+            }
+        });
+        NbtCompound snowGolemPumpkinNbtCompound = new NbtCompound();
+        snowGolemPumpkinNbtCompound.putBoolean("Pumpkin", true);
+        NbtPredicate snowGolemPumpkinNbtPredicate = new NbtPredicate(snowGolemPumpkinNbtCompound);
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.SNOW_GOLEM.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.SNOW_GOLEM_HEAD))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(snowGolemPumpkinNbtPredicate)).invert())
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()))
+                        .pool(LootPool.builder().with(ItemEntry.builder(Items.CARVED_PUMPKIN))
+                                .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().nbt(snowGolemPumpkinNbtPredicate)))
+                                .conditionally(KilledByChargedCreeperLootCondition.builder()));
+            }
+        });
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (source.isBuiltin() && EntityType.PLAYER.getLootTableId().equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(Items.PLAYER_HEAD))
+                        .apply(FillPlayerHeadLootFunction.builder(LootContext.EntityTarget.THIS))
+                        .conditionally(KilledByChargedCreeperLootCondition.builder()));
+            }
+        });
+    }
+
+    public static void registerModLootTables() {
+        Headed.LOGGER.debug("Registering loot table modifications");
     }
 }

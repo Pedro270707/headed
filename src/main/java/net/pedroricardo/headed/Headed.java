@@ -9,6 +9,8 @@ import net.minecraft.util.Identifier;
 import net.pedroricardo.headed.block.HeadedBlocks;
 import net.pedroricardo.headed.block.entity.HeadedBlockEntities;
 import net.pedroricardo.headed.item.HeadedItems;
+import net.pedroricardo.headed.loottable.HeadedLootConditionTypes;
+import net.pedroricardo.headed.loottable.HeadedLootTable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,6 +24,8 @@ public class Headed implements ModInitializer {
 		HeadedItems.registerModItems();
 		HeadedBlocks.registerModBlocks();
 		HeadedBlockEntities.registerBlockEntities();
+		HeadedLootConditionTypes.registerModLootConditions();
+		HeadedLootTable.registerModLootTables();
 
 		ConfigManager.register(MOD_ID, new HeadedConfig());
 	}
