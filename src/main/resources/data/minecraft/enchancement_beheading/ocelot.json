@@ -1,0 +1,6 @@
+{
+  "drop": "headed:ocelot_head",
+  "chance": 0.2,
+  "Routes": [
+  ]
+}
