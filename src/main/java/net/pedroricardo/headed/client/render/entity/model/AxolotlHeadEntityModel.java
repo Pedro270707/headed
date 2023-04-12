@@ -45,6 +45,10 @@ public class AxolotlHeadEntityModel extends HeadedSkullBlockEntityModel {
         return MathHelper.lerpAngleDegrees(delta, start, end);
     }
 
+    public float[] getHeadSizeInPixels() {
+        return new float[] {8, 5, 5};
+    }
+
     public void setHeadRotation(float animationProgress, float yaw, float pitch) {
         this.head.pitch = pitch * 0.017453292F;
         this.head.yaw = yaw * 0.017453292F;

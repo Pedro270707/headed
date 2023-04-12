@@ -27,6 +27,14 @@ public class AllayHeadEntityModel extends HeadedSkullBlockEntityModel {
         this.head.pitch = pitch * 0.017453292F;
     }
 
+    public float[] getHeadSizeInPixels() {
+        float[] headSize = new float[3];
+        headSize[0] = 5;
+        headSize[1] = 5;
+        headSize[2] = 5;
+        return headSize;
+    }
+
     public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
         matrices.translate(0.0F, 0.25F, 0.0F);
         this.head.render(matrices, vertices, light, overlay, red, green, blue, alpha);
