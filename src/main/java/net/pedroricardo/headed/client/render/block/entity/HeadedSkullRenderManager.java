@@ -259,20 +259,20 @@ public class HeadedSkullRenderManager {
         return getRenderLayer(skullType);
     }
 
-    public static float[] getModelSize(HeadedSkullBlockEntityModel model) {
-        float[] dimensions = model.getHeadSizeInPixels();
-
-        return dimensions;
+    private static float getDislocation(HeadedSkullBlock.SkullType skullType, float size) {
+        if (skullType == HeadedSkullBlock.Type.CAVE_SPIDER) {
+            return 0.325f;
+        }
+        return (16 - size)/32;
     }
-
 
     public static void renderSkull(@Nullable HeadedSkullBlock.SkullType skullType, @Nullable Direction direction, float yaw, float animationProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, HeadedSkullBlockEntityModel model, RenderLayer renderLayer, float r, float g, float b) {
         matrices.push();
         if (direction == null) {
             matrices.translate(0.5F, 0.0F, 0.5F);
         } else {
-            float dislocationY = (16 - model.getHeadSizeInPixels()[1])/32;
-            float dislocationX = (16 - model.getHeadSizeInPixels()[2])/32;
+            float dislocationY = getDislocation(skullType, model.getHeadSizeInPixels()[1]);
+            float dislocationX = getDislocation(skullType, model.getHeadSizeInPixels()[2]);
             matrices.translate(0.5F - (float)direction.getOffsetX() * dislocationX, dislocationY, 0.5F - (float)direction.getOffsetZ() * dislocationX);
         }
 
