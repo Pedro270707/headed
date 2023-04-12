@@ -6,6 +6,7 @@ import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.AllayEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.math.random.Random;
 import net.pedroricardo.headed.client.render.block.entity.HeadedSkullBlockEntityModel;
 
 @Environment(EnvType.CLIENT)
@@ -25,6 +26,14 @@ public class AllayHeadEntityModel extends HeadedSkullBlockEntityModel {
     public void setHeadRotation(float animationProgress, float yaw, float pitch) {
         this.head.yaw = yaw * 0.017453292F;
         this.head.pitch = pitch * 0.017453292F;
+    }
+
+    public float[] getHeadSizeInPixels() {
+        float[] headSize = new float[3];
+        headSize[0] = 5;
+        headSize[1] = 5;
+        headSize[2] = 5;
+        return headSize;
     }
 
     public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {

@@ -2,6 +2,7 @@ package net.pedroricardo.headed.client.render.block.entity;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
@@ -14,12 +15,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
+import net.pedroricardo.headed.Headed;
 import net.pedroricardo.headed.block.HeadedSkullBlock;
 import net.pedroricardo.headed.block.entity.HeadedSkullBlockEntity;
 import net.pedroricardo.headed.client.render.block.entity.feature.*;
 import net.pedroricardo.headed.client.render.entity.model.*;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class HeadedSkullRenderManager {
@@ -42,8 +46,18 @@ public class HeadedSkullRenderManager {
         MODELS = getModels(ctx.getLayerRenderDispatcher());
     }
 
+    private static final Map<HeadedSkullBlock.SkullType, HeadedSkullBlockEntityModel> EXTERNAL_MODELS = new HashMap<>();
+    private static final Map<HeadedSkullBlock.SkullType, Identifier> EXTERNAL_TEXTURES = new HashMap<>();
+
+    public static void registerExternalRendering(HeadedSkullBlock.SkullType type, HeadedSkullBlockEntityModel model, Identifier resourceLocation, float[] headDislocation) {
+        EXTERNAL_MODELS.put(type, model);
+        EXTERNAL_TEXTURES.put(type, resourceLocation);
+    }
+
     public static Map<HeadedSkullBlock.SkullType, HeadedSkullBlockEntityModel> getModels(EntityModelLoader modelLoader) {
         ImmutableMap.Builder<HeadedSkullBlock.SkullType, HeadedSkullBlockEntityModel> builder = ImmutableMap.builder();
+        builder.putAll(EXTERNAL_MODELS);
+
         builder.put(HeadedSkullBlock.Type.VILLAGER, new VillagerHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.VILLAGER_HEAD)));
         builder.put(HeadedSkullBlock.Type.EVOKER, new VillagerHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.EVOKER_HEAD)));
         builder.put(HeadedSkullBlock.Type.VINDICATOR, new VillagerHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.VINDICATOR_HEAD)));
@@ -136,6 +150,8 @@ public class HeadedSkullRenderManager {
     }
 
     private static final Map<HeadedSkullBlock.SkullType, Identifier> TEXTURES = Util.make(Maps.newHashMap(), (map) -> {
+        map.putAll(EXTERNAL_TEXTURES);
+
         map.put(HeadedSkullBlock.Type.VILLAGER, new Identifier("textures/entity/villager/villager.png"));
         map.put(HeadedSkullBlock.Type.EVOKER, new Identifier("textures/entity/illager/evoker.png"));
         map.put(HeadedSkullBlock.Type.VINDICATOR, new Identifier("textures/entity/illager/vindicator.png"));
@@ -226,108 +242,6 @@ public class HeadedSkullRenderManager {
         map.put(HeadedSkullBlock.Type.SNOW_GOLEM, new Identifier("textures/entity/snow_golem.png"));
     });
 
-    private static final Map<HeadedSkullBlock.SkullType, float[]> HEAD_DIRECTION_DISLOCATION = Util.make(Maps.newHashMap(), (map) -> {
-        /*
-         * To get these values, we use the following
-         * function: (16 - length)/32
-         * length would be the length of the dimension (e.g.:
-         * a normal skull is 8x8x8, so doing this with each
-         * dimension (not considering the X dimension, because
-         * the first and last ones have to use the Z dimension)
-         * gives us Z=0.25F, Y=0.25F, Z=0.25F).
-         */
-        map.put(HeadedSkullBlock.Type.VILLAGER, new float[]{0.25F, 0.25F, 0.25F});
-        map.put(HeadedSkullBlock.Type.EVOKER, new float[]{0.25F, 0.25F, 0.25F});
-        map.put(HeadedSkullBlock.Type.VINDICATOR, new float[]{0.25F, 0.25F, 0.25F});
-        map.put(HeadedSkullBlock.Type.PILLAGER, new float[]{0.25F, 0.25F, 0.25F});
-        map.put(HeadedSkullBlock.Type.ZOMBIE_VILLAGER, new float[]{0.25F, 0.25F, 0.25F});
-        map.put(HeadedSkullBlock.Type.WANDERING_TRADER, new float[]{0.25F, 0.25F, 0.25F});
-        map.put(HeadedSkullBlock.Type.ILLUSIONER, new float[]{0.25F, 0.25F, 0.25F});
-        map.put(HeadedSkullBlock.Type.SHEEP, new float[]{0.25F, 0.3125F, 0.25F});
-        map.put(HeadedSkullBlock.Type.WHITE_SHEEP, new float[]{0.25F, 0.3125F, 0.25F});
-        map.put(HeadedSkullBlock.Type.ORANGE_SHEEP, new float[]{0.25F, 0.3125F, 0.25F});
-        map.put(HeadedSkullBlock.Type.MAGENTA_SHEEP, new float[]{0.25F, 0.3125F, 0.25F});
-        map.put(HeadedSkullBlock.Type.LIGHT_BLUE_SHEEP, new float[]{0.25F, 0.3125F, 0.25F});
-        map.put(HeadedSkullBlock.Type.YELLOW_SHEEP, new float[]{0.25F, 0.3125F, 0.25F});
-        map.put(HeadedSkullBlock.Type.LIME_SHEEP, new float[]{0.25F, 0.3125F, 0.25F});
-        map.put(HeadedSkullBlock.Type.PINK_SHEEP, new float[]{0.25F, 0.3125F, 0.25F});
-        map.put(HeadedSkullBlock.Type.GRAY_SHEEP, new float[]{0.25F, 0.3125F, 0.25F});
-        map.put(HeadedSkullBlock.Type.LIGHT_GRAY_SHEEP, new float[]{0.25F, 0.3125F, 0.25F});
-        map.put(HeadedSkullBlock.Type.CYAN_SHEEP, new float[]{0.25F, 0.3125F, 0.25F});
-        map.put(HeadedSkullBlock.Type.PURPLE_SHEEP, new float[]{0.25F, 0.3125F, 0.25F});
-        map.put(HeadedSkullBlock.Type.BLUE_SHEEP, new float[]{0.25F, 0.3125F, 0.25F});
-        map.put(HeadedSkullBlock.Type.BROWN_SHEEP, new float[]{0.25F, 0.3125F, 0.25F});
-        map.put(HeadedSkullBlock.Type.GREEN_SHEEP, new float[]{0.25F, 0.3125F, 0.25F});
-        map.put(HeadedSkullBlock.Type.RED_SHEEP, new float[]{0.25F, 0.3125F, 0.25F});
-        map.put(HeadedSkullBlock.Type.BLACK_SHEEP, new float[]{0.25F, 0.3125F, 0.25F});
-        map.put(HeadedSkullBlock.Type.ALLAY, new float[]{0.34375F, 0.34375F, 0.34375F});
-        map.put(HeadedSkullBlock.Type.VEX, new float[]{0.34375F, 0.34375F, 0.34375F});
-        map.put(HeadedSkullBlock.Type.PIGLIN_BRUTE, new float[]{0.25F, 0.25F, 0.25F});
-        map.put(HeadedSkullBlock.Type.ZOMBIFIED_PIGLIN, new float[]{0.25F, 0.25F, 0.25F});
-        map.put(HeadedSkullBlock.Type.LEUCISTIC_AXOLOTL, new float[]{0.34375F, 0.34375F, 0.34375F});
-        map.put(HeadedSkullBlock.Type.BROWN_AXOLOTL, new float[]{0.34375F, 0.34375F, 0.34375F});
-        map.put(HeadedSkullBlock.Type.CYAN_AXOLOTL, new float[]{0.34375F, 0.34375F, 0.34375F});
-        map.put(HeadedSkullBlock.Type.GOLD_AXOLOTL, new float[]{0.34375F, 0.34375F, 0.34375F});
-        map.put(HeadedSkullBlock.Type.BLUE_AXOLOTL, new float[]{0.34375F, 0.34375F, 0.34375F});
-        map.put(HeadedSkullBlock.Type.COW, new float[]{0.3125F, 0.25F, 0.3125F});
-        map.put(HeadedSkullBlock.Type.BROWN_MOOSHROOM, new float[]{0.3125F, 0.25F, 0.3125F});
-        map.put(HeadedSkullBlock.Type.RED_MOOSHROOM, new float[]{0.3125F, 0.25F, 0.3125F});
-        map.put(HeadedSkullBlock.Type.POLAR_BEAR, new float[]{0.28125F, 0.28125F, 0.28125F});
-        map.put(HeadedSkullBlock.Type.OCELOT, new float[]{0.34375F, 0.375F, 0.34375F});
-        map.put(HeadedSkullBlock.Type.ALL_BLACK_CAT, new float[]{0.34375F, 0.375F, 0.34375F});
-        map.put(HeadedSkullBlock.Type.BLACK_CAT, new float[]{0.34375F, 0.375F, 0.34375F});
-        map.put(HeadedSkullBlock.Type.BRITISH_SHORTHAIR_CAT, new float[]{0.34375F, 0.375F, 0.34375F});
-        map.put(HeadedSkullBlock.Type.CALICO_CAT, new float[]{0.34375F, 0.375F, 0.34375F});
-        map.put(HeadedSkullBlock.Type.JELLIE_CAT, new float[]{0.34375F, 0.375F, 0.34375F});
-        map.put(HeadedSkullBlock.Type.PERSIAN_CAT, new float[]{0.34375F, 0.375F, 0.34375F});
-        map.put(HeadedSkullBlock.Type.RAGDOLL_CAT, new float[]{0.34375F, 0.375F, 0.34375F});
-        map.put(HeadedSkullBlock.Type.RED_CAT, new float[]{0.34375F, 0.375F, 0.34375F});
-        map.put(HeadedSkullBlock.Type.SIAMESE_CAT, new float[]{0.34375F, 0.375F, 0.34375F});
-        map.put(HeadedSkullBlock.Type.TABBY_CAT, new float[]{0.34375F, 0.375F, 0.34375F});
-        map.put(HeadedSkullBlock.Type.WHITE_CAT, new float[]{0.34375F, 0.375F, 0.34375F});
-        map.put(HeadedSkullBlock.Type.ENDERMAN, new float[]{0.25F, 0.25F, 0.25F});
-        map.put(HeadedSkullBlock.Type.FOX, new float[]{0.3125F, 0.3125F, 0.3125F});
-        map.put(HeadedSkullBlock.Type.SNOW_FOX, new float[]{0.3125F, 0.3125F, 0.3125F});
-        map.put(HeadedSkullBlock.Type.IRON_GOLEM, new float[]{0.25F, 0.25F, 0.25F});
-        map.put(HeadedSkullBlock.Type.AGGRESSIVE_PANDA, new float[]{0.21875F, 0.1875F, 0.21875F});
-        map.put(HeadedSkullBlock.Type.BROWN_PANDA, new float[]{0.21875F, 0.1875F, 0.21875F});
-        map.put(HeadedSkullBlock.Type.LAZY_PANDA, new float[]{0.21875F, 0.1875F, 0.21875F});
-        map.put(HeadedSkullBlock.Type.PANDA, new float[]{0.21875F, 0.1875F, 0.21875F});
-        map.put(HeadedSkullBlock.Type.PLAYFUL_PANDA, new float[]{0.21875F, 0.1875F, 0.21875F});
-        map.put(HeadedSkullBlock.Type.WEAK_PANDA, new float[]{0.21875F, 0.1875F, 0.21875F});
-        map.put(HeadedSkullBlock.Type.WORRIED_PANDA, new float[]{0.21875F, 0.1875F, 0.21875F});
-        map.put(HeadedSkullBlock.Type.DROWNED, new float[]{0.25F, 0.25F, 0.25F});
-        map.put(HeadedSkullBlock.Type.RED_PARROT, new float[]{0.4375F, 0.375F, 0.4375F});
-        map.put(HeadedSkullBlock.Type.GREEN_PARROT, new float[]{0.4375F, 0.375F, 0.4375F});
-        map.put(HeadedSkullBlock.Type.BLUE_PARROT, new float[]{0.4375F, 0.375F, 0.4375F});
-        map.put(HeadedSkullBlock.Type.CYAN_PARROT, new float[]{0.4375F, 0.375F, 0.4375F});
-        map.put(HeadedSkullBlock.Type.GRAY_PARROT, new float[]{0.4375F, 0.375F, 0.4375F});
-        map.put(HeadedSkullBlock.Type.STRAY, new float[]{0.25F, 0.25F, 0.25F});
-        map.put(HeadedSkullBlock.Type.SHULKER, new float[]{0.3125F, 0.3125F, 0.3125F});
-        map.put(HeadedSkullBlock.Type.HUSK, new float[]{0.25F, 0.25F, 0.25F});
-        map.put(HeadedSkullBlock.Type.PIG, new float[]{0.25F, 0.25F, 0.25F});
-        map.put(HeadedSkullBlock.Type.SPIDER, new float[]{0.25F, 0.25F, 0.25F});
-        map.put(HeadedSkullBlock.Type.CAVE_SPIDER, new float[]{0.325F, 0.325F, 0.325F});
-        map.put(HeadedSkullBlock.Type.BLAZE, new float[]{0.25F, 0.25F, 0.25F});
-        map.put(HeadedSkullBlock.Type.BLACK_RABBIT, new float[]{0.34375F, 0.375F, 0.34375F});
-        map.put(HeadedSkullBlock.Type.BROWN_RABBIT, new float[]{0.34375F, 0.375F, 0.34375F});
-        map.put(HeadedSkullBlock.Type.EVIL_RABBIT, new float[]{0.34375F, 0.375F, 0.34375F});
-        map.put(HeadedSkullBlock.Type.GOLD_RABBIT, new float[]{0.34375F, 0.375F, 0.34375F});
-        map.put(HeadedSkullBlock.Type.SALT_RABBIT, new float[]{0.34375F, 0.375F, 0.34375F});
-        map.put(HeadedSkullBlock.Type.WHITE_RABBIT, new float[]{0.34375F, 0.375F, 0.34375F});
-        map.put(HeadedSkullBlock.Type.WHITE_SPLOTCHED_RABBIT, new float[]{0.34375F, 0.375F, 0.34375F});
-        map.put(HeadedSkullBlock.Type.TURTLE, new float[]{0.3125F, 0.34375F, 0.3125F});
-        map.put(HeadedSkullBlock.Type.WITHER, new float[]{0.25F, 0.25F, 0.25F});
-        map.put(HeadedSkullBlock.Type.WOLF, new float[]{0.375F, 0.3125F, 0.375F});
-        map.put(HeadedSkullBlock.Type.BAT, new float[]{0.434375F, 0.434375F, 0.434375F});
-        map.put(HeadedSkullBlock.Type.WITCH, new float[]{0.25F, 0.25F, 0.25F});
-        map.put(HeadedSkullBlock.Type.CHICKEN, new float[]{0.40625F, 0.3125F, 0.40625F});
-        map.put(HeadedSkullBlock.Type.PHANTOM, new float[]{0.34375F, 0.40625F, 0.34375F});
-        map.put(HeadedSkullBlock.Type.SNOW_GOLEM, new float[]{0.28125F, 0.28125F, 0.28125F});
-    });
-
-
-
     private RenderLayer getRenderLayer(HeadedSkullBlock.SkullType type) {
         Identifier identifier = TEXTURES.get(type);
         if (type == HeadedSkullBlock.Type.ENDERMAN || type == HeadedSkullBlock.Type.SPIDER || type == HeadedSkullBlock.Type.CAVE_SPIDER || type == HeadedSkullBlock.Type.PHANTOM) {
@@ -345,19 +259,21 @@ public class HeadedSkullRenderManager {
         return getRenderLayer(skullType);
     }
 
-    public static float[] getHeadDirectionDislocation(HeadedSkullBlock.SkullType skullType) {
-        return HEAD_DIRECTION_DISLOCATION.get(skullType);
+    public static float[] getModelSize(HeadedSkullBlockEntityModel model) {
+        float[] dimensions = model.getHeadSizeInPixels();
+
+        return dimensions;
     }
 
-    public static void renderSkull(HeadedSkullBlock.SkullType skullType, @Nullable Direction direction, float yaw, float animationProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, HeadedSkullBlockEntityModel model, RenderLayer renderLayer, float r, float g, float b) {
+
+    public static void renderSkull(@Nullable HeadedSkullBlock.SkullType skullType, @Nullable Direction direction, float yaw, float animationProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, HeadedSkullBlockEntityModel model, RenderLayer renderLayer, float r, float g, float b) {
         matrices.push();
         if (direction == null) {
             matrices.translate(0.5F, 0.0F, 0.5F);
         } else {
-            float dislocationX = getHeadDirectionDislocation(skullType)[0];
-            float dislocationY = getHeadDirectionDislocation(skullType)[1];
-            float dislocationZ = getHeadDirectionDislocation(skullType)[2];
-            matrices.translate(0.5F - (float)direction.getOffsetX() * dislocationX, dislocationY, 0.5F - (float)direction.getOffsetZ() * dislocationZ);
+            float dislocationY = (16 - model.getHeadSizeInPixels()[1])/32;
+            float dislocationX = (16 - model.getHeadSizeInPixels()[2])/32;
+            matrices.translate(0.5F - (float)direction.getOffsetX() * dislocationX, dislocationY, 0.5F - (float)direction.getOffsetZ() * dislocationX);
         }
 
         matrices.scale(-1.0F, -1.0F, 1.0F);

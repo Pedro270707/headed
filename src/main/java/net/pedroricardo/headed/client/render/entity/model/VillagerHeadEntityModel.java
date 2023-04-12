@@ -32,6 +32,10 @@ public class VillagerHeadEntityModel extends HeadedSkullBlockEntityModel {
         return TexturedModelData.of(getModelData(), 64, 64);
     }
 
+    public float[] getHeadSizeInPixels() {
+        return new float[] {8.0f, 10.0f, 8.0f};
+    }
+
     public void setHeadRotation(float animationProgress, float yaw, float pitch) {
         this.head.yaw = yaw * 0.017453292F;
         this.head.pitch = pitch * 0.017453292F;

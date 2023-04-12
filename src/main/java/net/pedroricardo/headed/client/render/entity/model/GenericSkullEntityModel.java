@@ -25,6 +25,10 @@ public class GenericSkullEntityModel extends HeadedSkullBlockEntityModel {
         return TexturedModelData.of(modelData, textureWidth, textureHeight);
     }
 
+    public ModelPart getHead() {
+        return this.head;
+    }
+
     public void setHeadRotation(float animationProgress, float yaw, float pitch) {
         this.head.yaw = yaw * 0.017453292F;
         this.head.pitch = pitch * 0.017453292F;
