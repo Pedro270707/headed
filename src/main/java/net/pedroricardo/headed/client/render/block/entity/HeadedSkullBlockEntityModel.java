@@ -12,4 +12,8 @@ public abstract class HeadedSkullBlockEntityModel extends Model {
     }
 
     public abstract void setHeadRotation(float animationProgress, float yaw, float pitch);
+
+    public float[] getHeadSizeInPixels() {
+        return new float[] {8, 8, 8};
+    }
 }

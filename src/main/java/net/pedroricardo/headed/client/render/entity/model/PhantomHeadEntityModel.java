@@ -22,6 +22,11 @@ public class PhantomHeadEntityModel extends HeadedSkullBlockEntityModel {
         return TexturedModelData.of(modelData, 64, 64);
     }
 
+    @Override
+    public float[] getHeadSizeInPixels() {
+        return new float[] {7.0f, 3.0f, 5.0f};
+    }
+
     public void setHeadRotation(float animationProgress, float yaw, float pitch) {
         this.head.yaw = yaw * 0.017453292F;
         this.head.pitch = pitch * 0.017453292F;

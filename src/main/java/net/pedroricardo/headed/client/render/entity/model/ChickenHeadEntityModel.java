@@ -28,6 +28,11 @@ public class ChickenHeadEntityModel extends HeadedSkullBlockEntityModel {
         return TexturedModelData.of(modelData, 64, 32);
     }
 
+    @Override
+    public float[] getHeadSizeInPixels() {
+        return new float[] {4.0f, 6.0f, 3.0f};
+    }
+
     public void setHeadRotation(float animationProgress, float yaw, float pitch) {
         this.head.yaw = yaw * 0.017453292F;
         this.head.pitch = pitch * 0.017453292F;
