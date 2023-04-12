@@ -269,7 +269,7 @@ public class HeadedSkullRenderManager {
         }
     }
 
-    public static void renderSkull(HeadedSkullBlock.SkullType skullType, @Nullable Direction direction, float yaw, float animationProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, HeadedSkullBlockEntityModel model, RenderLayer renderLayer, float r, float g, float b) {
+    public static void renderSkull(@Nullable HeadedSkullBlock.SkullType skullType, @Nullable Direction direction, float yaw, float animationProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, HeadedSkullBlockEntityModel model, RenderLayer renderLayer, float r, float g, float b) {
         matrices.push();
         if (direction == null) {
             matrices.translate(0.5F, 0.0F, 0.5F);
