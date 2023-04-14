@@ -79,7 +79,6 @@ public class HeadedSkullRenderManager {
         builder.put(HeadedSkullBlock.Type.GREEN_SHEEP, new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
         builder.put(HeadedSkullBlock.Type.RED_SHEEP, new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
         builder.put(HeadedSkullBlock.Type.BLACK_SHEEP, new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
-        builder.put(HeadedSkullBlock.Type.ALLAY, new AllayHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.ALLAY_HEAD)));
         builder.put(HeadedSkullBlock.Type.VEX, new GenericSkullEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.VEX_HEAD)));
         builder.put(HeadedSkullBlock.Type.PIGLIN, new HeadedPiglinHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PIGLIN_HEAD)));
         builder.put(HeadedSkullBlock.Type.PIGLIN_BRUTE, new HeadedPiglinHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PIGLIN_BRUTE_HEAD)));
@@ -174,7 +173,6 @@ public class HeadedSkullRenderManager {
         map.put(HeadedSkullBlock.Type.GREEN_SHEEP, new Identifier("textures/entity/sheep/sheep.png"));
         map.put(HeadedSkullBlock.Type.RED_SHEEP, new Identifier("textures/entity/sheep/sheep.png"));
         map.put(HeadedSkullBlock.Type.BLACK_SHEEP, new Identifier("textures/entity/sheep/sheep.png"));
-        map.put(HeadedSkullBlock.Type.ALLAY, new Identifier("textures/entity/allay/allay.png"));
         map.put(HeadedSkullBlock.Type.VEX, new Identifier("textures/entity/illager/vex.png"));
         map.put(HeadedSkullBlock.Type.PIGLIN, new Identifier("textures/entity/piglin/piglin.png"));
         map.put(HeadedSkullBlock.Type.PIGLIN_BRUTE, new Identifier("textures/entity/piglin/piglin_brute.png"));

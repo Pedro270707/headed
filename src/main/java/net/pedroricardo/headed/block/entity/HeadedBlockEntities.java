@@ -36,7 +36,6 @@ public class HeadedBlockEntities {
                         HeadedBlocks.GREEN_SHEEP_HEAD, HeadedBlocks.GREEN_SHEEP_WALL_HEAD,
                         HeadedBlocks.RED_SHEEP_HEAD, HeadedBlocks.RED_SHEEP_WALL_HEAD,
                         HeadedBlocks.BLACK_SHEEP_HEAD, HeadedBlocks.BLACK_SHEEP_WALL_HEAD,
-                        HeadedBlocks.ALLAY_HEAD, HeadedBlocks.ALLAY_WALL_HEAD,
                         HeadedBlocks.VEX_HEAD, HeadedBlocks.VEX_WALL_HEAD,
                         HeadedBlocks.PIGLIN_HEAD, HeadedBlocks.PIGLIN_WALL_HEAD,
                         HeadedBlocks.PIGLIN_BRUTE_HEAD, HeadedBlocks.PIGLIN_BRUTE_WALL_HEAD,

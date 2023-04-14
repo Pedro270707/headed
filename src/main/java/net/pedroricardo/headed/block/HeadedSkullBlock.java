@@ -25,7 +25,6 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
     protected static final VoxelShape SHAPE;
     protected static final VoxelShape VILLAGER_SHAPE;
     protected static final VoxelShape SHEEP_SHAPE;
-    protected static final VoxelShape ALLAY_SHAPE;
     protected static final VoxelShape VEX_SHAPE;
     protected static final VoxelShape PIGLIN_SHAPE;
     protected static final VoxelShape AXOLOTL_SHAPE;
@@ -66,8 +65,6 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
             return VILLAGER_SHAPE;
         } else if (SHEEP_TYPES.contains(this.getSkullType())) {
             return SHEEP_SHAPE;
-        } else if (this.getSkullType() == Type.ALLAY) {
-            return ALLAY_SHAPE;
         } else if (this.getSkullType() == Type.VEX) {
             return VEX_SHAPE;
         } else if (PIGLIN_TYPES.contains(this.getSkullType())) {
@@ -136,7 +133,6 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
         SHAPE = Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 8.0, 12.0);
         VILLAGER_SHAPE = Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 10.0, 12.0);
         SHEEP_SHAPE = Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 6.0, 12.0);
-        ALLAY_SHAPE = Block.createCuboidShape(5.5, 0.0, 5.5, 10.5, 5.0, 10.5);
         VEX_SHAPE = Block.createCuboidShape(6.4, 0.0, 6.4, 9.6, 3.2, 9.6);
         PIGLIN_SHAPE = Block.createCuboidShape(3.0, 0.0, 3.0, 13.0, 8.0, 13.0);
         AXOLOTL_SHAPE = Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 5.0, 12.0);
@@ -205,7 +201,6 @@ public class HeadedSkullBlock extends AbstractHeadedSkullBlock {
         GREEN_SHEEP,
         RED_SHEEP,
         BLACK_SHEEP,
-        ALLAY,
         VEX,
         PIGLIN,
         PIGLIN_BRUTE,

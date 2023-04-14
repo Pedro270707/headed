@@ -14,7 +14,6 @@ import net.minecraft.item.Wearable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.pedroricardo.headed.HeadedConfig;
 import net.pedroricardo.headed.block.entity.HeadedBlockEntities;
 import net.pedroricardo.headed.block.entity.HeadedSkullBlockEntity;
 import net.pedroricardo.headed.item.HeadedItems;
@@ -40,7 +39,7 @@ public abstract class AbstractHeadedSkullBlock extends BlockWithEntity implement
     @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
         if (world.isClient) {
-            boolean bl = state.isOf(HeadedBlocks.PIGLIN_HEAD) || state.isOf(HeadedBlocks.PIGLIN_WALL_HEAD) || state.isOf(HeadedBlocks.PIGLIN_BRUTE_HEAD) || state.isOf(HeadedBlocks.PIGLIN_BRUTE_WALL_HEAD) || state.isOf(HeadedBlocks.ZOMBIFIED_PIGLIN_HEAD) || state.isOf(HeadedBlocks.ZOMBIFIED_PIGLIN_WALL_HEAD) || ((state.isOf(HeadedBlocks.FOX_HEAD) || state.isOf(HeadedBlocks.SNOW_FOX_HEAD)) && HeadedConfig.FOX_HEADS_TICK.get());
+            boolean bl = state.isOf(HeadedBlocks.PIGLIN_HEAD) || state.isOf(HeadedBlocks.PIGLIN_WALL_HEAD) || state.isOf(HeadedBlocks.PIGLIN_BRUTE_HEAD) || state.isOf(HeadedBlocks.PIGLIN_BRUTE_WALL_HEAD) || state.isOf(HeadedBlocks.ZOMBIFIED_PIGLIN_HEAD) || state.isOf(HeadedBlocks.ZOMBIFIED_PIGLIN_WALL_HEAD) || (state.isOf(HeadedBlocks.FOX_HEAD) || state.isOf(HeadedBlocks.SNOW_FOX_HEAD));
             if (bl) {
                 return checkType(type, HeadedBlockEntities.SKULL, HeadedSkullBlockEntity::tick);
             }

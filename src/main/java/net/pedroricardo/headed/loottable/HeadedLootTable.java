@@ -191,12 +191,6 @@ public class HeadedLootTable {
             }
         });
         LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
-            if (source.isBuiltin() && EntityType.ALLAY.getLootTableId().equals(id)) {
-                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.ALLAY_HEAD))
-                        .conditionally(KilledByChargedCreeperLootCondition.builder()));
-            }
-        });
-        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
             if (source.isBuiltin() && EntityType.VEX.getLootTableId().equals(id)) {
                 tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(HeadedItems.VEX_HEAD))
                         .conditionally(KilledByChargedCreeperLootCondition.builder()));
@@ -306,17 +300,17 @@ public class HeadedLootTable {
         NbtCompound siameseCatNbtCompound = new NbtCompound();
         NbtCompound tabbyCatNbtCompound = new NbtCompound();
         NbtCompound whiteCatNbtCompound = new NbtCompound();
-        allBlackCatNbtCompound.putString("variant", new Identifier("all_black").toString());
-        blackCatNbtCompound.putString("variant", new Identifier("black").toString());
-        britishShorthairCatNbtCompound.putString("variant", new Identifier("british_shorthair").toString());
-        calicoCatNbtCompound.putString("variant", new Identifier("calico").toString());
-        jellieCatNbtCompound.putString("variant", new Identifier("jellie").toString());
-        persianCatNbtCompound.putString("variant", new Identifier("persian").toString());
-        ragdollCatNbtCompound.putString("variant", new Identifier("ragdoll").toString());
-        redCatNbtCompound.putString("variant", new Identifier("red").toString());
-        siameseCatNbtCompound.putString("variant", new Identifier("siamese").toString());
-        tabbyCatNbtCompound.putString("variant", new Identifier("tabby").toString());
-        whiteCatNbtCompound.putString("variant", new Identifier("white").toString());
+        allBlackCatNbtCompound.putInt("CatType", CatEntity.ALL_BLACK_TYPE);
+        blackCatNbtCompound.putInt("CatType", CatEntity.BLACK_TYPE);
+        britishShorthairCatNbtCompound.putInt("CatType", CatEntity.BRITISH_SHORTHAIR_TYPE);
+        calicoCatNbtCompound.putInt("CatType", CatEntity.CALICO_TYPE);
+        jellieCatNbtCompound.putInt("CatType", CatEntity.JELLIE_TYPE);
+        persianCatNbtCompound.putInt("CatType", CatEntity.PERSIAN_TYPE);
+        ragdollCatNbtCompound.putInt("CatType", CatEntity.RAGDOLL_TYPE);
+        redCatNbtCompound.putInt("CatType", CatEntity.RED_TYPE);
+        siameseCatNbtCompound.putInt("CatType", CatEntity.SIAMESE_TYPE);
+        tabbyCatNbtCompound.putInt("CatType", CatEntity.TABBY_TYPE);
+        whiteCatNbtCompound.putInt("CatType", CatEntity.WHITE_TYPE);
         NbtPredicate allBlackCatNbtPredicate = new NbtPredicate(allBlackCatNbtCompound);
         NbtPredicate blackCatNbtPredicate = new NbtPredicate(blackCatNbtCompound);
         NbtPredicate britishShorthairCatNbtPredicate = new NbtPredicate(britishShorthairCatNbtCompound);
@@ -397,8 +391,8 @@ public class HeadedLootTable {
         });
         NbtCompound redFoxNbtCompound = new NbtCompound();
         NbtCompound snowFoxNbtCompound = new NbtCompound();
-        redFoxNbtCompound.putString("Type", "red");
-        snowFoxNbtCompound.putString("Type", "snow");
+        redFoxNbtCompound.putString("Type", FoxEntity.Type.RED.getKey());
+        snowFoxNbtCompound.putString("Type", FoxEntity.Type.SNOW.getKey());
         NbtPredicate redFoxNbtPredicate = new NbtPredicate(redFoxNbtCompound);
         NbtPredicate snowFoxNbtPredicate = new NbtPredicate(snowFoxNbtCompound);
         LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
@@ -600,13 +594,13 @@ public class HeadedLootTable {
         NbtCompound goldRabbitNbtCompound = new NbtCompound();
         NbtCompound saltRabbitNbtCompound = new NbtCompound();
         NbtCompound evilRabbitNbtCompound = new NbtCompound();
-        brownRabbitNbtCompound.putInt("RabbitType", 0);
-        whiteRabbitNbtCompound.putInt("RabbitType", 1);
-        blackRabbitNbtCompound.putInt("RabbitType", 2);
-        whiteSplotchedRabbitNbtCompound.putInt("RabbitType", 3);
-        goldRabbitNbtCompound.putInt("RabbitType", 4);
-        saltRabbitNbtCompound.putInt("RabbitType", 5);
-        evilRabbitNbtCompound.putInt("RabbitType", 99);
+        brownRabbitNbtCompound.putInt("RabbitType", RabbitEntity.BROWN_TYPE);
+        whiteRabbitNbtCompound.putInt("RabbitType", RabbitEntity.WHITE_TYPE);
+        blackRabbitNbtCompound.putInt("RabbitType", RabbitEntity.BLACK_TYPE);
+        whiteSplotchedRabbitNbtCompound.putInt("RabbitType", RabbitEntity.WHITE_SPOTTED_TYPE);
+        goldRabbitNbtCompound.putInt("RabbitType", RabbitEntity.GOLD_TYPE);
+        saltRabbitNbtCompound.putInt("RabbitType", RabbitEntity.SALT_TYPE);
+        evilRabbitNbtCompound.putInt("RabbitType", RabbitEntity.KILLER_BUNNY_TYPE);
         NbtPredicate brownRabbitNbtPredicate = new NbtPredicate(brownRabbitNbtCompound);
         NbtPredicate whiteRabbitNbtPredicate = new NbtPredicate(whiteRabbitNbtCompound);
         NbtPredicate blackRabbitNbtPredicate = new NbtPredicate(blackRabbitNbtCompound);

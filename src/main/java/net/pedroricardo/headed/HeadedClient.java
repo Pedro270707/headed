@@ -75,7 +75,6 @@ public class HeadedClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(ILLUSIONER_HEAD, VillagerHeadEntityModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(SHEEP_HEAD, SheepHeadEntityModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(SHEEP_WOOL, SheepHeadWoolEntityModel::getTexturedModelData);
-        EntityModelLayerRegistry.registerModelLayer(ALLAY_HEAD, AllayHeadEntityModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(VEX_HEAD, () -> GenericSkullEntityModel.getTexturedModelData(new Dilation(0.0F), 64, 64));
         EntityModelLayerRegistry.registerModelLayer(PIGLIN_HEAD, HeadedPiglinHeadEntityModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(PIGLIN_BRUTE_HEAD, HeadedPiglinHeadEntityModel::getTexturedModelData);
@@ -134,7 +133,6 @@ public class HeadedClient implements ClientModInitializer {
         ItemRendererRegistry.register(HeadedItems.GREEN_SHEEP_HEAD);
         ItemRendererRegistry.register(HeadedItems.RED_SHEEP_HEAD);
         ItemRendererRegistry.register(HeadedItems.BLACK_SHEEP_HEAD);
-        ItemRendererRegistry.register(HeadedItems.ALLAY_HEAD);
         ItemRendererRegistry.register(HeadedItems.VEX_HEAD);
         ItemRendererRegistry.register(HeadedItems.PIGLIN_HEAD);
         ItemRendererRegistry.register(HeadedItems.PIGLIN_BRUTE_HEAD);

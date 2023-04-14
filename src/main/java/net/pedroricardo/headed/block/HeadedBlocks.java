@@ -55,8 +55,6 @@ public class HeadedBlocks {
     public static final Block RED_SHEEP_WALL_HEAD;
     public static final Block BLACK_SHEEP_HEAD;
     public static final Block BLACK_SHEEP_WALL_HEAD;
-    public static final Block ALLAY_HEAD;
-    public static final Block ALLAY_WALL_HEAD;
     public static final Block VEX_HEAD;
     public static final Block VEX_WALL_HEAD;
     public static final Block PIGLIN_HEAD;
@@ -234,8 +232,6 @@ public class HeadedBlocks {
         RED_SHEEP_WALL_HEAD = register("red_sheep_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.RED_SHEEP, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(RED_SHEEP_HEAD)));
         BLACK_SHEEP_HEAD = register("black_sheep_head", new HeadedSkullBlock(HeadedSkullBlock.Type.BLACK_SHEEP, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
         BLACK_SHEEP_WALL_HEAD = register("black_sheep_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.BLACK_SHEEP, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(BLACK_SHEEP_HEAD)));
-        ALLAY_HEAD = register("allay_head", new HeadedSkullBlock(HeadedSkullBlock.Type.ALLAY, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).luminance(state -> 15)));
-        ALLAY_WALL_HEAD = register("allay_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.ALLAY, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).luminance(state -> 15).dropsLike(ALLAY_HEAD)));
         VEX_HEAD = register("vex_head", new HeadedSkullBlock(HeadedSkullBlock.Type.VEX, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
         VEX_WALL_HEAD = register("vex_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.VEX, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(VEX_HEAD)));
         ILLUSIONER_HEAD = register("illusioner_head", new HeadedSkullBlock(HeadedSkullBlock.Type.ILLUSIONER, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));

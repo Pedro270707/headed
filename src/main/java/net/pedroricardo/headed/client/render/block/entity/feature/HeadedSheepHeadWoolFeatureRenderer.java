@@ -51,9 +51,9 @@ public class HeadedSheepHeadWoolFeatureRenderer implements HeadedSkullFeatureRen
         float u;
         String skullName;
         if (blockEntity != null) {
-            skullName = Optional.ofNullable(blockEntity.getCustomName()).orElse(Text.empty()).getString();
+            skullName = Optional.ofNullable(blockEntity.getCustomName()).orElse(Text.of("")).getString();
         } else {
-            skullName = Optional.ofNullable(itemStack.getName()).orElse(Text.empty()).getString();
+            skullName = Optional.ofNullable(itemStack.getName()).orElse(Text.of("")).getString();
         }
         if (skullName.equals("jeb_")) {
             int time;
