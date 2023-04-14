@@ -26,7 +26,7 @@ public class SnowGolemHeadEntityModel extends HeadedSkullBlockEntityModel {
     }
 
     public float[] getHeadSizeInPixels() {
-        return new float[] {8.0f, 8.0f, 8.0f};
+        return new float[] {7.0f, 7.0f, 7.0f};
     }
 
     public void setHeadRotation(float animationProgress, float yaw, float pitch) {
