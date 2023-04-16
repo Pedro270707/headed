@@ -9,8 +9,12 @@ import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.pathing.NavigationType;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Wearable;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
@@ -54,7 +58,7 @@ public abstract class AbstractHeadedSkullBlock extends BlockWithEntity implement
     }
 
     public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
-      if (itemStack.hasCustomName() && (itemStack.getOrCreateSubNbt("BlockEntityTag").getBoolean(HeadedSkullBlockEntity.IS_TAMED_KEY) || itemStack.getItem().equals(HeadedItems.WHITE_SHEEP_HEAD) || itemStack.getItem().equals(HeadedItems.ORANGE_SHEEP_HEAD) || itemStack.getItem().equals(HeadedItems.MAGENTA_SHEEP_HEAD) || itemStack.getItem().equals(HeadedItems.LIGHT_BLUE_SHEEP_HEAD) || itemStack.getItem().equals(HeadedItems.YELLOW_SHEEP_HEAD) || itemStack.getItem().equals(HeadedItems.LIME_SHEEP_HEAD) || itemStack.getItem().equals(HeadedItems.PINK_SHEEP_HEAD) || itemStack.getItem().equals(HeadedItems.GRAY_SHEEP_HEAD) || itemStack.getItem().equals(HeadedItems.LIGHT_GRAY_SHEEP_HEAD) || itemStack.getItem().equals(HeadedItems.CYAN_SHEEP_HEAD) || itemStack.getItem().equals(HeadedItems.PURPLE_SHEEP_HEAD) || itemStack.getItem().equals(HeadedItems.BLUE_SHEEP_HEAD) || itemStack.getItem().equals(HeadedItems.BROWN_SHEEP_HEAD) || itemStack.getItem().equals(HeadedItems.GREEN_SHEEP_HEAD) || itemStack.getItem().equals(HeadedItems.RED_SHEEP_HEAD) || itemStack.getItem().equals(HeadedItems.BLACK_SHEEP_HEAD)) || itemStack.getItem().equals(HeadedItems.BLACK_RABBIT_HEAD) || itemStack.getItem().equals(HeadedItems.BROWN_RABBIT_HEAD) || itemStack.getItem().equals(HeadedItems.EVIL_RABBIT_HEAD) || itemStack.getItem().equals(HeadedItems.GOLD_RABBIT_HEAD) || itemStack.getItem().equals(HeadedItems.SALT_RABBIT_HEAD) || itemStack.getItem().equals(HeadedItems.WHITE_RABBIT_HEAD) || itemStack.getItem().equals(HeadedItems.WHITE_SPLOTCHED_RABBIT_HEAD)) {
+        if (itemStack.hasCustomName() && (itemStack.getOrCreateSubNbt("BlockEntityTag").getBoolean(HeadedSkullBlockEntity.IS_TAMED_KEY) || itemStack.getItem().equals(HeadedItems.WHITE_SHEEP_HEAD) || itemStack.getItem().equals(HeadedItems.ORANGE_SHEEP_HEAD) || itemStack.getItem().equals(HeadedItems.MAGENTA_SHEEP_HEAD) || itemStack.getItem().equals(HeadedItems.LIGHT_BLUE_SHEEP_HEAD) || itemStack.getItem().equals(HeadedItems.YELLOW_SHEEP_HEAD) || itemStack.getItem().equals(HeadedItems.LIME_SHEEP_HEAD) || itemStack.getItem().equals(HeadedItems.PINK_SHEEP_HEAD) || itemStack.getItem().equals(HeadedItems.GRAY_SHEEP_HEAD) || itemStack.getItem().equals(HeadedItems.LIGHT_GRAY_SHEEP_HEAD) || itemStack.getItem().equals(HeadedItems.CYAN_SHEEP_HEAD) || itemStack.getItem().equals(HeadedItems.PURPLE_SHEEP_HEAD) || itemStack.getItem().equals(HeadedItems.BLUE_SHEEP_HEAD) || itemStack.getItem().equals(HeadedItems.BROWN_SHEEP_HEAD) || itemStack.getItem().equals(HeadedItems.GREEN_SHEEP_HEAD) || itemStack.getItem().equals(HeadedItems.RED_SHEEP_HEAD) || itemStack.getItem().equals(HeadedItems.BLACK_SHEEP_HEAD)) || itemStack.getItem().equals(HeadedItems.BLACK_RABBIT_HEAD) || itemStack.getItem().equals(HeadedItems.BROWN_RABBIT_HEAD) || itemStack.getItem().equals(HeadedItems.EVIL_RABBIT_HEAD) || itemStack.getItem().equals(HeadedItems.GOLD_RABBIT_HEAD) || itemStack.getItem().equals(HeadedItems.SALT_RABBIT_HEAD) || itemStack.getItem().equals(HeadedItems.WHITE_RABBIT_HEAD) || itemStack.getItem().equals(HeadedItems.WHITE_SPLOTCHED_RABBIT_HEAD)) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof HeadedSkullBlockEntity) {
                 ((HeadedSkullBlockEntity) blockEntity).setCustomName(itemStack.getName());

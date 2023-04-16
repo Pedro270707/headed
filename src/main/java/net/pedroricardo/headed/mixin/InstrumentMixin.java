@@ -25,7 +25,7 @@ public class InstrumentMixin {
         } else if (state.isOf(HeadedBlocks.ZOMBIE_VILLAGER_HEAD)) {
             ci.setReturnValue(Optional.of(Instrument.valueOf("ZOMBIE_VILLAGER")));
         } else if (state.isOf(HeadedBlocks.WANDERING_TRADER_HEAD)) {
-            ci.setReturnValue(Optional.of(Instrument.valueOf("EVOKER")));
+            ci.setReturnValue(Optional.of(Instrument.valueOf("WANDERING_TRADER")));
         } else if (state.isOf(HeadedBlocks.ILLUSIONER_HEAD)) {
             ci.setReturnValue(Optional.of(Instrument.valueOf("ILLUSIONER")));
         } else if (state.isOf(HeadedBlocks.SHEEP_HEAD) || state.isOf(HeadedBlocks.WHITE_SHEEP_HEAD) || state.isOf(HeadedBlocks.ORANGE_SHEEP_HEAD) || state.isOf(HeadedBlocks.MAGENTA_SHEEP_HEAD) || state.isOf(HeadedBlocks.LIGHT_BLUE_SHEEP_HEAD) || state.isOf(HeadedBlocks.YELLOW_SHEEP_HEAD) || state.isOf(HeadedBlocks.LIME_SHEEP_HEAD) || state.isOf(HeadedBlocks.PINK_SHEEP_HEAD) || state.isOf(HeadedBlocks.GRAY_SHEEP_HEAD) || state.isOf(HeadedBlocks.LIGHT_GRAY_SHEEP_HEAD) || state.isOf(HeadedBlocks.CYAN_SHEEP_HEAD) || state.isOf(HeadedBlocks.PURPLE_SHEEP_HEAD) || state.isOf(HeadedBlocks.BLUE_SHEEP_HEAD) || state.isOf(HeadedBlocks.BROWN_SHEEP_HEAD) || state.isOf(HeadedBlocks.GREEN_SHEEP_HEAD) || state.isOf(HeadedBlocks.RED_SHEEP_HEAD) || state.isOf(HeadedBlocks.BLACK_SHEEP_HEAD)) {
