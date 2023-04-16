@@ -1,0 +1,362 @@
+{
+  "block.note_block.imitate.villager": {
+    "sounds": [
+      {
+        "name": "entity.villager.ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.villager.ambient"
+  },
+  "block.note_block.imitate.evoker": {
+    "sounds": [
+      {
+        "name": "entity.evoker.ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.evoker.ambient"
+  },
+  "block.note_block.imitate.vindicator": {
+    "sounds": [
+      {
+        "name": "entity.vindicator.ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.vindicator.ambient"
+  },
+  "block.note_block.imitate.pillager": {
+    "sounds": [
+      {
+        "name": "entity.pillager.ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.pillager.ambient"
+  },
+  "block.note_block.imitate.zombie_villager": {
+    "sounds": [
+      {
+        "name": "entity.zombie_villager.ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.zombie_villager.ambient"
+  },
+  "block.note_block.imitate.wandering_trader": {
+    "sounds": [
+      {
+        "name": "entity.wandering_trader.ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.wandering_trader.ambient"
+  },
+  "block.note_block.imitate.illusioner": {
+    "sounds": [
+      {
+        "name": "entity.illusioner.ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.illusioner.ambient"
+  },
+  "block.note_block.imitate.sheep": {
+    "sounds": [
+      {
+        "name": "entity.sheep.ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.sheep.ambient"
+  },
+  "block.note_block.imitate.allay": {
+    "sounds": [
+      {
+        "name": "entity.allay.ambient_without_item",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.allay.ambient_without_item"
+  },
+  "block.note_block.imitate.vex": {
+    "sounds": [
+      {
+        "name": "entity.vex.ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.vex.ambient"
+  },
+  "block.note_block.imitate.piglin_brute": {
+    "sounds": [
+      {
+        "name": "entity.piglin_brute.ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.piglin_brute.ambient"
+  },
+  "block.note_block.imitate.zombified_piglin": {
+    "sounds": [
+      {
+        "name": "entity.zombified_piglin.ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.zombified_piglin.ambient"
+  },
+  "block.note_block.imitate.axolotl": {
+    "sounds": [
+      {
+        "name": "entity.axolotl.idle_air",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.axolotl.idle_air"
+  },
+  "block.note_block.imitate.cow": {
+    "sounds": [
+      {
+        "name": "entity.cow.ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.cow.ambient"
+  },
+  "block.note_block.imitate.polar_bear": {
+    "sounds": [
+      {
+        "name": "entity.polar_bear.ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.polar_bear.ambient"
+  },
+  "block.note_block.imitate.ocelot": {
+    "sounds": [
+      {
+        "name": "entity.ocelot.ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.ocelot.ambient"
+  },
+  "block.note_block.imitate.cat": {
+    "sounds": [
+      {
+        "name": "entity.cat.ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.cat.ambient"
+  },
+  "block.note_block.imitate.stray_cat": {
+    "sounds": [
+      {
+        "name": "entity.cat.stray_ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.cat.ambient"
+  },
+  "block.note_block.imitate.enderman": {
+    "sounds": [
+      {
+        "name": "entity.enderman.ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.enderman.ambient"
+  },
+  "block.note_block.imitate.fox": {
+    "sounds": [
+      {
+        "name": "entity.fox.ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.fox.ambient"
+  },
+  "block.note_block.imitate.panda": {
+    "sounds": [
+      {
+        "name": "entity.panda.ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.panda.ambient"
+  },
+  "block.note_block.imitate.aggressive_panda": {
+    "sounds": [
+      {
+        "name": "entity.panda.aggressive_ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.panda.aggressive_ambient"
+  },
+  "block.note_block.imitate.worried_panda": {
+    "sounds": [
+      {
+        "name": "entity.panda.worried_ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.panda.worried_ambient"
+  },
+  "block.note_block.imitate.drowned": {
+    "sounds": [
+      {
+        "name": "entity.drowned.ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.drowned.ambient"
+  },
+  "block.note_block.imitate.parrot": {
+    "sounds": [
+      {
+        "name": "entity.parrot.ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.parrot.ambient"
+  },
+  "block.note_block.imitate.stray": {
+    "sounds": [
+      {
+        "name": "entity.stray.ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.stray.ambient"
+  },
+  "block.note_block.imitate.shulker": {
+    "sounds": [
+      {
+        "name": "entity.shulker.ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.shulker.ambient"
+  },
+  "block.note_block.imitate.husk": {
+    "sounds": [
+      {
+        "name": "entity.husk.ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.husk.ambient"
+  },
+  "block.note_block.imitate.pig": {
+    "sounds": [
+      {
+        "name": "entity.pig.ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.pig.ambient"
+  },
+  "block.note_block.imitate.spider": {
+    "sounds": [
+      {
+        "name": "entity.spider.ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.spider.ambient"
+  },
+  "block.note_block.imitate.blaze": {
+    "sounds": [
+      {
+        "name": "entity.blaze.ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.blaze.ambient"
+  },
+  "block.note_block.imitate.rabbit": {
+    "sounds": [
+      {
+        "name": "entity.rabbit.ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.rabbit.ambient"
+  },
+  "block.note_block.imitate.turtle": {
+    "sounds": [
+      {
+        "name": "entity.turtle.ambient_land",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.turtle.ambient_land"
+  },
+  "block.note_block.imitate.wither": {
+    "sounds": [
+      {
+        "name": "entity.wither.ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.wither.ambient"
+  },
+  "block.note_block.imitate.wolf": {
+    "sounds": [
+      {
+        "name": "entity.wolf.ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.wolf.ambient"
+  },
+  "block.note_block.imitate.tamed_wolf": {
+    "sounds": [
+      {
+        "name": "entity.wolf.pant",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.wolf.ambient"
+  },
+  "block.note_block.imitate.bat": {
+    "sounds": [
+      {
+        "name": "entity.bat.ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.bat.ambient"
+  },
+  "block.note_block.imitate.witch": {
+    "sounds": [
+      {
+        "name": "entity.witch.ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.witch.ambient"
+  },
+  "block.note_block.imitate.chicken": {
+    "sounds": [
+      {
+        "name": "entity.chicken.ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.chicken.ambient"
+  },
+  "block.note_block.imitate.phantom": {
+    "sounds": [
+      {
+        "name": "entity.phantom.ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.phantom.ambient"
+  }
+}
