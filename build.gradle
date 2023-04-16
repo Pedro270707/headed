@@ -18,6 +18,10 @@ repositories {
 			includeGroup "maven.modrinth"
 		}
 	}
+	maven {
+		name = 'Jitpack'
+		url = "https://jitpack.io"
+	}
 }
 
 dependencies {
@@ -30,6 +34,7 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	include modImplementation("maven.modrinth:paragon:fabric-3.0.2-1.19x")
+	includeMod "com.github.PlanetTeamSpeakk:Fabric-ASM:master-SNAPSHOT"
 
 	runtimeOnly 'blue.endless:jankson:1.1.2'
 
@@ -37,6 +42,11 @@ dependencies {
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
 
 	// modImplementation "net.fabricmc.fabric-api:fabric-api-deprecated:${project.fabric_version}"
+}
+
+def includeMod(String dep) {
+	dependencies.modImplementation(dep)
+	dependencies.include(dep)
 }
 
 processResources {

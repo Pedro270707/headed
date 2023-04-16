@@ -21,8 +21,13 @@
     "main": [
       "net.pedroricardo.headed.Headed"
     ],
+
     "client": [
       "net.pedroricardo.headed.HeadedClient"
+    ],
+
+    "mm:early_risers": [
+      "net.pedroricardo.headed.sound.HeadedEarlyRisers"
     ]
   },
   "mixins": [

@@ -3,13 +3,14 @@ package net.pedroricardo.headed;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.ItemGroups;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.pedroricardo.headed.block.HeadedBlocks;
 import net.pedroricardo.headed.block.entity.HeadedBlockEntities;
+import net.pedroricardo.headed.item.HeadedDispenserBehavior;
 import net.pedroricardo.headed.item.HeadedItems;
 import net.pedroricardo.headed.loottable.HeadedLootConditionTypes;
 import net.pedroricardo.headed.loottable.HeadedLootTable;
+import net.pedroricardo.headed.sound.HeadedSoundEvents;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,6 +24,8 @@ public class Headed implements ModInitializer {
 		HeadedBlockEntities.registerModBlockEntities();
 		HeadedLootConditionTypes.registerModLootConditions();
 		HeadedLootTable.registerModLootTables();
+		HeadedDispenserBehavior.registerModDispenserBehavior();
+		HeadedSoundEvents.registerModSoundEvents();
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(content -> {
 			content.addBefore(Items.DRAGON_HEAD, HeadedItems.PIGLIN_BRUTE_HEAD);
 			content.addAfter(Items.ZOMBIE_HEAD, HeadedItems.HUSK_HEAD);
