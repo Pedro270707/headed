@@ -25,12 +25,12 @@ public class HeadedMooshroomHeadMushroomFeatureRenderer implements HeadedSkullFe
         float dislocationY;
         if (skullType == HeadedSkullBlock.Type.RED_MOOSHROOM) {
             blockState = Blocks.RED_MUSHROOM.getDefaultState();
-            dislocationX = HeadedSkullRenderManager.getModels(MinecraftClient.getInstance().getEntityModelLoader()).get(HeadedSkullBlock.Type.RED_MOOSHROOM).getHeadSizeInPixels()[2];
-            dislocationY = HeadedSkullRenderManager.getModels(MinecraftClient.getInstance().getEntityModelLoader()).get(HeadedSkullBlock.Type.RED_MOOSHROOM).getHeadSizeInPixels()[1];
+            dislocationX = (16 - HeadedSkullRenderManager.getModels(MinecraftClient.getInstance().getEntityModelLoader()).get(HeadedSkullBlock.Type.RED_MOOSHROOM).getHeadSizeInPixels()[2])/32;
+            dislocationY = (16 - HeadedSkullRenderManager.getModels(MinecraftClient.getInstance().getEntityModelLoader()).get(HeadedSkullBlock.Type.RED_MOOSHROOM).getHeadSizeInPixels()[1])/32;
         } else {
             blockState = Blocks.BROWN_MUSHROOM.getDefaultState();
-            dislocationX = HeadedSkullRenderManager.getModels(MinecraftClient.getInstance().getEntityModelLoader()).get(HeadedSkullBlock.Type.BROWN_MOOSHROOM).getHeadSizeInPixels()[2];
-            dislocationY = HeadedSkullRenderManager.getModels(MinecraftClient.getInstance().getEntityModelLoader()).get(HeadedSkullBlock.Type.BROWN_MOOSHROOM).getHeadSizeInPixels()[1];
+            dislocationX = (16 - HeadedSkullRenderManager.getModels(MinecraftClient.getInstance().getEntityModelLoader()).get(HeadedSkullBlock.Type.BROWN_MOOSHROOM).getHeadSizeInPixels()[2])/32;
+            dislocationY = (16 - HeadedSkullRenderManager.getModels(MinecraftClient.getInstance().getEntityModelLoader()).get(HeadedSkullBlock.Type.BROWN_MOOSHROOM).getHeadSizeInPixels()[1])/32;
         }
         if (direction == null) {
             matrices.translate(0.5F, 0.0F, 0.5F);
