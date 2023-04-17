@@ -8,6 +8,7 @@
     "WitherSkullImmunityMixin"
   ],
   "client": [
+    "EasterEggMixin"
   ],
   "injectors": {
     "defaultRequire": 1
