@@ -1,12 +1,22 @@
 package net.pedroricardo.headed.block;
 
+import com.google.common.collect.Maps;
 import net.minecraft.block.*;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.util.DyeColor;
+import net.minecraft.util.Identifier;
 import net.pedroricardo.headed.Headed;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 public class HeadedBlocks {
-    
+    public static final Map<DyeColor, Block> SHEEP_HEADS = Maps.newEnumMap(DyeColor.class);
+    public static final Map<DyeColor, Block> SHEEP_WALL_HEADS = Maps.newEnumMap(DyeColor.class);
+    public static final List<Block> MOOSHROOM_HEADS = new ArrayList<>();
+    public static final List<Block> MOOSHROOM_WALL_HEADS = new ArrayList<>();
+
     public static final Block VILLAGER_HEAD;
     public static final Block VILLAGER_WALL_HEAD;
     public static final Block EVOKER_HEAD;
@@ -59,8 +69,6 @@ public class HeadedBlocks {
     public static final Block ALLAY_WALL_HEAD;
     public static final Block VEX_HEAD;
     public static final Block VEX_WALL_HEAD;
-    public static final Block PIGLIN_HEAD;
-    public static final Block PIGLIN_WALL_HEAD;
     public static final Block PIGLIN_BRUTE_HEAD;
     public static final Block PIGLIN_BRUTE_WALL_HEAD;
     public static final Block ZOMBIFIED_PIGLIN_HEAD;
@@ -240,8 +248,6 @@ public class HeadedBlocks {
         VEX_WALL_HEAD = register("vex_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.VEX, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(VEX_HEAD)));
         ILLUSIONER_HEAD = register("illusioner_head", new HeadedSkullBlock(HeadedSkullBlock.Type.ILLUSIONER, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
         ILLUSIONER_WALL_HEAD = register("illusioner_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.ILLUSIONER, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(ILLUSIONER_HEAD)));
-        PIGLIN_HEAD = register("piglin_head", new HeadedSkullBlock(HeadedSkullBlock.Type.PIGLIN, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
-        PIGLIN_WALL_HEAD = register("piglin_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.PIGLIN, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(PIGLIN_HEAD)));
         PIGLIN_BRUTE_HEAD = register("piglin_brute_head", new HeadedSkullBlock(HeadedSkullBlock.Type.PIGLIN_BRUTE, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
         PIGLIN_BRUTE_WALL_HEAD = register("piglin_brute_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.PIGLIN_BRUTE, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(PIGLIN_BRUTE_HEAD)));
         ZOMBIFIED_PIGLIN_HEAD = register("zombified_piglin_head", new HeadedSkullBlock(HeadedSkullBlock.Type.ZOMBIFIED_PIGLIN, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
@@ -374,5 +380,47 @@ public class HeadedBlocks {
 
     public static void registerModBlocks() {
         Headed.LOGGER.debug("Registering Headed blocks");
+    }
+
+    static {
+        SHEEP_HEADS.put(DyeColor.WHITE, WHITE_SHEEP_HEAD);
+        SHEEP_HEADS.put(DyeColor.ORANGE, ORANGE_SHEEP_HEAD);
+        SHEEP_HEADS.put(DyeColor.MAGENTA, MAGENTA_SHEEP_HEAD);
+        SHEEP_HEADS.put(DyeColor.LIGHT_BLUE, LIGHT_BLUE_SHEEP_HEAD);
+        SHEEP_HEADS.put(DyeColor.YELLOW, YELLOW_SHEEP_HEAD);
+        SHEEP_HEADS.put(DyeColor.LIME, LIME_SHEEP_HEAD);
+        SHEEP_HEADS.put(DyeColor.PINK, PINK_SHEEP_HEAD);
+        SHEEP_HEADS.put(DyeColor.GRAY, GRAY_SHEEP_HEAD);
+        SHEEP_HEADS.put(DyeColor.LIGHT_GRAY, LIGHT_GRAY_SHEEP_HEAD);
+        SHEEP_HEADS.put(DyeColor.CYAN, CYAN_SHEEP_HEAD);
+        SHEEP_HEADS.put(DyeColor.PURPLE, PURPLE_SHEEP_HEAD);
+        SHEEP_HEADS.put(DyeColor.BLUE, BLUE_SHEEP_HEAD);
+        SHEEP_HEADS.put(DyeColor.BROWN, BROWN_SHEEP_HEAD);
+        SHEEP_HEADS.put(DyeColor.GREEN, GREEN_SHEEP_HEAD);
+        SHEEP_HEADS.put(DyeColor.RED, RED_SHEEP_HEAD);
+        SHEEP_HEADS.put(DyeColor.BLACK, BLACK_SHEEP_HEAD);
+
+        SHEEP_WALL_HEADS.put(DyeColor.WHITE, WHITE_SHEEP_WALL_HEAD);
+        SHEEP_WALL_HEADS.put(DyeColor.ORANGE, ORANGE_SHEEP_WALL_HEAD);
+        SHEEP_WALL_HEADS.put(DyeColor.MAGENTA, MAGENTA_SHEEP_WALL_HEAD);
+        SHEEP_WALL_HEADS.put(DyeColor.LIGHT_BLUE, LIGHT_BLUE_SHEEP_WALL_HEAD);
+        SHEEP_WALL_HEADS.put(DyeColor.YELLOW, YELLOW_SHEEP_WALL_HEAD);
+        SHEEP_WALL_HEADS.put(DyeColor.LIME, LIME_SHEEP_WALL_HEAD);
+        SHEEP_WALL_HEADS.put(DyeColor.PINK, PINK_SHEEP_WALL_HEAD);
+        SHEEP_WALL_HEADS.put(DyeColor.GRAY, GRAY_SHEEP_WALL_HEAD);
+        SHEEP_WALL_HEADS.put(DyeColor.LIGHT_GRAY, LIGHT_GRAY_SHEEP_WALL_HEAD);
+        SHEEP_WALL_HEADS.put(DyeColor.CYAN, CYAN_SHEEP_WALL_HEAD);
+        SHEEP_WALL_HEADS.put(DyeColor.PURPLE, PURPLE_SHEEP_WALL_HEAD);
+        SHEEP_WALL_HEADS.put(DyeColor.BLUE, BLUE_SHEEP_WALL_HEAD);
+        SHEEP_WALL_HEADS.put(DyeColor.BROWN, BROWN_SHEEP_WALL_HEAD);
+        SHEEP_WALL_HEADS.put(DyeColor.GREEN, GREEN_SHEEP_WALL_HEAD);
+        SHEEP_WALL_HEADS.put(DyeColor.RED, RED_SHEEP_WALL_HEAD);
+        SHEEP_WALL_HEADS.put(DyeColor.BLACK, BLACK_SHEEP_WALL_HEAD);
+
+        MOOSHROOM_HEADS.add(RED_MOOSHROOM_HEAD);
+        MOOSHROOM_HEADS.add(BROWN_MOOSHROOM_HEAD);
+
+        MOOSHROOM_WALL_HEADS.add(RED_MOOSHROOM_WALL_HEAD);
+        MOOSHROOM_WALL_HEADS.add(BROWN_MOOSHROOM_WALL_HEAD);
     }
 }
