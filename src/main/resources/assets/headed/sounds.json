@@ -141,7 +141,7 @@
         "type": "event"
       }
     ],
-    "subtitle": "subtitles.entity.ocelot.ambient"
+    "subtitle": "subtitles.entity.cat.ambient"
   },
   "block.note_block.imitate.cat": {
     "sounds": [
