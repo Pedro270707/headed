@@ -9,6 +9,7 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
 import net.pedroricardo.headed.block.HeadedSkullBlock;
 import net.pedroricardo.headed.block.entity.HeadedSkullBlockEntity;
@@ -34,7 +35,7 @@ public class HeadedMooshroomHeadMushroomFeatureRenderer implements HeadedSkullFe
         }
         if (direction == null) {
             matrices.translate(0.5F, 0.0F, 0.5F);
-            matrices.translate(Math.sqrt(0.5)*-Math.cos((yaw+45) * 0.0174532F), 0.0F, Math.sqrt(0.5)*-Math.sin((yaw+45) * 0.0174532F));
+            matrices.translate(MathHelper.sqrt(0.5F)*-MathHelper.cos((yaw+45.0F) * 0.0174532F), 0.0F, MathHelper.sqrt(0.5F)*-MathHelper.sin((yaw+45.0F) * 0.0174532F));
             matrices.multiply(RotationAxis.NEGATIVE_Y.rotationDegrees(yaw));
         } else {
             matrices.translate(- (float)direction.getOffsetX() * dislocationX, dislocationY, - (float)direction.getOffsetZ() * dislocationX);
