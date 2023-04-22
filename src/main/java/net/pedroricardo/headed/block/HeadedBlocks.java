@@ -69,6 +69,8 @@ public class HeadedBlocks {
     public static final Block ALLAY_WALL_HEAD;
     public static final Block VEX_HEAD;
     public static final Block VEX_WALL_HEAD;
+    public static final Block PIGLIN_HEAD;
+    public static final Block PIGLIN_WALL_HEAD;
     public static final Block PIGLIN_BRUTE_HEAD;
     public static final Block PIGLIN_BRUTE_WALL_HEAD;
     public static final Block ZOMBIFIED_PIGLIN_HEAD;
@@ -248,6 +250,8 @@ public class HeadedBlocks {
         VEX_WALL_HEAD = register("vex_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.VEX, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(VEX_HEAD)));
         ILLUSIONER_HEAD = register("illusioner_head", new HeadedSkullBlock(HeadedSkullBlock.Type.ILLUSIONER, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
         ILLUSIONER_WALL_HEAD = register("illusioner_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.ILLUSIONER, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(ILLUSIONER_HEAD)));
+        PIGLIN_HEAD = register("piglin_head", new HeadedSkullBlock(HeadedSkullBlock.Type.PIGLIN, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
+        PIGLIN_WALL_HEAD = register("piglin_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.PIGLIN, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(PIGLIN_HEAD)));
         PIGLIN_BRUTE_HEAD = register("piglin_brute_head", new HeadedSkullBlock(HeadedSkullBlock.Type.PIGLIN_BRUTE, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
         PIGLIN_BRUTE_WALL_HEAD = register("piglin_brute_wall_head", new HeadedWallSkullBlock(HeadedSkullBlock.Type.PIGLIN_BRUTE, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F).dropsLike(PIGLIN_BRUTE_HEAD)));
         ZOMBIFIED_PIGLIN_HEAD = register("zombified_piglin_head", new HeadedSkullBlock(HeadedSkullBlock.Type.ZOMBIFIED_PIGLIN, AbstractBlock.Settings.of(Material.DECORATION).strength(1.0F)));
