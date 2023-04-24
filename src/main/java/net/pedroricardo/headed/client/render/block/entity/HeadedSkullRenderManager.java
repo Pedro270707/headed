@@ -9,6 +9,7 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.BlockRenderManager;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
+import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.render.entity.model.EntityModelLoader;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
@@ -23,6 +24,8 @@ import net.pedroricardo.headed.client.render.block.entity.feature.*;
 import net.pedroricardo.headed.client.render.entity.model.*;
 import org.jetbrains.annotations.Nullable;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,17 +49,36 @@ public class HeadedSkullRenderManager {
         MODELS = getModels(ctx.getLayerRenderDispatcher());
     }
 
-    private static final Map<HeadedSkullBlock.SkullType, HeadedSkullBlockEntityModel> EXTERNAL_MODELS = new HashMap<>();
+    private static final Map<HeadedSkullBlock.SkullType, Class<? extends HeadedSkullBlockEntityModel>> EXTERNAL_MODELS = new HashMap<>();
+    private static final Map<HeadedSkullBlock.SkullType, EntityModelLayer> EXTERNAL_MODEL_LAYERS = new HashMap<>();
     private static final Map<HeadedSkullBlock.SkullType, Identifier> EXTERNAL_TEXTURES = new HashMap<>();
 
-    public static void registerExternalRendering(HeadedSkullBlock.SkullType type, HeadedSkullBlockEntityModel model, Identifier resourceLocation, float[] headDislocation) {
-        EXTERNAL_MODELS.put(type, model);
+    private static Map<HeadedSkullBlock.SkullType, HeadedSkullBlockEntityModel> getExternalModels(EntityModelLoader modelLoader) {
+        Map<HeadedSkullBlock.SkullType, HeadedSkullBlockEntityModel> externalModels = new HashMap<>();
+        EXTERNAL_MODELS.forEach((type, modelClass) -> {
+            try {
+                Constructor<? extends HeadedSkullBlockEntityModel> constructor = modelClass.getDeclaredConstructor(ModelPart.class);
+                ModelPart modelPart = modelLoader.getModelPart(EXTERNAL_MODEL_LAYERS.get(type));
+                HeadedSkullBlockEntityModel model = constructor.newInstance(modelPart);
+                externalModels.put(type, model);
+            } catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException |
+                     InvocationTargetException e) {
+                e.printStackTrace();
+            }
+        });
+        return externalModels;
+    }
+
+
+    public static void registerExternalRendering(HeadedSkullBlock.SkullType type, Class<? extends HeadedSkullBlockEntityModel> modelClass, Identifier resourceLocation, EntityModelLayer modelLayer) {
+        EXTERNAL_MODELS.put(type, modelClass);
+        EXTERNAL_MODEL_LAYERS.put(type, modelLayer);
         EXTERNAL_TEXTURES.put(type, resourceLocation);
     }
 
     public static Map<HeadedSkullBlock.SkullType, HeadedSkullBlockEntityModel> getModels(EntityModelLoader modelLoader) {
         ImmutableMap.Builder<HeadedSkullBlock.SkullType, HeadedSkullBlockEntityModel> builder = ImmutableMap.builder();
-        builder.putAll(EXTERNAL_MODELS);
+        builder.putAll(getExternalModels(modelLoader));
 
         builder.put(HeadedSkullBlock.Type.VILLAGER, new VillagerHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.VILLAGER_HEAD)));
         builder.put(HeadedSkullBlock.Type.EVOKER, new VillagerHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.EVOKER_HEAD)));
