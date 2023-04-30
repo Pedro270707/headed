@@ -1,7 +1,8 @@
 package net.pedroricardo.headed.client.render.block.entity;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
+import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
@@ -74,102 +75,190 @@ public class HeadedSkullRenderManager {
     }
 
     public static Map<HeadedSkullBlock.SkullType, HeadedSkullBlockEntityModel> getModels(EntityModelLoader modelLoader) {
-        ImmutableMap.Builder<HeadedSkullBlock.SkullType, HeadedSkullBlockEntityModel> builder = ImmutableMap.builder();
-        builder.putAll(getExternalModels(modelLoader));
+        return Util.make(Maps.newHashMap(), (map) -> {
+            map.putAll(getExternalModels(modelLoader));
 
-        builder.put(HeadedSkullBlock.Type.VILLAGER, new VillagerHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.VILLAGER_HEAD)));
-        builder.put(HeadedSkullBlock.Type.EVOKER, new VillagerHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.EVOKER_HEAD)));
-        builder.put(HeadedSkullBlock.Type.VINDICATOR, new VillagerHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.VINDICATOR_HEAD)));
-        builder.put(HeadedSkullBlock.Type.PILLAGER, new VillagerHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PILLAGER_HEAD)));
-        builder.put(HeadedSkullBlock.Type.ZOMBIE_VILLAGER, new VillagerHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.ZOMBIE_VILLAGER_HEAD)));
-        builder.put(HeadedSkullBlock.Type.WANDERING_TRADER, new VillagerHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.WANDERING_TRADER_HEAD)));
-        builder.put(HeadedSkullBlock.Type.ILLUSIONER, new VillagerHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.ILLUSIONER_HEAD)));
-        builder.put(HeadedSkullBlock.Type.SHEEP, new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
-        builder.put(HeadedSkullBlock.Type.WHITE_SHEEP, new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
-        builder.put(HeadedSkullBlock.Type.ORANGE_SHEEP, new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
-        builder.put(HeadedSkullBlock.Type.MAGENTA_SHEEP, new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
-        builder.put(HeadedSkullBlock.Type.LIGHT_BLUE_SHEEP, new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
-        builder.put(HeadedSkullBlock.Type.YELLOW_SHEEP, new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
-        builder.put(HeadedSkullBlock.Type.LIME_SHEEP, new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
-        builder.put(HeadedSkullBlock.Type.PINK_SHEEP, new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
-        builder.put(HeadedSkullBlock.Type.GRAY_SHEEP, new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
-        builder.put(HeadedSkullBlock.Type.LIGHT_GRAY_SHEEP, new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
-        builder.put(HeadedSkullBlock.Type.CYAN_SHEEP, new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
-        builder.put(HeadedSkullBlock.Type.PURPLE_SHEEP, new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
-        builder.put(HeadedSkullBlock.Type.BLUE_SHEEP, new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
-        builder.put(HeadedSkullBlock.Type.BROWN_SHEEP, new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
-        builder.put(HeadedSkullBlock.Type.GREEN_SHEEP, new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
-        builder.put(HeadedSkullBlock.Type.RED_SHEEP, new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
-        builder.put(HeadedSkullBlock.Type.BLACK_SHEEP, new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
-        builder.put(HeadedSkullBlock.Type.VEX, new GenericSkullEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.VEX_HEAD)));
-        builder.put(HeadedSkullBlock.Type.PIGLIN, new HeadedPiglinHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PIGLIN_HEAD)));
-        builder.put(HeadedSkullBlock.Type.PIGLIN_BRUTE, new HeadedPiglinHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PIGLIN_BRUTE_HEAD)));
-        builder.put(HeadedSkullBlock.Type.ZOMBIFIED_PIGLIN, new HeadedPiglinHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.ZOMBIFIED_PIGLIN_HEAD)));
-        builder.put(HeadedSkullBlock.Type.LEUCISTIC_AXOLOTL, new AxolotlHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.AXOLOTL_HEAD)));
-        builder.put(HeadedSkullBlock.Type.BROWN_AXOLOTL, new AxolotlHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.AXOLOTL_HEAD)));
-        builder.put(HeadedSkullBlock.Type.CYAN_AXOLOTL, new AxolotlHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.AXOLOTL_HEAD)));
-        builder.put(HeadedSkullBlock.Type.GOLD_AXOLOTL, new AxolotlHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.AXOLOTL_HEAD)));
-        builder.put(HeadedSkullBlock.Type.BLUE_AXOLOTL, new AxolotlHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.AXOLOTL_HEAD)));
-        builder.put(HeadedSkullBlock.Type.COW, new CowHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.COW_HEAD)));
-        builder.put(HeadedSkullBlock.Type.BROWN_MOOSHROOM, new CowHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.COW_HEAD)));
-        builder.put(HeadedSkullBlock.Type.RED_MOOSHROOM, new CowHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.COW_HEAD)));
-        builder.put(HeadedSkullBlock.Type.POLAR_BEAR, new PolarBearHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.POLAR_BEAR_HEAD)));
-        builder.put(HeadedSkullBlock.Type.OCELOT, new OcelotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.OCELOT_HEAD)));
-        builder.put(HeadedSkullBlock.Type.ALL_BLACK_CAT, new OcelotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.OCELOT_HEAD)));
-        builder.put(HeadedSkullBlock.Type.BLACK_CAT, new OcelotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.OCELOT_HEAD)));
-        builder.put(HeadedSkullBlock.Type.BRITISH_SHORTHAIR_CAT, new OcelotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.OCELOT_HEAD)));
-        builder.put(HeadedSkullBlock.Type.CALICO_CAT, new OcelotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.OCELOT_HEAD)));
-        builder.put(HeadedSkullBlock.Type.JELLIE_CAT, new OcelotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.OCELOT_HEAD)));
-        builder.put(HeadedSkullBlock.Type.PERSIAN_CAT, new OcelotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.OCELOT_HEAD)));
-        builder.put(HeadedSkullBlock.Type.RAGDOLL_CAT, new OcelotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.OCELOT_HEAD)));
-        builder.put(HeadedSkullBlock.Type.RED_CAT, new OcelotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.OCELOT_HEAD)));
-        builder.put(HeadedSkullBlock.Type.SIAMESE_CAT, new OcelotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.OCELOT_HEAD)));
-        builder.put(HeadedSkullBlock.Type.TABBY_CAT, new OcelotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.OCELOT_HEAD)));
-        builder.put(HeadedSkullBlock.Type.WHITE_CAT, new OcelotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.OCELOT_HEAD)));
-        builder.put(HeadedSkullBlock.Type.ENDERMAN, new EndermanHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.ENDERMAN_HEAD)));
-        builder.put(HeadedSkullBlock.Type.FOX, new FoxHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.FOX_HEAD)));
-        builder.put(HeadedSkullBlock.Type.SNOW_FOX, new FoxHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.FOX_HEAD)));
-        builder.put(HeadedSkullBlock.Type.IRON_GOLEM, new IronGolemHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.IRON_GOLEM_HEAD)));
-        builder.put(HeadedSkullBlock.Type.AGGRESSIVE_PANDA, new PandaHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PANDA_HEAD)));
-        builder.put(HeadedSkullBlock.Type.BROWN_PANDA, new PandaHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PANDA_HEAD)));
-        builder.put(HeadedSkullBlock.Type.LAZY_PANDA, new PandaHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PANDA_HEAD)));
-        builder.put(HeadedSkullBlock.Type.PANDA, new PandaHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PANDA_HEAD)));
-        builder.put(HeadedSkullBlock.Type.PLAYFUL_PANDA, new PandaHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PANDA_HEAD)));
-        builder.put(HeadedSkullBlock.Type.WEAK_PANDA, new PandaHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PANDA_HEAD)));
-        builder.put(HeadedSkullBlock.Type.WORRIED_PANDA, new PandaHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PANDA_HEAD)));
-        builder.put(HeadedSkullBlock.Type.DROWNED, new GenericSkullEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.DROWNED_HEAD)));
-        builder.put(HeadedSkullBlock.Type.RED_PARROT, new GenericSkullEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PARROT_HEAD)));
-        builder.put(HeadedSkullBlock.Type.GREEN_PARROT, new ParrotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PARROT_HEAD)));
-        builder.put(HeadedSkullBlock.Type.BLUE_PARROT, new ParrotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PARROT_HEAD)));
-        builder.put(HeadedSkullBlock.Type.CYAN_PARROT, new ParrotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PARROT_HEAD)));
-        builder.put(HeadedSkullBlock.Type.GRAY_PARROT, new ParrotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PARROT_HEAD)));
-        builder.put(HeadedSkullBlock.Type.STRAY, new StraySkullEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.STRAY_SKULL)));
-        builder.put(HeadedSkullBlock.Type.SHULKER, new StraySkullEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHULKER_HEAD)));
-        builder.put(HeadedSkullBlock.Type.HUSK, new GenericSkullEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.HUSK_HEAD)));
-        builder.put(HeadedSkullBlock.Type.PIG, new PigHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PIG_HEAD)));
-        builder.put(HeadedSkullBlock.Type.SPIDER, new SpiderHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SPIDER_HEAD)));
-        builder.put(HeadedSkullBlock.Type.CAVE_SPIDER, new SpiderHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SPIDER_HEAD)));
-        builder.put(HeadedSkullBlock.Type.BLAZE, new GenericSkullEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.BLAZE_HEAD)));
-        builder.put(HeadedSkullBlock.Type.BLACK_RABBIT, new RabbitHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.RABBIT_HEAD)));
-        builder.put(HeadedSkullBlock.Type.BROWN_RABBIT, new RabbitHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.RABBIT_HEAD)));
-        builder.put(HeadedSkullBlock.Type.EVIL_RABBIT, new RabbitHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.RABBIT_HEAD)));
-        builder.put(HeadedSkullBlock.Type.GOLD_RABBIT, new RabbitHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.RABBIT_HEAD)));
-        builder.put(HeadedSkullBlock.Type.SALT_RABBIT, new RabbitHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.RABBIT_HEAD)));
-        builder.put(HeadedSkullBlock.Type.WHITE_RABBIT, new RabbitHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.RABBIT_HEAD)));
-        builder.put(HeadedSkullBlock.Type.WHITE_SPLOTCHED_RABBIT, new RabbitHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.RABBIT_HEAD)));
-        builder.put(HeadedSkullBlock.Type.TURTLE, new TurtleHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.TURTLE_HEAD)));
-        builder.put(HeadedSkullBlock.Type.WITHER, new GenericSkullEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.WITHER_SKULL)));
-        builder.put(HeadedSkullBlock.Type.WOLF, new WolfHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.WOLF_HEAD)));
-        builder.put(HeadedSkullBlock.Type.BAT, new BatHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.BAT_HEAD)));
-        builder.put(HeadedSkullBlock.Type.WITCH, new WitchHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.WITCH_HEAD)));
-        builder.put(HeadedSkullBlock.Type.CHICKEN, new ChickenHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.CHICKEN_HEAD)));
-        builder.put(HeadedSkullBlock.Type.PHANTOM, new PhantomHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PHANTOM_HEAD)));
-        builder.put(HeadedSkullBlock.Type.SNOW_GOLEM, new SnowGolemHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SNOW_GOLEM_HEAD)));
-        return builder.build();
+            map.put(HeadedSkullBlock.Type.VILLAGER,
+                    new VillagerHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.VILLAGER_HEAD)));
+            map.put(HeadedSkullBlock.Type.EVOKER,
+                    new VillagerHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.EVOKER_HEAD)));
+            map.put(HeadedSkullBlock.Type.VINDICATOR,
+                    new VillagerHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.VINDICATOR_HEAD)));
+            map.put(HeadedSkullBlock.Type.PILLAGER,
+                    new VillagerHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PILLAGER_HEAD)));
+            map.put(HeadedSkullBlock.Type.ZOMBIE_VILLAGER, new VillagerHeadEntityModel(
+                    modelLoader.getModelPart(HeadedEntityModelLayers.ZOMBIE_VILLAGER_HEAD)));
+            map.put(HeadedSkullBlock.Type.WANDERING_TRADER, new VillagerHeadEntityModel(
+                    modelLoader.getModelPart(HeadedEntityModelLayers.WANDERING_TRADER_HEAD)));
+            map.put(HeadedSkullBlock.Type.ILLUSIONER,
+                    new VillagerHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.ILLUSIONER_HEAD)));
+            map.put(HeadedSkullBlock.Type.SHEEP,
+                    new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
+            map.put(HeadedSkullBlock.Type.WHITE_SHEEP,
+                    new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
+            map.put(HeadedSkullBlock.Type.ORANGE_SHEEP,
+                    new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
+            map.put(HeadedSkullBlock.Type.MAGENTA_SHEEP,
+                    new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
+            map.put(HeadedSkullBlock.Type.LIGHT_BLUE_SHEEP,
+                    new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
+            map.put(HeadedSkullBlock.Type.YELLOW_SHEEP,
+                    new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
+            map.put(HeadedSkullBlock.Type.LIME_SHEEP,
+                    new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
+            map.put(HeadedSkullBlock.Type.PINK_SHEEP,
+                    new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
+            map.put(HeadedSkullBlock.Type.GRAY_SHEEP,
+                    new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
+            map.put(HeadedSkullBlock.Type.LIGHT_GRAY_SHEEP,
+                    new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
+            map.put(HeadedSkullBlock.Type.CYAN_SHEEP,
+                    new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
+            map.put(HeadedSkullBlock.Type.PURPLE_SHEEP,
+                    new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
+            map.put(HeadedSkullBlock.Type.BLUE_SHEEP,
+                    new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
+            map.put(HeadedSkullBlock.Type.BROWN_SHEEP,
+                    new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
+            map.put(HeadedSkullBlock.Type.GREEN_SHEEP,
+                    new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
+            map.put(HeadedSkullBlock.Type.RED_SHEEP,
+                    new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
+            map.put(HeadedSkullBlock.Type.BLACK_SHEEP,
+                    new SheepHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHEEP_HEAD)));
+            map.put(HeadedSkullBlock.Type.VEX,
+                    new GenericSkullEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.VEX_HEAD)));
+            map.put(HeadedSkullBlock.Type.PIGLIN, new HeadedPiglinHeadEntityModel(
+                    modelLoader.getModelPart(HeadedEntityModelLayers.PIGLIN_HEAD)));
+            map.put(HeadedSkullBlock.Type.PIGLIN_BRUTE, new HeadedPiglinHeadEntityModel(
+                    modelLoader.getModelPart(HeadedEntityModelLayers.PIGLIN_BRUTE_HEAD)));
+            map.put(HeadedSkullBlock.Type.ZOMBIFIED_PIGLIN, new HeadedPiglinHeadEntityModel(
+                    modelLoader.getModelPart(HeadedEntityModelLayers.ZOMBIFIED_PIGLIN_HEAD)));
+            map.put(HeadedSkullBlock.Type.LEUCISTIC_AXOLOTL,
+                    new AxolotlHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.AXOLOTL_HEAD)));
+            map.put(HeadedSkullBlock.Type.BROWN_AXOLOTL,
+                    new AxolotlHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.AXOLOTL_HEAD)));
+            map.put(HeadedSkullBlock.Type.CYAN_AXOLOTL,
+                    new AxolotlHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.AXOLOTL_HEAD)));
+            map.put(HeadedSkullBlock.Type.GOLD_AXOLOTL,
+                    new AxolotlHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.AXOLOTL_HEAD)));
+            map.put(HeadedSkullBlock.Type.BLUE_AXOLOTL,
+                    new AxolotlHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.AXOLOTL_HEAD)));
+            map.put(HeadedSkullBlock.Type.COW,
+                    new CowHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.COW_HEAD)));
+            map.put(HeadedSkullBlock.Type.BROWN_MOOSHROOM,
+                    new CowHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.COW_HEAD)));
+            map.put(HeadedSkullBlock.Type.RED_MOOSHROOM,
+                    new CowHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.COW_HEAD)));
+            map.put(HeadedSkullBlock.Type.POLAR_BEAR,
+                    new PolarBearHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.POLAR_BEAR_HEAD)));
+            map.put(HeadedSkullBlock.Type.OCELOT,
+                    new OcelotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.OCELOT_HEAD)));
+            map.put(HeadedSkullBlock.Type.ALL_BLACK_CAT,
+                    new OcelotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.OCELOT_HEAD)));
+            map.put(HeadedSkullBlock.Type.BLACK_CAT,
+                    new OcelotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.OCELOT_HEAD)));
+            map.put(HeadedSkullBlock.Type.BRITISH_SHORTHAIR_CAT,
+                    new OcelotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.OCELOT_HEAD)));
+            map.put(HeadedSkullBlock.Type.CALICO_CAT,
+                    new OcelotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.OCELOT_HEAD)));
+            map.put(HeadedSkullBlock.Type.JELLIE_CAT,
+                    new OcelotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.OCELOT_HEAD)));
+            map.put(HeadedSkullBlock.Type.PERSIAN_CAT,
+                    new OcelotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.OCELOT_HEAD)));
+            map.put(HeadedSkullBlock.Type.RAGDOLL_CAT,
+                    new OcelotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.OCELOT_HEAD)));
+            map.put(HeadedSkullBlock.Type.RED_CAT,
+                    new OcelotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.OCELOT_HEAD)));
+            map.put(HeadedSkullBlock.Type.SIAMESE_CAT,
+                    new OcelotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.OCELOT_HEAD)));
+            map.put(HeadedSkullBlock.Type.TABBY_CAT,
+                    new OcelotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.OCELOT_HEAD)));
+            map.put(HeadedSkullBlock.Type.WHITE_CAT,
+                    new OcelotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.OCELOT_HEAD)));
+            map.put(HeadedSkullBlock.Type.ENDERMAN,
+                    new EndermanHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.ENDERMAN_HEAD)));
+            map.put(HeadedSkullBlock.Type.FOX,
+                    new FoxHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.FOX_HEAD)));
+            map.put(HeadedSkullBlock.Type.SNOW_FOX,
+                    new FoxHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.FOX_HEAD)));
+            map.put(HeadedSkullBlock.Type.IRON_GOLEM,
+                    new IronGolemHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.IRON_GOLEM_HEAD)));
+            map.put(HeadedSkullBlock.Type.AGGRESSIVE_PANDA,
+                    new PandaHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PANDA_HEAD)));
+            map.put(HeadedSkullBlock.Type.BROWN_PANDA,
+                    new PandaHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PANDA_HEAD)));
+            map.put(HeadedSkullBlock.Type.LAZY_PANDA,
+                    new PandaHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PANDA_HEAD)));
+            map.put(HeadedSkullBlock.Type.PANDA,
+                    new PandaHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PANDA_HEAD)));
+            map.put(HeadedSkullBlock.Type.PLAYFUL_PANDA,
+                    new PandaHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PANDA_HEAD)));
+            map.put(HeadedSkullBlock.Type.WEAK_PANDA,
+                    new PandaHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PANDA_HEAD)));
+            map.put(HeadedSkullBlock.Type.WORRIED_PANDA,
+                    new PandaHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PANDA_HEAD)));
+            map.put(HeadedSkullBlock.Type.DROWNED,
+                    new GenericSkullEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.DROWNED_HEAD)));
+            map.put(HeadedSkullBlock.Type.RED_PARROT,
+                    new GenericSkullEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PARROT_HEAD)));
+            map.put(HeadedSkullBlock.Type.GREEN_PARROT,
+                    new ParrotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PARROT_HEAD)));
+            map.put(HeadedSkullBlock.Type.BLUE_PARROT,
+                    new ParrotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PARROT_HEAD)));
+            map.put(HeadedSkullBlock.Type.CYAN_PARROT,
+                    new ParrotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PARROT_HEAD)));
+            map.put(HeadedSkullBlock.Type.GRAY_PARROT,
+                    new ParrotHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PARROT_HEAD)));
+            map.put(HeadedSkullBlock.Type.STRAY,
+                    new StraySkullEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.STRAY_SKULL)));
+            map.put(HeadedSkullBlock.Type.SHULKER,
+                    new ShulkerHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SHULKER_HEAD)));
+            map.put(HeadedSkullBlock.Type.HUSK,
+                    new GenericSkullEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.HUSK_HEAD)));
+            map.put(HeadedSkullBlock.Type.PIG,
+                    new PigHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PIG_HEAD)));
+            map.put(HeadedSkullBlock.Type.SPIDER,
+                    new SpiderHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SPIDER_HEAD)));
+            map.put(HeadedSkullBlock.Type.CAVE_SPIDER,
+                    new SpiderHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SPIDER_HEAD)));
+            map.put(HeadedSkullBlock.Type.BLAZE,
+                    new GenericSkullEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.BLAZE_HEAD)));
+            map.put(HeadedSkullBlock.Type.BLACK_RABBIT,
+                    new RabbitHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.RABBIT_HEAD)));
+            map.put(HeadedSkullBlock.Type.BROWN_RABBIT,
+                    new RabbitHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.RABBIT_HEAD)));
+            map.put(HeadedSkullBlock.Type.EVIL_RABBIT,
+                    new RabbitHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.RABBIT_HEAD)));
+            map.put(HeadedSkullBlock.Type.GOLD_RABBIT,
+                    new RabbitHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.RABBIT_HEAD)));
+            map.put(HeadedSkullBlock.Type.SALT_RABBIT,
+                    new RabbitHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.RABBIT_HEAD)));
+            map.put(HeadedSkullBlock.Type.WHITE_RABBIT,
+                    new RabbitHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.RABBIT_HEAD)));
+            map.put(HeadedSkullBlock.Type.WHITE_SPLOTCHED_RABBIT,
+                    new RabbitHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.RABBIT_HEAD)));
+            map.put(HeadedSkullBlock.Type.TURTLE,
+                    new TurtleHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.TURTLE_HEAD)));
+            map.put(HeadedSkullBlock.Type.WITHER,
+                    new GenericSkullEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.WITHER_SKULL)));
+            map.put(HeadedSkullBlock.Type.WOLF,
+                    new WolfHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.WOLF_HEAD)));
+            map.put(HeadedSkullBlock.Type.BAT,
+                    new BatHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.BAT_HEAD)));
+            map.put(HeadedSkullBlock.Type.WITCH,
+                    new WitchHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.WITCH_HEAD)));
+            map.put(HeadedSkullBlock.Type.CHICKEN,
+                    new ChickenHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.CHICKEN_HEAD)));
+            map.put(HeadedSkullBlock.Type.PHANTOM,
+                    new PhantomHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.PHANTOM_HEAD)));
+            map.put(HeadedSkullBlock.Type.SNOW_GOLEM,
+                    new SnowGolemHeadEntityModel(modelLoader.getModelPart(HeadedEntityModelLayers.SNOW_GOLEM_HEAD)));
+        });
     }
 
     private static final Map<HeadedSkullBlock.SkullType, Identifier> TEXTURES = Util.make(Maps.newHashMap(), (map) -> {
-        map.putAll(EXTERNAL_TEXTURES);
+        ClientLifecycleEvents.CLIENT_STARTED.register(client -> map.putAll(EXTERNAL_TEXTURES));
 
         map.put(HeadedSkullBlock.Type.VILLAGER, new Identifier("textures/entity/villager/villager.png"));
         map.put(HeadedSkullBlock.Type.EVOKER, new Identifier("textures/entity/illager/evoker.png"));
@@ -272,8 +361,7 @@ public class HeadedSkullRenderManager {
     public RenderLayer getRenderLayer(HeadedSkullBlockEntity blockEntity, ItemStack itemStack, HeadedSkullBlock.SkullType skullType) {
         if (HeadedSkullBlock.isTamed(blockEntity, itemStack) && skullType == HeadedSkullBlock.Type.WOLF) {
             return RenderLayer.getEntityCutoutNoCullZOffset(new Identifier("textures/entity/wolf/wolf_tame.png"));
-        } else if (HeadedSkullBlock.isToast(blockEntity, itemStack) && HeadedSkullBlock.RABBIT_TYPES.contains(
-                skullType)) {
+        } else if (HeadedSkullBlock.isToast(blockEntity, itemStack) && HeadedSkullBlock.RABBIT_TYPES.contains(skullType)) {
             return RenderLayer.getEntityCutoutNoCullZOffset(new Identifier("textures/entity/rabbit/toast.png"));
         }
         return getRenderLayer(skullType);

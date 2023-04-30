@@ -2,6 +2,7 @@ package net.pedroricardo.headed.block.entity;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.text.Text;
@@ -20,6 +21,10 @@ public class HeadedSkullBlockEntity extends BlockEntity {
 
     public HeadedSkullBlockEntity(BlockPos pos, BlockState state) {
         super(HeadedBlockEntities.SKULL, pos, state);
+    }
+
+    public HeadedSkullBlockEntity(BlockPos pos, BlockState state, BlockEntityType<? extends HeadedSkullBlockEntity> type) {
+        super(type, pos, state);
     }
 
     protected void writeNbt(NbtCompound nbt) {
@@ -47,7 +52,6 @@ public class HeadedSkullBlockEntity extends BlockEntity {
         } else {
             blockEntity.powered = false;
         }
-
     }
 
     public float getPoweredTicks(float tickDelta) {
