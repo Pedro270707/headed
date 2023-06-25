@@ -199,7 +199,7 @@ public class HeadedClient implements ClientModInitializer {
         ItemRendererRegistry.register(HeadedItems.SNOW_GOLEM_HEAD);
 
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, entityRenderer, registrationHelper, context) -> {
-            if (entityRenderer instanceof ModelWithHead) {
+            if (entityRenderer.getModel() instanceof ModelWithHead) {
                 registrationHelper.register(new HeadedHeadFeatureRenderer(entityRenderer, context.getModelLoader()));
             }
         });
