@@ -47,7 +47,7 @@ public class InstrumentMixin {
         } else if (state.isOf(HeadedBlocks.OCELOT_HEAD)) {
             ci.setReturnValue(Optional.of(Instrument.valueOf("OCELOT")));
         } else if (state.isOf(HeadedBlocks.ALL_BLACK_CAT_HEAD) || state.isOf(HeadedBlocks.BLACK_CAT_HEAD) || state.isOf(HeadedBlocks.BRITISH_SHORTHAIR_CAT_HEAD) || state.isOf(HeadedBlocks.CALICO_CAT_HEAD) || state.isOf(HeadedBlocks.JELLIE_CAT_HEAD) || state.isOf(HeadedBlocks.PERSIAN_CAT_HEAD) || state.isOf(HeadedBlocks.RAGDOLL_CAT_HEAD) || state.isOf(HeadedBlocks.RED_CAT_HEAD) || state.isOf(HeadedBlocks.SIAMESE_CAT_HEAD) || state.isOf(HeadedBlocks.TABBY_CAT_HEAD) || state.isOf(HeadedBlocks.WHITE_CAT_HEAD)) {
-            ci.setReturnValue(Optional.of(Instrument.valueOf("ZOMBIFIED_PIGLIN")));
+            ci.setReturnValue(Optional.of(Instrument.valueOf("CAT")));
         } else if (state.isOf(HeadedBlocks.ENDERMAN_HEAD)) {
             ci.setReturnValue(Optional.of(Instrument.valueOf("ENDERMAN")));
         } else if (state.isOf(HeadedBlocks.FOX_HEAD) || state.isOf(HeadedBlocks.SNOW_FOX_HEAD)) {
