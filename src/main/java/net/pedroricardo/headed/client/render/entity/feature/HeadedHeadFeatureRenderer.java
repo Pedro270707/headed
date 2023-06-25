@@ -61,7 +61,6 @@ public class HeadedHeadFeatureRenderer<T extends LivingEntity, M extends EntityM
             }
 
             (this.getContextModel()).getHead().rotate(matrixStack);
-//            if (item instanceof BlockItem && ((BlockItem)item).getBlock() instanceof AbstractHeadedSkullBlock) {
             if (item instanceof BlockItem blockItem && blockItem.getBlock() instanceof AbstractHeadedSkullBlock abstractHeadedSkullBlock) {
                 m = 1.1875F;
                 matrixStack.scale(1.1875F, -1.1875F, -1.1875F);
@@ -70,7 +69,6 @@ public class HeadedHeadFeatureRenderer<T extends LivingEntity, M extends EntityM
                 }
 
                 matrixStack.translate(-0.5, 0.0, -0.5);
-//                HeadedSkullBlock.SkullType skullType = ((AbstractHeadedSkullBlock)((BlockItem)item).getBlock()).getSkullType();
                 HeadedSkullBlock.SkullType skullType = abstractHeadedSkullBlock.getSkullType();
                 HeadedSkullBlockEntityModel skullBlockEntityModel = this.headModels.get(skullType);
                 RenderLayer renderLayer = HeadedSkullRenderManager.getInstance().getRenderLayer(null, itemStack, skullType);
