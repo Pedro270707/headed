@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
 import net.minecraft.client.model.Dilation;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
+import net.minecraft.client.render.entity.model.ModelWithHead;
 import net.minecraft.util.Identifier;
 import net.pedroricardo.headed.block.entity.HeadedBlockEntities;
 import net.pedroricardo.headed.client.render.block.entity.HeadedSkullBlockEntityRenderer;
@@ -197,6 +198,10 @@ public class HeadedClient implements ClientModInitializer {
         ItemRendererRegistry.register(HeadedItems.PHANTOM_HEAD);
         ItemRendererRegistry.register(HeadedItems.SNOW_GOLEM_HEAD);
 
-        LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, entityRenderer, registrationHelper, context) -> registrationHelper.register(new HeadedHeadFeatureRenderer(entityRenderer, context.getModelLoader())));
+        LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, entityRenderer, registrationHelper, context) -> {
+            if (entityRenderer instanceof ModelWithHead) {
+                registrationHelper.register(new HeadedHeadFeatureRenderer(entityRenderer, context.getModelLoader()));
+            }
+        });
     }
 }
