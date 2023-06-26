@@ -34,7 +34,7 @@ public class HeadedSkullBlockEntityRenderer implements BlockEntityRenderer<Heade
         BlockState blockState = blockEntity.getCachedState();
         boolean bl = blockState.getBlock() instanceof HeadedWallSkullBlock;
         Direction direction = bl ? blockState.get(HeadedWallSkullBlock.FACING) : null;
-        int k = bl ? RotationPropertyHelper.fromDirection(direction) : blockState.get(HeadedSkullBlock.ROTATION);
+        int k = bl ? RotationPropertyHelper.fromDirection(direction.getOpposite()) : blockState.get(HeadedSkullBlock.ROTATION);
         float h = RotationPropertyHelper.toDegrees(k);
         HeadedSkullBlock.SkullType skullType = ((AbstractHeadedSkullBlock)blockState.getBlock()).getSkullType();
         HeadedSkullBlockEntityModel skullBlockEntityModel = HeadedSkullRenderManager.getModels(MinecraftClient.getInstance().getEntityModelLoader()).get(skullType);
