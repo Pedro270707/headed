@@ -21,7 +21,8 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
-import net.pedroricardo.headed.HeadedConfig;
+import net.pedroricardo.headed.Headed;
+import net.pedroricardo.headed.HeadedConfigModel;
 import net.pedroricardo.headed.block.entity.HeadedBlockEntities;
 import net.pedroricardo.headed.block.entity.HeadedSkullBlockEntity;
 import net.pedroricardo.headed.item.HeadedItems;
@@ -51,9 +52,9 @@ public abstract class AbstractHeadedSkullBlock extends BlockWithEntity {
                     || state.isOf(HeadedBlocks.PIGLIN_BRUTE_WALL_HEAD)
                     || state.isOf(HeadedBlocks.ZOMBIFIED_PIGLIN_HEAD)
                     || state.isOf(HeadedBlocks.ZOMBIFIED_PIGLIN_WALL_HEAD)
-                    || ((state.isOf(HeadedBlocks.FOX_HEAD) || (state.isOf(HeadedBlocks.SNOW_FOX_HEAD)) && HeadedConfig.FOX_HEADS_TICK.get())));
+                    || ((state.isOf(HeadedBlocks.FOX_HEAD) || (state.isOf(HeadedBlocks.SNOW_FOX_HEAD)) && Headed.CONFIG.foxHeadsTick())));
             if (bl) {
-                return checkType(type, HeadedBlockEntities.SKULL, HeadedSkullBlockEntity::tick);
+                return BlockWithEntity.validateTicker(type, HeadedBlockEntities.SKULL, HeadedSkullBlockEntity::tick);
             }
         }
 

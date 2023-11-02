@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 
 public class Headed implements ModInitializer {
 	public static final String MOD_ID = "headed";
+	public static final net.pedroricardo.headed.HeadedConfig CONFIG = net.pedroricardo.headed.HeadedConfig.createAndLoad();
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 	@Override
 	public void onInitialize() {
