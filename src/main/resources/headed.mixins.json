@@ -4,6 +4,7 @@
   "package": "net.pedroricardo.headed.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "InstrumentMixin",
     "WitherSkullImmunityMixin"
   ],
   "client": [

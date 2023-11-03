@@ -1,16 +1,25 @@
 package net.pedroricardo.headed;
 
-import com.kyanite.paragon.api.ConfigOption;
-import com.kyanite.paragon.api.interfaces.Config;
-import com.kyanite.paragon.api.interfaces.serializers.ConfigSerializer;
-import com.kyanite.paragon.api.interfaces.serializers.JSON5Serializer;
+import com.google.gson.GsonBuilder;
+import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
+import dev.isxander.yacl3.config.v2.api.SerialEntry;
+import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.util.Identifier;
 
-public class HeadedConfig implements Config {
-    public static final ConfigOption<Boolean> WITHER_SKULL_GRANTS_WITHER_IMMUNITY = new ConfigOption<>("wither_skull_grants_wither_immunity", true);
-    public static final ConfigOption<Boolean> FOX_HEADS_TICK = new ConfigOption<>("fox_heads_tick", true);
+public class HeadedConfig {
+    public static ConfigClassHandler<HeadedConfig> HANDLER = ConfigClassHandler.createBuilder(HeadedConfig.class)
+            .id(new Identifier(Headed.MOD_ID, "headed"))
+            .serializer(config -> GsonConfigSerializerBuilder.create(config)
+                    .setPath(FabricLoader.getInstance().getConfigDir().resolve("headed.json5"))
+                    .appendGsonBuilder(GsonBuilder::setPrettyPrinting)
+                    .setJson5(true)
+                    .build())
+            .build();
 
-    @Override
-    public ConfigSerializer getSerializer() {
-        return JSON5Serializer.builder(this).build();
-    }
+    @SerialEntry
+    public boolean witherSkullsGrantWitherImmunity = true;
+
+    @SerialEntry
+    public boolean foxHeadsTick = true;
 }

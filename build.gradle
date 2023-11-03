@@ -10,7 +10,15 @@ archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
 
+loom {
+	accessWidenerPath = file("src/main/resources/headed.accesswidener")
+}
+
 repositories {
+	maven {
+		name 'Xander Maven'
+		url 'https://maven.isxander.dev/releases'
+	}
 	maven {
 		name = "Modrinth"
 		url = "https://api.modrinth.com/maven"
@@ -22,6 +30,7 @@ repositories {
 		name = 'Jitpack'
 		url = "https://jitpack.io"
 	}
+	maven {	url = "https://oss.sonatype.org/content/repositories/snapshots" }
 }
 
 dependencies {
@@ -37,6 +46,8 @@ dependencies {
 	includeMod "com.github.PlanetTeamSpeakk:Fabric-ASM:master-SNAPSHOT"
 
 	runtimeOnly 'blue.endless:jankson:1.1.2'
+
+	modImplementation "dev.isxander.yacl:yet-another-config-lib-fabric:${project.yet_another_config_lib_version}"
 
 	// Uncomment the following line to enable the deprecated Fabric API modules. 
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.

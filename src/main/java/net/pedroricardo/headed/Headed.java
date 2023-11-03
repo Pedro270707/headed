@@ -19,6 +19,7 @@ public class Headed implements ModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 	@Override
 	public void onInitialize() {
+		HeadedConfig.HANDLER.load();
 		HeadedItems.registerModItems();
 		HeadedBlocks.registerModBlocks();
 		HeadedBlockEntities.registerModBlockEntities();

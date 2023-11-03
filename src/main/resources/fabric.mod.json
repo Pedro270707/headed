@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "headed",
-  "version": "${version}",
+  "version": "1.1.4",
 
   "name": "Headed",
   "description": "A mod that adds heads and skulls to more mobs in the game!",
@@ -24,20 +24,19 @@
 
     "client": [
       "net.pedroricardo.headed.HeadedClient"
-    ],
-
-    "mm:early_risers": [
-      "net.pedroricardo.headed.sound.HeadedEarlyRisers"
     ]
   },
   "mixins": [
     "headed.mixins.json"
   ],
 
+  "accessWidener": "headed.accesswidener",
+
   "depends": {
     "fabricloader": ">=0.14.21",
     "fabric-api": "*",
     "minecraft": "~1.20",
+    "yet_another_config_lib_v3": "*",
     "java": ">=17"
   }
 }

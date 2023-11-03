@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class WitherSkullImmunityMixin {
     @Inject(method = "canHaveStatusEffect", at = @At("HEAD"), cancellable = true)
     private void canHaveStatusEffect(StatusEffectInstance effect, CallbackInfoReturnable<Boolean> ci) {
-        if (effect.getEffectType() == StatusEffects.WITHER && HeadedConfig.WITHER_SKULL_GRANTS_WITHER_IMMUNITY.get()) {
+        if (effect.getEffectType() == StatusEffects.WITHER && HeadedConfig.HANDLER.instance().witherSkullsGrantWitherImmunity) {
             LivingEntity entity = (LivingEntity) (Object) this;
             if (entity instanceof PlayerEntity player) {
                 ItemStack headStack = player.getEquippedStack(EquipmentSlot.HEAD);
