@@ -42,9 +42,6 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	include modImplementation("maven.modrinth:paragon:fabric-3.0.2-1.19x")
-	includeMod "com.github.PlanetTeamSpeakk:Fabric-ASM:master-SNAPSHOT"
-
 	runtimeOnly 'blue.endless:jankson:1.1.2'
 
 	modImplementation "dev.isxander.yacl:yet-another-config-lib-fabric:${project.yet_another_config_lib_version}"
