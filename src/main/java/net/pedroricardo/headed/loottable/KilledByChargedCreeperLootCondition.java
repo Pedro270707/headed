@@ -6,9 +6,11 @@
 package net.pedroricardo.headed.loottable;
 
 import com.google.common.collect.ImmutableSet;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSerializationContext;
 import java.util.Set;
 
-import com.mojang.serialization.Codec;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.loot.condition.LootCondition;
@@ -16,10 +18,10 @@ import net.minecraft.loot.condition.LootConditionType;
 import net.minecraft.loot.context.LootContext;
 import net.minecraft.loot.context.LootContextParameter;
 import net.minecraft.loot.context.LootContextParameters;
+import net.minecraft.util.JsonSerializer;
 
 public class KilledByChargedCreeperLootCondition implements LootCondition {
     static final KilledByChargedCreeperLootCondition INSTANCE = new KilledByChargedCreeperLootCondition();
-    public static final Codec<KilledByChargedCreeperLootCondition> CODEC = Codec.unit(INSTANCE);
 
     private KilledByChargedCreeperLootCondition() {
     }
@@ -55,6 +57,20 @@ public class KilledByChargedCreeperLootCondition implements LootCondition {
     }
 
     public static LootCondition.Builder builder() {
-        return () -> INSTANCE;
+        return () -> {
+            return INSTANCE;
+        };
+    }
+
+    public static class Serializer implements JsonSerializer<KilledByChargedCreeperLootCondition> {
+        public Serializer() {
+        }
+
+        public void toJson(JsonObject jsonObject, KilledByChargedCreeperLootCondition killedByPlayerLootCondition, JsonSerializationContext jsonSerializationContext) {
+        }
+
+        public KilledByChargedCreeperLootCondition fromJson(JsonObject jsonObject, JsonDeserializationContext jsonDeserializationContext) {
+            return KilledByChargedCreeperLootCondition.INSTANCE;
+        }
     }
 }

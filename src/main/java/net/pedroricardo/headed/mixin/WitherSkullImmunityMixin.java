@@ -6,8 +6,7 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.pedroricardo.headed.Headed;
-import net.pedroricardo.headed.HeadedConfigModel;
+import net.pedroricardo.headed.HeadedConfig;
 import net.pedroricardo.headed.item.HeadedItems;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -18,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class WitherSkullImmunityMixin {
     @Inject(method = "canHaveStatusEffect", at = @At("HEAD"), cancellable = true)
     private void canHaveStatusEffect(StatusEffectInstance effect, CallbackInfoReturnable<Boolean> ci) {
-        if (effect.getEffectType() == StatusEffects.WITHER && Headed.CONFIG.witherSkullGrantsWitherImmunity()) {
+        if (effect.getEffectType() == StatusEffects.WITHER && HeadedConfig.WITHER_SKULL_GRANTS_WITHER_IMMUNITY.get()) {
             LivingEntity entity = (LivingEntity) (Object) this;
             if (entity instanceof PlayerEntity player) {
                 ItemStack headStack = player.getEquippedStack(EquipmentSlot.HEAD);
